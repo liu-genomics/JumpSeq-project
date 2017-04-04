@@ -8,5 +8,5 @@ output:
 The goal of this new template is to simplify the setup and maintenance of a research website.
 Specifically,
 
-*  [This](Peakcalling-procedure.html) is Peak window calling procedure. 
+*  [This](PeakCalling-procedure.html) is Peak window calling procedure. 
 * [This](JumpSeq-analysis.html) is jump seq data analysis. 
