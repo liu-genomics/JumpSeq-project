@@ -83,6 +83,19 @@ rep2:plus.21.bp.enriched.window.p10-15.bed.extend2kbp.bed | 8769 | 22941 | 0.382
 rep2:plus.21.bp.enriched.window.p10-20.bed.extend2kbp.bed | 2792 | 7557 | 0.3694588
 
 
+### Comparison between replicates 
+Overlapping among peak windows extended by 2kbp for 2 large combined replicates. 
+
+
+minus | $10^{-3}$ | $10^{-7}$ | $10^{-15}$ | $10^{-20}$
+------|-----------|-----------|------------|-------------
+rep1 | 0.9388 | 0.7334 | 0.4543 | 0.4056
+rep2 | 0.9523 | 0.8091 | 0.5576 | 0.5612
+-----|--------|--------|--------|-------------------------
+plus | $10^{-3}$ | $10^{-7}$ | $10^{-15}$ | $10^{-20}$
+rep1 | 0.9389 | 0.7337 | 0.4650 | 0.3952
+rep2 | 0.9524 | 0.8095 | 0.5397 | 0.5419
+
 ## Session information
 
 <!-- Insert the session information into the document -->
