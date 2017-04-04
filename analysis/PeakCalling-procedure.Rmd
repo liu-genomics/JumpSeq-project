@@ -26,7 +26,12 @@ knitr::read_chunk("chunks.R")
 
 <!-- Add your analysis here -->
 
-## base level coverage calling 
+## Step 1: Base level coverage calling
+## Setp 2: Split whole genome into small windows of equal size
+## Step 3: Calculate p values for each window
+## step 4: Summarize the results with Staitsics of interest
+
+
 
 ## Session information
 
