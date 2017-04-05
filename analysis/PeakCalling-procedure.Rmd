@@ -53,7 +53,7 @@ echo get coverage for minus strand
 
 ### Setp 2: Split whole genome into small windows of equal size
 ### Step 3: Calculate p values for each window
-### step 4: Summarize the results with Staitsics of interest
+### step 4: Summarize the results with Statistics of interest
 
 
 
