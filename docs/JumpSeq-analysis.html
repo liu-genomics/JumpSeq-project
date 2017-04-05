@@ -312,10 +312,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-04-03</p>
+<p><strong>Last updated:</strong> 2017-04-04</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> ec1da60</p>
+<p><strong>Code version:</strong> 93da9f3</p>
 <!-- Add your analysis here -->
 <div id="hmc-replicates" class="section level2">
 <h2>5hmC replicates</h2>
@@ -487,12 +487,14 @@ shared across the workflowr files. -->
 </div>
 <div id="comparison-between-replicates" class="section level3">
 <h3>Comparison between replicates</h3>
-<p>Overlapping among peak windows extended by 2kbp for 2 large combined replicates.</p>
+<p>Overlapping among peak windows extended by 2kbp for 2 large combined replicates at different p value cutoffs.</p>
 <table>
 <thead>
 <tr class="header">
 <th>minus</th>
+<th><span class="math inline">\(10^{-1}\)</span></th>
 <th><span class="math inline">\(10^{-3}\)</span></th>
+<th><span class="math inline">\(10^{-5}\)</span></th>
 <th><span class="math inline">\(10^{-7}\)</span></th>
 <th><span class="math inline">\(10^{-15}\)</span></th>
 <th><span class="math inline">\(10^{-20}\)</span></th>
@@ -501,48 +503,52 @@ shared across the workflowr files. -->
 <tbody>
 <tr class="odd">
 <td>rep1</td>
+<td>0.9905</td>
 <td>0.9388</td>
+<td>0.8425</td>
 <td>0.7334</td>
 <td>0.4543</td>
 <td>0.4056</td>
 </tr>
 <tr class="even">
 <td>rep2</td>
+<td>0.9886</td>
 <td>0.9523</td>
+<td>0.8961</td>
 <td>0.8091</td>
 <td>0.5576</td>
 <td>0.5612</td>
 </tr>
 <tr class="odd">
-<td>—–</td>
-<td>——–</td>
-<td>——–</td>
-<td>——–</td>
-<td>————————-</td>
-</tr>
-<tr class="even">
 <td>plus</td>
+<td><span class="math inline">\(10^{-1}\)</span></td>
 <td><span class="math inline">\(10^{-3}\)</span></td>
+<td><span class="math inline">\(10^{-5}\)</span></td>
 <td><span class="math inline">\(10^{-7}\)</span></td>
 <td><span class="math inline">\(10^{-15}\)</span></td>
 <td><span class="math inline">\(10^{-20}\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>rep1</td>
+<td>0.9906</td>
 <td>0.9389</td>
+<td>0.8426</td>
 <td>0.7337</td>
 <td>0.4650</td>
 <td>0.3952</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>rep2</td>
+<td>0.9887</td>
 <td>0.9524</td>
+<td>0.8967</td>
 <td>0.8095</td>
 <td>0.5397</td>
 <td>0.5419</td>
 </tr>
 </tbody>
 </table>
+<p>Surprisingly, the overlapping rate deceases as the p value cutofff becomes more stringent.</p>
 </div>
 </div>
 <div id="session-information" class="section level2">

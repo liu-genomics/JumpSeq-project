@@ -26,10 +26,34 @@ knitr::read_chunk("chunks.R")
 
 <!-- Add your analysis here -->
 
-## Step 1: Base level coverage calling
-## Setp 2: Split whole genome into small windows of equal size
-## Step 3: Calculate p values for each window
-## step 4: Summarize the results with Staitsics of interest
+## Region level peak calling 
+Basic idea: identify regions in the whole genome which contains one peak ideally. Thus the regions should be neigher too large nor too short. Currently use 20 bp.  
+
+
+### Step 1: Base level coverage calling
+Start with .bam file. The fist step is to call 5' end  coverage at base level 
+```{r base level coverage calling, echo=T, eval=F}
+prefix1=Jump-positive
+prefix2=mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
+samtools view -b -F 20 -o $prefix1.$prefix2.plus  $prefix1.$prefix2
+samtools view -b -f 16 -o $prefix1.$prefix2.minus  $prefix1.$prefix2
+echo get minus and plus strand
+############## sort strands ################
+samtools sort $prefix1.$prefix2.plus $prefix1.$prefix2.plus.sorted
+samtools sort $prefix1.$prefix2.minus $prefix1.$prefix2.minus.sorted
+echo sort two strands
+########### call coverage at base level ###############
+bedtools genomecov -5 -d -ibam $prefix1.$prefix2.plus.sorted.bam  -g mm9.genome > $prefix1.$prefix2.plus.cove.base.level
+echo get coverage for plus strand
+
+bedtools genomecov -5 -d -ibam $prefix1.$prefix2.minus.sorted.bam  -g mm9.genome > $prefix1.$prefix2.minus.cove.base.level
+echo get coverage for minus strand
+
+```
+
+### Setp 2: Split whole genome into small windows of equal size
+### Step 3: Calculate p values for each window
+### step 4: Summarize the results with Staitsics of interest
 
 
 

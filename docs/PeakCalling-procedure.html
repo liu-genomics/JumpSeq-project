@@ -312,22 +312,42 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-04-03</p>
+<p><strong>Last updated:</strong> 2017-04-04</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 41bb573</p>
+<p><strong>Code version:</strong> 93da9f3</p>
 <!-- Add your analysis here -->
-<div id="step-1-base-level-coverage-calling" class="section level2">
-<h2>Step 1: Base level coverage calling</h2>
+<div id="region-level-peak-calling" class="section level2">
+<h2>Region level peak calling</h2>
+<p>Basic idea: identify regions in the whole genome which contains one peak ideally. Thus the regions should be neigher too large nor too short. Currently use 20 bp.</p>
+<div id="step-1-base-level-coverage-calling" class="section level3">
+<h3>Step 1: Base level coverage calling</h3>
+<p>Start with .bam file. The fist step is to call 5’ end coverage at base level</p>
+<pre class="r"><code>prefix1=Jump-positive
+prefix2=mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
+samtools view -b -F 20 -o $prefix1.$prefix2.plus  $prefix1.$prefix2
+samtools view -b -f 16 -o $prefix1.$prefix2.minus  $prefix1.$prefix2
+echo get minus and plus strand
+############## sort strands ################
+samtools sort $prefix1.$prefix2.plus $prefix1.$prefix2.plus.sorted
+samtools sort $prefix1.$prefix2.minus $prefix1.$prefix2.minus.sorted
+echo sort two strands
+########### call coverage at base level ###############
+bedtools genomecov -5 -d -ibam $prefix1.$prefix2.plus.sorted.bam  -g mm9.genome &gt; $prefix1.$prefix2.plus.cove.base.level
+echo get coverage for plus strand
+
+bedtools genomecov -5 -d -ibam $prefix1.$prefix2.minus.sorted.bam  -g mm9.genome &gt; $prefix1.$prefix2.minus.cove.base.level
+echo get coverage for minus strand</code></pre>
 </div>
-<div id="setp-2-split-whole-genome-into-small-windows-of-equal-size" class="section level2">
-<h2>Setp 2: Split whole genome into small windows of equal size</h2>
+<div id="setp-2-split-whole-genome-into-small-windows-of-equal-size" class="section level3">
+<h3>Setp 2: Split whole genome into small windows of equal size</h3>
 </div>
-<div id="step-3-calculate-p-values-for-each-window" class="section level2">
-<h2>Step 3: Calculate p values for each window</h2>
+<div id="step-3-calculate-p-values-for-each-window" class="section level3">
+<h3>Step 3: Calculate p values for each window</h3>
 </div>
-<div id="step-4-summarize-the-results-with-staitsics-of-interest" class="section level2">
-<h2>step 4: Summarize the results with Staitsics of interest</h2>
+<div id="step-4-summarize-the-results-with-staitsics-of-interest" class="section level3">
+<h3>step 4: Summarize the results with Staitsics of interest</h3>
+</div>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
