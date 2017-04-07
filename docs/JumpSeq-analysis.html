@@ -312,10 +312,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-04-04</p>
+<p><strong>Last updated:</strong> 2017-04-06</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 93da9f3</p>
+<p><strong>Code version:</strong> 873207b</p>
 <!-- Add your analysis here -->
 <div id="hmc-replicates" class="section level2">
 <h2>5hmC replicates</h2>
@@ -549,6 +549,73 @@ shared across the workflowr files. -->
 </tbody>
 </table>
 <p>Surprisingly, the overlapping rate deceases as the p value cutofff becomes more stringent.</p>
+<p>This is the overlapping for originally called 20 bp windows at different FDR levels.</p>
+<table>
+<thead>
+<tr class="header">
+<th>minus</th>
+<th>0.5</th>
+<th>0.1</th>
+<th>0.01</th>
+<th>0.001</th>
+<th>0.0001</th>
+<th><span class="math inline">\(10^{-7}\)</span></th>
+<th><span class="math inline">\(10^{-10}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>0.3955</td>
+<td>0.4118</td>
+<td>0.3840</td>
+<td>0.3611</td>
+<td>0.3563</td>
+<td>0.3148</td>
+<td>0.3118</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>0.4985</td>
+<td>0.3915</td>
+<td>0.4111</td>
+<td>0.4109</td>
+<td>0.4023</td>
+<td>0.4196</td>
+<td>0.4231</td>
+</tr>
+<tr class="odd">
+<td>plus</td>
+<td>0.5</td>
+<td>0.1</td>
+<td>0.01</td>
+<td>0.001</td>
+<td>0.0001</td>
+<td><span class="math inline">\(10^{-7}\)</span></td>
+<td><span class="math inline">\(10^{-10}\)</span></td>
+</tr>
+<tr class="even">
+<td>rep1</td>
+<td>0.3954</td>
+<td>0.4126</td>
+<td>0.3841</td>
+<td>0.3627</td>
+<td>0.3572</td>
+<td>0.3991</td>
+<td>0.3115</td>
+</tr>
+<tr class="odd">
+<td>rep2</td>
+<td>0.4985</td>
+<td>0.3907</td>
+<td>0.4116</td>
+<td>0.4128</td>
+<td>0.4030</td>
+<td>0.4205</td>
+<td>0.4205</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="session-information" class="section level2">
