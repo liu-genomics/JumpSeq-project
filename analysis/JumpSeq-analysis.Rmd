@@ -25,7 +25,7 @@ knitr::read_chunk("chunks.R")
 ```
 
 <!-- Add your analysis here -->
-## 5hmC replicates
+## eleven 48 ng 5hmC replicates
 There are 11 5hmC replicates listed below. Each one has two strands, plus+minus. 
 
 
@@ -46,7 +46,7 @@ orted.dedup.bam
 * Jump-NC-2.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
 * Jump-positive.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
 
-## Two large combined 5hmC replicates
+## Combining from eleven 48 ng 5hmC replicates
 Once the base level coverage of each individual replicates is obtained, directly combine some of them to form a synthesized large replicate and the rest form to another such that their coverage, i.e. number of reads are as balanced as possible. In this way, power is expected to be increasing. 
 
 * combined rep 1: 20160601 5hmC Jump Seq 48ng.He-Lu-lu-1 
