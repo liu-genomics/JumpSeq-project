@@ -312,15 +312,18 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-04-21</p>
+<p><strong>Last updated:</strong> 2017-04-24</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> a6faaa5</p>
+<p><strong>Code version:</strong> 8c5174c</p>
 <!-- Add your analysis here -->
-<div id="eleven-48-ng-5hmc-replicates" class="section level2">
-<h2>eleven 48 ng 5hmC replicates</h2>
-<p>There are 11 5hmC replicates listed below. Each one has two strands, plus+minus.</p>
-<ul>
+<p>All samples are <a href="https://docs.google.com/spreadsheets/d/1WesFCQTrFplnXRKCHmhqtm1529DHc5Sc2tX7GkRa_-U/edit#gid=1664366512">here</a>: 48 ng (11); 24 ng (5); 12 ng (5); 6ng (5); 2.4 ng (5); 0.6ng (2).</p>
+<div id="ng-5hmc-replicates" class="section level2">
+<h2>48ng 5hmC replicates</h2>
+<div id="summary" class="section level3">
+<h3>Summary</h3>
+<p>There are eleven 48ng 5hmC replicates listed below. Each one has two strands, plus+minus.</p>
+<ol style="list-style-type: decimal">
 <li>CHe-Lu-1_S12_L005_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorted.d edup.bam</li>
 <li>He-Lu-6_48ng-S3_L001_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorte d.dedup.bam</li>
 <li>He-lu-6_S6_L006_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorted.ded up.bam</li>
@@ -332,16 +335,80 @@ shared across the workflowr files. -->
 <li>Jump-2hmC-sites.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam</li>
 <li>Jump-NC-2.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam</li>
 <li>Jump-positive.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam</li>
-</ul>
+</ol>
+<table style="width:81%;">
+<caption>Number of reads in plus and minus strand for each 48 ng replicate.</caption>
+<colgroup>
+<col width="8%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>#reads(plus)</td>
+<td>3,516,149</td>
+<td>3,781,024</td>
+<td>2,014,714</td>
+<td>6,982,592</td>
+<td>4,741,743</td>
+<td>5,036,004</td>
+<td>5,825,862</td>
+<td>5,532,109</td>
+<td>5,072,780</td>
+<td>3,951,163</td>
+<td>3,641,213</td>
+</tr>
+<tr class="even">
+<td>#reads(minus)</td>
+<td>3,524,627</td>
+<td>3,793,291</td>
+<td>2,021,689</td>
+<td>6,995,038</td>
+<td>4,754,910</td>
+<td>5,048,479</td>
+<td>5,834,324</td>
+<td>5,546,279</td>
+<td>5,059,828</td>
+<td>3,935,679</td>
+<td>3,631,379</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="combining-from-eleven-48-ng-5hmc-replicates" class="section level2">
-<h2>Combining from eleven 48 ng 5hmC replicates</h2>
+<div id="two-large-combined-replicates-from-eleven-48-ng-5hmc-replicates" class="section level3">
+<h3>Two large combined replicates from eleven 48 ng 5hmC replicates</h3>
 <p>Once the base level coverage of each individual replicates is obtained, directly combine some of them to form a synthesized large replicate and the rest form to another such that their coverage, i.e. number of reads are as balanced as possible. In this way, power is expected to be increasing.</p>
 <ul>
-<li>combined rep 1: 20160601 5hmC Jump Seq 48ng.He-Lu-lu-1 48ng S1 L006 R1 001.20161115 5hmC Jump Seq 2hmC spike in.20161115 5hmC Jump Seq negative control spike in.20161115 5hmC Jump Seq positive control</li>
-<li>combined rep 2:CHe..Lu..1 S12 L005 R1 001:He..Lu..6 48ng ..S3 L001 R1 001:He..lu..6 S6 L006 R1 001:Jump..2hmC ..sites:Jump..NC ..2:Jump .. positive.</li>
+<li>combined rep 1: rep 4+5+6+7+8</li>
+<li>combined rep 2:rep 1+2+3+9+10+11</li>
 </ul>
 <table>
+<caption>Number of reads in each combined replicate.</caption>
 <thead>
 <tr class="header">
 <th>Two large combined replicates</th>
@@ -351,26 +418,35 @@ shared across the workflowr files. -->
 <tbody>
 <tr class="odd">
 <td>rep1.minus</td>
-<td>28179030</td>
+<td>28,179,030</td>
 </tr>
 <tr class="even">
 <td>rep1.plus</td>
-<td>28118310</td>
+<td>28,118,310</td>
 </tr>
 <tr class="odd">
 <td>rep2.minus</td>
-<td>22004763</td>
+<td>21,966,493</td>
 </tr>
 <tr class="even">
 <td>rep2.plus</td>
-<td>21938791</td>
+<td>21,977,043</td>
+</tr>
+<tr class="odd">
+<td>rep1+rep2:minus</td>
+<td>50,145,523</td>
+</tr>
+<tr class="even">
+<td>rep1+rep2:plus</td>
+<td>50,095,353</td>
 </tr>
 </tbody>
 </table>
-<div id="comparison-with-dali-hans-data" class="section level3">
-<h3>comparison with Dali Han’s data</h3>
+<div id="comparison-with-dali-hans-data" class="section level5">
+<h5>Comparison with Dali Han’s data</h5>
 <p>Originally called 20 bp windows are extended by 2kbp, 1kbp upstream and 1kbp downstream. Overlapping between extended peak windows (at four p value cutoffs <span class="math inline">\(10^{-3}, 10^{-7}, 10^{-15}, 10^{-20}\)</span>) and Dali Han’s data (window size differs among each other) are summzried below.</p>
 <table style="width:72%;">
+<caption>Comparison of peak windows between two large replivcates and Dali’s data.</caption>
 <colgroup>
 <col width="27%" />
 <col width="22%" />
@@ -485,10 +561,10 @@ shared across the workflowr files. -->
 </tbody>
 </table>
 </div>
-<div id="comparison-between-replicates" class="section level3">
-<h3>Comparison between replicates</h3>
-<p>Overlapping among peak windows extended by 2kbp for 2 large combined replicates at different p value cutoffs.</p>
+<div id="comparison-between-two-large-replicates" class="section level5">
+<h5>Comparison between two large replicates</h5>
 <table>
+<caption>Overlapping among peak windows extended by 2kbp for 2 large combined replicates at different p value cutoffs.</caption>
 <thead>
 <tr class="header">
 <th>minus</th>
@@ -549,8 +625,8 @@ shared across the workflowr files. -->
 </tbody>
 </table>
 <p>Surprisingly, the overlapping rate deceases as the p value cutofff becomes more stringent.</p>
-<p>This is the overlapping for originally called 20 bp windows at different FDR levels.</p>
 <table>
+<caption>overlapping for originally called 20 bp windows at different FDR levels.</caption>
 <thead>
 <tr class="header">
 <th>minus</th>
@@ -617,6 +693,79 @@ shared across the workflowr files. -->
 </tbody>
 </table>
 </div>
+</div>
+<div id="downsample" class="section level3">
+<h3>Downsample</h3>
+<p>Combine all 48ng replicates together, downsample <span class="math inline">\(40\%, 50\%, \cdots, 90\%\)</span> reads, call peak windows, and see how #peak.windows (absolute peak windows or overlapping with other data) vary with number of reads.</p>
+<pre class="bash"><code>samtools merge output.sorted.bam input1.sorted.bam input2.sorted.bam # merge together sorted bam files</code></pre>
+<pre class="bash"><code>samtools view -s 0.25 -b input.all.bam &gt; input_25p.sam # downsample 25% reads </code></pre>
+<table>
+<caption>Actutrally number of reads from each downsample with ratios of <span class="math inline">\(40\%, 50\%, \cdots, 90\%\)</span>.</caption>
+<thead>
+<tr class="header">
+<th>ratio</th>
+<th>plus</th>
+<th>minus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>40%</td>
+<td>20,027,749</td>
+<td>20,070,771</td>
+</tr>
+<tr class="even">
+<td>50%</td>
+<td>25,029,777</td>
+<td>25,091,279</td>
+</tr>
+<tr class="odd">
+<td>60%</td>
+<td>30,035,435</td>
+<td>30,110,375</td>
+</tr>
+<tr class="even">
+<td>70%</td>
+<td>35,040,232</td>
+<td>35,127,703</td>
+</tr>
+<tr class="odd">
+<td>80%</td>
+<td>40,044,961</td>
+<td>40,149,113</td>
+</tr>
+<tr class="even">
+<td>90%</td>
+<td>45,048,466</td>
+<td>45,168,687</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>num.win.FDR5per=c(1848560, 2149967, 2635168, 2738080, 3066015, 3458501)
+num.reads=c(20070771, 25091279, 30110375, 35127703, 40149113, 45168687)
+plot(num.reads, num.win.FDR5per, xlab=&quot;Number of reads&quot;, ylab=&quot;# peak windowsof 20 bp at FDR0.05&quot;, type=&quot;o&quot;, main=&quot;minus strands&quot;)</code></pre>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>num.win.FDR5per=c(1854249, 2148405, 2632652, 2736153, 3082261, 3456391)
+num.reads=c(20027749, 25029777, 30035435, 35040232, 40044961, 45048466)
+plot(num.reads, num.win.FDR5per, xlab=&quot;Number of reads&quot;, ylab=&quot;# peak windowsof 20 bp at FDR0.05&quot;, type=&quot;o&quot;, main=&quot;plus strands&quot;)</code></pre>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><strong>Based on the current observations, the number of peak windows grows as the read coverage increases, it does not show significant plateau</strong>.</p>
+</div>
+</div>
+<div id="ng-5hmc-replicate" class="section level2">
+<h2>24ng 5hmC replicate</h2>
+</div>
+<div id="ng-5hmc-replicate-1" class="section level2">
+<h2>12ng 5hmC replicate</h2>
+</div>
+<div id="ng-5hmc-replicate-2" class="section level2">
+<h2>6ng 5hmC replicate</h2>
+</div>
+<div id="ng-5hmc-replicate-3" class="section level2">
+<h2>2.4ng 5hmC replicate</h2>
+</div>
+<div id="ng-5hmc-replicate-4" class="section level2">
+<h2>0.6ng 5hmC replicate</h2>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>

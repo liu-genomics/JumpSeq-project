@@ -25,42 +25,58 @@ knitr::read_chunk("chunks.R")
 ```
 
 <!-- Add your analysis here -->
-## eleven 48 ng 5hmC replicates
-There are 11 5hmC replicates listed below. Each one has two strands, plus+minus. 
+
+All samples are [here][allsample]: 48 ng (11); 24 ng (5); 12 ng (5); 6ng (5); 2.4 ng (5); 0.6ng (2). 
+
+[allsample]: https://docs.google.com/spreadsheets/d/1WesFCQTrFplnXRKCHmhqtm1529DHc5Sc2tX7GkRa_-U/edit#gid=1664366512
 
 
-* CHe-Lu-1_S12_L005_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorted.d
+##  48ng 5hmC replicates
+
+### Summary 
+There are eleven 48ng 5hmC replicates listed below. Each one has two strands, plus+minus. 
+
+
+1.  CHe-Lu-1_S12_L005_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorted.d
 edup.bam
-* He-Lu-6_48ng-S3_L001_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorte
+2.  He-Lu-6_48ng-S3_L001_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorte
 d.dedup.bam
-* He-lu-6_S6_L006_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorted.ded
+3. He-lu-6_S6_L006_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorted.ded
 up.bam
-* 20160601_5hmC_Jump_Seq_48ng.umi_encoded_adaptor_removed_no_mismatch.sorte
+4. 20160601_5hmC_Jump_Seq_48ng.umi_encoded_adaptor_removed_no_mismatch.sorte
 d.dedup.bam
-* He-Lu-lu-1-48ng_S1_L006_R1_001.umi_encoded_adaptor_removed_no_mismatch.s
+5. He-Lu-lu-1-48ng_S1_L006_R1_001.umi_encoded_adaptor_removed_no_mismatch.s
 orted.dedup.bam
-* 20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
-* 20161115_5hmC_Jump_Seq_negative_control_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
-* 20161115_5hmC_Jump_Seq_positive_control_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
-* Jump-2hmC-sites.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
-* Jump-NC-2.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
-* Jump-positive.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
+6. 20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
+7. 20161115_5hmC_Jump_Seq_negative_control_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
+8. 20161115_5hmC_Jump_Seq_positive_control_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
+9. Jump-2hmC-sites.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
+10. Jump-NC-2.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
+11. Jump-positive.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
 
-## Combining from eleven 48 ng 5hmC replicates
+rep  | 1 |2 | 3 | 4 | 5| 6| 7| 8| 9| 10| 11 
+-----|---|---|---|---|---|---|---|---|---|---|-----------
+\#reads(plus) |3,516,149|3,781,024|2,014,714|6,982,592|4,741,743|5,036,004|5,825,862|5,532,109|5,072,780|3,951,163|3,641,213|
+\#reads(minus)|3,524,627| 3,793,291|2,021,689|6,995,038|4,754,910 |5,048,479|5,834,324|5,546,279|5,059,828|3,935,679|3,631,379|
+Table: Number of reads in plus and minus strand for each 48 ng replicate. 
+
+### Two large combined replicates from eleven 48 ng 5hmC replicates
 Once the base level coverage of each individual replicates is obtained, directly combine some of them to form a synthesized large replicate and the rest form to another such that their coverage, i.e. number of reads are as balanced as possible. In this way, power is expected to be increasing. 
 
-* combined rep 1: 20160601 5hmC Jump Seq 48ng.He-Lu-lu-1 
-48ng S1 L006 R1 001.20161115 5hmC Jump Seq 2hmC spike in.20161115 5hmC Jump Seq negative control spike in.20161115 5hmC Jump Seq positive control
-* combined rep 2:CHe..Lu..1 S12 L005 R1 001:He..Lu..6 48ng ..S3 L001 R1 001:He..lu..6 S6 L006 R1 001:Jump..2hmC ..sites:Jump..NC ..2:Jump .. positive.
+* combined rep 1: rep 4+5+6+7+8
+* combined rep 2:rep 1+2+3+9+10+11
 
 Two large combined replicates | \#reads
 ------------------------------|-----------
-rep1.minus | 28179030 
-rep1.plus | 28118310
-rep2.minus | 22004763
-rep2.plus | 21938791
+rep1.minus | 28,179,030 
+rep1.plus | 28,118,310
+rep2.minus | 21,966,493
+rep2.plus | 21,977,043
+rep1+rep2:minus| 50,145,523
+rep1+rep2:plus | 50,095,353
+Table: Number of reads in each combined replicate. 
 
-### comparison with Dali Han's data
+##### Comparison with Dali Han's data
 Originally called 20 bp windows are extended by 2kbp, 1kbp upstream and 1kbp downstream. Overlapping between extended peak windows (at four p value cutoffs $10^{-3}, 10^{-7}, 10^{-15}, 10^{-20}$) and Dali Han's data (window size differs among each other) are summzried below. 
 
 Combined replicate | \#overlap.win | \#.win | ratio
@@ -81,10 +97,9 @@ rep2:plus.21.bp.enriched.window.p10-3.bed.extend2kbp.bed | 348193 | 1243355 | 0.
 rep2:plus.21.bp.enriched.window.p10-7.bed.extend2kbp.bed | 71014 | 200017 | 0.3550398
 rep2:plus.21.bp.enriched.window.p10-15.bed.extend2kbp.bed | 8769 | 22941 | 0.3822414
 rep2:plus.21.bp.enriched.window.p10-20.bed.extend2kbp.bed | 2792 | 7557 | 0.3694588
+Table: Comparison of peak windows between two large replivcates and Dali's data. 
 
-
-### Comparison between replicates 
-Overlapping among peak windows extended by 2kbp for 2 large combined replicates at different p value cutoffs. 
+##### Comparison between two large replicates 
 
 
 minus | $10^{-1}$| $10^{-3}$ | $10^{-5}$ |$10^{-7}$ | $10^{-15}$ | $10^{-20}$
@@ -94,11 +109,11 @@ rep2 |0.9886 | 0.9523 |  0.8961 |0.8091 | 0.5576 | 0.5612
 plus |$10^{-1}$| $10^{-3}$ | $10^{-5}$|$10^{-7}$ | $10^{-15}$ | $10^{-20}$
 rep1 | 0.9906 | 0.9389 | 0.8426 |0.7337 | 0.4650 | 0.3952
 rep2 |0.9887 | 0.9524 | 0.8967 |0.8095 | 0.5397 | 0.5419
+Table: Overlapping among peak windows extended by 2kbp for 2 large combined replicates at different p value cutoffs.
+
 
 Surprisingly, the overlapping rate deceases as the p value cutofff becomes more stringent. 
 
-
-This is the overlapping for originally called 20 bp windows at different FDR levels. 
 
 
 minus | 0.5| 0.1 | 0.01|0.001 | 0.0001 |$10^{-7}$ |$10^{-10}$
@@ -108,6 +123,50 @@ rep2 |0.4985 | 0.3915  |  0.4111 |0.4109 | 0.4023| 0.4196| 0.4231
 plus |0.5| 0.1 | 0.01|0.001 | 0.0001 | $10^{-7}$ |$10^{-10}$
 rep1 | 0.3954 | 0.4126 | 0.3841 |0.3627 | 0.3572 | 0.3991|0.3115
 rep2 |0.4985 | 0.3907 | 0.4116 |0.4128 | 0.4030 | 0.4205| 0.4205
+Table: overlapping for originally called 20 bp windows at different FDR levels.
+
+### Downsample
+Combine all 48ng replicates together, downsample $40\%, 50\%, \cdots, 90\%$ reads, call peak windows, and see how \#peak.windows (absolute peak windows or overlapping with other data) vary with number of reads.   
+
+```{r, engine = 'bash', eval = FALSE}
+samtools merge output.sorted.bam input1.sorted.bam input2.sorted.bam # merge together sorted bam files
+```
+
+```{r, engine='bash', eval=F}
+samtools view -s 0.25 -b input.all.bam > input_25p.sam # downsample 25% reads 
+```
+
+ratio  | plus | minus 
+-------|------|-----
+40\% |20,027,749 |20,070,771
+50\% |25,029,777 |25,091,279
+60\% |30,035,435 |30,110,375
+70\% |35,040,232|35,127,703
+80\% |40,044,961 |40,149,113
+90\% |45,048,466 |45,168,687
+Table: Actutrally number of reads from each downsample with ratios of  $40\%, 50\%, \cdots, 90\%$. 
+
+
+```{r, echo=T,  eval =T}
+num.win.FDR5per=c(1848560, 2149967, 2635168, 2738080, 3066015, 3458501)
+num.reads=c(20070771, 25091279, 30110375, 35127703, 40149113, 45168687)
+plot(num.reads, num.win.FDR5per, xlab="Number of reads", ylab="# peak windowsof 20 bp at FDR0.05", type="o", main="minus strands")
+```
+
+```{r, echo=T,  eval =T}
+num.win.FDR5per=c(1854249, 2148405, 2632652, 2736153, 3082261, 3456391)
+num.reads=c(20027749, 25029777, 30035435, 35040232, 40044961, 45048466)
+plot(num.reads, num.win.FDR5per, xlab="Number of reads", ylab="# peak windowsof 20 bp at FDR0.05", type="o", main="plus strands")
+```
+
+**Based on the current observations, the number of peak windows grows as the read coverage increases, it does not show significant plateau**. 
+
+
+## 24ng 5hmC replicate
+## 12ng 5hmC replicate
+## 6ng 5hmC replicate 
+## 2.4ng 5hmC replicate
+## 0.6ng 5hmC replicate
 
 ## Session information
 
