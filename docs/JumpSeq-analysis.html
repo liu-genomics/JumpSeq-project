@@ -315,27 +315,14 @@ shared across the workflowr files. -->
 <p><strong>Last updated:</strong> 2017-04-24</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 8c5174c</p>
+<p><strong>Code version:</strong> 0761e74</p>
 <!-- Add your analysis here -->
 <p>All samples are <a href="https://docs.google.com/spreadsheets/d/1WesFCQTrFplnXRKCHmhqtm1529DHc5Sc2tX7GkRa_-U/edit#gid=1664366512">here</a>: 48 ng (11); 24 ng (5); 12 ng (5); 6ng (5); 2.4 ng (5); 0.6ng (2).</p>
 <div id="ng-5hmc-replicates" class="section level2">
 <h2>48ng 5hmC replicates</h2>
 <div id="summary" class="section level3">
 <h3>Summary</h3>
-<p>There are eleven 48ng 5hmC replicates listed below. Each one has two strands, plus+minus.</p>
-<ol style="list-style-type: decimal">
-<li>CHe-Lu-1_S12_L005_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorted.d edup.bam</li>
-<li>He-Lu-6_48ng-S3_L001_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorte d.dedup.bam</li>
-<li>He-lu-6_S6_L006_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorted.ded up.bam</li>
-<li>20160601_5hmC_Jump_Seq_48ng.umi_encoded_adaptor_removed_no_mismatch.sorte d.dedup.bam</li>
-<li>He-Lu-lu-1-48ng_S1_L006_R1_001.umi_encoded_adaptor_removed_no_mismatch.s orted.dedup.bam</li>
-<li>20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam</li>
-<li>20161115_5hmC_Jump_Seq_negative_control_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam</li>
-<li>20161115_5hmC_Jump_Seq_positive_control_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam</li>
-<li>Jump-2hmC-sites.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam</li>
-<li>Jump-NC-2.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam</li>
-<li>Jump-positive.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam</li>
-</ol>
+<p>There are eleven 48ng 5hmC replicates(see <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=400442004">here</a>). Each one has two strands, plus+minus.</p>
 <table style="width:81%;">
 <caption>Number of reads in plus and minus strand for each 48 ng replicate.</caption>
 <colgroup>
@@ -741,6 +728,7 @@ shared across the workflowr files. -->
 </tr>
 </tbody>
 </table>
+<p>For each down sample, call base level coverage, call peak windows and count how many peak windows at specified FDR level.</p>
 <pre class="r"><code>num.win.FDR5per=c(1848560, 2149967, 2635168, 2738080, 3066015, 3458501)
 num.reads=c(20070771, 25091279, 30110375, 35127703, 40149113, 45168687)
 plot(num.reads, num.win.FDR5per, xlab=&quot;Number of reads&quot;, ylab=&quot;# peak windowsof 20 bp at FDR0.05&quot;, type=&quot;o&quot;, main=&quot;minus strands&quot;)</code></pre>
@@ -763,6 +751,7 @@ plot(num.reads, num.win.FDR5per, xlab=&quot;Number of reads&quot;, ylab=&quot;# 
 </div>
 <div id="ng-5hmc-replicate-3" class="section level2">
 <h2>2.4ng 5hmC replicate</h2>
+<p>There are 4 replicates (see <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit?usp=sharing">here</a>).</p>
 </div>
 <div id="ng-5hmc-replicate-4" class="section level2">
 <h2>0.6ng 5hmC replicate</h2>

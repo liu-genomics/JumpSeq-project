@@ -34,25 +34,10 @@ All samples are [here][allsample]: 48 ng (11); 24 ng (5); 12 ng (5); 6ng (5); 2.
 ##  48ng 5hmC replicates
 
 ### Summary 
-There are eleven 48ng 5hmC replicates listed below. Each one has two strands, plus+minus. 
+There are eleven 48ng 5hmC replicates(see [here][5hmc]). Each one has two strands, plus+minus. 
 
+[5hmc]: https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=400442004
 
-1.  CHe-Lu-1_S12_L005_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorted.d
-edup.bam
-2.  He-Lu-6_48ng-S3_L001_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorte
-d.dedup.bam
-3. He-lu-6_S6_L006_R1_001.umi_encoded_adaptor_removed_no_mismatch.sorted.ded
-up.bam
-4. 20160601_5hmC_Jump_Seq_48ng.umi_encoded_adaptor_removed_no_mismatch.sorte
-d.dedup.bam
-5. He-Lu-lu-1-48ng_S1_L006_R1_001.umi_encoded_adaptor_removed_no_mismatch.s
-orted.dedup.bam
-6. 20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
-7. 20161115_5hmC_Jump_Seq_negative_control_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
-8. 20161115_5hmC_Jump_Seq_positive_control_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
-9. Jump-2hmC-sites.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
-10. Jump-NC-2.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
-11. Jump-positive.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
 
 rep  | 1 |2 | 3 | 4 | 5| 6| 7| 8| 9| 10| 11 
 -----|---|---|---|---|---|---|---|---|---|---|-----------
@@ -146,6 +131,7 @@ ratio  | plus | minus
 90\% |45,048,466 |45,168,687
 Table: Actutrally number of reads from each downsample with ratios of  $40\%, 50\%, \cdots, 90\%$. 
 
+For each down sample, call base level coverage, call peak windows and count how many peak windows at specified FDR level. 
 
 ```{r, echo=T,  eval =T}
 num.win.FDR5per=c(1848560, 2149967, 2635168, 2738080, 3066015, 3458501)
@@ -164,8 +150,14 @@ plot(num.reads, num.win.FDR5per, xlab="Number of reads", ylab="# peak windowsof 
 
 ## 24ng 5hmC replicate
 ## 12ng 5hmC replicate
+
 ## 6ng 5hmC replicate 
 ## 2.4ng 5hmC replicate
+There are 4 replicates (see [here][2.4ng]). 
+
+[2.4ng]: https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit?usp=sharing
+
+
 ## 0.6ng 5hmC replicate
 
 ## Session information
