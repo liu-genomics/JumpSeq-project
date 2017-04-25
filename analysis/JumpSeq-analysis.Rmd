@@ -155,7 +155,7 @@ plot(num.reads, num.win.FDR5per, xlab="Number of reads", ylab="# peak windowsof 
 ## 2.4ng 5hmC replicate
 There are 4 replicates (see [here][2.4ng]). 
 
-[2.4ng]: https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit?usp=sharing
+[2.4ng]: https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=400442004
 
 
 ## 0.6ng 5hmC replicate
