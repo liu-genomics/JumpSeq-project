@@ -209,6 +209,41 @@ rep 4|1,962,631|1,976,519
 rep 5| 1,365,146|1,375,074
 Table: number of reads in each replicate
 
+```{r, echo=T}
+win.minus=c(1144297, 1008422, 1436959, 1197291)
+win.plus=c(1312102, 1036507, 1441863, 1200396)
+plot(win.minus, type="o", xaxt='n', xlab="replicates", ylab="Number of peak windows", col=1, main="Number of peak windows (20bp, FDR0.05)", cex=0.8)
+lines(win.plus, col=2, type="o")
+legend(1, 1420000, c("minus strand", "plus strand"), col=c(1,2), lty=c(1,1))
+axis.labels <-c("rep1 ", "rep2", "rep3", "rep5")
+axis(1, at=seq(1,4), labels=axis.labels)
+```
+
+
+
+
+
+
+### Comparison with Dali's peaks
+```{r, echo=T}
+jump.rate.minus=c(0.0876, 0.0665, 0.0734, 0.0933)
+jump.rate.plus=c(0.0858, 0.0672, 0.0734, 0.0938)
+dali.rate.minus=c(0.6385, 0.5558, 0.6989, 0.7158)
+dali.rate.plus=c(0.7222, 0.5711, 0.7026, 0.7202)
+plot(jump.rate.minus, ylim=c(0, 1), type="o", xaxt='n', xlab="number of reads", ylab="overlapping rate", col=1, main="Overlapping rate of peak windows of 20 bp (FDR0.05) with Dali's peaks", cex=0.8)
+lines(jump.rate.plus, col=2, type="o")
+lines(dali.rate.minus, col=3, type="o")
+lines(dali.rate.plus, col=4, type="o")
+legend(1, 0.5, c("jump.rate.minus", "jump.rate.plus", "dali.rate.minus", "dali.rate.plus"), col=c(1,2,3,4), lty=c(1,1,1,1))
+axis.labels <-c("40% reads", "50% reads", "60% reads", "70% reads", "80% reads", "90% reads")
+axis(1, at=seq(1,6), labels=axis.labels)
+
+
+```
+
+
+
+
 ## 6ng 5hmC replicate 
 ## 2.4ng 5hmC replicate
 
