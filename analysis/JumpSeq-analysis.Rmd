@@ -521,7 +521,33 @@ pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
 
 ## Summary 
 
-* 
+* Jump-seq vs Dali's peaks
+
+```{r, echo=T}
+jump.rate=c(0.0829, 0.0922, 0.0933, 0.1264, 0.1425)
+dali.rate=c(0.4154, 0.5469, 0.7158, 0.5625, 0.9156)
+plot(jump.rate, type="o", ylim=c(0,1), xaxt='n', xlab="samples", ylab="overlap rate", col=1, main="", cex=0.8)
+lines(dali.rate, col=2, type="o")
+legend(1, 1, c("Jump-seq", "Dali's peak"), col=c(1,2), lty=c(1,1))
+axis.labels <-c("2.4ng combine ", "6ng", "12ng", "24ng", "48ng(90%)")
+axis(1, at=seq(1,5), labels=axis.labels)
+
+```
+
+
+
+* Jump-seq vs strong TAB-seq
+
+```{r, echo=T}
+jump.rate=c(0.1489, 0.1724, 0.1250, 0.2730, 0.2492)
+TAB.rate=c(0.0477, 0.0704, 0.0861, 0.0930, 0.4455)
+plot(jump.rate, type="o", ylim=c(0,0.5), xaxt='n', xlab="samples", ylab="overlap rate", col=1, main="", cex=0.8)
+lines(TAB.rate, col=2, type="o")
+legend(1, 0.5, c("Jump-seq", "strong TAB-seq"), col=c(1,2), lty=c(1,1))
+axis.labels <-c("2.4ng combine ", "6ng", "12ng", "24ng", "48ng(90%)")
+axis(1, at=seq(1,5), labels=axis.labels)
+
+```
 
 
 ## Session information
