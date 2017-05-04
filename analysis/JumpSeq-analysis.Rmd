@@ -33,7 +33,6 @@ All samples are [here][allsample]: 48 ng (11); 24 ng (5); 12 ng (5); 6ng (5); 2.
 
 ##  48ng 5hmC replicates
 
-### Summary 
 There are eleven 48ng 5hmC replicates and each one has two strands, plus+minus. 
 
 
@@ -234,7 +233,28 @@ pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
   	main=" strong TAB-seq (90% reads)", cex.main=0.9, sub="plus strand")
 ```
 
+### enrichment-90% reads minus
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(492824, 67317 )
+count[,2]=3458501-count[,1]
+pval=fisher.test(count, alternative = "greater")$p.value
+barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="hmC_Seal", main="48ng 90%reads  minus strand", ylab="Number of peak windows")
 
+```
+
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(861701, 89747)
+count[,2]=3458501-count[,1]
+pval=fisher.test(count, alternative = "greater")$p.value
+barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="strong TAB-seq", main="48ng 90% reads minus strand", ylab="Number of peak windows")
+
+```
+
+
+
+#####################################################################################################
 ## 24ng 5hmC replicate
 There are 5 24ng 5hmC replicates. 
 
@@ -296,7 +316,27 @@ axis(1, at=seq(1,5), labels=axis.labels)
 ```
 
 
-################################################################################
+### enrichment-rep4 minus
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(122190, 29091)
+count[,2]=1474825-count[,1]
+pval=fisher.test(count, alternative = "greater")$p.value
+barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="hmC_Seal", main="24ng rep4 minus strand", ylab="Number of peak windows")
+
+```
+
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(246529, 17073)
+count[,2]=1474825-count[,1]
+pval=fisher.test(count, alternative = "greater")$p.value
+barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="strong TAB-seq", main="24ng rep4 minus strand", ylab="Number of peak windows")
+
+```
+
+
+###################################################################################################
 ## 12ng 5hmC replicate
 There are 5 12ng 5hmC replicates. 
 
@@ -357,7 +397,27 @@ axis.labels <-c("rep1", "rep2", "rep3", "rep5")
 axis(1, at=seq(1,4), labels=axis.labels)
 ```
 
+### enrichment-rep 5 minus strand 
 
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(111734, 23171)
+count[,2]=1197291-count[,1]
+pval=fisher.test(count, alternative = "greater")$p.value
+barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="hmC_Seal", main="12ng rep5 minus strand", ylab="Number of peak windows")
+
+```
+
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(149717, 31057)
+count[,2]=1197291-count[,1]
+pval=fisher.test(count, alternative = "greater")$p.value
+barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="strong TAB-seq", main="12ng rep5 minus strand", ylab="Number of peak windows")
+
+```
+
+#####################################################################################################
 ## 6ng 5hmC replicate 
 There are 5 6ng 5hmC replicates. 
 
@@ -418,6 +478,29 @@ legend(1, 0.6, c("jump.rate.minus", "jump.rate.plus", "StrongTAB.rate.minus", "S
 axis.labels <-c("rep1", "rep2", "rep3", "rep4", "combine")
 axis(1, at=seq(1,5), labels=axis.labels)
 ```
+
+### enrichment-rep 5 minus strand 
+
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(61404, 12907)
+count[,2]=665737-count[,1]
+pval=fisher.test(count, alternative = "greater")$p.value
+barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="hmC_Seal", main="6ng rep5 minus strand", ylab="Number of peak windows")
+
+```
+
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(114794, 17049)
+count[,2]=665737-count[,1]
+pval=fisher.test(count, alternative = "greater")$p.value
+barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="strong TAB-seq", main="6ng rep5 minus strand", ylab="Number of peak windows")
+
+```
+
+
+#####################################################################################################
 
 
 ## 2point4ng 5hmC replicate
@@ -519,16 +602,39 @@ pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
   	main=" strong TAB-seq (combine, FDR0.05, - strand)", cex.main=0.7, sub="combine")
 ```
 
+### enrichment-2.4ng combine minus strand 
+
+```{r, echo=T}
+count1=matrix(nrow=2, ncol=2)
+count1[,1]=c(43213, 10092)
+count1[,2]=521062-count1[,1]
+pval=fisher.test(count1, alternative = "greater")$p.value
+barplot(count1[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="hmC_Seal", main="2.4ng (combine)", ylab="Number of peak windows")
+
+```
+
+```{r, echo=T}
+count2=matrix(nrow=2,ncol=2)
+count2[,1]=c(98049, 13382)
+count2[,2]=521062-count2[,1]
+pval=fisher.test(count2, alternative = "greater")$p.value
+barplot(count2[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="strong TAB-seq", main="2.4ng (combine)", ylab="Number of peak windows")
+
+```
+
 ## Summary 
 
-* Jump-seq vs Dali's peaks
+* Jump-seq overlaps with Dali's peaks
+
+Horizontal line is genome-wide overlap rate of 0.0203. 
 
 ```{r, echo=T}
 jump.rate=c(0.0829, 0.0922, 0.0933, 0.1264, 0.1425)
 dali.rate=c(0.4154, 0.5469, 0.7158, 0.5625, 0.9156)
 plot(jump.rate, type="o", ylim=c(0,1), xaxt='n', xlab="samples", ylab="overlap rate", col=1, main="", cex=0.8)
 lines(dali.rate, col=2, type="o")
-legend(1, 1, c("Jump-seq", "Dali's peak"), col=c(1,2), lty=c(1,1))
+abline(h=0.0203, col=3)
+legend(1, 1, c("Jump-seq", "Dali's peak", "background rate"), col=c(1,2, 3), lty=c(1,1, 1))
 axis.labels <-c("2.4ng combine ", "6ng", "12ng", "24ng", "48ng(90%)")
 axis(1, at=seq(1,5), labels=axis.labels)
 
@@ -536,14 +642,16 @@ axis(1, at=seq(1,5), labels=axis.labels)
 
 
 
-* Jump-seq vs strong TAB-seq
+* Jump-seq overlaps with  strong TAB-seq
 
+Horizontal line is the genome-wide overlap rate of 0.0258.  
 ```{r, echo=T}
 jump.rate=c(0.1489, 0.1724, 0.1250, 0.2730, 0.2492)
 TAB.rate=c(0.0477, 0.0704, 0.0861, 0.0930, 0.4455)
 plot(jump.rate, type="o", ylim=c(0,0.5), xaxt='n', xlab="samples", ylab="overlap rate", col=1, main="", cex=0.8)
 lines(TAB.rate, col=2, type="o")
-legend(1, 0.5, c("Jump-seq", "strong TAB-seq"), col=c(1,2), lty=c(1,1))
+abline(h=0.0260, col=3) # background rate
+legend(1, 0.5, c("Jump-seq", "strong TAB-seq", "background rate"), col=c(1,2,3), lty=c(1,1, 1))
 axis.labels <-c("2.4ng combine ", "6ng", "12ng", "24ng", "48ng(90%)")
 axis(1, at=seq(1,5), labels=axis.labels)
 
