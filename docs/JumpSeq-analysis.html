@@ -315,7 +315,7 @@ shared across the workflowr files. -->
 <p><strong>Last updated:</strong> 2017-05-04</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> de75cfd</p>
+<p><strong>Code version:</strong> 5b3f1d8</p>
 <!-- Add your analysis here -->
 <p>All samples are <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=400442004">here</a>: 48 ng (11); 24 ng (5); 12 ng (5); 6ng (5); 2.4 ng (5); 0.6ng (2).</p>
 <div id="ng-5hmc-replicates" class="section level2">
@@ -765,7 +765,7 @@ pct &lt;- round(slices/sum(slices)*100)
 lbls &lt;- paste(lbls, pct) # add percents to labels 
 lbls &lt;- paste(lbls,&quot;%&quot;,sep=&quot;&quot;) # ad % to labels 
 pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-    main=&quot;Jump-seq peak windows (90% reads)&quot;, cex.main=0.9, sub=&quot;plus strand&quot;)
+    main=&quot;Jump-seq&quot;, cex.main=0.9, sub=&quot;90% reads plus strand&quot;)
 
 slices &lt;- c(59368, 5497) 
 lbls &lt;- c(&quot;overlap&quot;, &quot;non-overlap&quot;)
@@ -773,7 +773,7 @@ pct &lt;- round(slices/sum(slices)*100)
 lbls &lt;- paste(lbls, pct) # add percents to labels 
 lbls &lt;- paste(lbls,&quot;%&quot;,sep=&quot;&quot;) # ad % to labels 
 pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-    main=&quot; Dali&#39;s peaks (90% reads)&quot;, cex.main=0.9, sub=&quot;plus strand&quot;)</code></pre>
+    main=&quot; hmC_seal&quot;, cex.main=0.9, sub=&quot;90% reads plus strand&quot;)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="cmparison-with-strong-tab-seq-peaks" class="section level4">
@@ -798,7 +798,7 @@ pct &lt;- round(slices/sum(slices)*100)
 lbls &lt;- paste(lbls, pct) # add percents to labels 
 lbls &lt;- paste(lbls,&quot;%&quot;,sep=&quot;&quot;) # ad % to labels 
 pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-    main=&quot;Jump-seq peak windows (90% reads)&quot;, cex.main=0.9, sub=&quot;plus strand&quot;)
+    main=&quot;Jump-seq&quot;, cex.main=0.9, sub=&quot;90% reads plus strand&quot;)
 
 slices &lt;- c(916635, 1141001) 
 lbls &lt;- c(&quot;overlap&quot;, &quot;non-overlap&quot;)
@@ -806,7 +806,7 @@ pct &lt;- round(slices/sum(slices)*100)
 lbls &lt;- paste(lbls, pct) # add percents to labels 
 lbls &lt;- paste(lbls,&quot;%&quot;,sep=&quot;&quot;) # ad % to labels 
 pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-    main=&quot; strong TAB-seq (90% reads)&quot;, cex.main=0.9, sub=&quot;plus strand&quot;)</code></pre>
+    main=&quot; strong TAB-seq&quot;, cex.main=0.9, sub=&quot;90% reads plus strand&quot;)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -1245,10 +1245,15 @@ count2[,2]=521062-count2[,1]
 pval=fisher.test(count2, alternative = &quot;greater&quot;)$p.value
 barplot(count2[,1], beside=F, col=c(&quot;red&quot;, &quot;darkblue&quot;), legend=c(&quot;Observed&quot;, &quot;Expected&quot;), xlab=&quot;strong TAB-seq&quot;, main=&quot;2.4ng (combine)&quot;, ylab=&quot;Number of peak windows&quot;)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="section-4" class="section level100">
+<p></p>
+</div>
 </div>
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
+<div id="overlap-pattern-at-different-genomic-concentration" class="section level3">
+<h3>Overlap pattern at different genomic concentration</h3>
 <ul>
 <li>Jump-seq overlaps with Dali’s peaks</li>
 </ul>
@@ -1275,6 +1280,45 @@ legend(1, 0.5, c(&quot;Jump-seq&quot;, &quot;strong TAB-seq&quot;, &quot;backgro
 axis.labels &lt;-c(&quot;2.4ng combine &quot;, &quot;6ng&quot;, &quot;12ng&quot;, &quot;24ng&quot;, &quot;48ng(90%)&quot;)
 axis(1, at=seq(1,5), labels=axis.labels)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="enrichemnt-analysis" class="section level3">
+<h3>Enrichemnt analysis</h3>
+<pre class="r"><code>count=matrix(nrow=2, ncol=2)
+count[,1]=c(43213, 10092)
+count[,2]=c(98049, 13382)
+colnames(count)=c(&quot;hmC_seal&quot;, &quot;strong TAB-seq&quot;)
+barplot(count, beside=T, col=c(&quot;red&quot;, &quot;darkblue&quot;), legend=c(&quot;Observed&quot;, &quot;Expected&quot;), 
+xlab=&quot;&quot;, main=&quot;2.4ng (combine) minus strand&quot;, ylab=&quot;Number of peak windows&quot;)</code></pre>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>count=matrix(nrow=2, ncol=2)
+count[,1]=c(61404, 12907)
+count[,2]=c(114794, 17049)
+colnames(count)=c(&quot;hmC_seal&quot;, &quot;strong TAB-seq&quot;)
+barplot(count, beside=T, col=c(&quot;red&quot;, &quot;darkblue&quot;), legend=c(&quot;Observed&quot;, &quot;Expected&quot;), 
+xlab=&quot;&quot;, main=&quot;6ng rep5 minus strand&quot;, ylab=&quot;Number of peak windows&quot;)</code></pre>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>count=matrix(nrow=2, ncol=2)
+count[,1]=c(111734, 23172)
+count[,2]=c(149717, 31057)
+colnames(count)=c(&quot;hmC_seal&quot;, &quot;strong TAB-seq&quot;)
+barplot(count, beside=T, col=c(&quot;red&quot;, &quot;darkblue&quot;), legend=c(&quot;Observed&quot;, &quot;Expected&quot;), 
+xlab=&quot;&quot;, main=&quot;12ng rep5 minus strand&quot;, ylab=&quot;Number of peak windows&quot;)</code></pre>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>count=matrix(nrow=2, ncol=2)
+count[,1]=c(122190, 29091)
+count[,2]=c(246529, 17073)
+colnames(count)=c(&quot;hmC_seal&quot;, &quot;strong TAB-seq&quot;)
+barplot(count, beside=T, col=c(&quot;red&quot;, &quot;darkblue&quot;), legend=c(&quot;Observed&quot;, &quot;Expected&quot;), 
+xlab=&quot;&quot;, main=&quot;24ng rep4 minus strand&quot;, ylab=&quot;Number of peak windows&quot;)</code></pre>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>count=matrix(nrow=2, ncol=2)
+count[,1]=c(492824, 67317)
+count[,2]=c(861701, 89747)
+colnames(count)=c(&quot;hmC_seal&quot;, &quot;strong TAB-seq&quot;)
+barplot(count, beside=T, col=c(&quot;red&quot;, &quot;darkblue&quot;), legend=c(&quot;Observed&quot;, &quot;Expected&quot;), 
+xlab=&quot;&quot;, main=&quot;48ng (90%reads) minus strand&quot;, ylab=&quot;Number of peak windows&quot;)</code></pre>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>

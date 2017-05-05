@@ -186,7 +186,7 @@ pct <- round(slices/sum(slices)*100)
 lbls <- paste(lbls, pct) # add percents to labels 
 lbls <- paste(lbls,"%",sep="") # ad % to labels 
 pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-  	main="Jump-seq peak windows (90% reads)", cex.main=0.9, sub="plus strand")
+  	main="Jump-seq", cex.main=0.9, sub="90% reads plus strand")
 
 slices <- c(59368, 5497) 
 lbls <- c("overlap", "non-overlap")
@@ -194,7 +194,7 @@ pct <- round(slices/sum(slices)*100)
 lbls <- paste(lbls, pct) # add percents to labels 
 lbls <- paste(lbls,"%",sep="") # ad % to labels 
 pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-  	main=" Dali's peaks (90% reads)", cex.main=0.9, sub="plus strand")
+  	main=" hmC_seal", cex.main=0.9, sub="90% reads plus strand")
 ```
 
 
@@ -222,7 +222,7 @@ pct <- round(slices/sum(slices)*100)
 lbls <- paste(lbls, pct) # add percents to labels 
 lbls <- paste(lbls,"%",sep="") # ad % to labels 
 pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-  	main="Jump-seq peak windows (90% reads)", cex.main=0.9, sub="plus strand")
+  	main="Jump-seq", cex.main=0.9, sub="90% reads plus strand")
 
 slices <- c(916635, 1141001) 
 lbls <- c("overlap", "non-overlap")
@@ -230,7 +230,7 @@ pct <- round(slices/sum(slices)*100)
 lbls <- paste(lbls, pct) # add percents to labels 
 lbls <- paste(lbls,"%",sep="") # ad % to labels 
 pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-  	main=" strong TAB-seq (90% reads)", cex.main=0.9, sub="plus strand")
+  	main=" strong TAB-seq", cex.main=0.9, sub="90% reads plus strand")
 ```
 
 ### enrichment-90% reads minus
@@ -622,7 +622,10 @@ barplot(count2[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Ex
 
 ```
 
-## Summary 
+####################################################################################################
+## Summary
+
+### Overlap pattern at different genomic concentration 
 
 * Jump-seq overlaps with Dali's peaks
 
@@ -657,6 +660,54 @@ axis(1, at=seq(1,5), labels=axis.labels)
 
 ```
 
+### Enrichemnt analysis 
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(43213, 10092)
+count[,2]=c(98049, 13382)
+colnames(count)=c("hmC_seal", "strong TAB-seq")
+barplot(count, beside=T, col=c("red", "darkblue"), legend=c("Observed", "Expected"), 
+xlab="", main="2.4ng (combine) minus strand", ylab="Number of peak windows")
+```
+
+
+
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(61404, 12907)
+count[,2]=c(114794, 17049)
+colnames(count)=c("hmC_seal", "strong TAB-seq")
+barplot(count, beside=T, col=c("red", "darkblue"), legend=c("Observed", "Expected"), 
+xlab="", main="6ng rep5 minus strand", ylab="Number of peak windows")
+```
+
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(111734, 23172)
+count[,2]=c(149717, 31057)
+colnames(count)=c("hmC_seal", "strong TAB-seq")
+barplot(count, beside=T, col=c("red", "darkblue"), legend=c("Observed", "Expected"), 
+xlab="", main="12ng rep5 minus strand", ylab="Number of peak windows")
+```
+
+
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(122190, 29091)
+count[,2]=c(246529, 17073)
+colnames(count)=c("hmC_seal", "strong TAB-seq")
+barplot(count, beside=T, col=c("red", "darkblue"), legend=c("Observed", "Expected"), 
+xlab="", main="24ng rep4 minus strand", ylab="Number of peak windows")
+```
+
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(492824, 67317)
+count[,2]=c(861701, 89747)
+colnames(count)=c("hmC_seal", "strong TAB-seq")
+barplot(count, beside=T, col=c("red", "darkblue"), legend=c("Observed", "Expected"), 
+xlab="", main="48ng (90%reads) minus strand", ylab="Number of peak windows")
+```
 
 ## Session information
 
