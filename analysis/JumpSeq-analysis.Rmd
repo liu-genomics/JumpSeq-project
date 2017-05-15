@@ -1,5 +1,5 @@
 ---
-title: "Jump seq data analysis"
+title: "5hmC data analysis"
 author: "Shengtong Han"
 date: YYYY-MM-DD
 output: html_document
@@ -31,15 +31,17 @@ All samples are [here][allsample]: 48 ng (11); 24 ng (5); 12 ng (5); 6ng (5); 2.
 [allsample]: https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=400442004
 
 
+Mouse genome mm9 has 2,654,911,517 bases, 507,439,500 (19.11324\%) cytosines and 507,585,491 (19.11873\%) Gumines.
+
 ##  48ng 5hmC replicates
 
 There are eleven 48ng 5hmC replicates and each one has two strands, plus+minus. 
 
 
-rep  | 1 |2 | 3 | 4 | 5| 6| 7| 8| 9| 10| 11 
------|---|---|---|---|---|---|---|---|---|---|-----------
-\#reads(plus) |3,516,149|3,781,024|2,014,714|6,982,592|4,741,743|5,036,004|5,825,862|5,532,109|5,072,780|3,951,163|3,641,213|
-\#reads(minus)|3,524,627| 3,793,291|2,021,689|6,995,038|4,754,910 |5,048,479|5,834,324|5,546,279|5,059,828|3,935,679|3,631,379|
+rep  | 1 |2 | 3 | 4 | 5| 6| 7| 8| 9| 10| 11 | combine
+-----|---|---|---|---|---|---|---|---|---|---|------|----
+\#reads(plus) |3,516,149|3,781,024|2,014,714|6,982,592|4,741,743|5,036,004|5,825,862|5,532,109|5,072,780|3,951,163|3,641,213|50,057,101
+\#reads(minus)|3,524,627| 3,793,291|2,021,689|6,995,038|4,754,910 |5,048,479|5,834,324|5,546,279|5,059,828|3,935,679|3,631,379|50,183,793
 Table: Number of reads in plus and minus strand for each 48 ng replicate. 
 
 ### Two large combined replicates from eleven 48 ng 5hmC replicates
@@ -139,19 +141,35 @@ ratio  | plus | minus
 70\% |35,040,232|35,127,703
 80\% |40,044,961 |40,149,113
 90\% |45,048,466 |45,168,687
-Table: Actutrally number of reads from each downsample with ratios of  $40\%, 50\%, \cdots, 90\%$. 
+100\%|50,057,101 | 50,183,793
+Table: Actutrally number of reads from each downsample with ratios of  $40\%, 50\%, \cdots, 100\%$. 
+
+
+#### Reads distribution 
+Windows with reads greater than 10 are put together into category 11. 
+```{r, echo=T}
+reads.plus=matrix(nrow=11, ncol=1)
+rownames(reads.plus)=c(seq(1,10), ">10"); reads.plus[,1]=c(9371352, 2190106, 772609, 334745, 162092, 84161, 45907, 25962, 15529, 9208, 16960)
+barplot(reads.plus[,1]/sum(reads.plus[,1]), ylim=c(0,1), ylab="Freq", main="Frequency of peak windows (40% reads plus)", xlab="Number of reads")
+```
+
+```{r, echo=T}
+reads.plus=matrix(nrow=11, ncol=1)
+rownames(reads.plus)=c(seq(1,10), ">10"); reads.plus[,1]=c(14075383, 4568606, 2003109, 1078497, 642833, 411173, 274861, 188434, 133511, 95662, 300518)
+barplot(reads.plus[,1]/sum(reads.plus[,1]), ylim=c(0,1), ylab="Freq", main="Frequency of peak windows (100% reads plus)", xlab="Number of reads")
+```
 
 For each down sample, call base level coverage, call peak windows and count how many peak windows at specified FDR level. 
 
 ```{r, echo=T,  eval =T}
-num.win.FDR5per=c(1848560, 2149967, 2635168, 2738080, 3066015, 3458501)
-num.reads=c(20070771, 25091279, 30110375, 35127703, 40149113, 45168687)
+num.win.FDR5per=c(1848560, 2149967, 2635168, 2738080, 3066015, 3458501, 3789453)
+num.reads=c(20070771, 25091279, 30110375, 35127703, 40149113, 45168687, 50183793)
 plot(num.reads, num.win.FDR5per, xlab="Number of reads", ylab="# peak windowsof 20 bp at FDR0.05", type="o", main="minus strands")
 ```
 
 ```{r, echo=T,  eval =T}
-num.win.FDR5per=c(1854249, 2148405, 2632652, 2736153, 3082261, 3456391)
-num.reads=c(20027749, 25029777, 30035435, 35040232, 40044961, 45048466)
+num.win.FDR5per=c(1854249, 2148405, 2632652, 2736153, 3082261, 3456391, 3812734)
+num.reads=c(20027749, 25029777, 30035435, 35040232, 40044961, 45048466, 50057101)
 plot(num.reads, num.win.FDR5per, xlab="Number of reads", ylab="# peak windowsof 20 bp at FDR0.05", type="o", main="plus strands")
 ```
 
@@ -160,17 +178,17 @@ plot(num.reads, num.win.FDR5per, xlab="Number of reads", ylab="# peak windowsof 
 #### Comparison with Dali's Peaks 
 There are 64865 peak windows of varying size in Dali's data. With each down sample, call peak windows of 20bp. 
 ```{r, echo=T}
-jump.rate.minus=c(0.1518, 0.1516, 0.1457, 0.1494, 0.1460, 0.1425)
-jump.rate.plus=c(0.1511, 0.1512, 0.1454, 0.1491, 0.1458, 0.1424)
-dali.rate.minus=c(0.8715, 0.8866, 0.9001, 0.9039, 0.9102, 0.9156)
-dali.rate.plus=c(0.8709, 0.8863, 0.8999, 0.9039, 0.9095, 0.9153)
+jump.rate.minus=c(0.1518, 0.1516, 0.1457, 0.1494, 0.1460, 0.1425, 0.1397)
+jump.rate.plus=c(0.1511, 0.1512, 0.1454, 0.1491, 0.1458, 0.1424, 0.1391)
+dali.rate.minus=c(0.8715, 0.8866, 0.9001, 0.9039, 0.9102, 0.9156, 0.9189)
+dali.rate.plus=c(0.8709, 0.8863, 0.8999, 0.9039, 0.9095, 0.9153, 0.9193)
 plot(jump.rate.minus, ylim=c(0, 1), type="o", xaxt='n', xlab="number of reads", ylab="overlapping rate", col=1, main="Overlapping rate of peak windows of 20 bp (FDR0.05) with Dali's peaks", cex=0.8)
 lines(jump.rate.plus, col=2, type="o")
 lines(dali.rate.minus, col=3, type="o")
 lines(dali.rate.plus, col=4, type="o")
 legend(1, 0.6, c("jump.rate.minus", "jump.rate.plus", "dali.rate.minus", "dali.rate.plus"), col=c(1,2,3,4), lty=c(1,1,1,1))
-axis.labels <-c("40% reads", "50% reads", "60% reads", "70% reads", "80% reads", "90% reads")
-axis(1, at=seq(1,6), labels=axis.labels)
+axis.labels <-c("40% reads", "50% reads", "60% reads", "70% reads", "80% reads", "90% reads", "100% reads")
+axis(1, at=seq(1,7), labels=axis.labels)
 
 
 ```
@@ -178,7 +196,7 @@ jump.rate.*: the ratio of windows overlapping with Dali's peaks from all called 
 dali.rate.*: among of all Dali's peaks, the ratio of windows overlapping with our called peak windows. 
 
 
-```{r, echo=T}
+```{r, echo=F,results="hide", eval=F}
 par(mfrow=c(1,2))
 slices <- c(492278, 2964113) 
 lbls <- c("overlap", "non-overlap")
@@ -198,57 +216,101 @@ pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
 ```
 
 
+
+```{r, echo=T}
+ratio=c(0.1397, 0.9189)
+barplot(ratio, beside=F, ylim=c(0,1.4), col=c("red", "darkblue"), legend=c("Jump-Seq", "nano hmC_seal"), xlab="", main="48ng(combine) minus strand", ylab="Overlap rate")
+text(0.6, 0.2, ratio[1])
+text(2, 1.0, ratio[2])
+```
+
+```{r, echo=T}
+ratio=c(0.1391, 0.9193)
+barplot(ratio, beside=F, ylim=c(0,1.4), col=c("red", "darkblue"), legend=c("Jump-Seq", "nano hmC_seal"), xlab="", main="48ng(combine) plus strand", ylab="Overlap rate")
+text(0.6, 0.2, ratio[1])
+text(2, 1.0, ratio[2])
+```
+
 #### Cmparison with strong TAB-seq peaks
 There are 2,057,636 strong base level peaks from TAB-seq. To compute overlapping rate, each base is extend by 10bp downstream, 10bp upstream, the same length as the called peak windows.  
 ```{r, echo=T}
-jump.rate.minus=c(0.2678, 0.2677, 0.2560, 0.2630, 0.2566, 0.2492)
-jump.rate.plus=c(0.2678, 0.2682, 0.2566, 0.2634, 0.2566, 0.2494)
-TAB.rate.minus=c(0.2810, 0.3203, 0.3654, 0.3858, 0.4145, 0.4455)
-TAB.rate.plus=c(0.2815, 0.3202, 0.3655, 0.3859, 0.4160, 0.4455)
+jump.rate.minus=c(0.2678, 0.2677, 0.2560, 0.2630, 0.2566, 0.2492, 0.2432)
+jump.rate.plus=c(0.2678, 0.2682, 0.2566, 0.2634, 0.2566, 0.2494, 0.2429)
+TAB.rate.minus=c(0.2810, 0.3203, 0.3654, 0.3858, 0.4145, 0.4455, 0.4693)
+TAB.rate.plus=c(0.2815, 0.3202, 0.3655, 0.3859, 0.4160, 0.4455, 0.4709)
 plot(jump.rate.minus, ylim=c(0, 1), type="o", xaxt='n', xlab="number of reads", ylab="overlapping rate", col=1, main="Overlapping rate of peak windows (20bp,FDR0.05) with strong TAB-seq peaks", cex.main=0.9)
 lines(jump.rate.plus, col=2, type="o")
 lines(TAB.rate.minus, col=3, type="o")
 lines(TAB.rate.plus, col=4, type="o")
 legend(1, 0.8, c("jump.rate.minus", "jump.rate.plus", "StrongTAB.rate.minus", "StrongTAB.rate.plus"), col=c(1,2,3,4), lty=c(1,1,1,1))
-axis.labels <-c("40% reads", "50% reads", "60% reads", "70% reads", "80% reads", "90% reads")
-axis(1, at=seq(1,6), labels=axis.labels)
+axis.labels <-c("40% reads", "50% reads", "60% reads", "70% reads", "80% reads", "90% reads", "100% reads")
+axis(1, at=seq(1,7), labels=axis.labels)
 ```
 
-```{r, echo=T}
+```{r, echo=F, results="hide"}
 par(mfrow=c(1,2))
 slices <- c(862040, 2594391) 
 lbls <- c("overlap", "non-overlap")
 pct <- round(slices/sum(slices)*100)
 lbls <- paste(lbls, pct) # add percents to labels 
 lbls <- paste(lbls,"%",sep="") # ad % to labels 
-pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-  	main="Jump-seq", cex.main=0.9, sub="90% reads plus strand")
+#pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
+#  	main="Jump-seq", cex.main=0.9, sub="90% reads plus strand")
 
 slices <- c(916635, 1141001) 
 lbls <- c("overlap", "non-overlap")
 pct <- round(slices/sum(slices)*100)
 lbls <- paste(lbls, pct) # add percents to labels 
 lbls <- paste(lbls,"%",sep="") # ad % to labels 
-pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-  	main=" strong TAB-seq", cex.main=0.9, sub="90% reads plus strand")
-```
-
-### enrichment-90% reads minus
-```{r, echo=T}
-count=matrix(nrow=2, ncol=2)
-count[,1]=c(492824, 67317 )
-count[,2]=3458501-count[,1]
-pval=fisher.test(count, alternative = "greater")$p.value
-barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="hmC_Seal", main="48ng 90%reads  minus strand", ylab="Number of peak windows")
-
+#pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
+#  	main=" strong TAB-seq", cex.main=0.9, sub="90% reads plus strand")
 ```
 
 ```{r, echo=T}
+ratio=c(0.2432, 0.4693)
+barplot(ratio, beside=F, ylim=c(0,0.7), col=c("red", "darkblue"), legend=c("Jump-Seq", "strong TAB-seq"), xlab="", main="48ng(combine) minus strand", ylab="Overlap rate")
+text(0.6, 0.3, ratio[1])
+text(2, 0.5, ratio[2])
+```
+
+```{r, echo=T}
+ratio=c(0.2429, 0.4709)
+barplot(ratio, beside=F, ylim=c(0,0.7), col=c("red", "darkblue"), legend=c("Jump-Seq", "strong TAB-seq"), xlab="", main="48ng(combine) plus strand", ylab="Overlap rate")
+text(0.6, 0.3, ratio[1])
+text(2, 0.5, ratio[2])
+```
+```{r, echo=T}
+ratio=matrix(nrow=2, ncol=2)
+ratio[,1]=c(0.9193, 0.4709)
+ratio[,2]=c(0.9189, 0.4693)
+rownames(ratio)=c("Nano_seal", "Tab-seq")
+par(mfrow=c(1,2))
+barplot(ratio[,1], beside=F, ylim=c(0,1.2), col=c("red", "darkblue"), xlab=c("plus strand"), main="", ylab="Sensitivity")
+text(0.6, 1.0, ratio[1,1])
+text(2, 0.6, ratio[2,1])
+barplot(ratio[,1], beside=F, ylim=c(0,1.2), col=c("red", "darkblue"), xlab=c("minus strand"), main="", ylab="Sensitivity")
+text(0.6, 1.0, ratio[1,2])
+text(2, 0.6, ratio[2,2])
+```
+
+
+
+### enrichment-100% reads minus
+To do enrichments analysis, peak windows are called with varying p values. Use FDR 0.05 as threshold to select enriched windows. Randomly pick the same number of windows as enriched windows from the whole genome as background. Perform enrichment analysis for enriched windows versus background windows when overlapping with nano hmC_seal  and strong TAB-seq. FDR 0.05 is used throughout and stated clearly otherwise.   
+```{r, echo=T}
 count=matrix(nrow=2, ncol=2)
-count[,1]=c(861701, 89747)
-count[,2]=3458501-count[,1]
+count[,1]=c(519216, 73689)
+count[,2]=3789453-count[,1]
+barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="hmC_Seal", main="48ng(combine)  minus strand (FDR 0.05)", ylab="Number of peak windows")
+
+```
+
+```{r, echo=T}
+count=matrix(nrow=2, ncol=2)
+count[,1]=c(921479, 98580)
+count[,2]=3789453-count[,1]
 pval=fisher.test(count, alternative = "greater")$p.value
-barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="strong TAB-seq", main="48ng 90% reads minus strand", ylab="Number of peak windows")
+barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="strong TAB-seq", main="48ng(combine) minus strand (FDR 0.05)", ylab="Number of peak windows")
 
 ```
 
@@ -321,7 +383,6 @@ axis(1, at=seq(1,5), labels=axis.labels)
 count=matrix(nrow=2, ncol=2)
 count[,1]=c(122190, 29091)
 count[,2]=1474825-count[,1]
-pval=fisher.test(count, alternative = "greater")$p.value
 barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="hmC_Seal", main="24ng rep4 minus strand", ylab="Number of peak windows")
 
 ```
@@ -330,7 +391,6 @@ barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Exp
 count=matrix(nrow=2, ncol=2)
 count[,1]=c(246529, 17073)
 count[,2]=1474825-count[,1]
-pval=fisher.test(count, alternative = "greater")$p.value
 barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="strong TAB-seq", main="24ng rep4 minus strand", ylab="Number of peak windows")
 
 ```
@@ -403,7 +463,6 @@ axis(1, at=seq(1,4), labels=axis.labels)
 count=matrix(nrow=2, ncol=2)
 count[,1]=c(111734, 23171)
 count[,2]=1197291-count[,1]
-pval=fisher.test(count, alternative = "greater")$p.value
 barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="hmC_Seal", main="12ng rep5 minus strand", ylab="Number of peak windows")
 
 ```
@@ -412,13 +471,20 @@ barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Exp
 count=matrix(nrow=2, ncol=2)
 count[,1]=c(149717, 31057)
 count[,2]=1197291-count[,1]
-pval=fisher.test(count, alternative = "greater")$p.value
 barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="strong TAB-seq", main="12ng rep5 minus strand", ylab="Number of peak windows")
 
 ```
 
 #####################################################################################################
-## 6ng 5hmC replicate 
+## 6ng 5hmC replicate
+
+### reads distribution
+```{r, echo=T}
+reads=matrix(nrow=11, ncol=1)
+rownames(reads)=c(seq(1,10), ">10"); reads[,1]=c(473607, 8448, 370, 60, 30, 13, 8, 7, 5, 6, 94)
+barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab="Freq", main="Frequency of called peak windows at FDR0.05 (rep1 minus)", xlab="Number of reads")
+```
+
 There are 5 6ng 5hmC replicates. 
 
 rep | plus | minus
@@ -442,6 +508,8 @@ axis.labels <-c("rep 1", "rep2", "rep3", "rep4", "rep5")
 axis(1, at=seq(1,5), labels=axis.labels)
 
 ```
+
+
 
 
 ### Comparison with Dali's peaks
@@ -485,7 +553,6 @@ axis(1, at=seq(1,5), labels=axis.labels)
 count=matrix(nrow=2, ncol=2)
 count[,1]=c(61404, 12907)
 count[,2]=665737-count[,1]
-pval=fisher.test(count, alternative = "greater")$p.value
 barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="hmC_Seal", main="6ng rep5 minus strand", ylab="Number of peak windows")
 
 ```
@@ -494,14 +561,12 @@ barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Exp
 count=matrix(nrow=2, ncol=2)
 count[,1]=c(114794, 17049)
 count[,2]=665737-count[,1]
-pval=fisher.test(count, alternative = "greater")$p.value
 barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="strong TAB-seq", main="6ng rep5 minus strand", ylab="Number of peak windows")
 
 ```
 
 
 #####################################################################################################
-
 
 ## 2point4ng 5hmC replicate
 
@@ -526,6 +591,28 @@ axis(1, at=seq(1,5), labels=axis.labels)
 
 ```
 
+
+### Reads distribution 
+```{r, echo=T}
+reads.plus=matrix(nrow=11, ncol=1)
+rownames(reads.plus)=c(seq(1,10), ">10"); reads.plus[,1]=c(253804, 3709, 159, 31, 16, 11, 1, 6, 7, 4, 61)
+barplot(reads.plus[,1]/sum(reads.plus[,1]), ylim=c(0,1), ylab="Freq", main="Frequency of windows with reads (rep1 plus)", xlab="Number of reads")
+```
+```{r, echo=T}
+reads.plus=matrix(nrow=11, ncol=1)
+rownames(reads.plus)=c(seq(1,10), ">10"); reads.plus[,1]=c(371791, 128383, 4260, 985, 115, 67, 27, 14, 11, 10, 125)
+barplot(reads.plus[,1]/sum(reads.plus[,1]), ylim=c(0,1), ylab="Freq", main="Frequency of windows with reads (combine plus)", xlab="Number of reads")
+```
+
+
+```{r, echo=T}
+reads.minus=matrix(nrow=11, ncol=1)
+rownames(reads.minus)=c(seq(1,10), ">10"); reads.minus[,1]=c(253875, 3720, 166, 31, 21, 8, 7, 3, 2, 3, 82)
+barplot(reads.minus[,1]/sum(reads.minus[,1]), ylim=c(0,1), ylab="Freq", main="Frequency of called peak windows at FDR0.05  (rep1 minus)", xlab="Number of reads")
+
+```
+
+
 ### Comparison with Dali's peaks 
 
 ```{r, echo=T}
@@ -533,38 +620,42 @@ jump.rate.minus=c(0.0854, 0.0711, 0.0830, 0.0809, 0.0829)
 jump.rate.plus=c(0.0852, 0.0713, 0.0818, 0.0793, 0.0822)
 dali.rate.minus=c(0.2711, 0.1481, 0.2712, 0.2137, 0.4154)
 dali.rate.plus=c(0.2692, 0.1490, 0.2674, 0.2093, 0.4014)
-plot(jump.rate.minus, ylim=c(0, 1), type="o", xaxt='n', xlab="number of reads", ylab="overlapping rate", col=1, main="Overlapping rate of peak windows of 20 bp (FDR0.05) with Dali's peaks", cex=0.8)
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(jump.rate.minus, ylim=c(0, 1), type="o", xaxt='n', xlab="", ylab="Proportion of Jump-seq", col=1, main="20bp, FDR>0.05", cex.main=0.8, cex.lab=0.8)
 lines(jump.rate.plus, col=2, type="o")
-lines(dali.rate.minus, col=3, type="o")
-lines(dali.rate.plus, col=4, type="o")
-legend(1, 0.7, c("jump.rate.minus", "jump.rate.plus", "dali.rate.minus", "dali.rate.plus"), col=c(1,2,3,4), lty=c(1,1,1,1))
+legend(1, 0.7, c("minus", "plus"), col=c(1,2), lty=c(1,1))
 axis.labels <-c("rep1", "rep2", "rep3", "rep4", "combine")
-axis(1, at=seq(1,5), labels=axis.labels)
+axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8)
 
+plot(dali.rate.minus, ylim=c(0,1), type="o", xaxt='n', xlab="", ylab="Proportion of nano hmC_seal", col=3, main="20bp, FDR>0.05", cex.main=0.8, cex.lab=0.8)
+lines(dali.rate.plus, col=4, type="o")
+legend(1, 0.7, c("minus", "plus"), col=c(3,4), lty=c(1,1))
+axis.labels <-c("rep1", "rep2", "rep3", "rep4", "combine")
+axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8)
+mtext("overlap between Jump-seq & nano hmC_seal", outer = TRUE, cex = 1)
 
 ```
+
 ```{r, echo=T}
-par(mfrow=c(1,2))
-slices <- c(43213, 477849)
-lbls <- c("overlap", "non-overlap")
-pct <- round(slices/sum(slices)*100)
-lbls <- paste(lbls, pct) # add percents to labels 
-lbls <- paste(lbls,"%",sep="") # ad % to labels 
-pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-  	main="Jump-seq peak windows (combine, FDR0.05, - strand)", cex.main=0.7, sub="combine")
-
-slices <- c(26943, 37922) 
-lbls <- c("overlap", "non-overlap")
-pct <- round(slices/sum(slices)*100)
-lbls <- paste(lbls, pct) # add percents to labels 
-lbls <- paste(lbls,"%",sep="") # ad % to labels 
-pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-  	main=" Dali's peaks (combine, FDR0.05, - strand)", cex.main=0.7, sub="combine")
+combine.minus=c(0.0818, 0.0840, 0.1435, 0.1059, 0.1000, 0.0641, 0.0606, 0.0588, 0, 0, 0)
+plot(seq(1,11), combine.minus, type="o", xaxt='n', xlab="Number of reads", ylim=c(0, 0.2), ylab="Proportion of Jump-seq (combine minus)")
+axis.labels <-c(seq(1,10), ">10")
+abline(h=0.0194, col=2)
+axis(1, at=seq(1,11), labels=axis.labels, cex.axis=0.8)
 ```
 
 
+* This is the enrichment of peak windows at different reads counts for combined 2.4ng replicates. 
+*  This is not a good measure since the number of widnows with large number of reads usually is small, say 2 windows, the overlapping rate with nano hmc_seal is not so reliable, (with large variance). 
+* red line is background rate, 1.94%. 
 
-
+```{r, echo=T}
+combine.plus=c(0.0814, 0.0828, 0.1254, 0.1289, 0.1478, 0.1045, 0.0741, 0, 0.0909, 0, 0.0080)
+plot(seq(1,11), combine.plus, type="o", xaxt='n', xlab="Number of reads", ylim=c(0, 0.2), ylab="Proportion of Jump-seq (combine plus)")
+axis.labels <-c(seq(1,10), ">10")
+abline(h=0.0194, col=2)
+axis(1, at=seq(1,11), labels=axis.labels, cex.axis=0.8)
+```
 
 ### Comparison with strong TAB-seq
 
@@ -573,33 +664,36 @@ jump.rate.minus=c(0.1543, 0.1295, 0.1544, 0.1483, 0.1489)
 jump.rate.plus=c(0.1564, 0.1292, 0.1547, 0.1491, 0.1496)
 TAB.rate.minus=c(0.0246, 0.0122, 0.0253, 0.0186, 0.0477)
 TAB.rate.plus=c(0.0249, 0.0122, 0.0253, 0.0187, 0.0462)
-plot(jump.rate.minus, ylim=c(0, 0.6), type="o", xaxt='n', xlab="number of reads", ylab="overlapping rate", col=1, main="Overlapping rate of peak windows (20bp,FDR0.05) with strong TAB-seq peaks", cex.main=0.9)
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(jump.rate.minus, ylim=c(0, 1), type="o", xaxt='n', xlab="", ylab="Proportion of Jump-seq", col=1, main="20bp, FDR>0.05", cex.main=0.8, cex.lab=0.8)
 lines(jump.rate.plus, col=2, type="o")
-lines(TAB.rate.minus, col=3, type="o")
-lines(TAB.rate.plus, col=4, type="o")
-legend(1, 0.6, c("jump.rate.minus", "jump.rate.plus", "StrongTAB.rate.minus", "StrongTAB.rate.plus"), col=c(1,2,3,4), lty=c(1,1,1,1))
+legend(1, 0.7, c("minus", "plus"), col=c(1,2), lty=c(1,1))
 axis.labels <-c("rep1", "rep2", "rep3", "rep4", "combine")
-axis(1, at=seq(1,5), labels=axis.labels)
+axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8)
+
+
+plot(TAB.rate.minus, ylim=c(0,1), type="o", xaxt='n', xlab="", ylab="Proportion of TAB-seq", col=3, main="20bp, FDR>0.05", cex.main=0.8, cex.lab=0.8)
+lines(TAB.rate.plus, col=4, type="o")
+legend(1, 0.7, c("minus", "plus"), col=c(3,4), lty=c(1,1))
+axis.labels <-c("rep1", "rep2", "rep3", "rep4", "combine")
+axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8)
+mtext("overlap between Jump-seq & TAB-seq", outer = TRUE, cex = 1)
 ```
 
+```{r, echo=T}
+combine.minus=c(0.1462, 0.1519, 0.2660, 0.2118, 0.2357, 0.0769, 0.2121, 0.1176, 0.0769, 0.3333, 0.2349)
+plot(seq(1,11), combine.minus, type="o", xaxt='n', xlab="Number of reads", ylim=c(0, 0.4), ylab="Proportion of Jump-seq (combine minus)")
+axis.labels <-c(seq(1,10), ">10")
+abline(h=0.0258, col=2)
+axis(1, at=seq(1,11), labels=axis.labels, cex.axis=0.8)
+```
 
 ```{r, echo=T}
-par(mfrow=c(1,2))
-slices <- c(77581, 443481)
-lbls <- c("overlap", "non-overlap")
-pct <- round(slices/sum(slices)*100)
-lbls <- paste(lbls, pct) # add percents to labels 
-lbls <- paste(lbls,"%",sep="") # ad % to labels 
-pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-  	main="Jump-seq peak windows (combine, FDR0.05, - strand)", cex.main=0.7, sub="combine")
-
-slices <- c(98049, 1959587) 
-lbls <- c("overlap", "non-overlap")
-pct <- round(slices/sum(slices)*100)
-lbls <- paste(lbls, pct) # add percents to labels 
-lbls <- paste(lbls,"%",sep="") # ad % to labels 
-pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
-  	main=" strong TAB-seq (combine, FDR0.05, - strand)", cex.main=0.7, sub="combine")
+combine.plus=c(0.1466, 0.1532, 0.2643, 0.2609, 0.2174, 0.1642, 0.1481, 0.3571, 0.1818, 0.1000, 0.2960)
+plot(seq(1,11), combine.plus, type="o", xaxt='n', xlab="Number of reads", ylim=c(0, 0.4), ylab="Proportion of Jump-seq (combine plus)")
+axis.labels <-c(seq(1,10), ">10")
+abline(h=0.0258, col=2)
+axis(1, at=seq(1,11), labels=axis.labels, cex.axis=0.8)
 ```
 
 ### enrichment-2.4ng combine minus strand 
@@ -608,7 +702,6 @@ pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
 count1=matrix(nrow=2, ncol=2)
 count1[,1]=c(43213, 10092)
 count1[,2]=521062-count1[,1]
-pval=fisher.test(count1, alternative = "greater")$p.value
 barplot(count1[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="hmC_Seal", main="2.4ng (combine)", ylab="Number of peak windows")
 
 ```
@@ -617,10 +710,11 @@ barplot(count1[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Ex
 count2=matrix(nrow=2,ncol=2)
 count2[,1]=c(98049, 13382)
 count2[,2]=521062-count2[,1]
-pval=fisher.test(count2, alternative = "greater")$p.value
 barplot(count2[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Expected"), xlab="strong TAB-seq", main="2.4ng (combine)", ylab="Number of peak windows")
 
 ```
+
+
 
 ####################################################################################################
 ## Summary
@@ -632,13 +726,13 @@ barplot(count2[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Ex
 Horizontal line is genome-wide overlap rate of 0.0203. 
 
 ```{r, echo=T}
-jump.rate=c(0.0829, 0.0922, 0.0933, 0.1264, 0.1425)
-dali.rate=c(0.4154, 0.5469, 0.7158, 0.5625, 0.9156)
+jump.rate=c(0.0829, 0.0922, 0.0933, 0.1264, 0.1397)
+dali.rate=c(0.4154, 0.5469, 0.7158, 0.5625, 0.9189)
 plot(jump.rate, type="o", ylim=c(0,1), xaxt='n', xlab="samples", ylab="overlap rate", col=1, main="", cex=0.8)
 lines(dali.rate, col=2, type="o")
 abline(h=0.0203, col=3)
 legend(1, 1, c("Jump-seq", "Dali's peak", "background rate"), col=c(1,2, 3), lty=c(1,1, 1))
-axis.labels <-c("2.4ng combine ", "6ng", "12ng", "24ng", "48ng(90%)")
+axis.labels <-c("2.4ng combine ", "6ng", "12ng", "24ng", "48ng(combine)")
 axis(1, at=seq(1,5), labels=axis.labels)
 
 ```
@@ -649,66 +743,78 @@ axis(1, at=seq(1,5), labels=axis.labels)
 
 Horizontal line is the genome-wide overlap rate of 0.0258.  
 ```{r, echo=T}
-jump.rate=c(0.1489, 0.1724, 0.1250, 0.2730, 0.2492)
-TAB.rate=c(0.0477, 0.0704, 0.0861, 0.0930, 0.4455)
+jump.rate=c(0.1489, 0.1724, 0.1250, 0.2730, 0.2432)
+TAB.rate=c(0.0477, 0.0704, 0.0861, 0.0930, 0.4693)
 plot(jump.rate, type="o", ylim=c(0,0.5), xaxt='n', xlab="samples", ylab="overlap rate", col=1, main="", cex=0.8)
 lines(TAB.rate, col=2, type="o")
 abline(h=0.0260, col=3) # background rate
 legend(1, 0.5, c("Jump-seq", "strong TAB-seq", "background rate"), col=c(1,2,3), lty=c(1,1, 1))
-axis.labels <-c("2.4ng combine ", "6ng", "12ng", "24ng", "48ng(90%)")
+axis.labels <-c("2.4ng combine ", "6ng", "12ng", "24ng", "48ng(combine)")
 axis(1, at=seq(1,5), labels=axis.labels)
 
 ```
 
 ### Enrichemnt analysis 
+
 ```{r, echo=T}
-count=matrix(nrow=2, ncol=2)
-count[,1]=c(43213, 10092)
-count[,2]=c(98049, 13382)
-colnames(count)=c("hmC_seal", "strong TAB-seq")
-barplot(count, beside=T, col=c("red", "darkblue"), legend=c("Observed", "Expected"), 
-xlab="", main="2.4ng (combine) minus strand", ylab="Number of peak windows")
+percent=matrix(nrow=2, ncol=10)
+percent[,1]=c(43213, 10092)/521062
+percent[,2]=c(98049, 13382)/521062
+
+percent[,3]=c(61404, 12907)/665737
+percent[,4]=c(114794, 17049)/665737
+
+percent[,5]=c(111734, 23171)/1197291
+percent[,6]=c(149717, 31057)/1197291
+
+percent[,7]=c(122190, 28799)/1474825
+percent[,8]=c(246529, 37851)/1474825
+
+percent[,9]=c(529216, 73689)/3789453
+percent[,10]=c(921479, 98580)/3789453
+colnames(percent)=paste(rep(c("2.4ng(combine)", "6ng", "12ng", "24ng", "48ng (combine)"), each=2), c("Nano hmC_Seal", "strongTAB"), sep="_")
+
+#barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Observed", "Expected"), ylim=c(0,0.4),
+#xlab="", main="", ylab="overlap rate", cex.names=0.5)
+barplot(percent[,c(1,3,5,7,9)], beside=T, col=c("red", "darkblue"), legend=c("Observed", "Expected"), ylim=c(0,0.3),
+xlab="", main="", ylab="overlap rate", cex.names=0.5)
+
+barplot(percent[,c(2,4,6,8,10)], beside=T, col=c("red", "darkblue"), legend=c("Observed", "Expected"), ylim=c(0,0.4),
+xlab="", main="", ylab="overlap rate", cex.names=0.5)
 ```
 
 
 
 ```{r, echo=T}
-count=matrix(nrow=2, ncol=2)
-count[,1]=c(61404, 12907)
-count[,2]=c(114794, 17049)
-colnames(count)=c("hmC_seal", "strong TAB-seq")
-barplot(count, beside=T, col=c("red", "darkblue"), legend=c("Observed", "Expected"), 
-xlab="", main="6ng rep5 minus strand", ylab="Number of peak windows")
+percent=matrix(nrow=2, ncol=10)
+percent[,1]=c(43213, 10092)/521062
+percent[,2]=c(98049, 13382)/521062
+
+percent[,3]=c(61404, 12907)/665737
+percent[,4]=c(114794, 17049)/665737
+
+percent[,5]=c(111734, 23171)/1197291
+percent[,6]=c(149717, 31057)/1197291
+
+percent[,7]=c(122190, 28799)/1474825
+percent[,8]=c(246529, 37851)/1474825
+
+percent[,9]=c(529216, 73689)/3789453
+percent[,10]=c(921479, 98580)/3789453
+colnames(percent)=rep(c("2.4ng", "6ng", "12ng", "24ng", "48ng"), each=2)
+
+par(mfrow=c(1,2))
+barplot(percent[,c(1,3,5,7,9)], beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.3),
+xlab="Figure 1A", main="", ylab="Proportion of Nano-seal peaks", cex.names=0.5)
+#text(2, 0.1, 4.2819)
+#text(4, 0.1, 4.7574)
+#text(6, 0.12, round(percent[1,5]/percent[2,5],4))
+#text(8, 0.12, round(percent[1,7]/percent[2,7],4))
+#text(10, 0.12, round(percent[1,9]/percent[2,9],4))
+
+barplot(percent[,c(2,4,6,8,10)], beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.4),
+xlab="Figure 1B", main="", ylab="Proportion of Tab-seq peaks", cex.names=0.5)
 ```
-
-```{r, echo=T}
-count=matrix(nrow=2, ncol=2)
-count[,1]=c(111734, 23172)
-count[,2]=c(149717, 31057)
-colnames(count)=c("hmC_seal", "strong TAB-seq")
-barplot(count, beside=T, col=c("red", "darkblue"), legend=c("Observed", "Expected"), 
-xlab="", main="12ng rep5 minus strand", ylab="Number of peak windows")
-```
-
-
-```{r, echo=T}
-count=matrix(nrow=2, ncol=2)
-count[,1]=c(122190, 29091)
-count[,2]=c(246529, 17073)
-colnames(count)=c("hmC_seal", "strong TAB-seq")
-barplot(count, beside=T, col=c("red", "darkblue"), legend=c("Observed", "Expected"), 
-xlab="", main="24ng rep4 minus strand", ylab="Number of peak windows")
-```
-
-```{r, echo=T}
-count=matrix(nrow=2, ncol=2)
-count[,1]=c(492824, 67317)
-count[,2]=c(861701, 89747)
-colnames(count)=c("hmC_seal", "strong TAB-seq")
-barplot(count, beside=T, col=c("red", "darkblue"), legend=c("Observed", "Expected"), 
-xlab="", main="48ng (90%reads) minus strand", ylab="Number of peak windows")
-```
-
 ## Session information
 
 <!-- Insert the session information into the document -->
