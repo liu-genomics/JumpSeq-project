@@ -25,8 +25,63 @@ knitr::read_chunk("chunks.R")
 ```
 
 <!-- Add your analysis here -->
-## 48ng 
-There are two replicates 
+Samples are [here][allsample]:  
+
+[allsample]: https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=271045416
+
+
+## 48ng 5mC replicates 
+There are two replicates. 
+
+  
+
+
+### reads distribution 
+
+
+rep | minus | plus
+----|-------|----------
+rep1| 4,270,565|4,246,992
+rep2|5,707,602|5,686,410
+Table: number of reads in every replicate
+
+Peak windows with reads greater than 10 are put together into category ">10". 
+```{r, echo=T}
+reads=matrix(nrow=11, ncol=1)
+rownames(reads)=c(seq(1,10), ">10"); reads[,1]=c(3338973, 312411, 45971, 8205, 1741, 435, 202, 83, 52, 45, 393)
+barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab="Freq", main="Frequency of peak windows (rep 1 minus)", xlab="Number of reads")
+```
+
+
+
+
+```{r, echo=T}
+reads=matrix(nrow=11, ncol=1)
+rownames(reads)=c(seq(1,10), ">10"); reads[,1]=c(4066783, 506148, 99300, 22528, 5818, 1551, 563, 215, 130, 62, 639)
+barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab="Freq", main="Frequency of peak windows (rep 2 plus)", xlab="Number of reads")
+```
+
+rep | minus | plus
+----|-------|----------
+rep1| 33,312|34,307
+rep2|94,687|94,320
+Table: number of peak windows at FDR 0.05 (~ pvalue $1.2\times 10^{-5}$) in every replicate
+
+
+rep | minus | plus
+----|-------|----------
+rep1| 56,390|57,010
+rep2|134,018|134,260
+Table: number of peak windows at FDR 0.1 (~ pvalue $3.5\times 10^{-5}$) in every replicate
+
+rep | minus | plus
+----|-------|----------
+rep1| 181,825|188,726
+rep2|188,726|431,088
+Table: number of peak windows at FDR 0.5 (~ pvalue $1.5\times 10^{-3}$) in every replicate
+
+
+
 
 ## Session information
 

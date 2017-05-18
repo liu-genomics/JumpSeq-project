@@ -312,10 +312,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-05-14</p>
+<p><strong>Last updated:</strong> 2017-05-18</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 7b0f8e3</p>
+<p><strong>Code version:</strong> faf6f06</p>
 <!-- Add your analysis here -->
 <p>All samples are <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=400442004">here</a>: 48 ng (11); 24 ng (5); 12 ng (5); 6ng (5); 2.4 ng (5); 0.6ng (2).</p>
 <p>Mouse genome mm9 has 2,654,911,517 bases, 507,439,500 (19.11324%) cytosines and 507,585,491 (19.11873%) Gumines.</p>
@@ -810,12 +810,12 @@ axis(1, at=seq(1,7), labels=axis.labels)</code></pre>
 barplot(ratio, beside=F, ylim=c(0,0.7), col=c(&quot;red&quot;, &quot;darkblue&quot;), legend=c(&quot;Jump-Seq&quot;, &quot;strong TAB-seq&quot;), xlab=&quot;&quot;, main=&quot;48ng(combine) minus strand&quot;, ylab=&quot;Overlap rate&quot;)
 text(0.6, 0.3, ratio[1])
 text(2, 0.5, ratio[2])</code></pre>
-<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>ratio=c(0.2429, 0.4709)
 barplot(ratio, beside=F, ylim=c(0,0.7), col=c(&quot;red&quot;, &quot;darkblue&quot;), legend=c(&quot;Jump-Seq&quot;, &quot;strong TAB-seq&quot;), xlab=&quot;&quot;, main=&quot;48ng(combine) plus strand&quot;, ylab=&quot;Overlap rate&quot;)
 text(0.6, 0.3, ratio[1])
 text(2, 0.5, ratio[2])</code></pre>
-<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>ratio=matrix(nrow=2, ncol=2)
 ratio[,1]=c(0.9193, 0.4709)
 ratio[,2]=c(0.9189, 0.4693)
@@ -827,7 +827,7 @@ text(2, 0.6, ratio[2,1])
 barplot(ratio[,1], beside=F, ylim=c(0,1.2), col=c(&quot;red&quot;, &quot;darkblue&quot;), xlab=c(&quot;minus strand&quot;), main=&quot;&quot;, ylab=&quot;Sensitivity&quot;)
 text(0.6, 1.0, ratio[1,2])
 text(2, 0.6, ratio[2,2])</code></pre>
-<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="enrichment-100-reads-minus" class="section level3">
@@ -837,13 +837,17 @@ text(2, 0.6, ratio[2,2])</code></pre>
 count[,1]=c(519216, 73689)
 count[,2]=3789453-count[,1]
 barplot(count[,1], beside=F, col=c(&quot;red&quot;, &quot;darkblue&quot;), legend=c(&quot;Observed&quot;, &quot;Expected&quot;), xlab=&quot;hmC_Seal&quot;, main=&quot;48ng(combine)  minus strand (FDR 0.05)&quot;, ylab=&quot;Number of peak windows&quot;)</code></pre>
-<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>count=matrix(nrow=2, ncol=2)
 count[,1]=c(921479, 98580)
 count[,2]=3789453-count[,1]
 pval=fisher.test(count, alternative = &quot;greater&quot;)$p.value
 barplot(count[,1], beside=F, col=c(&quot;red&quot;, &quot;darkblue&quot;), legend=c(&quot;Observed&quot;, &quot;Expected&quot;), xlab=&quot;strong TAB-seq&quot;, main=&quot;48ng(combine) minus strand (FDR 0.05)&quot;, ylab=&quot;Number of peak windows&quot;)</code></pre>
-<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="jump-distribution" class="section level3">
+<h3>Jump distribution</h3>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-18-2.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="section" class="section level101">
 <p></p>
 </div>

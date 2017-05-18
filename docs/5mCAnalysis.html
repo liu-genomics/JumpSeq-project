@@ -312,14 +312,115 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-05-08</p>
+<p><strong>Last updated:</strong> 2017-05-16</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 7b0f8e3</p>
+<p><strong>Code version:</strong> faf6f06</p>
 <!-- Add your analysis here -->
-<div id="ng" class="section level2">
-<h2>48ng</h2>
-<p>There are two replicates</p>
+<p>Samples are <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=271045416">here</a>:</p>
+<div id="ng-5mc-replicates" class="section level2">
+<h2>48ng 5mC replicates</h2>
+<p>There are two replicates.</p>
+<div id="reads-distribution" class="section level3">
+<h3>reads distribution</h3>
+<table>
+<caption>number of reads in every replicate</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>4,270,565</td>
+<td>4,246,992</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>5,707,602</td>
+<td>5,686,410</td>
+</tr>
+</tbody>
+</table>
+<p>Peak windows with reads greater than 10 are put together into category “&gt;10”.</p>
+<pre class="r"><code>reads=matrix(nrow=11, ncol=1)
+rownames(reads)=c(seq(1,10), &quot;&gt;10&quot;); reads[,1]=c(3338973, 312411, 45971, 8205, 1741, 435, 202, 83, 52, 45, 393)
+barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab=&quot;Freq&quot;, main=&quot;Frequency of peak windows (rep 1 minus)&quot;, xlab=&quot;Number of reads&quot;)</code></pre>
+<p><img src="figure/5mCAnalysis.Rmd/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>reads=matrix(nrow=11, ncol=1)
+rownames(reads)=c(seq(1,10), &quot;&gt;10&quot;); reads[,1]=c(4066783, 506148, 99300, 22528, 5818, 1551, 563, 215, 130, 62, 639)
+barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab=&quot;Freq&quot;, main=&quot;Frequency of peak windows (rep 2 plus)&quot;, xlab=&quot;Number of reads&quot;)</code></pre>
+<p><img src="figure/5mCAnalysis.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<table>
+<caption>number of peak windows at FDR 0.05 (~ pvalue <span class="math inline">\(1.2\times 10^{-5}\)</span>) in every replicate</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>33,312</td>
+<td>34,307</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>94,687</td>
+<td>94,320</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>number of peak windows at FDR 0.1 (~ pvalue <span class="math inline">\(3.5\times 10^{-5}\)</span>) in every replicate</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>56,390</td>
+<td>57,010</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>134,018</td>
+<td>134,260</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>number of peak windows at FDR 0.5 (~ pvalue <span class="math inline">\(1.5\times 10^{-3}\)</span>) in every replicate</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>181,825</td>
+<td>188,726</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>188,726</td>
+<td>431,088</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
