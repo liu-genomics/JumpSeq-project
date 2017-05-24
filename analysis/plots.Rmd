@@ -1,0 +1,25 @@
+---
+#title: "Untitled"
+#author: "First Last"
+#date: YYYY-MM-DD
+output: html_document
+---
+
+
+
+
+
+
+
+<!-- Add your analysis here -->
+```{r, echo=F, eval=T}
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_GSM882244_FDR_0.0484_minus_with_1_coverage.ave.perbase", header=F)
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_GSM882244_FDR_0.0484_plus_with_1_coverage.ave.perbase", header=F)
+plot(1+seq(-100, 100, by=1),minus.48ng[,1], type="l", ylab="coverage", xlab="Distance", main="20161115_5hmC_Jump_Seq_2hmC_spike_in.minus")
+abline(v=0, col=2)
+
+plot(1+seq(-100, 100, by=1),plus.48ng[,1], type="l", ylab="coverage", xlab="Distance", main="20161115_5hmC_Jump_Seq_2hmC_spike_in.plus")
+abline(v=0, col=2)
+
+```
+
