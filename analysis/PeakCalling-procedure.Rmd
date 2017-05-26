@@ -56,6 +56,13 @@ echo get coverage for minus strand
 ### step 4: Summarize the results with Statistics of interest
 
 
+## Plot jump distribution 
+### Yuwen's pipleline via sos 
+
+sos run ../code/170509_plot_coverage_for_bam_files_using_FDR_0.5_tab-seq_sites_test_RCC_han.sos  'get_coverage' --data_folder ../../project2/xinhe/Shengtong/Shengtong_JumpSeq/5hmC_48ng_downsample/  --file_name 48ng_11rep_merge.sorted.bam  test.bam --plus_reference_regions ../other_annotations/other_hmc_data_set/GSM882244_mESC.hmC_sites.FDR_0.0484.mm9.txt_minus.extend_100bp_separated.bed --minus_reference_regions ../other_annotations/other_hmc_data_set/GSM882244_mESC.hmC_sites.FDR_0.0484.mm9.txt_minus.extend_100bp_separated.bed --reference_sites_name GSM882244_FDR_0.0484  &
+
+* run the code in the `processing_command` directory in `Tiao_Seq`
+* bedtools must be version of v2.17.0
 
 ## Session information
 
