@@ -59,10 +59,27 @@ echo get coverage for minus strand
 ## Plot jump distribution 
 ### Yuwen's pipleline via sos 
 
+```{r,  eval=F}
 sos run ../code/170509_plot_coverage_for_bam_files_using_FDR_0.5_tab-seq_sites_test_RCC_han.sos  'get_coverage' --data_folder ../../project2/xinhe/Shengtong/Shengtong_JumpSeq/5hmC_48ng_downsample/  --file_name 48ng_11rep_merge.sorted.bam  test.bam --plus_reference_regions ../other_annotations/other_hmc_data_set/GSM882244_mESC.hmC_sites.FDR_0.0484.mm9.txt_minus.extend_100bp_separated.bed --minus_reference_regions ../other_annotations/other_hmc_data_set/GSM882244_mESC.hmC_sites.FDR_0.0484.mm9.txt_minus.extend_100bp_separated.bed --reference_sites_name GSM882244_FDR_0.0484  &
 
+```
 * run the code in the `processing_command` directory in `Tiao_Seq`
-* bedtools must be version of v2.17.0
+* bedtools MUST be version of v2.17.0
+* MUST use  relative path
+
+
+
+## reads mapping 
+
+
+```{r,  eval=F}
+sos run ../code/170310_bioinformatics_preprocessing_using_spike_in_andUMI_nomismatch.han.sos 'gunzip+UMI_encoding+UMI_mapping' --data_folder ../unified_data_repo/160620/ --file_name He-Lu-10_5mc-jump-2.4ng-S10_L004_R1_001.fastq.gz --spike_in ../other_annotations/bowtie1_indexed_genome/mm9 --spike_in_base_name mm9 &
+
+```
+
+* run the code in the `processing_command` directory in `Tiao_Seq`
+* command bowtie must be from tools bowtie of version 1.1.0
+* install umi_tools and bowtie manually if not avialble in computing clusters. 
 
 ## Session information
 

@@ -25,9 +25,10 @@ knitr::read_chunk("chunks.R")
 ```
 
 <!-- Add your analysis here -->
-Samples are [here][allsample]:  
+Samples are [here][allsample]: and original samples are [here][orighere]  
 
 [allsample]: https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=271045416
+[orighere]: https://docs.google.com/spreadsheets/d/1WesFCQTrFplnXRKCHmhqtm1529DHc5Sc2tX7GkRa_-U/edit#gid=1664366512
 
 
 ## 48ng 5mC replicates 
@@ -79,6 +80,65 @@ rep | minus | plus
 rep1| 181,825|188,726
 rep2|188,726|431,088
 Table: number of peak windows at FDR 0.5 (~ pvalue $1.5\times 10^{-3}$) in every replicate
+
+
+### Overlap with other bisulfite peaks 
+ download bisulfite peaks at this [site][site]. Use the data _GSM1173118_E14-d0.CPG.methylPattern.txt_ (denoted as E14-d0). It has a total of 3605387 CG sites, with varying methylation levels between 0 and 1. Use 0.9 as threshold to choose CG sites as peaks, which takes 64.55%.    
+ 
+ [site]:https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE48229
+ 
+
+
+rep | minus | plus
+----|-------|----------
+rep1| 0.0250|0.0254
+rep2|0.0216|0.0221
+Table: Proportion of 5mC data (FDR0.05) overlapping with E14_d0 and the background rate is 0.0157. 
+
+
+
+## 24ng 5mC replicates 
+
+### reads distribution 
+
+rep | minus | plus
+----|-------|----------
+rep1| 4,479,619|4,456,960
+rep2|1,848,313|1,833,769
+Table: number of reads in every replicate
+
+
+## 12ng 5mC replicates 
+
+### reads distribution 
+
+rep | minus | plus
+----|-------|----------
+rep1| 2,954,172|2,927,975
+rep2|1,006,187|986,516
+Table: number of reads in every replicate
+
+
+## 6ng 5mC replicates 
+### reads distribution 
+
+rep | minus | plus
+----|-------|----------
+rep1| 2,049,655|2,025,183
+rep2|330,093|845,322
+Table: number of reads in every replicate
+
+
+
+## 2.4ng 5mC replicates
+
+### reads distribution 
+
+rep | minus | plus
+----|-------|----------
+rep1| 562,794|550,530
+rep2|231,751|224,961
+Table: number of reads in every replicate
 
 
 

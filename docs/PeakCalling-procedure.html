@@ -312,10 +312,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-05-26</p>
+<p><strong>Last updated:</strong> 2017-06-14</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 8b703c5</p>
+<p><strong>Code version:</strong> b367d22</p>
 <!-- Add your analysis here -->
 <div id="region-level-peak-calling" class="section level2">
 <h2>Region level peak calling</h2>
@@ -353,12 +353,22 @@ echo get coverage for minus strand</code></pre>
 <h2>Plot jump distribution</h2>
 <div id="yuwens-pipleline-via-sos" class="section level3">
 <h3>Yuwen’s pipleline via sos</h3>
-<p>sos run ../code/170509_plot_coverage_for_bam_files_using_FDR_0.5_tab-seq_sites_test_RCC_han.sos ‘get_coverage’ –data_folder ../../project2/xinhe/Shengtong/Shengtong_JumpSeq/5hmC_48ng_downsample/ –file_name 48ng_11rep_merge.sorted.bam test.bam –plus_reference_regions ../other_annotations/other_hmc_data_set/GSM882244_mESC.hmC_sites.FDR_0.0484.mm9.txt_minus.extend_100bp_separated.bed –minus_reference_regions ../other_annotations/other_hmc_data_set/GSM882244_mESC.hmC_sites.FDR_0.0484.mm9.txt_minus.extend_100bp_separated.bed –reference_sites_name GSM882244_FDR_0.0484 &amp;</p>
+<pre class="r"><code>sos run ../code/170509_plot_coverage_for_bam_files_using_FDR_0.5_tab-seq_sites_test_RCC_han.sos  &#39;get_coverage&#39; --data_folder ../../project2/xinhe/Shengtong/Shengtong_JumpSeq/5hmC_48ng_downsample/  --file_name 48ng_11rep_merge.sorted.bam  test.bam --plus_reference_regions ../other_annotations/other_hmc_data_set/GSM882244_mESC.hmC_sites.FDR_0.0484.mm9.txt_minus.extend_100bp_separated.bed --minus_reference_regions ../other_annotations/other_hmc_data_set/GSM882244_mESC.hmC_sites.FDR_0.0484.mm9.txt_minus.extend_100bp_separated.bed --reference_sites_name GSM882244_FDR_0.0484  &amp;</code></pre>
 <ul>
 <li>run the code in the <code>processing_command</code> directory in <code>Tiao_Seq</code></li>
-<li>bedtools must be version of v2.17.0</li>
+<li>bedtools MUST be version of v2.17.0</li>
+<li>MUST use relative path</li>
 </ul>
 </div>
+</div>
+<div id="reads-mapping" class="section level2">
+<h2>reads mapping</h2>
+<pre class="r"><code>sos run ../code/170310_bioinformatics_preprocessing_using_spike_in_andUMI_nomismatch.han.sos &#39;gunzip+UMI_encoding+UMI_mapping&#39; --data_folder ../unified_data_repo/160620/ --file_name He-Lu-10_5mc-jump-2.4ng-S10_L004_R1_001.fastq.gz --spike_in ../other_annotations/bowtie1_indexed_genome/mm9 --spike_in_base_name mm9 &amp;</code></pre>
+<ul>
+<li>run the code in the <code>processing_command</code> directory in <code>Tiao_Seq</code></li>
+<li>command bowtie must be from tools bowtie of version 1.1.0</li>
+<li>install umi_tools and bowtie manually if not avialble in computing clusters.</li>
+</ul>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>

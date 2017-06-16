@@ -294,7 +294,7 @@ barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Exp
 
 
 ### Jump distribution 
-The reference is GSM882244_FDR_0.0484. First got non-overlapping 5hmC regions and make sure each window has only one 5hmC site. For each window, count the reads depth at every site, then add up reads depth of these non-overlapping windows. Reads distribution is the accumulative reads depth at every base of all non-overlapping windows. 
+The reference is GSM882244_FDR_0.0484. First got non-overlapping 5hmC regions and make sure each window has only one 5hmC site. For each window, count the reads depth at every site, then add up reads depth of these non-overlapping windows. Reads distribution is the accumulative reads depth at every base of all non-overlapping windows. Input Bam file is the replicate with largest number of reads.  
 
 ```{r, echo=T, eval=T}
 minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_GSM882244_FDR_0.0484_minus_with_1_coverage.ave.perbase", header=F)
@@ -321,7 +321,384 @@ mtext("20161115_5hmC_Jump_Seq_2hmC_spike_in.plus", outer = TRUE, cex = 1)
 ```
 
 
+Look into jump distribution of one base nearby CpG in the center. Bam file are the combined 11 replicates. 
 
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_aa_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_aa_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***aC/Ga***-11rep", outer = TRUE, cex = 1)
+
+```
+
+
+* aC/Ga means the center three nucleotides are aCa (plus strand) or aGa (minus strand). 
+
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ac_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ac_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***aC/Gc***-11rep", outer = TRUE, cex = 1)
+
+```
+
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ag_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ag_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***aC/Gg***-11rep", outer = TRUE, cex = 1)
+
+```
+
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_at_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_at_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***aC/Gt***-11rep", outer = TRUE, cex = 1)
+
+```
+
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ca_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ca_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***cC/Ga***-11rep", outer = TRUE, cex = 1)
+
+```
+
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_cc_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_cc_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***cC/Gc***-11rep", outer = TRUE, cex = 1)
+
+```
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_cg_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_cg_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***cC/Gg***-11rep", outer = TRUE, cex = 1)
+
+```
+
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ct_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ct_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***cC/Gt***-11rep", outer = TRUE, cex = 1)
+
+```
+
+
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ga_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ga_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***gC/Ga***-11rep", outer = TRUE, cex = 1)
+
+```
+
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gc_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gc_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***gC/Gc***-11rep", outer = TRUE, cex = 1)
+
+```
+
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gg_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gg_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***gC/Gg***-11rep", outer = TRUE, cex = 1)
+
+```
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gt_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gt_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***gC/Gt***-11rep", outer = TRUE, cex = 1)
+
+```
+
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ta_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ta_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***tC/Ga***-11rep", outer = TRUE, cex = 1)
+
+```
+
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tc_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tc_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***tC/Gc***-11rep", outer = TRUE, cex = 1)
+
+```
+
+
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tg_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tg_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***tC/Gg***-11rep", outer = TRUE, cex = 1)
+
+```
+
+```{r, echo=T}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tt_plus_with_1_coverage.ave.perbase", header=F)
+
+minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tt_minus_with_1_coverage.ave.perbase", header=F)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="plus")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="minus")
+abline(v=0, col=2)
+mtext("***tC/Gt***-11rep", outer = TRUE, cex = 1)
+
+```
+
+
+Put all these 16 jump distributions together and plot them. 
+
+```{r, echo=F}
+path="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\"
+aa=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_aa_plus_with_1_coverage.ave.perbase", sep=""), header=F)[[1]]
+ac=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ac_plus_with_1_coverage.ave.perbase", sep=""),header=F)[[1]]
+ag=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ag_plus_with_1_coverage.ave.perbase", sep=""),header=F)[[1]]
+at=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_at_plus_with_1_coverage.ave.perbase", sep=""), header=F)[[1]]
+
+ca=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ca_plus_with_1_coverage.ave.perbase", sep=""), header=F)[[1]]
+cc=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_cc_plus_with_1_coverage.ave.perbase", sep=""), header=F)[[1]]
+cg=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_cg_plus_with_1_coverage.ave.perbase", sep=""), header=F)[[1]]
+ct=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ct_plus_with_1_coverage.ave.perbase", sep=""), header=F)[[1]]
+
+ga=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ga_plus_with_1_coverage.ave.perbase", sep=""), header=F)[[1]]
+gc=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gc_plus_with_1_coverage.ave.perbase", sep=""), header=F)[[1]]
+gg=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gg_plus_with_1_coverage.ave.perbase", sep=""),  header=F)[[1]]
+gt=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gt_plus_with_1_coverage.ave.perbase", sep=""), header=F)[[1]]
+
+ta=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ta_plus_with_1_coverage.ave.perbase", sep=""), header=F)[[1]]
+tc=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tc_plus_with_1_coverage.ave.perbase", sep=""), header=F)[[1]]
+tg=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tg_plus_with_1_coverage.ave.perbase", sep=""), header=F)[[1]]
+tt=read.table(paste(path, "48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tt_plus_with_1_coverage.ave.perbase", sep=""), header=F)[[1]]
+ 
+base.comp=matrix(nrow=16, ncol=19)
+base.comp[1,]=(aa/sum(aa))[91:109]
+base.comp[2,]=(ac/sum(ac))[91:109]
+base.comp[3,]=(ag/sum(ag))[91:109]
+base.comp[4,]=(at/sum(at))[91:109]
+base.comp[5,]=(ca/sum(ca))[91:109]
+base.comp[6,]=(cc/sum(cc))[91:109]
+base.comp[7,]=(cg/sum(cg))[91:109]
+base.comp[8,]=(ct/sum(ct))[91:109]
+base.comp[9,]=(ga/sum(ga))[91:109]
+base.comp[10,]=(gc/sum(gc))[91:109]
+base.comp[11,]=(gg/sum(gg))[91:109]
+base.comp[12,]=(gt/sum(gt))[91:109]
+base.comp[13,]=(ta/sum(ta))[91:109]
+base.comp[14,]=(tc/sum(tc))[91:109]
+base.comp[15,]=(tg/sum(tg))[91:109]
+base.comp[16,]=(tt/sum(tt))[91:109]
+
+par(mfrow=c(1,2))
+plot(seq(-9, 9), base.comp[1,], ylim=c(0,0.11),col=1, type="l", xlab="Distance", ylab="Reads frequency")
+for (i in 2:8)
+ lines(seq(-9, 9), base.comp[i,], col=i)
+legend(2,0.1,  c("a*a", "a*c", "a*g", "a*t", "c*a", "c*c", "c*g", "c*t"), col=c(1,2,3,4, 5, 6, 7, 8), lty=c(1,1,1,1, 1,1,1,1))
+
+
+plot(seq(-9, 9), base.comp[9,], ylim=c(0,0.11),col=1, type="l", xlab="Distance", ylab="Reads frequency")
+for (i in 10:16)
+ lines(seq(-9, 9), base.comp[i,], col=i)
+legend(2,0.1,  c("g*a", "g*c", "g*g", "g*t", "t*a", "t*c", "t*g", "t*t"), col=c(9,10,11,12, 13, 14, 15, 16), lty=c(1,1,1,1, 1,1,1,1))
+
+```
+
+
+Two sample Kolmogorov-Smirnov Tests: test if any two jump distributions are from the same distribution or not. First standardize the data.  
+
+
+--|aca|acc|acg|act|cca|ccc|ccg|cct|
+---|---|---|---|---|---|---|---|---|
+aca|
+acc|0.403(1.3e-14)
+acg|0.2836(1.91e-7)|0.393(6.5e-14)
+act|0.3781(6.6e-13)|**0.1194(0.1139)**|0.3632(6.1e-12)
+cca|**0.0995(0.2727)**|0.3632(6.1e-12)|0.2438(1.3e-5)|0.3234(1.5e-9)
+ccc|0.4279(2.2e-16)|**0.0896(0.3957)**|0.398(2.98e-14)|0.1542(0.0168)|0.3582(1.3e-11)
+ccg|0.2935(6e-8)|0.393(6.5e-14)|**0.0597(0.8663)**|0.3781(6.6e-13)|0.3532(2.6e-11)|0.4(2.98e-14)
+cct|0.4129(2.5e-15)|**0.1493(0.0227)**|0.4378(<2.2e-16)|**0.1294(0.0693)**|0.9552(<2.2e-16)|**0.1(0.22)**|0.4(<2.2e-16)
+gca|0.1791(0.0032)|0.3582(1.3e-11)|0.2687(1e-6)|0.3134(5.3e-9)|0.4726(<2.2e-16)|0.29(6e-8)|0.3(1e-7)|0.3(3e-8)
+gcc|0.5473(2.2e-16)|**0.1592(0.0123)**|0.5522(<2.2e-16)|0.2189(0.0001)|0.9552(<2.2e-16)|0.25(7.9e-6)|0.6(<2.2e-16)|0.2(0.0001)
+gcg|**0.1343(0.0532)**|0.4876(<2.2e-16)|0.2637(1.7e-6)|0.4279(2.2e-16)|0.1642(0.0089)|0.42(4.4e-16)|0.2(3e-5)|0.5(<2.2e-16)
+gct|0.4328(<2.2e-16)|**0.1144(0.1438)**|0.3881(1.4e-13)|**0.1443(0.0305)**|0.3781(6.6e-13)|0.18(0.002)|0.4(1e-13)|0.2(0.002)
+tca|0.1642(0.0089)|0.3234(1.5e-9)|0.2388(2.1e-5)|0.2687(1e-6)|**0.15(0.02)**|0.32(1.5e-9)|0.2(3e-5)|0.3(3e-8)
+tcc|0.5224(<2.2e-16)|0.204(0.0005)|0.4776(<2.2e-16)|0.2438(1.3e-5)|0.47(<2.2e-16)|0.17(0.0045)|0.5(<2e-16)|0.2(3e-5)
+tcg|0.2537(4.8e-6)|0.4677(<2.2e-16)|**0.1443(0.0305)**|0.4279(2.2e-16)|0.22(0.0001)|0.4(2.9e-14)|**0.2(0.02)**|0.5(<2e-16)
+tct|0.5025(<2.2e-16)|**0.1443(0.0305)**|0.4179(1.1e-15)|0.1791(0.0032)|0.44(<2.2e-16)|0.2(0.0002)|0.4(1e-15)|0.2(0.005)
+
+
+
+
+--|gca|gcc|gcg|gct|tca|tcc|tcg|tct|
+---|---|---|---|---|---|---|---|---|
+gca|
+gcc|0.5(<2.2e-16)
+gcg|0.2(3e-5)|0.6(<2.2e-16)
+gct|0.4(6e-12)|0.2(0.003)|0.5(<2.2e-16)
+tca|**0.1(0.2)**|0.4(4e-16)|0.2(0.0003)|0.4(1e-11)
+tcc|0.4(<2.2e-16)|0.1(0.04)|0.5(<2.2e-16)|**0.1(0.02)**|0.4(<2.2e-16)
+tcg|0.2(2e-5)|0.6(<2.2e-16)|0.2(0.0005)|0.4(1e-13)|0.2(0.0003)|0.5(<2.2e-16)
+tct|0.4(3e-14)|0.1(0.05)|0.6(<2.2e-16)|0.2(0.0001)|0.4(3e-14)|0.2(0.003)|0.5(<2.2e-16)
+Table: K-S test for pairwise jump distributions of 16 possible base compositions from combined 48ng samples of 11 replicates of plus strand. 
+
+
+
+* this is only for combing 11 replicates plus strand. 
+* most pair whose p values are large to be not significant (>0.05) have the same base after 5hmC base
+
+
+
+```{r, echo=F}
+aa=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_aa_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+ac=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ac_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+ag=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ag_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+at=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_at_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+
+
+ca=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ca_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+cc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_cc_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+cg=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_cg_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+ct=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ct_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+
+ga=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ga_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+gc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gc_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+gg=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gg_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+gt=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gt_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+
+ta=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ta_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+tc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tc_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+tg=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tg_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+tt=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tt_plus_with_1_coverage.ave.perbase", header=F)[91:101,1]
+
+suma=sum(aa+ca+ga+ta)
+sumc=sum(ac+cc+gc+tc)
+sumg=sum(ag+cg+gg+tg)
+sumt=sum(at+ct+gt+tt)
+total=matrix(nrow=4, ncol=1)
+total[,1]=c(suma, sumc, sumg, sumt)/sum(c(suma, sumc, sumg, sumt))
+rownames(total)=c("ca", "cc", "cg", "ct")
+barplot(total[,1]/sum(total[,1]), ylim=c(0,1))
+
+```
+This figure shows the ratio of reads within 20 bp window in the center with the center site being ca, cc, cg, ct, in plus strand. Obviously, over 99% reads are generated from cg.   
 
 
 #####################################################################################################
@@ -750,27 +1127,41 @@ mtext("CHe-lu-2.4ng_mixed_with_other_library.plus", outer = TRUE, cex = 1)
 ```
 
 ### enrichment at cis-regulatory regions 
-download cis-regulatory peaks at [Ren lab][renlab]. They are sinlge base peaks and extended to 20 bp windows.  
+download cis-regulatory peaks at [Ren lab][renlab]. They are sinlge base peaks and extended to 200 bp windows.  
 
 [renlab]: http://chromosome.sdsc.edu/mouse/download.html
 
 ```{r, echo=T}
 percent=matrix(nrow=2, ncol=5)
-percent[,1]=c(0.0017, 0.0006)
-percent[,2]=c(0.0013, 0.0006)
+percent[,1]=c(0.0068, 0.0032)
+percent[,2]=c(0.0082, 0.0034)
 
-percent[,3]=c(0.0009, 0.0004)
-percent[,4]=c(0.0006, 0.0004)
+percent[,3]=c(0.0048, 0.0026)
+percent[,4]=c(0.0028, 0.0021)
 
-percent[,5]=c(0.0018, 0.0002)
+percent[,5]=c(0.0064, 0.0011)
 colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
 
-barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.004),
-xlab="Proportion of Jump-seq windows", main="combine minus (FDR0.05)", ylab="", cex.names=1)
+barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.009),
+ylab="Proportion of Jump-seq windows", main="combine minus (FDR0.05)", xlab="", cex.names=1)
 
 ```
 
+```{r, echo=T}
+percent=matrix(nrow=2, ncol=5)
+percent[,1]=c(0.0072, 0.0032)
+percent[,2]=c(0.0079, 0.0034)
 
+percent[,3]=c(0.0039, 0.0026)
+percent[,4]=c(0.0020, 0.0021)
+
+percent[,5]=c(0.0057, 0.0011)
+colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
+
+barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.008),
+ylab="Proportion of Jump-seq windows", main="combine plus (FDR0.05)", xlab="", cex.names=1)
+
+```
 
 ####################################################################################################
 ## Summary
@@ -837,6 +1228,31 @@ xlab="Figure 1A", main="", ylab="Proportion of Nano-seal peaks", cex.names=0.5)
 barplot(percent[,c(2,4,6,8,10)], beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.4),
 xlab="Figure 1B", main="", ylab="Proportion of Tab-seq peaks", cex.names=0.5)
 ```
+
+## 5hmC spike in 
+
+
+### number of reads versus 5hmC percentage 
+
+```{r, echo=T}
+num.reads.plus=c(61720, 49782, 57708,  140773, 97274, 146991, 155893, 156222)
+num.reads.minus=c(256, 117, 82, 290, 197, 339, 390, 301)
+num.reads=num.reads.plus+num.reads.minus
+hmc.ratio=c(0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1)
+plot(hmc.ratio, num.reads, type="o", xlab="5hmC percentage", ylab="Number of reads in spike in", main="20170531")
+
+```
+
+
+```{r, echo=T}
+num.reads.plus=c(51218, 42860, 52078, 131192, 91995, 141295, 149531, 151531)
+num.reads.minus=c(264, 98, 96, 267, 184, 335, 424, 286)
+num.reads=num.reads.plus+num.reads.minus
+hmc.ratio=c(0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1)
+plot(hmc.ratio, num.reads, type="o", xlab="5hmC percentage", ylab="Number of reads in spike in", main="20170605")
+
+```
+
 ## Session information
 
 <!-- Insert the session information into the document -->

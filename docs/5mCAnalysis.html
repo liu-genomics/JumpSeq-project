@@ -312,12 +312,12 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-05-16</p>
+<p><strong>Last updated:</strong> 2017-06-15</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> faf6f06</p>
+<p><strong>Code version:</strong> b367d22</p>
 <!-- Add your analysis here -->
-<p>Samples are <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=271045416">here</a>:</p>
+<p>Samples are <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=271045416">here</a>: and original samples are <a href="https://docs.google.com/spreadsheets/d/1WesFCQTrFplnXRKCHmhqtm1529DHc5Sc2tX7GkRa_-U/edit#gid=1664366512">here</a></p>
 <div id="ng-5mc-replicates" class="section level2">
 <h2>48ng 5mC replicates</h2>
 <p>There are two replicates.</p>
@@ -417,6 +417,144 @@ barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab=&quot;Freq&quot;, main=&quot
 <td>rep2</td>
 <td>188,726</td>
 <td>431,088</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="overlap-with-other-bisulfite-peaks" class="section level3">
+<h3>Overlap with other bisulfite peaks</h3>
+<p>download bisulfite peaks at this <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE48229">site</a>. Use the data <em>GSM1173118_E14-d0.CPG.methylPattern.txt</em> (denoted as E14-d0). It has a total of 3605387 CG sites, with varying methylation levels between 0 and 1. Use 0.9 as threshold to choose CG sites as peaks, which takes 64.55%.</p>
+<table>
+<caption>Proportion of 5mC data (FDR0.05) overlapping with E14_d0 and the background rate is 0.0157.</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>0.0250</td>
+<td>0.0254</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>0.0216</td>
+<td>0.0221</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="ng-5mc-replicates-1" class="section level2">
+<h2>24ng 5mC replicates</h2>
+<div id="reads-distribution-1" class="section level3">
+<h3>reads distribution</h3>
+<table>
+<caption>number of reads in every replicate</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>4,479,619</td>
+<td>4,456,960</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>1,848,313</td>
+<td>1,833,769</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="ng-5mc-replicates-2" class="section level2">
+<h2>12ng 5mC replicates</h2>
+<div id="reads-distribution-2" class="section level3">
+<h3>reads distribution</h3>
+<table>
+<caption>number of reads in every replicate</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>2,954,172</td>
+<td>2,927,975</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>1,006,187</td>
+<td>986,516</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="ng-5mc-replicates-3" class="section level2">
+<h2>6ng 5mC replicates</h2>
+<div id="reads-distribution-3" class="section level3">
+<h3>reads distribution</h3>
+<table>
+<caption>number of reads in every replicate</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>2,049,655</td>
+<td>2,025,183</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>330,093</td>
+<td>845,322</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="ng-5mc-replicates-4" class="section level2">
+<h2>2.4ng 5mC replicates</h2>
+<div id="reads-distribution-4" class="section level3">
+<h3>reads distribution</h3>
+<table>
+<caption>number of reads in every replicate</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>562,794</td>
+<td>550,530</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>231,751</td>
+<td>224,961</td>
 </tr>
 </tbody>
 </table>
