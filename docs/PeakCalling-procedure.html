@@ -312,10 +312,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-06-14</p>
+<p><strong>Last updated:</strong> 2017-06-22</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> b367d22</p>
+<p><strong>Code version:</strong> 455fabb</p>
 <!-- Add your analysis here -->
 <div id="region-level-peak-calling" class="section level2">
 <h2>Region level peak calling</h2>
@@ -363,11 +363,21 @@ echo get coverage for minus strand</code></pre>
 </div>
 <div id="reads-mapping" class="section level2">
 <h2>reads mapping</h2>
+<p>reads mapping for 5mC sample</p>
 <pre class="r"><code>sos run ../code/170310_bioinformatics_preprocessing_using_spike_in_andUMI_nomismatch.han.sos &#39;gunzip+UMI_encoding+UMI_mapping&#39; --data_folder ../unified_data_repo/160620/ --file_name He-Lu-10_5mc-jump-2.4ng-S10_L004_R1_001.fastq.gz --spike_in ../other_annotations/bowtie1_indexed_genome/mm9 --spike_in_base_name mm9 &amp;</code></pre>
+<p>reads mapping for spike in sample</p>
+<pre class="r"><code>sos run ../code/170310_bioinformatics_preprocessing_using_spike_in_andUMI_nomismatch.han.sos &#39;gunzip+UMI_encoding+UMI_mapping&#39; --data_folder ../unified_data_repo/20170531/ --file_name CHe-LH-lu-1_S1_L006_R1_001.fastq.gz  --spike_in ../other_annotations/160811_5hmc_spikein --spike_in_base_name 160811_5hmc_spikein</code></pre>
 <ul>
 <li>run the code in the <code>processing_command</code> directory in <code>Tiao_Seq</code></li>
 <li>command bowtie must be from tools bowtie of version 1.1.0</li>
 <li>install umi_tools and bowtie manually if not avialble in computing clusters.</li>
+</ul>
+</div>
+<div id="reads-mapping-for-200bp-spike-in-sequence" class="section level2">
+<h2>reads mapping for 200bp spike in sequence</h2>
+<pre class="r"><code>sos run ../code/170509_plot_coverage_for_bam_files_using_FDR_0.5_tab-seq_sites_test_RCC_han.sos  &#39;get_coverage&#39; --data_folder ../unified_data_repo/20170531/   --file_name CHe-LH-lu-1_S1_L006_R1_001.160811_5hmc_spikein.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam  --plus_reference_regions test.bed  --minus_reference_regions test.bed  --reference_sites_name 160811_5hmc_spikein</code></pre>
+<ul>
+<li>test.bed is a one line-bed file spike_in_5hmc 0 200 1</li>
 </ul>
 </div>
 <div id="session-information" class="section level2">

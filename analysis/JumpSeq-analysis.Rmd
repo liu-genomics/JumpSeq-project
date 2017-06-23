@@ -695,10 +695,42 @@ sumt=sum(at+ct+gt+tt)
 total=matrix(nrow=4, ncol=1)
 total[,1]=c(suma, sumc, sumg, sumt)/sum(c(suma, sumc, sumg, sumt))
 rownames(total)=c("ca", "cc", "cg", "ct")
-barplot(total[,1]/sum(total[,1]), ylim=c(0,1))
+barplot(total[,1]/sum(total[,1]), ylim=c(0,1), main="48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_plus")
 
 ```
-This figure shows the ratio of reads within 20 bp window in the center with the center site being ca, cc, cg, ct, in plus strand. Obviously, over 99% reads are generated from cg.   
+This figure shows the ratio of reads within 20 bp window in the center with the center site being ca, cc, cg, ct, in plus strand. Obviously, over 99% reads are generated from the window with cg in the center.   
+
+
+Investigate the number of CA, CC, CG, CT's in the peak windows. 
+
+```{r, echo=T}
+total=matrix(nrow=4, ncol=1)
+total[,1]=c(2936943, 2318330, 2135195, 3507124)/sum(c(2936943, 2318330, 2135195, 3507124))
+rownames(total)=c("CA", "CC", "CG", "CT")
+barplot(total[,1]/sum(total[,1]), ylim=c(0,0.5), main="48ng_11rep_merge.minus.FDR0.05.corrected")
+
+```
+
+
+### reads depletion 
+
+
+```{r, echo=F}
+minus2.4ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\48ng_11rep_merge.sorted_mESC.ctcf.peak_minus_with_1_coverage.ave.perbase", header=F)[[1]]
+par(mfrow=c(1,2))
+plot(seq(1,200)-101, minus2.4ng, xlab="Distance", ylab="Num.reads", type="l", main="48ng_11rep_merge.minus")
+plot(seq(1,200)[91:111]-101, minus2.4ng[91:111], xlab="Distance", ylab="Num.reads", type="l", main="48ng_11rep_merge")
+```
+
+
+```{r, echo=F}
+minus2.4ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\48ng_11rep_merge.sorted_mESC.ctcf.peak_plus_with_1_coverage.ave.perbase", header=F)[[1]]
+par(mfrow=c(1,2))
+plot(seq(1,200)-99, minus2.4ng, xlab="Distance", ylab="Num.reads", type="l", main="48ng_11rep_merge.plus")
+plot(seq(1,200)[91:111]-99, minus2.4ng[91:111], xlab="Distance", ylab="Num.reads", type="l", main="48ng_11rep_merge")
+```
+
+
 
 
 #####################################################################################################
@@ -1163,6 +1195,60 @@ ylab="Proportion of Jump-seq windows", main="combine plus (FDR0.05)", xlab="", c
 
 ```
 
+
+```{r, echo=T}
+percent=matrix(nrow=2, ncol=5)
+percent[,1]=c(0.0254, 0.0032)
+percent[,2]=c(0.0829, 0.0034)
+
+percent[,3]=c(0.0186, 0.0026)
+percent[,4]=c(0.0486, 0.0021)
+
+percent[,5]=c(0.0027, 0.0011)
+colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
+
+barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Nano_hmC seal peaks", "Random windows"), ylim=c(0,0.1),
+ylab="Proportion of Nano_hmC seal peaks", main="", xlab="", cex.names=1)
+```
+
+
+
+```{r, echo=T}
+percent=matrix(nrow=2, ncol=5)
+percent[,1]=c(0.0070, 0.0032)
+percent[,2]=c(0.0139, 0.0034)
+
+percent[,3]=c(0.0069, 0.0026)
+percent[,4]=c(0.0042, 0.0021)
+
+percent[,5]=c(0.0005, 0.0011)
+colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
+
+barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.02),
+ylab="Proportion of Jump-seq windows", main="combine 11 48ng replicates minus (FDR0.05)", xlab="", cex.names=1)
+
+```
+
+
+### reads depletion
+
+
+Reads distribution of 200bp window with CTCF at the center.  
+```{r, echo=F}
+minus2.4ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\CHe-lu-2.4ng_mixed_with_other_library.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_mESC.ctcf.peak_minus_with_1_coverage.ave.perbase", header=F)[[1]]
+par(mfrow=c(1,2))
+plot(seq(1,200)-101, minus2.4ng, xlab="Distance", ylab="Num.reads", type="l", main="CHe-lu-2.4ng_mixed_with_other_library.minus")
+plot(seq(1,200)[91:111]-101, minus2.4ng[91:111], xlab="Distance", ylab="Num.reads", type="l", main="CHe-lu-2.4ng_mixed_with_other_library.minus")
+```
+
+```{r, echo=F}
+minus2.4ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\CHe-lu-2.4ng_mixed_with_other_library.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_mESC.ctcf.peak_plus_with_1_coverage.ave.perbase", header=F)[[1]]
+par(mfrow=c(1,2))
+plot(seq(1,200)-99, minus2.4ng, xlab="Distance", ylab="Num.reads", type="l", main="CHe-lu-2.4ng_mixed_with_other_library.plus")
+plot(seq(1,200)[91:111]-99, minus2.4ng[91:111], xlab="Distance", ylab="Num.reads", type="l", main="CHe-lu-2.4ng_mixed_with_other_library.plus")
+```
+
+
 ####################################################################################################
 ## Summary
 
@@ -1232,14 +1318,14 @@ xlab="Figure 1B", main="", ylab="Proportion of Tab-seq peaks", cex.names=0.5)
 ## 5hmC spike in 
 
 
-### number of reads versus 5hmC percentage 
+### number of reads versus 5hmC percentage-only consider unique reads 
 
 ```{r, echo=T}
 num.reads.plus=c(61720, 49782, 57708,  140773, 97274, 146991, 155893, 156222)
 num.reads.minus=c(256, 117, 82, 290, 197, 339, 390, 301)
 num.reads=num.reads.plus+num.reads.minus
 hmc.ratio=c(0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1)
-plot(hmc.ratio, num.reads, type="o", xlab="5hmC percentage", ylab="Number of reads in spike in", main="20170531")
+plot(hmc.ratio, num.reads, type="o", xlab="5hmC percentage", ylab="Number of reads in spike in", main="20170531-200 bp spike in sequence")
 
 ```
 
@@ -1249,8 +1335,68 @@ num.reads.plus=c(51218, 42860, 52078, 131192, 91995, 141295, 149531, 151531)
 num.reads.minus=c(264, 98, 96, 267, 184, 335, 424, 286)
 num.reads=num.reads.plus+num.reads.minus
 hmc.ratio=c(0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1)
-plot(hmc.ratio, num.reads, type="o", xlab="5hmC percentage", ylab="Number of reads in spike in", main="20170605")
+plot(hmc.ratio, num.reads, type="o", xlab="5hmC percentage", ylab="Number of reads in spike in", main="20170605-200 bp spike in sequence")
 
+```
+
+
+Only focus on reads from 96 base to 102 base. 
+```{r, echo=T}
+num.reads.plus1=c(6394, 8485, 11180,  22850, 18627, 21870, 22936, 23313)
+num.reads.plus2=c(5392, 7629, 10587, 21930, 18126, 21722, 22765, 23269)
+hmc.ratio=c(0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1)
+plot(hmc.ratio, num.reads.plus1, type="o", xlab="5hmC percentage", ylab="Number of reads in spike in", main="reads in base >=96 & <=102", col=1, ylim=c(5700, 26500))
+lines(hmc.ratio, num.reads.plus2, col=2, type="o")
+legend(0.8, 20000, c("plus1", "plus2"), col=c(1,2), lty=c(1,1))
+```
+
+```{r, echo=T}
+spike_in_zero=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20170531\\CHe-LH-lu-1_S1_L006_R1_001.160811_5hmc_spikein.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_160811_5hmc_spikein_plus_with_1_coverage.ave.perbase", header=F)[[1]]
+par(mfrow=c(1,2))
+plot(seq(1,200)+1, spike_in_zero, type="l", main="0% hmC model", xlab="Base position", ylab="Num of reads")
+plot(seq(96, 102), spike_in_zero[97:103], type="o", main="0% hmC model", xlab="Base position", ylab="Num of reads")
+```
+
+
+```{r, echo=T}
+spike_in_zero=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20170531\\CHe-LH-lu-8_S8_L006_R1_001.160811_5hmc_spikein.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_160811_5hmc_spikein_plus_with_1_coverage.ave.perbase", header=F)[[1]]
+par(mfrow=c(1,2))
+plot(seq(1,200)+1, spike_in_zero, type="l", main="100% hmC model", xlab="Base position", ylab="Num of reads")
+plot(seq(96, 102), spike_in_zero[97:103], type="o", main="100% hmC model", xlab="Base position", ylab="Num of reads")
+# there is one base shift 
+```
+
+
+### allow multiple reads 
+
+Only focus on reads from 96 base to 102 base. 
+```{r, echo=T}
+num.reads.plus1=c(34536, 103817, 282178,  1398644, 1374788, 2427158, 3002380, 3198060)
+num.reads.plus2=c(21389, 84709, 241444, 1184547, 1171380, 2109440, 2578213, 2757798)
+hmc.ratio=c(0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1)
+plot(hmc.ratio, num.reads.plus1, type="o", xlab="5hmC percentage", ylab="Number of reads in spike in", main="reads in base >=96 & <=102", col=1, ylim=c(21000, 3200000))
+lines(hmc.ratio, num.reads.plus2, col=2, type="o")
+legend(0.8, 1000000, c("plus1", "plus2"), col=c(1,2), lty=c(1,1))
+```
+
+Fold change can be >100. 
+
+
+
+```{r, echo=T}
+spike_in_zero=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20170605\\CHe-LH-lu-1_S1_L007_R1_001.160811_5hmc_spikein.umi_encoded_adaptor_removed_no_mismatch.sorted_160811_5hmc_spikein_plus_with_1_coverage.ave.perbase", header=F)[[1]]
+par(mfrow=c(1,2))
+plot(seq(1,200)+1, spike_in_zero, type="l", main="0% hmC model", xlab="Base position", ylab="Num of reads")
+plot(seq(96, 102), spike_in_zero[97:103], type="o", main="0% hmC model", xlab="Base position", ylab="Num of reads")
+```
+
+
+```{r, echo=T}
+spike_in_zero=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20170605\\CHe-LH-lu-8_S8_L007_R1_001.160811_5hmc_spikein.umi_encoded_adaptor_removed_no_mismatch.sorted_160811_5hmc_spikein_plus_with_1_coverage.ave.perbase", header=F)[[1]]
+par(mfrow=c(1,2))
+plot(seq(1,200)+1, spike_in_zero, type="l", main="100% hmC model", xlab="Base position", ylab="Num of reads")
+plot(seq(96, 102), spike_in_zero[97:103], type="o", main="100% hmC model", xlab="Base position", ylab="Num of reads")
+# there is one base shift 
 ```
 
 ## Session information
