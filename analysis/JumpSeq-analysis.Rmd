@@ -718,16 +718,16 @@ barplot(total[,1]/sum(total[,1]), ylim=c(0,0.5), main="48ng_11rep_merge.minus.FD
 ```{r, echo=F}
 minus2.4ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\48ng_11rep_merge.sorted_mESC.ctcf.peak_minus_with_1_coverage.ave.perbase", header=F)[[1]]
 par(mfrow=c(1,2))
-plot(seq(1,200)-101, minus2.4ng, xlab="Distance", ylab="Num.reads", type="l", main="48ng_11rep_merge.minus")
-plot(seq(1,200)[91:111]-101, minus2.4ng[91:111], xlab="Distance", ylab="Num.reads", type="l", main="48ng_11rep_merge")
+plot(seq(1,200)-101, minus2.4ng, xlab="Distance to CTCF", ylab="Num.reads", type="l", main="48ng_11rep_merge.minus")
+plot(seq(1,200)[91:111]-101, minus2.4ng[91:111], xlab="Distance to CTCF", ylab="Num.reads", type="l", main="48ng_11rep_merge")
 ```
 
 
 ```{r, echo=F}
 minus2.4ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\48ng_11rep_merge.sorted_mESC.ctcf.peak_plus_with_1_coverage.ave.perbase", header=F)[[1]]
 par(mfrow=c(1,2))
-plot(seq(1,200)-99, minus2.4ng, xlab="Distance", ylab="Num.reads", type="l", main="48ng_11rep_merge.plus")
-plot(seq(1,200)[91:111]-99, minus2.4ng[91:111], xlab="Distance", ylab="Num.reads", type="l", main="48ng_11rep_merge")
+plot(seq(1,200)-99, minus2.4ng, xlab="Distance to CTCF", ylab="Num.reads", type="l", main="48ng_11rep_merge.plus")
+plot(seq(1,200)[91:111]-99, minus2.4ng[91:111], xlab="Distance to CTCF", ylab="Num.reads", type="l", main="48ng_11rep_merge")
 ```
 
 
@@ -1237,15 +1237,15 @@ Reads distribution of 200bp window with CTCF at the center.
 ```{r, echo=F}
 minus2.4ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\CHe-lu-2.4ng_mixed_with_other_library.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_mESC.ctcf.peak_minus_with_1_coverage.ave.perbase", header=F)[[1]]
 par(mfrow=c(1,2))
-plot(seq(1,200)-101, minus2.4ng, xlab="Distance", ylab="Num.reads", type="l", main="CHe-lu-2.4ng_mixed_with_other_library.minus")
-plot(seq(1,200)[91:111]-101, minus2.4ng[91:111], xlab="Distance", ylab="Num.reads", type="l", main="CHe-lu-2.4ng_mixed_with_other_library.minus")
+plot(seq(1,200)-101, minus2.4ng, xlab="Distance to CTCF", ylab="Num.reads", type="l", main="CHe-lu-2.4ng_mixed_with_other_library.minus")
+plot(seq(1,200)[91:111]-101, minus2.4ng[91:111], xlab="Distance to CTCF", ylab="Num.reads", type="l", main="CHe-lu-2.4ng_mixed_with_other_library.minus")
 ```
 
 ```{r, echo=F}
 minus2.4ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\CHe-lu-2.4ng_mixed_with_other_library.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_mESC.ctcf.peak_plus_with_1_coverage.ave.perbase", header=F)[[1]]
 par(mfrow=c(1,2))
-plot(seq(1,200)-99, minus2.4ng, xlab="Distance", ylab="Num.reads", type="l", main="CHe-lu-2.4ng_mixed_with_other_library.plus")
-plot(seq(1,200)[91:111]-99, minus2.4ng[91:111], xlab="Distance", ylab="Num.reads", type="l", main="CHe-lu-2.4ng_mixed_with_other_library.plus")
+plot(seq(1,200)-99, minus2.4ng, xlab="Distance to CTCF", ylab="Num.reads", type="l", main="CHe-lu-2.4ng_mixed_with_other_library.plus")
+plot(seq(1,200)[91:111]-99, minus2.4ng[91:111], xlab="Distance to CTCF", ylab="Num.reads", type="l", main="CHe-lu-2.4ng_mixed_with_other_library.plus")
 ```
 
 
