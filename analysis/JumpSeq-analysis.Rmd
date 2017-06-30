@@ -730,6 +730,76 @@ plot(seq(1,200)-99, minus2.4ng, xlab="Distance to CTCF", ylab="Num.reads", type=
 plot(seq(1,200)[91:111]-99, minus2.4ng[91:111], xlab="Distance to CTCF", ylab="Num.reads", type="l", main="48ng_11rep_merge")
 ```
 
+### enrichment at cis-regulatory regions
+Combine 11 48ng replicates together and look at plus and minus strand. 
+
+
+```{r, echo=T}
+percent=matrix(nrow=2, ncol=5)
+percent[,1]=c(0.0070, 0.0032)
+percent[,2]=c(0.0139, 0.0034)
+
+percent[,3]=c(0.0069, 0.0026)
+percent[,4]=c(0.0042, 0.0021)
+
+percent[,5]=c(0.0005, 0.0011)
+colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
+
+barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.02),
+ylab="Proportion of Jump-seq windows", main="combine 11 48ng replicates minus (FDR0.05)", xlab="", cex.names=1)
+text(2, 0.0075, "2.21(p<2.2e-16)")
+text(5, 0.0145, "3.87(p<2.2e-16)")
+text(8, 0.0075, "2.60(p<2.2e-16)")
+text(11, 0.005, "1.99(p<2.2e-16)")
+text(14, 0.0015, "0.46 (p=1)")
+
+```
+
+
+
+
+```{r, echo=T}
+percent=matrix(nrow=2, ncol=5)
+percent[,1]=c(0.0068, 0.0032)
+percent[,2]=c(0.0139, 0.0034)
+
+percent[,3]=c(0.0070, 0.0026)
+percent[,4]=c(0.0042, 0.0021)
+
+percent[,5]=c(0.0006, 0.0011)
+colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
+
+barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.02),
+ylab="Proportion of Jump-seq windows", main="combine 11 48ng replicates plus (FDR0.05)", xlab="", cex.names=1)
+text(2, 0.0075, "2.21(p<2.2e-16)")
+text(5, 0.0145, "3.95(p<2.2e-16)")
+text(8, 0.0075, "2.60(p<2.2e-16)")
+text(11, 0.005, "1.99(p<2.2e-16)")
+text(14, 0.0015, "0.49 (p=1)")
+
+```
+
+### peak distribution
+
+```{r, echo=F}
+
+slices <- c(16133,32803, 15811, 9038, 802) 
+lbls <- c("CTCF", "Enhancer", "h3k27ac", "h3k4me3", "POIII")
+pct <- round(slices/sum(slices)*100)
+lbls <- paste(lbls, pct) # add percents to labels 
+lbls <- paste(lbls,"%",sep="") # ad % to labels 
+pie(slices,labels = lbls, col=rainbow(length(lbls)),
+  	main="Peak distribution in different regions(combine,plus, FDR0.05)")
+```
+
+* The peaks are from combined data of 11 48ng replicates of plus strand at FDR0.05. 
+
+* Each peak window is counted once, start from CTCF, then enhancer, h3k27ac, h3k5me3, PoIII. For example, first count how many peak windows are overlaping with CTCF, then exclude these overlapped windows, use the rest to overlap with enhancer, and so on.   
+
+* all these peaks overlapping with those regions only take about 3% of all peaks called. 
+
+
+
 
 
 
@@ -1163,6 +1233,16 @@ download cis-regulatory peaks at [Ren lab][renlab]. They are sinlge base peaks a
 
 [renlab]: http://chromosome.sdsc.edu/mouse/download.html
 
+
+
+```{r, echo=T}
+num.base=matrix(nrow=5, ncol=1)
+rownames(num.base)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII"); num.base[,1]=c(38714, 42477, 32109, 25911, 13398)
+barplot(num.base[,1]/sum(num.base[,1]), ylab="Freq", main=" The ratio of peaks in different regions", xlab="")
+```
+
+
+
 ```{r, echo=T}
 percent=matrix(nrow=2, ncol=5)
 percent[,1]=c(0.0068, 0.0032)
@@ -1174,8 +1254,13 @@ percent[,4]=c(0.0028, 0.0021)
 percent[,5]=c(0.0064, 0.0011)
 colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
 
-barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.009),
+barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.01),
 ylab="Proportion of Jump-seq windows", main="combine minus (FDR0.05)", xlab="", cex.names=1)
+text(2.1, 0.007, "2.11(p=1.99e-13)")
+text(5, 0.0085, "2.40(p<2.2e-16)")
+text(8, 0.005, "1.87(p=9.37e-8)")
+text(11, 0.003, "1.33(p=0.0325)")
+text(14, 0.0068, "5.77 (p<2.2e-16)")
 
 ```
 
@@ -1190,44 +1275,77 @@ percent[,4]=c(0.0020, 0.0021)
 percent[,5]=c(0.0057, 0.0011)
 colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
 
-barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.008),
+barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.01),
 ylab="Proportion of Jump-seq windows", main="combine plus (FDR0.05)", xlab="", cex.names=1)
+text(2, 0.0075, "2.21(p=8.17e-13)")
+text(4, 0.0085, "2.32(p=2.8e-15)")
+text(8, 0.005, "1.50 (p=0.0029)")
+text(11, 0.003, "0.96(p=0.6208)")
+text(14, 0.006, "5.17 (p<2.2e-16)")
 
 ```
 
 
 ```{r, echo=T}
 percent=matrix(nrow=2, ncol=5)
-percent[,1]=c(0.0254, 0.0032)
-percent[,2]=c(0.0829, 0.0034)
+percent[,1]=c(0.0053, 0.0032)
+percent[,2]=c(0.0084, 0.0035)
 
-percent[,3]=c(0.0186, 0.0026)
-percent[,4]=c(0.0486, 0.0021)
+percent[,3]=c(0.0053, 0.0026)
+percent[,4]=c(0.0036, 0.0021)
 
-percent[,5]=c(0.0027, 0.0011)
+percent[,5]=c(0.0010, 0.0012)
+colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
+
+barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.01),
+ylab="Proportion of Jump-seq windows", xlab="", cex.names=1, main="combine minus (one reads window)")
+# do one side "greater" fisher exact test 
+text(2, 0.006, "1.67(p<2.2e-16)")
+text(4, 0.009, "2.40(p<2.2e-16)")
+text(8, 0.006, "2.02 (p<2.2e-16)")
+text(11, 0.004, "1.71(p<2.2e-16)")
+text(14, 0.0015, "0.89 (p=0.9776)")
+
+```
+
+
+```{r, echo=T}
+percent=matrix(nrow=2, ncol=5)
+percent[,1]=c(0.0254, 0.0137)
+percent[,2]=c(0.0829, 0.0160)
+
+percent[,3]=c(0.0186, 0.0117)
+percent[,4]=c(0.0486, 0.0100)
+
+percent[,5]=c(0.0027, 0.0049)
 colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
 
 barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Nano_hmC seal peaks", "Random windows"), ylim=c(0,0.1),
 ylab="Proportion of Nano_hmC seal peaks", main="", xlab="", cex.names=1)
-```
-
-
-
-```{r, echo=T}
-percent=matrix(nrow=2, ncol=5)
-percent[,1]=c(0.0070, 0.0032)
-percent[,2]=c(0.0139, 0.0034)
-
-percent[,3]=c(0.0069, 0.0026)
-percent[,4]=c(0.0042, 0.0021)
-
-percent[,5]=c(0.0005, 0.0011)
-colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
-
-barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.02),
-ylab="Proportion of Jump-seq windows", main="combine 11 48ng replicates minus (FDR0.05)", xlab="", cex.names=1)
+# do one side "greater" fisher exact test 
+text(2, 0.04, "1.85(p<2.2e-16)")
+text(4, 0.09, "5.18(p<2.2e-16)")
+text(8, 0.03, "1.59 (p<2.2e-16)")
+text(11, 0.06, "4.86(p<2.2e-16)")
+text(14, 0.01, "0.55 (p=1)")
 
 ```
+
+
+### peak distribution 
+
+```{r, echo=F}
+
+slices <- c(2014,3158, 1794, 1237, 257) 
+lbls <- c("CTCF", "Enhancer", "h3k27ac", "h3k4me3", "POIII")
+pct <- round(slices/sum(slices)*100)
+lbls <- paste(lbls, pct) # add percents to labels 
+lbls <- paste(lbls,"%",sep="") # ad % to labels 
+pie(slices,labels = lbls, col=rainbow(length(lbls)),
+  	main="Peak distribution in different regions(combine,plus, 1-reads window)")
+```
+
+* peak windows in all these regions take <3% of all peaks called. 
 
 
 ### reads depletion
@@ -1374,12 +1492,21 @@ Only focus on reads from 96 base to 102 base.
 num.reads.plus1=c(34536, 103817, 282178,  1398644, 1374788, 2427158, 3002380, 3198060)
 num.reads.plus2=c(21389, 84709, 241444, 1184547, 1171380, 2109440, 2578213, 2757798)
 hmc.ratio=c(0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1)
-plot(hmc.ratio, num.reads.plus1, type="o", xlab="5hmC percentage", ylab="Number of reads in spike in", main="reads in base >=96 & <=102", col=1, ylim=c(21000, 3200000))
+plot(hmc.ratio, num.reads.plus1, type="o", xlab="5hmC percentage", ylab="Number of reads in spike in", main="reads in base >=96 & <=102", col=1, ylim=c(21000, 3200000), xaxt="n")
+axis(1, at =hmc.ratio, las=0, cex.axis=0.5)
 lines(hmc.ratio, num.reads.plus2, col=2, type="o")
 legend(0.8, 1000000, c("plus1", "plus2"), col=c(1,2), lty=c(1,1))
+
+fit=lm(num.reads.plus1/num.reads.plus1[1] ~ hmc.ratio)
+fit
+plot(hmc.ratio, num.reads.plus1/num.reads.plus1[1], xlim=c(0,1), ylim=c(0, 110), type="o", ylab="fold change", xaxt="n", main="plus1")
+axis(1, at =hmc.ratio, las=0, cex.axis=0.5)
+lines(hmc.ratio, fit$coefficients[1]+fit$coefficients[2]*hmc.ratio, col=2, type="o")
+legend(0.75, 40, c("observed", "fitted"), col=c(1,2), lty=c(1,1))
 ```
 
 Fold change can be >100. 
+
 
 
 

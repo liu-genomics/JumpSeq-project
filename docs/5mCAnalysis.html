@@ -312,10 +312,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-06-15</p>
+<p><strong>Last updated:</strong> 2017-06-26</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> b367d22</p>
+<p><strong>Code version:</strong> 3077f03</p>
 <!-- Add your analysis here -->
 <p>Samples are <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=271045416">here</a>: and original samples are <a href="https://docs.google.com/spreadsheets/d/1WesFCQTrFplnXRKCHmhqtm1529DHc5Sc2tX7GkRa_-U/edit#gid=1664366512">here</a></p>
 <div id="ng-5mc-replicates" class="section level2">
@@ -443,6 +443,29 @@ barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab=&quot;Freq&quot;, main=&quot
 <td>rep2</td>
 <td>0.0216</td>
 <td>0.0221</td>
+</tr>
+</tbody>
+</table>
+<p>Got methylated cytosines in Tab-seq paper from Gary Hon. It has 35,452,294 sites, including plus strand and minus strand. Extending the site by one base upstream and one base downstream to form 3 bp windows. All 2,057,636 strong Tab-seq sites are included in 35,452,294 methylated cytosines.</p>
+<table>
+<caption>Proportion of 5mC data (FDR0.05) overlapping with methylated cytosines and the background rate is 0.1450.</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>0.8470</td>
+<td>0.8520</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>0.8597</td>
+<td>0.8618</td>
 </tr>
 </tbody>
 </table>

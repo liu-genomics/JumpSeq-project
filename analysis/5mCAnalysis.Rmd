@@ -82,7 +82,7 @@ rep2|188,726|431,088
 Table: number of peak windows at FDR 0.5 (~ pvalue $1.5\times 10^{-3}$) in every replicate
 
 
-### Overlap with other bisulfite peaks 
+### Overlap with other bisulfite peaks  
  download bisulfite peaks at this [site][site]. Use the data _GSM1173118_E14-d0.CPG.methylPattern.txt_ (denoted as E14-d0). It has a total of 3605387 CG sites, with varying methylation levels between 0 and 1. Use 0.9 as threshold to choose CG sites as peaks, which takes 64.55%.    
  
  [site]:https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE48229
@@ -95,6 +95,15 @@ rep1| 0.0250|0.0254
 rep2|0.0216|0.0221
 Table: Proportion of 5mC data (FDR0.05) overlapping with E14_d0 and the background rate is 0.0157. 
 
+
+
+Got methylated cytosines in Tab-seq paper from Gary Hon. It has 35,452,294 sites, including plus strand and minus strand. Extending the site by one base upstream and one base downstream to form 3 bp windows. All 2,057,636 strong Tab-seq sites are included in  35,452,294 methylated cytosines.    
+
+rep | minus | plus
+----|-------|----------
+rep1| 0.8470|0.8520
+rep2|0.8597|0.8618
+Table: Proportion of 5mC data (FDR0.05) overlapping with methylated cytosines and the background rate is 0.1450. 
 
 
 ## 24ng 5mC replicates 
