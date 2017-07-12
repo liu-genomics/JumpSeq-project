@@ -12,7 +12,7 @@
 <meta name="author" content="Shengtong Han" />
 
 
-<title>Peak calling</title>
+<title>Single Cell</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -301,7 +301,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Peak calling</h1>
+<h1 class="title toc-ignore">Single Cell</h1>
 <h4 class="author"><em>Shengtong Han</em></h4>
 <h4 class="date"><em>YYYY-MM-DD</em></h4>
 
@@ -312,73 +312,44 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-07-03</p>
+<p><strong>Last updated:</strong> 2017-07-12</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
 <p><strong>Code version:</strong> d82dcfe</p>
 <!-- Add your analysis here -->
-<div id="region-level-peak-calling" class="section level2">
-<h2>Region level peak calling</h2>
-<p>Basic idea: identify regions in the whole genome which contains one peak ideally. Thus the regions should be neigher too large nor too short. Currently use 20 bp.</p>
-<div id="step-1-base-level-coverage-calling" class="section level3">
-<h3>Step 1: Base level coverage calling</h3>
-<p>Start with .bam file. The fist step is to call 5’ end coverage at base level</p>
-<pre class="r"><code>prefix1=Jump-positive
-prefix2=mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam
-samtools view -b -F 20 -o $prefix1.$prefix2.plus  $prefix1.$prefix2
-samtools view -b -f 16 -o $prefix1.$prefix2.minus  $prefix1.$prefix2
-echo get minus and plus strand
-############## sort strands ################
-samtools sort $prefix1.$prefix2.plus $prefix1.$prefix2.plus.sorted
-samtools sort $prefix1.$prefix2.minus $prefix1.$prefix2.minus.sorted
-echo sort two strands
-########### call coverage at base level ###############
-bedtools genomecov -5 -d -ibam $prefix1.$prefix2.plus.sorted.bam  -g mm9.genome &gt; $prefix1.$prefix2.plus.cove.base.level
-echo get coverage for plus strand
-
-bedtools genomecov -5 -d -ibam $prefix1.$prefix2.minus.sorted.bam  -g mm9.genome &gt; $prefix1.$prefix2.minus.cove.base.level
-echo get coverage for minus strand</code></pre>
+<div id="quality-control-qc" class="section level2">
+<h2>Quality Control (QC)</h2>
+<div id="reads-distribution-across-all-960-seal-single-cells" class="section level3">
+<h3>reads distribution across all 960 seal single cells</h3>
+<p>most reads are not mappable to reference genome, for instance</p>
+<pre class="r"><code>cat CHe-lu-2_S2_L006_R2_001_Nbarcode_TTGGGGCTAGATGTGTATAAGAGACAG.adaptor_removed_no_mismatch_sorted_dedup_D23.bam.flagstat
+416 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 duplicates
+0 + 0 mapped (0.00%:-nan%)
+416 + 0 paired in sequencing
+208 + 0 read1
+208 + 0 read2
+0 + 0 properly paired (0.00%:-nan%)
+0 + 0 with itself and mate mapped
+0 + 0 singletons (0.00%:-nan%)
+0 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ&gt;=5)</code></pre>
 </div>
-<div id="setp-2-split-whole-genome-into-small-windows-of-equal-size" class="section level3">
-<h3>Setp 2: Split whole genome into small windows of equal size</h3>
+<div id="bulk-seal-5hmc-data" class="section level3">
+<h3>bulk seal 5hmC data</h3>
+<pre class="r"><code>cat CHe-lu-2_S2_L006_R2_001_Nbarcode_CTTCTAGCAGATGTGTATAAGAGACAG.adaptor_removed_no_mismatch_sorted_dedup_A01.bam.flagstat
+9912976 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 duplicates
+1358618 + 0 mapped (13.71%:-nan%)
+9912976 + 0 paired in sequencing
+4956488 + 0 read1
+4956488 + 0 read2
+1358618 + 0 properly paired (13.71%:-nan%)
+1358618 + 0 with itself and mate mapped
+0 + 0 singletons (0.00%:-nan%)
+0 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ&gt;=5)</code></pre>
 </div>
-<div id="step-3-calculate-p-values-for-each-window" class="section level3">
-<h3>Step 3: Calculate p values for each window</h3>
-</div>
-<div id="step-4-summarize-the-results-with-statistics-of-interest" class="section level3">
-<h3>step 4: Summarize the results with Statistics of interest</h3>
-</div>
-</div>
-<div id="plot-jump-distribution" class="section level2">
-<h2>Plot jump distribution</h2>
-<div id="yuwens-pipleline-via-sos" class="section level3">
-<h3>Yuwen’s pipleline via sos</h3>
-<pre class="r"><code>sos run ../code/170509_plot_coverage_for_bam_files_using_FDR_0.5_tab-seq_sites_test_RCC_han.sos  &#39;get_coverage&#39; --data_folder ../../project2/xinhe/Shengtong/Shengtong_JumpSeq/5hmC_48ng_downsample/  --file_name 48ng_11rep_merge.sorted.bam  test.bam --plus_reference_regions ../other_annotations/other_hmc_data_set/GSM882244_mESC.hmC_sites.FDR_0.0484.mm9.txt_minus.extend_100bp_separated.bed --minus_reference_regions ../other_annotations/other_hmc_data_set/GSM882244_mESC.hmC_sites.FDR_0.0484.mm9.txt_minus.extend_100bp_separated.bed --reference_sites_name GSM882244_FDR_0.0484  &amp;</code></pre>
-<ul>
-<li>run the code in the <code>processing_command</code> directory in <code>Tiao_Seq</code></li>
-<li>bedtools MUST be version of v2.17.0</li>
-<li>MUST use relative path</li>
-</ul>
-</div>
-</div>
-<div id="reads-mapping" class="section level2">
-<h2>reads mapping</h2>
-<p>reads mapping for 5mC sample</p>
-<pre class="r"><code>sos run ../code/170310_bioinformatics_preprocessing_using_spike_in_andUMI_nomismatch.han.sos &#39;gunzip+UMI_encoding+UMI_mapping&#39; --data_folder ../unified_data_repo/160620/ --file_name He-Lu-10_5mc-jump-2.4ng-S10_L004_R1_001.fastq.gz --spike_in ../other_annotations/bowtie1_indexed_genome/mm9 --spike_in_base_name mm9 &amp;</code></pre>
-<p>reads mapping for spike in sample</p>
-<pre class="r"><code>sos run ../code/170310_bioinformatics_preprocessing_using_spike_in_andUMI_nomismatch.han.sos &#39;gunzip+UMI_encoding+UMI_mapping&#39; --data_folder ../unified_data_repo/20170531/ --file_name CHe-LH-lu-1_S1_L006_R1_001.fastq.gz  --spike_in ../other_annotations/160811_5hmc_spikein --spike_in_base_name 160811_5hmc_spikein</code></pre>
-<ul>
-<li>run the code in the <code>processing_command</code> directory in <code>Tiao_Seq</code></li>
-<li>command bowtie must be from tools bowtie of version 1.1.0</li>
-<li>install umi_tools and bowtie manually if not avialble in computing clusters.</li>
-</ul>
-</div>
-<div id="reads-mapping-for-200bp-spike-in-sequence" class="section level2">
-<h2>reads mapping for 200bp spike in sequence</h2>
-<pre class="r"><code>sos run ../code/170509_plot_coverage_for_bam_files_using_FDR_0.5_tab-seq_sites_test_RCC_han.sos  &#39;get_coverage&#39; --data_folder ../unified_data_repo/20170531/   --file_name CHe-LH-lu-1_S1_L006_R1_001.160811_5hmc_spikein.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup.bam  --plus_reference_regions test.bed  --minus_reference_regions test.bed  --reference_sites_name 160811_5hmc_spikein</code></pre>
-<ul>
-<li>test.bed is a one line-bed file spike_in_5hmc 0 200 1</li>
-</ul>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>

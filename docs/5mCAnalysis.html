@@ -312,10 +312,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-06-26</p>
+<p><strong>Last updated:</strong> 2017-07-05</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 3077f03</p>
+<p><strong>Code version:</strong> d82dcfe</p>
 <!-- Add your analysis here -->
 <p>Samples are <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=271045416">here</a>: and original samples are <a href="https://docs.google.com/spreadsheets/d/1WesFCQTrFplnXRKCHmhqtm1529DHc5Sc2tX7GkRa_-U/edit#gid=1664366512">here</a></p>
 <div id="ng-5mc-replicates" class="section level2">
@@ -420,6 +420,53 @@ barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab=&quot;Freq&quot;, main=&quot
 </tr>
 </tbody>
 </table>
+<div id="use-p-value-as-cutoffs" class="section level4">
+<h4>use p value as cutoffs</h4>
+<table>
+<caption>number of peak windows with pvalue less than <span class="math inline">\(10^{-3}\)</span> in every replicate</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>237,674</td>
+<td>238,205</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>356,244</td>
+<td>358,641</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>number of peak windows with pvalue less than <span class="math inline">\(10^{-6}\)</span> in every replicate</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>13,341</td>
+<td>13,559</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>29,038</td>
+<td>28,901</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="overlap-with-other-bisulfite-peaks" class="section level3">
 <h3>Overlap with other bisulfite peaks</h3>
@@ -466,6 +513,50 @@ barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab=&quot;Freq&quot;, main=&quot
 <td>rep2</td>
 <td>0.8597</td>
 <td>0.8618</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Proportion of 5mC data (p value less than <span class="math inline">\(10^{-3}\)</span>) overlapping with methylated cytosines and the background rate is 0.1450.</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>0.7890</td>
+<td>0.7882</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>0.8023</td>
+<td>0.8034</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Proportion of 5mC data (p value less than <span class="math inline">\(10^{-6}\)</span>) overlapping with methylated cytosines and the background rate is 0.1450.</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>0.8374</td>
+<td>0.8403</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>0.8598</td>
+<td>0.8584</td>
 </tr>
 </tbody>
 </table>
