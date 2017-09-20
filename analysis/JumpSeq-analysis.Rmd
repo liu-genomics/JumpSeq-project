@@ -44,84 +44,6 @@ rep  | 1 |2 | 3 | 4 | 5| 6| 7| 8| 9| 10| 11 | combine
 \#reads(minus)|3,524,627| 3,793,291|2,021,689|6,995,038|4,754,910 |5,048,479|5,834,324|5,546,279|5,059,828|3,935,679|3,631,379|50,183,793
 Table: Number of reads in plus and minus strand for each 48 ng replicate. 
 
-### Two large combined replicates from eleven 48 ng 5hmC replicates
-Once the base level coverage of each individual replicates is obtained, directly combine some of them to form a synthesized large replicate and the rest form to another such that their coverage, i.e. number of reads are as balanced as possible. In this way, power is expected to be increasing. 
-
-* combined rep 1: rep 4+5+6+7+8
-* combined rep 2:rep 1+2+3+9+10+11
-
-Two large combined replicates | \#reads
-------------------------------|-----------
-rep1.minus | 28,179,030 
-rep1.plus | 28,118,310
-rep2.minus | 21,966,493
-rep2.plus | 21,977,043
-rep1+rep2:minus| 50,145,523
-rep1+rep2:plus | 50,095,353
-Table: Number of reads in each combined replicate. 
-
-##### Comparison 1: Comparison with Dali Han's data
-Dali Han's peak: 64865 peak windows with varying window size. 
-
-
-Originally called 20 bp windows are extended by 2kbp, 1kbp upstream and 1kbp downstream. Overlapping between extended peak windows (at four p value cutoffs $10^{-3}, 10^{-7}, 10^{-15}, 10^{-20}$) and Dali Han's data (window size differs among each other) are summzried below. 
-
-Combined replicate | \#overlap.win | \#.win | ratio
--------------------|---------------|--------|------
-rep1.minus.21.bp.enriched.window.p10-3.bed.extend2kbp.bed | 345920 | 1318454 | 0.2623679
-rep1.minus.21.bp.enriched.window.p10-7.bed.extend2kbp.bed | 74515 | 236507 | 0.3150647
-rep1.minus.21.bp.enriched.window.p10-15.bed.extend2kbp.bed | 9191 | 27656 | 0.3323329
-rep1.minus.21.bp.enriched.window.p10-20.bed.extend2kbp.bed | 3686 | 11162 | 0.3302276
-rep1.plus.21.bp.enriched.window.p10-3.bed.extend2kbp.bed | 344905 | 1317670 | 0.2617537
-rep1.plus.21.bp.enriched.window.p10-7.bed.extend2kbp.bed | 74504 | 236568 | 0.3149369
-rep1.plus.21.bp.enriched.window.p10-15.bed.extend2kbp.bed | 9167 | 27662 | 0.3313932
-rep1.plus.21.bp.enriched.window.p10-20.bed.extend2kbp.bed | 3554 | 10997 | 0.3231790
-rep2:minus.21.bp.enriched.window.p10-3.bed.extend2kbp.bed | 349863 | 1245093 | 0.2809935
-rep2:minus.21.bp.enriched.window.p10-7.bed.extend2kbp.bed | 70615 | 199358 | 0.3542120
-rep2:minus.21.bp.enriched.window.p10-15.bed.extend2kbp.bed | 8216 | 21511 | 0.3819441
-rep2:minus.21.bp.enriched.window.p10-20.bed.extend2kbp.bed | 2851 | 7710 | 0.3697795
-rep2:plus.21.bp.enriched.window.p10-3.bed.extend2kbp.bed | 348193 | 1243355 | 0.2800431
-rep2:plus.21.bp.enriched.window.p10-7.bed.extend2kbp.bed | 71014 | 200017 | 0.3550398
-rep2:plus.21.bp.enriched.window.p10-15.bed.extend2kbp.bed | 8769 | 22941 | 0.3822414
-rep2:plus.21.bp.enriched.window.p10-20.bed.extend2kbp.bed | 2792 | 7557 | 0.3694588
-Table: Comparison of peak windows between two large replivcates and Dali's data. Column2: total number of peak windows; Column3: number of peak windows overlapping with Dali's peak; Column4: the ratio.   
-```{r, echo=T}
-rep1.minus=c(0.2624, 0.3151, 0.3323, 0.3302); rep1.plus=c(0.2618, 0.3149, 0.3314, 0.3232)
-rep2.minus=c(0.2810, 0.3542, 0.3819, 0.3698); rep2.plus=c(0.2800, 0.3550, 0.3822, 0.3695)
-plot(rep1.minus, ylim=c(0.2, 0.4), type="o", xaxt='n', xlab="p value cutoffs", ylab="ratio", col=1, main="Overlapping rate with Dali's peaks")
-lines(rep1.plus, col=2, type="o")
-lines(rep2.minus, col=3, type="o")
-lines(rep2.plus, col=4, type="o")
-legend(3, 0.3, c("rep1.minus", "rep1.plus", "rep2.minus", "rep2.plus"), col=c(1,2,3,4), lty=c(1,1,1,1))
-axis.labels <-c("10^(-3)", "10^(-7)", "10^(-15)", "10^(-20)")
-axis(1, at=seq(1,4), labels=axis.labels)
-```
-##### Comparison 2: Comparison between two large replicates 
-
-
-minus | $10^{-1}$| $10^{-3}$ | $10^{-5}$ |$10^{-7}$ | $10^{-15}$ | $10^{-20}$
-------|----------|-|-----------|------------|-------------|--
-rep1 | 0.9905  |0.9388 | 0.8425 |0.7334 | 0.4543 | 0.4056
-rep2 |0.9886 | 0.9523 |  0.8961 |0.8091 | 0.5576 | 0.5612
-plus |$10^{-1}$| $10^{-3}$ | $10^{-5}$|$10^{-7}$ | $10^{-15}$ | $10^{-20}$
-rep1 | 0.9906 | 0.9389 | 0.8426 |0.7337 | 0.4650 | 0.3952
-rep2 |0.9887 | 0.9524 | 0.8967 |0.8095 | 0.5397 | 0.5419
-Table: Overlapping among peak windows extended by 2kbp for 2 large combined replicates at different p value cutoffs.
-
-
-Surprisingly, the overlapping rate deceases as the p value cutofff becomes more stringent. 
-
-
-
-minus | 0.5| 0.1 | 0.01|0.001 | 0.0001 |$10^{-7}$ |$10^{-10}$
-------|----------|-|-----------|------------|----|-----|---
-rep1 |0.3955| 0.4118 | 0.3840 | 0.3611| 0.3563| 0.3148 |0.3118
-rep2 |0.4985 | 0.3915  |  0.4111 |0.4109 | 0.4023| 0.4196| 0.4231
-plus |0.5| 0.1 | 0.01|0.001 | 0.0001 | $10^{-7}$ |$10^{-10}$
-rep1 | 0.3954 | 0.4126 | 0.3841 |0.3627 | 0.3572 | 0.3991|0.3115
-rep2 |0.4985 | 0.3907 | 0.4116 |0.4128 | 0.4030 | 0.4205| 0.4205
-Table: overlapping for originally called 20 bp windows at different FDR levels.
-
 ### Downsample
 Combine all 48ng replicates together, downsample $40\%, 50\%, \cdots, 90\%$ reads, call peak windows, and see how \#peak.windows (absolute peak windows or overlapping with other data) vary with number of reads.   
 
@@ -243,37 +165,51 @@ pie(slices,radius=0.7, labels = lbls, cex=0.7, col=rainbow(length(lbls)),
 #### Cmparison with strong TAB-seq peaks
 There are 2,057,636 strong base level peaks from TAB-seq. To compute overlapping rate, each base is extend by 10bp downstream, 10bp upstream, the same length as the called peak windows.  
 ```{r, echo=T}
-jump.rate.minus=c(0.2678, 0.2677, 0.2560, 0.2630, 0.2566, 0.2492, 0.2432)
-jump.rate.plus=c(0.2678, 0.2682, 0.2566, 0.2634, 0.2566, 0.2494, 0.2429)
-TAB.rate.minus=c(0.2810, 0.3203, 0.3654, 0.3858, 0.4145, 0.4455, 0.4693)
-TAB.rate.plus=c(0.2815, 0.3202, 0.3655, 0.3859, 0.4160, 0.4455, 0.4709)
-plot(jump.rate.minus, ylim=c(0, 1), type="o", xaxt='n', xlab="number of reads", ylab="overlapping rate", col=1, main="Overlapping rate of peak windows (20bp,FDR0.05) with strong TAB-seq peaks", cex.main=0.9)
+jump.rate.minus=c(0.3387, 0.3346, 0.3199, 0.3082, 0.2984, 0.2926, 0.2898)
+jump.rate.plus=c(0.3397, 0.3354, 0.3208, 0.3094, 0.2989, 0.2919, 0.2902)
+TAB.rate.minus=c(0.1577, 0.1947, 0.2424, 0.2810, 0.3152, 0.3392, 0.3713)
+TAB.rate.plus=c(0.1582, 0.1950, 0.2445, 0.2813, 0.3172, 0.3407, 0.3713)
+
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(jump.rate.minus, ylim=c(0, 1), type="o", xaxt='n', xlab="", ylab="Proportion of Jump-seq", col=1, main="20bp, FDR 0.5", cex.main=0.8, cex.lab=0.8)
 lines(jump.rate.plus, col=2, type="o")
-lines(TAB.rate.minus, col=3, type="o")
+legend(1, 0.7, c("minus", "plus"), col=c(1,2), lty=c(1,1))
+axis.labels <-c("40%", "50%", "60%", "70%", "80%", "90%", "100%")
+axis(1, at=seq(1,7), labels=axis.labels, cex.axis=0.8)
+
+
+plot(TAB.rate.minus, ylim=c(0,1), type="o", xaxt='n', xlab="", ylab="Proportion of strong TAB-seq", col=3, main="20bp, FDR 0.5", cex.main=0.8, cex.lab=0.8)
 lines(TAB.rate.plus, col=4, type="o")
-legend(1, 0.8, c("jump.rate.minus", "jump.rate.plus", "StrongTAB.rate.minus", "StrongTAB.rate.plus"), col=c(1,2,3,4), lty=c(1,1,1,1))
-axis.labels <-c("40% reads", "50% reads", "60% reads", "70% reads", "80% reads", "90% reads", "100% reads")
-axis(1, at=seq(1,7), labels=axis.labels)
+legend(1, 0.7, c("minus", "plus"), col=c(3,4), lty=c(1,1))
+axis.labels <-c("40%", "50%", "60%", "70%", "80%", "90%", "100%")
+axis(1, at=seq(1,7), labels=axis.labels, cex.axis=0.8)
+mtext("overlap between Jump-seq & strong TAB-seq", outer = TRUE, cex = 1)
+
 ```
+
+
+#### Sensitivity with 100% reads 
+
+Senstivibity is defined as the proportion of nano hmc seal or strong Tab-seq that are recovered by jump seq peak windows at FDR0.05 with 100% reads here.   
 
 
 ```{r, echo=T}
 ratio=matrix(nrow=2, ncol=2)
-ratio[,1]=c(0.9193, 0.4709)
-ratio[,2]=c(0.9189, 0.4693)
-rownames(ratio)=c("Nano_seal", "Tab-seq")
+ratio[,1]=c(0.9271, 0.3713)
+ratio[,2]=c(0.9273, 0.3713)
+rownames(ratio)=c("Nano_seal", "Strong Tab-seq")
 par(mfrow=c(1,2))
 barplot(ratio[,1], beside=F, ylim=c(0,1.2), col=c("red", "darkblue"), xlab=c("plus strand"), main="", ylab="Sensitivity")
 text(0.6, 1.0, ratio[1,1])
-text(2, 0.6, ratio[2,1])
+text(2, 0.45, ratio[2,1])
 barplot(ratio[,1], beside=F, ylim=c(0,1.2), col=c("red", "darkblue"), xlab=c("minus strand"), main="", ylab="Sensitivity")
 text(0.6, 1.0, ratio[1,2])
-text(2, 0.6, ratio[2,2])
+text(2, 0.45, ratio[2,2])
 ```
 
 
 
-### enrichment-100% reads minus
+##### Enrichment (100% reads minus )
 To do enrichments analysis, peak windows are called with varying p values. Use FDR 0.05 as threshold to select enriched windows. Randomly pick the same number of windows as enriched windows from the whole genome as background. Perform enrichment analysis for enriched windows versus background windows when overlapping with nano hmC_seal  and strong TAB-seq. FDR 0.05 is used throughout and stated clearly otherwise.   
 ```{r, echo=T}
 count=matrix(nrow=2, ncol=2)
@@ -1432,6 +1368,51 @@ xlab="Figure 1A", main="", ylab="Proportion of Nano-seal peaks", cex.names=0.5)
 barplot(percent[,c(2,4,6,8,10)], beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.4),
 xlab="Figure 1B", main="", ylab="Proportion of Tab-seq peaks", cex.names=0.5)
 ```
+
+## 0.6ng 5hmC replicate 
+
+### reads information  and peak windows
+rep | plus | minus
+-----|---------|-----
+rep 1| 22,997 | 23,664
+rep 2| 29,836| 29,848
+Table: number of reads in every replicate. 
+
+rep | plus | minus
+-----|---------|-----
+rep 1| 20,511 | 21,188
+rep 2| 27,154| 27,392
+Table: number of peak windows with at least one reads in every replicate. 
+
+
+
+### overlap with Nano seal sites 
+rep | plus | minus
+-----|---------|-----
+rep 1| 0.0582 | 0.0558
+rep 2| 0.0760| 0.0752
+Table: Ratio of jump-seq windows with at least one reads overlapping with Nano seal peaks. The background rate is 0.0194.  
+
+
+### Enrichment in cis-regulatory regions
+
+```{r, echo=T}
+percent=matrix(nrow=2, ncol=5)
+percent[,1]=c(0.0049, 0.0032)
+percent[,2]=c(0.0056, 0.0035)
+
+percent[,3]=c(0.0033, 0.0026)
+percent[,4]=c(0.0021, 0.0021)
+
+percent[,5]=c(0.0034, 0.0012)
+colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
+
+barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.01),
+ylab="Proportion of Jump-seq windows", main="20160811_5hmC_Jump_Seq_0.6ng.minus", xlab="", cex.names=1)
+```
+
+* cis-regulatory regions are extended 200bp windows. 
+* jump peaks are 20 bp windows with at least one reads. 
 
 ## 5hmC spike in 
 

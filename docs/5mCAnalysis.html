@@ -312,10 +312,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-07-05</p>
+<p><strong>Last updated:</strong> 2017-08-30</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> d82dcfe</p>
+<p><strong>Code version:</strong> 781d351</p>
 <!-- Add your analysis here -->
 <p>Samples are <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=271045416">here</a>: and original samples are <a href="https://docs.google.com/spreadsheets/d/1WesFCQTrFplnXRKCHmhqtm1529DHc5Sc2tX7GkRa_-U/edit#gid=1664366512">here</a></p>
 <div id="ng-5mc-replicates" class="section level2">
@@ -589,6 +589,31 @@ barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab=&quot;Freq&quot;, main=&quot
 </tbody>
 </table>
 </div>
+<div id="overlap-with-5mc-peaks" class="section level3">
+<h3>overlap with 5mC peaks</h3>
+<table>
+<caption>Proportion of 5mC data (p value less than <span class="math inline">\(10^{-6}\)</span>) overlapping with methylated cytosines and the background rate is 0.1450.</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>0.8511</td>
+<td>0.8482</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>0.8441</td>
+<td>0.8651</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="ng-5mc-replicates-2" class="section level2">
 <h2>12ng 5mC replicates</h2>
@@ -613,6 +638,31 @@ barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab=&quot;Freq&quot;, main=&quot
 <td>rep2</td>
 <td>1,006,187</td>
 <td>986,516</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="overlap-with-5mc-peaks-1" class="section level3">
+<h3>overlap with 5mC peaks</h3>
+<table>
+<caption>Proportion of 5mC data (p value less than <span class="math inline">\(10^{-6}\)</span>) overlapping with methylated cytosines and the background rate is 0.1450.</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>0.8051</td>
+<td>0.8356</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>0.8160</td>
+<td>0.8403</td>
 </tr>
 </tbody>
 </table>
@@ -645,9 +695,34 @@ barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab=&quot;Freq&quot;, main=&quot
 </tbody>
 </table>
 </div>
+<div id="overlap-with-5mc-peaks-2" class="section level3">
+<h3>overlap with 5mC peaks</h3>
+<table>
+<caption>Proportion of 5mC data (p value less than <span class="math inline">\(10^{-6}\)</span>) overlapping with methylated cytosines and the background rate is 0.1450.</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>0.8069</td>
+<td>0.8473</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>0.7305</td>
+<td>0.8704</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="ng-5mc-replicates-4" class="section level2">
-<h2>2.4ng 5mC replicates</h2>
+</div>
+<div id="point4ng-5mc-replicates" class="section level2">
+<h2>2point4ng 5mC replicates</h2>
 <div id="reads-distribution-4" class="section level3">
 <h3>reads distribution</h3>
 <table>
@@ -672,7 +747,76 @@ barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab=&quot;Freq&quot;, main=&quot
 </tr>
 </tbody>
 </table>
+<table>
+<caption>number of peak windows at FDR 0.05 in every replicate.</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>494</td>
+<td>552</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>345</td>
+<td>469</td>
+</tr>
+</tbody>
+</table>
 </div>
+<div id="overlap-with-other-bisulfite-peaks-1" class="section level3">
+<h3>Overlap with other bisulfite peaks</h3>
+<div id="overlap-with-cpgs-from-gary-hon." class="section level4">
+<h4>overlap with CpG’s from Gary Hon.</h4>
+<table>
+<caption>Proportion of 5mC data (FDR0.05) overlapping with methylated cytosines and the background rate is 0.1450.</caption>
+<thead>
+<tr class="header">
+<th>rep</th>
+<th>minus</th>
+<th>plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rep1</td>
+<td>0.7895</td>
+<td>0.7826</td>
+</tr>
+<tr class="even">
+<td>rep2</td>
+<td>0.6174</td>
+<td>0.6397</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<pre class="r"><code>percent=matrix(nrow=2, ncol=5)
+percent[,1]=c(0.7895, 0.1450)
+percent[,2]=c(0.8069, 0.1450)
+
+percent[,3]=c(0.8051, 0.1450)
+percent[,4]=c(0.8511, 0.1450)
+
+percent[,5]=c(0.8374, 0.1450)
+colnames(percent)=c(&quot;2.4ng&quot;, &quot;6ng&quot;, &quot;12ng&quot;, &quot;24ng&quot;, &quot;48ng&quot;)
+
+barplot(percent, beside=T, col=c(&quot;red&quot;, &quot;darkblue&quot;), legend=c(&quot;Jump-seq peaks&quot;, &quot;Random windows&quot;), ylim=c(0,1.2),
+ylab=&quot;Proportion of Jump-seq windows&quot;, main=&quot;Enrichment with methylated cytosine from Gary Hon (Data:rep 1 minus)&quot;, xlab=&quot;&quot;, cex.names=0.7)</code></pre>
+<p><img src="figure/5mCAnalysis.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<ul>
+<li>cutoff used for peak windows: 2.4ng (FDR0.05), others use p values less than <span class="math inline">\(10^{-6}\)</span>.</li>
+</ul>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>

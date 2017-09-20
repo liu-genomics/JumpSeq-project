@@ -143,6 +143,13 @@ rep2|1,848,313|1,833,769
 Table: number of reads in every replicate
 
 
+### overlap with 5mC peaks 
+rep | minus | plus
+----|-------|----------
+rep1| 0.8511|0.8482
+rep2|0.8441|0.8651
+Table: Proportion of 5mC data (p value less than $10^{-6}$) overlapping with methylated cytosines and the background rate is 0.1450.
+
 ## 12ng 5mC replicates 
 
 ### reads distribution 
@@ -154,6 +161,13 @@ rep2|1,006,187|986,516
 Table: number of reads in every replicate
 
 
+### overlap with 5mC peaks 
+rep | minus | plus
+----|-------|----------
+rep1| 0.8051|0.8356
+rep2|0.8160|0.8403
+Table: Proportion of 5mC data (p value less than $10^{-6}$) overlapping with methylated cytosines and the background rate is 0.1450.
+
 ## 6ng 5mC replicates 
 ### reads distribution 
 
@@ -164,8 +178,14 @@ rep2|330,093|845,322
 Table: number of reads in every replicate
 
 
+### overlap with 5mC peaks 
+rep | minus | plus
+----|-------|----------
+rep1| 0.8069|0.8473
+rep2|0.7305|0.8704
+Table: Proportion of 5mC data (p value less than $10^{-6}$) overlapping with methylated cytosines and the background rate is 0.1450.
 
-## 2.4ng 5mC replicates
+## 2point4ng 5mC replicates
 
 ### reads distribution 
 
@@ -176,7 +196,41 @@ rep2|231,751|224,961
 Table: number of reads in every replicate
 
 
+rep | minus | plus
+----|-------|----------
+rep1| 494| 552
+rep2|345|469
+Table: number of peak windows at FDR 0.05 in every replicate. 
 
+### Overlap with other bisulfite peaks
+
+#### overlap with CpG's from Gary Hon.  
+
+rep | minus | plus
+----|-------|----------
+rep1| 0.7895|0.7826
+rep2|0.6174|0.6397
+Table: Proportion of 5mC data (FDR0.05) overlapping with methylated cytosines and the background rate is 0.1450. 
+
+
+## Summary 
+
+```{r, echo=T}
+percent=matrix(nrow=2, ncol=5)
+percent[,1]=c(0.7895, 0.1450)
+percent[,2]=c(0.8069, 0.1450)
+
+percent[,3]=c(0.8051, 0.1450)
+percent[,4]=c(0.8511, 0.1450)
+
+percent[,5]=c(0.8374, 0.1450)
+colnames(percent)=c("2.4ng", "6ng", "12ng", "24ng", "48ng")
+
+barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,1.2),
+ylab="Proportion of Jump-seq windows", main="Enrichment with methylated cytosine from Gary Hon (Data:rep 1 minus)", xlab="", cex.names=0.7)
+```
+
+* cutoff used for peak windows: 2.4ng (FDR0.05), others use p values less than $10^{-6}$. 
 
 ## Session information
 

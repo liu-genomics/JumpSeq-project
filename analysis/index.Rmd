@@ -11,6 +11,7 @@ This project aims to investigate genome-wide distribution of 5hmC.
 * [This](JumpSeq-analysis.html) is analysis for 5hmC data.
 * [Here](5mCAnalysis.html) is analysis for 5mC data. 
 * [This](SingleCell.html) is single cell data. 
+* [This](PGC-analysis.html) is PGC analysis. 
 
 * Yuwen's analysis is [here][Yuwen]
 
