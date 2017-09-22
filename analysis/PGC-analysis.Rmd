@@ -46,6 +46,17 @@ Table: reads in every transposase bacode sample
 
 ![Whole genome reads distribution of plus strand-TP2345 ](figure/lu1_jumpbarcode1/lu1_jumpbarcode1_tp2345_plus.png)
 
+* The tracks from top to bottom: Ref_seq(mm9), PN1, PN2, PN3, PN4
+* To use IGV, I created 21 bp window by extending 10 bp updtream and 10 bp downstream at every reads location. 
+
+
+```{r, echo=T}
+
+lu1_jumpbarcode1_tp2_minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\CHe-LHu-1_S1_R1_001_jump_TGACTCG.umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.minus.cove.base.level.shiftonebase.bed", header=T)
+```
+
+
+
 
 
 ![Whole genome reads distribution of minus strand-TP2345 ](figure/lu1_jumpbarcode1/lu1_jumpbarcode1_tp2345_minus.png)
@@ -57,6 +68,42 @@ Table: reads in every transposase bacode sample
 ![Whole genome reads distribution of minus strand-TP78910 ](figure/lu1_jumpbarcode1/lu1_jumpbarcode1_tp78910_minus.png)
 
 
+
+```{r, echo=T, }
+imprinting.gene=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\MouseGenome\\imprinting_genes.txt", header=T)
+reads.gene.tp2.minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp3.minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP03.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp4.minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP04.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp5.minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP05.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+imprinting.gene.reads.tp2.minus=reads.gene.tp2.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp2.minus$Gene),]
+imprinting.gene.reads.tp3.minus=reads.gene.tp3.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp3.minus$Gene),]
+imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp4.minus$Gene),]
+imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
+combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
+colnames(combine)[4:7]=c("tp2.minus.RPKM", "tp3.minus.RPKM", "tp4.minus.RPKM", "tp5.minus.RPKM")
+paternal.gene=combine[combine$tp2.minus.RPKM>0,]$Gene
+```
+
+
+
+```{r, echo=F}
+imprinting.gene=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\MouseGenome\\imprinting_genes.txt", header=T)
+reads.gene.tp7.minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP07.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp8.minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP08.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp9.minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP09.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp10.minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP10.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+imprinting.gene.reads.tp7.minus=reads.gene.tp7.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp7.minus$Gene),]
+imprinting.gene.reads.tp8.minus=reads.gene.tp8.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp8.minus$Gene),]
+imprinting.gene.reads.tp9.minus=reads.gene.tp9.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp9.minus$Gene),]
+imprinting.gene.reads.tp10.minus=reads.gene.tp10.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp10.minus$Gene),]
+combine=cbind(imprinting.gene.reads.tp7.minus, imprinting.gene.reads.tp8.minus$RPKM, imprinting.gene.reads.tp9.minus$RPKM, imprinting.gene.reads.tp10.minus$RPKM)
+colnames(combine)[4:7]=c("tp2.minus.RPKM", "tp3.minus.RPKM", "tp4.minus.RPKM", "tp5.minus.RPKM")
+maternal.gene=combine[combine$tp2.minus.RPKM>0,]$Gene
+
+```
+
+
+
 ## lu2-jumpbarcode2(5mC)
 
 Transposase barcode  | total unique reads | plus reads / minus reads
@@ -64,15 +111,40 @@ Transposase barcode  | total unique reads | plus reads / minus reads
 1(E9.5, negative)| 1,587| 752/835
 2 (PN1)|16,647|8,298/8,349
 3 (PN2)| 26,834| 13,076/13758
-4 (PN3)| 41,445 | 19,319/22,126 ???
-5 (PN4)| 29,586| 14,089/15,497
-6| 648 | 280/368
-7| 30,982 | 15,316/15,666
-8| 7,782 | 3,877/3,905
-9| 32,754 | 16,329/16,425
-10| 42,382 | 21,133/21,249
+4 (PN3)| 12,157 | 6052/6105
+5 (PN4)| 9,003| 4,433/4,570
+6| 45,489 | 22,894/22,595
+7| 6,752 | 3,467/3,285
+8| 4,547 | 2,346/2,201
+9| 2,087 | 1,082/1,005
+10| 14,692 | 7,361/7,331
 Table: reads in every transposase bacode sample 
 
+![Whole genome reads distribution of minus strand-TP2345 ](figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp2345_minus.png)
+
+
+![Whole genome reads distribution of plus strand-TP2345 ](figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp2345_plus.png)
+
+
+![Whole genome reads distribution of minus strand-TP78910 ](figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp78910_minus.png)
+
+
+![Whole genome reads distribution of plus strand-TP2345 ](figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp2345_plus.png)
+
+```{r, echo=T, }
+imprinting.gene=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\MouseGenome\\imprinting_genes.txt", header=T)
+reads.gene.tp2.minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp3.minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP03.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp4.minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP04.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp5.minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP05.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+imprinting.gene.reads.tp2.minus=reads.gene.tp2.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp2.minus$Gene),]
+imprinting.gene.reads.tp3.minus=reads.gene.tp3.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp3.minus$Gene),]
+imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp4.minus$Gene),]
+imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
+combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
+colnames(combine)[4:7]=c("tp2.minus.RPKM", "tp3.minus.RPKM", "tp4.minus.RPKM", "tp5.minus.RPKM")
+
+```
 
 <!-- Insert the session information into the document -->
 ```{r session-info}

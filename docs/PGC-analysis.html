@@ -312,10 +312,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-09-20</p>
+<p><strong>Last updated:</strong> 2017-09-21</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 781d351</p>
+<p><strong>Code version:</strong> 31fe026</p>
 <!-- Add your analysis here -->
 <div id="lu1-jumpbarcode15hmc" class="section level2">
 <h2>lu1-jumpbarcode1(5hmC)</h2>
@@ -385,6 +385,11 @@ shared across the workflowr files. -->
 <img src="figure/lu1_jumpbarcode1/lu1_jumpbarcode1_tp2345_plus.png" alt="Whole genome reads distribution of plus strand-TP2345" />
 <p class="caption">Whole genome reads distribution of plus strand-TP2345</p>
 </div>
+<ul>
+<li>The tracks from top to bottom: Ref_seq(mm9), PN1, PN2, PN3, PN4</li>
+<li>To use IGV, I created 21 bp window by extending 10 bp updtream and 10 bp downstream at every reads location.</li>
+</ul>
+<pre class="r"><code>lu1_jumpbarcode1_tp2_minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\CHe-LHu-1_S1_R1_001_jump_TGACTCG.umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.minus.cove.base.level.shiftonebase.bed&quot;, header=T)</code></pre>
 <div class="figure">
 <img src="figure/lu1_jumpbarcode1/lu1_jumpbarcode1_tp2345_minus.png" alt="Whole genome reads distribution of minus strand-TP2345" />
 <p class="caption">Whole genome reads distribution of minus strand-TP2345</p>
@@ -397,6 +402,18 @@ shared across the workflowr files. -->
 <img src="figure/lu1_jumpbarcode1/lu1_jumpbarcode1_tp78910_minus.png" alt="Whole genome reads distribution of minus strand-TP78910" />
 <p class="caption">Whole genome reads distribution of minus strand-TP78910</p>
 </div>
+<pre class="r"><code>imprinting.gene=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\MouseGenome\\imprinting_genes.txt&quot;, header=T)
+reads.gene.tp2.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
+reads.gene.tp3.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP03.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
+reads.gene.tp4.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP04.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
+reads.gene.tp5.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP05.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
+imprinting.gene.reads.tp2.minus=reads.gene.tp2.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp2.minus$Gene),]
+imprinting.gene.reads.tp3.minus=reads.gene.tp3.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp3.minus$Gene),]
+imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp4.minus$Gene),]
+imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
+combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
+colnames(combine)[4:7]=c(&quot;tp2.minus.RPKM&quot;, &quot;tp3.minus.RPKM&quot;, &quot;tp4.minus.RPKM&quot;, &quot;tp5.minus.RPKM&quot;)
+paternal.gene=combine[combine$tp2.minus.RPKM&gt;0,]$Gene</code></pre>
 </div>
 <div id="lu2-jumpbarcode25mc" class="section level2">
 <h2>lu2-jumpbarcode2(5mC)</h2>
@@ -427,41 +444,68 @@ shared across the workflowr files. -->
 </tr>
 <tr class="even">
 <td>4 (PN3)</td>
-<td>41,445</td>
-<td>19,319/22,126 ???</td>
+<td>12,157</td>
+<td>6052/6105</td>
 </tr>
 <tr class="odd">
 <td>5 (PN4)</td>
-<td>29,586</td>
-<td>14,089/15,497</td>
+<td>9,003</td>
+<td>4,433/4,570</td>
 </tr>
 <tr class="even">
 <td>6</td>
-<td>648</td>
-<td>280/368</td>
+<td>45,489</td>
+<td>22,894/22,595</td>
 </tr>
 <tr class="odd">
 <td>7</td>
-<td>30,982</td>
-<td>15,316/15,666</td>
+<td>6,752</td>
+<td>3,467/3,285</td>
 </tr>
 <tr class="even">
 <td>8</td>
-<td>7,782</td>
-<td>3,877/3,905</td>
+<td>4,547</td>
+<td>2,346/2,201</td>
 </tr>
 <tr class="odd">
 <td>9</td>
-<td>32,754</td>
-<td>16,329/16,425</td>
+<td>2,087</td>
+<td>1,082/1,005</td>
 </tr>
 <tr class="even">
 <td>10</td>
-<td>42,382</td>
-<td>21,133/21,249</td>
+<td>14,692</td>
+<td>7,361/7,331</td>
 </tr>
 </tbody>
 </table>
+<div class="figure">
+<img src="figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp2345_minus.png" alt="Whole genome reads distribution of minus strand-TP2345" />
+<p class="caption">Whole genome reads distribution of minus strand-TP2345</p>
+</div>
+<div class="figure">
+<img src="figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp2345_plus.png" alt="Whole genome reads distribution of plus strand-TP2345" />
+<p class="caption">Whole genome reads distribution of plus strand-TP2345</p>
+</div>
+<div class="figure">
+<img src="figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp78910_minus.png" alt="Whole genome reads distribution of minus strand-TP78910" />
+<p class="caption">Whole genome reads distribution of minus strand-TP78910</p>
+</div>
+<div class="figure">
+<img src="figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp2345_plus.png" alt="Whole genome reads distribution of plus strand-TP2345" />
+<p class="caption">Whole genome reads distribution of plus strand-TP2345</p>
+</div>
+<pre class="r"><code>imprinting.gene=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\MouseGenome\\imprinting_genes.txt&quot;, header=T)
+reads.gene.tp2.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
+reads.gene.tp3.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP03.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
+reads.gene.tp4.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP04.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
+reads.gene.tp5.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP05.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
+imprinting.gene.reads.tp2.minus=reads.gene.tp2.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp2.minus$Gene),]
+imprinting.gene.reads.tp3.minus=reads.gene.tp3.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp3.minus$Gene),]
+imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp4.minus$Gene),]
+imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
+combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
+colnames(combine)[4:7]=c(&quot;tp2.minus.RPKM&quot;, &quot;tp3.minus.RPKM&quot;, &quot;tp4.minus.RPKM&quot;, &quot;tp5.minus.RPKM&quot;)</code></pre>
 <!-- Insert the session information into the document -->
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 3.2.2 (2015-08-14)
