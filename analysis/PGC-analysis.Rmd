@@ -1,5 +1,5 @@
 ---
-title: "PGC analysis"
+title: "PN analysis"
 author: "Shengtong Han"
 date: YYYY-MM-DD
 output: html_document
@@ -41,6 +41,8 @@ Transposase barcode  | total unique reads | plus reads / minus reads
 9| 32,754 | 16,329/16,425
 10| 42,382 | 21,133/21,249
 Table: reads in every transposase bacode sample 
+
+* Paternal: 6, 7, 8, 9, 10; maternal: 1, 2, 3, 4, 5
 
 
 
