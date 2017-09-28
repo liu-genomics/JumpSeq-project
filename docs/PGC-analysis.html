@@ -312,10 +312,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-09-25</p>
+<p><strong>Last updated:</strong> 2017-09-27</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 5cd1290</p>
+<p><strong>Code version:</strong> dbbeef6</p>
 <!-- Add your analysis here -->
 <div id="lu1-jumpbarcode15hmc" class="section level2">
 <h2>lu1-jumpbarcode1(5hmC)</h2>
@@ -384,6 +384,8 @@ shared across the workflowr files. -->
 <ul>
 <li>Paternal: 6, 7, 8, 9, 10; maternal: 1, 2, 3, 4, 5</li>
 </ul>
+<div id="maternal-samples" class="section level3">
+<h3>Maternal samples</h3>
 <div class="figure">
 <img src="figure/lu1_jumpbarcode1/lu1_jumpbarcode1_tp2345_plus.png" alt="Whole genome reads distribution of plus strand-TP2345" />
 <p class="caption">Whole genome reads distribution of plus strand-TP2345</p>
@@ -392,31 +394,1657 @@ shared across the workflowr files. -->
 <li>The tracks from top to bottom: Ref_seq(mm9), PN1, PN2, PN3, PN4</li>
 <li>To use IGV, I created 21 bp window by extending 10 bp updtream and 10 bp downstream at every reads location.</li>
 </ul>
-<pre class="r"><code>lu1_jumpbarcode1_tp2_minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\CHe-LHu-1_S1_R1_001_jump_TGACTCG.umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.minus.cove.base.level.shiftonebase.bed&quot;, header=T)</code></pre>
+<pre class="r"><code>kable(combine.fin, caption=&quot;RPKM of imprinting genes (at plus strand) from maternal samples at different stages&quot;)</code></pre>
+<table>
+<caption>RPKM of imprinting genes (at plus strand) from maternal samples at different stages</caption>
+<thead>
+<tr class="header">
+<th align="left">Gene</th>
+<th align="right">PN1</th>
+<th align="right">PN2</th>
+<th align="right">PN3</th>
+<th align="right">PN4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gpr1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.2100658</td>
+</tr>
+<tr class="even">
+<td align="left">Sfmbt2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4715387</td>
+<td align="right">0.2950837</td>
+<td align="right">0.4840850</td>
+</tr>
+<tr class="odd">
+<td align="left">Wt1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.2064556</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Gatm</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.9475976</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">L3mbtl</td>
+<td align="right">0.0000000</td>
+<td align="right">1.9779374</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Trp73</td>
+<td align="right">1.5199091</td>
+<td align="right">1.2275594</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2602214</td>
+</tr>
+<tr class="odd">
+<td align="left">Magi2</td>
+<td align="right">0.0720920</td>
+<td align="right">0.3493522</td>
+<td align="right">0.5242850</td>
+<td align="right">0.3387226</td>
+</tr>
+<tr class="even">
+<td align="left">Ppp1r9a</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2678198</td>
+</tr>
+<tr class="odd">
+<td align="left">Pon1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.9157047</td>
+<td align="right">2.6937554</td>
+</tr>
+<tr class="even">
+<td align="left">Pon3</td>
+<td align="right">0.0000000</td>
+<td align="right">1.9175628</td>
+<td align="right">0.0000000</td>
+<td align="right">1.9685839</td>
+</tr>
+<tr class="odd">
+<td align="left">Sgce</td>
+<td align="right">3.5758127</td>
+<td align="right">0.8022268</td>
+<td align="right">0.5856955</td>
+<td align="right">1.9765724</td>
+</tr>
+<tr class="even">
+<td align="left">Calcr</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6299626</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Pon2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2880960</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Copg2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2718204</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Dhcr7</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.9622238</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Ano1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3305366</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Usp29</td>
+<td align="right">0.0000000</td>
+<td align="right">0.8080175</td>
+<td align="right">0.4424424</td>
+<td align="right">0.4147583</td>
+</tr>
+<tr class="even">
+<td align="left">Gabrg3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3627599</td>
+<td align="right">0.2648464</td>
+<td align="right">0.2979296</td>
+</tr>
+<tr class="odd">
+<td align="left">Gabra5</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4838948</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Gabrb3</td>
+<td align="right">1.0591205</td>
+<td align="right">0.5702680</td>
+<td align="right">0.4163454</td>
+<td align="right">0.8781619</td>
+</tr>
+<tr class="odd">
+<td align="left">Snrpn</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0916234</td>
+<td align="right">0.2675722</td>
+<td align="right">0.3762449</td>
+</tr>
+<tr class="even">
+<td align="left">Kcnq1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6195883</td>
+<td align="right">0.2178075</td>
+</tr>
+<tr class="odd">
+<td align="left">Kcnq1ot1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.5936740</td>
+<td align="right">0.8347907</td>
+</tr>
+<tr class="even">
+<td align="left">Nap1l4</td>
+<td align="right">0.0000000</td>
+<td align="right">1.9152533</td>
+<td align="right">1.3983018</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Tnfrsf23</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.4685726</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">AK155734</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.6373013</td>
+</tr>
+<tr class="odd">
+<td align="left">Osbpl5</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9453035</td>
+<td align="right">1.3292322</td>
+</tr>
+<tr class="even">
+<td align="left">Atp10a</td>
+<td align="right">0.0000000</td>
+<td align="right">0.7924918</td>
+<td align="right">0.2892941</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Inpp5f</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4354066</td>
+</tr>
+<tr class="even">
+<td align="left">Gab1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.5846579</td>
+<td align="right">0.4268512</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Snx14</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.1623010</td>
+</tr>
+<tr class="even">
+<td align="left">Ntm</td>
+<td align="right">0.2423460</td>
+<td align="right">0.5436986</td>
+<td align="right">0.2540463</td>
+<td align="right">0.4688585</td>
+</tr>
+<tr class="odd">
+<td align="left">Zc3h12c</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6489885</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Rasgrf1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9933036</td>
+</tr>
+<tr class="odd">
+<td align="left">Sdhd</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">9.2746251</td>
+</tr>
+<tr class="even">
+<td align="left">Lin28b</td>
+<td align="right">3.5446054</td>
+<td align="right">0.4771353</td>
+<td align="right">0.6967007</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Plagl1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.1128028</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Ctnna3</td>
+<td align="right">0.5271887</td>
+<td align="right">0.4888650</td>
+<td align="right">0.3454007</td>
+<td align="right">0.2428415</td>
+</tr>
+<tr class="odd">
+<td align="left">Ddc</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2031567</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Grb10</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.1084181</td>
+</tr>
+<tr class="odd">
+<td align="left">Commd1</td>
+<td align="right">3.1146556</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Dlk1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">6.9593975</td>
+</tr>
+<tr class="odd">
+<td align="left">Begain</td>
+<td align="right">0.0000000</td>
+<td align="right">1.8827619</td>
+<td align="right">0.0000000</td>
+<td align="right">3.8657140</td>
+</tr>
+<tr class="even">
+<td align="left">Rb1</td>
+<td align="right">1.9342707</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Htr2a</td>
+<td align="right">0.0000000</td>
+<td align="right">1.0276766</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Zfat</td>
+<td align="right">2.8782271</td>
+<td align="right">0.7748698</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Kcnk9</td>
+<td align="right">7.3773054</td>
+<td align="right">0.0000000</td>
+<td align="right">2.9000543</td>
+<td align="right">2.0389460</td>
+</tr>
+<tr class="even">
+<td align="left">Slc38a4</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4567144</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Slc22a3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.5646166</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Slc22a2</td>
+<td align="right">0.0000000</td>
+<td align="right">1.5315397</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Impact</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">3.3653396</td>
+</tr>
+<tr class="even">
+<td align="left">Glis3</td>
+<td align="right">1.0373416</td>
+<td align="right">0.0000000</td>
+<td align="right">0.8971248</td>
+<td align="right">0.8027638</td>
+</tr>
+<tr class="odd">
+<td align="left">Tsix</td>
+<td align="right">4.7157824</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+</tbody>
+</table>
 <div class="figure">
 <img src="figure/lu1_jumpbarcode1/lu1_jumpbarcode1_tp2345_minus.png" alt="Whole genome reads distribution of minus strand-TP2345" />
 <p class="caption">Whole genome reads distribution of minus strand-TP2345</p>
 </div>
+<pre class="r"><code>kable(combine.fin, caption=&quot;RPKM of imprinting genes (at minus strand) from maternal samples at different stages&quot;)</code></pre>
+<table>
+<caption>RPKM of imprinting genes (at minus strand) from maternal samples at different stages</caption>
+<thead>
+<tr class="header">
+<th align="left">Gene</th>
+<th align="right">PN1</th>
+<th align="right">PN2</th>
+<th align="right">PN3</th>
+<th align="right">PN4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gpr1</td>
+<td align="right">6.9279290</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Sfmbt2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2656548</td>
+<td align="right">0.2964768</td>
+<td align="right">0.2401399</td>
+</tr>
+<tr class="odd">
+<td align="left">Wt1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.3467144</td>
+</tr>
+<tr class="even">
+<td align="left">Gatm</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.5384395</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Blcap</td>
+<td align="right">0.0000000</td>
+<td align="right">5.3513137</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Nnat</td>
+<td align="right">0.0000000</td>
+<td align="right">22.2046214</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Gnas</td>
+<td align="right">0.0000000</td>
+<td align="right">0.7977700</td>
+<td align="right">1.2718990</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Lin28a</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.7544700</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Trp73</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2572732</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Magi2</td>
+<td align="right">0.2498351</td>
+<td align="right">0.5817053</td>
+<td align="right">0.4637116</td>
+<td align="right">0.1556749</td>
+</tr>
+<tr class="odd">
+<td align="left">Ppp1r9a</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2057628</td>
+<td align="right">0.8201282</td>
+<td align="right">0.4650005</td>
+</tr>
+<tr class="even">
+<td align="left">Pon3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2056547</td>
+<td align="right">1.7089708</td>
+</tr>
+<tr class="odd">
+<td align="left">Asb4</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9250355</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Mest</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">5.0752731</td>
+</tr>
+<tr class="odd">
+<td align="left">Pon2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.1092945</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Copg2</td>
+<td align="right">1.1981464</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3318122</td>
+</tr>
+<tr class="odd">
+<td align="left">Dhcr7</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.6898462</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Ano1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4034873</td>
+</tr>
+<tr class="odd">
+<td align="left">Peg3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.4720688</td>
+</tr>
+<tr class="even">
+<td align="left">Usp29</td>
+<td align="right">0.0000000</td>
+<td align="right">0.1593269</td>
+<td align="right">0.1270089</td>
+<td align="right">0.7201215</td>
+</tr>
+<tr class="odd">
+<td align="left">Gabrg3</td>
+<td align="right">0.2334812</td>
+<td align="right">0.2861197</td>
+<td align="right">0.2736994</td>
+<td align="right">0.3232990</td>
+</tr>
+<tr class="even">
+<td align="left">Gabra5</td>
+<td align="right">2.1329407</td>
+<td align="right">1.0455256</td>
+<td align="right">0.0000000</td>
+<td align="right">0.5906923</td>
+</tr>
+<tr class="odd">
+<td align="left">Gabrb3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2248938</td>
+<td align="right">0.3585522</td>
+<td align="right">0.5082344</td>
+</tr>
+<tr class="even">
+<td align="left">Snrpn</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2304304</td>
+<td align="right">0.1633132</td>
+</tr>
+<tr class="odd">
+<td align="left">Kcnq1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6693556</td>
+<td align="right">0.1333957</td>
+<td align="right">0.7563338</td>
+</tr>
+<tr class="even">
+<td align="left">Kcnq1ot1</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2827196</td>
+<td align="right">0.5112657</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Ascl2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">17.4615130</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Tnfrsf23</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">3.0133960</td>
+</tr>
+<tr class="odd">
+<td align="left">Inpp5f</td>
+<td align="right">2.7297524</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Gab1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4611373</td>
+<td align="right">0.3675997</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Snx14</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.4236972</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Ntm</td>
+<td align="right">0.4199252</td>
+<td align="right">0.2058391</td>
+<td align="right">0.2734775</td>
+<td align="right">0.1938221</td>
+</tr>
+<tr class="odd">
+<td align="left">Rasgrf1</td>
+<td align="right">0.0000000</td>
+<td align="right">1.9078584</td>
+<td align="right">1.5208664</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Lin28b</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4499934</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Plagl1</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2021867</td>
+<td align="right">1.1180562</td>
+<td align="right">1.3584027</td>
+</tr>
+<tr class="even">
+<td align="left">Ctnna3</td>
+<td align="right">0.1522478</td>
+<td align="right">0.2363248</td>
+<td align="right">0.3272009</td>
+<td align="right">0.5621760</td>
+</tr>
+<tr class="odd">
+<td align="left">Ddc</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9489659</td>
+<td align="right">0.0000000</td>
+<td align="right">0.7148517</td>
+</tr>
+<tr class="even">
+<td align="left">Grb10</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2958980</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Commd1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.4946128</td>
+</tr>
+<tr class="even">
+<td align="left">Rian</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.8106483</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Rb1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.8214466</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9281879</td>
+</tr>
+<tr class="even">
+<td align="left">Htr2a</td>
+<td align="right">3.3071889</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9158862</td>
+</tr>
+<tr class="odd">
+<td align="left">Zfat</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.7307912</td>
+<td align="right">0.3452898</td>
+</tr>
+<tr class="even">
+<td align="left">Peg13</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">12.7972071</td>
+</tr>
+<tr class="odd">
+<td align="left">Slc38a4</td>
+<td align="right">2.9395256</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2871561</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Slc22a3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9724835</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Slc22a2</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2079715</td>
+<td align="right">0.9629453</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Igf2r</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2259456</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Glis3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.1321616</td>
+<td align="right">0.4916509</td>
+<td align="right">1.0951236</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="paternal-samples" class="section level3">
+<h3>Paternal samples</h3>
 <div class="figure">
 <img src="figure/lu1_jumpbarcode1/lu1_jumpbarcode1_tp78910_plus.png" alt="Whole genome reads distribution of plus strand-TP78910" />
 <p class="caption">Whole genome reads distribution of plus strand-TP78910</p>
 </div>
+<pre class="r"><code>kable(combine.fin, caption=&quot;RPKM of imprinting genes (at plus strand) from paternal samples at different stages&quot;)</code></pre>
+<table>
+<caption>RPKM of imprinting genes (at plus strand) from paternal samples at different stages</caption>
+<thead>
+<tr class="header">
+<th align="left">Gene</th>
+<th align="right">PN1</th>
+<th align="right">PN2</th>
+<th align="right">PN3</th>
+<th align="right">PN4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sfmbt2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2125694</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Wt1</td>
+<td align="right">2.8477129</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Gatm</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.5121839</td>
+</tr>
+<tr class="even">
+<td align="left">H13</td>
+<td align="right">3.3970094</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Nespas</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">3.7693376</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Gnas</td>
+<td align="right">0.9530705</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4787645</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">L3mbtl</td>
+<td align="right">0.0000000</td>
+<td align="right">7.0639251</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Gnai3</td>
+<td align="right">1.6470127</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Trp73</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3228068</td>
+<td align="right">0.2546122</td>
+</tr>
+<tr class="even">
+<td align="left">Magi2</td>
+<td align="right">0.4572005</td>
+<td align="right">0.3465729</td>
+<td align="right">0.3215375</td>
+<td align="right">0.6159127</td>
+</tr>
+<tr class="odd">
+<td align="left">Il6</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">6.2460793</td>
+</tr>
+<tr class="even">
+<td align="left">Ppp1r9a</td>
+<td align="right">1.0652124</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3430114</td>
+<td align="right">0.4869873</td>
+</tr>
+<tr class="odd">
+<td align="left">Pon1</td>
+<td align="right">2.4724618</td>
+<td align="right">0.0000000</td>
+<td align="right">2.0700234</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Asb4</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9154677</td>
+</tr>
+<tr class="odd">
+<td align="left">Sgce</td>
+<td align="right">0.0000000</td>
+<td align="right">3.4380482</td>
+<td align="right">1.5189022</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Calcr</td>
+<td align="right">0.8130472</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Mest</td>
+<td align="right">1.7886644</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Cpa4</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.8063174</td>
+</tr>
+<tr class="odd">
+<td align="left">Copg2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.5791690</td>
+</tr>
+<tr class="even">
+<td align="left">Dhcr7</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.1202898</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Ano1</td>
+<td align="right">1.7063988</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3571628</td>
+<td align="right">0.8451310</td>
+</tr>
+<tr class="even">
+<td align="left">Zim1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.0113030</td>
+</tr>
+<tr class="odd">
+<td align="left">Usp29</td>
+<td align="right">0.1903428</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.1256952</td>
+</tr>
+<tr class="even">
+<td align="left">Zim3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.4133006</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Gabrg3</td>
+<td align="right">0.7519998</td>
+<td align="right">0.2591092</td>
+<td align="right">0.1717086</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Gabra5</td>
+<td align="right">0.6245281</td>
+<td align="right">0.0000000</td>
+<td align="right">0.5228747</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Gabrb3</td>
+<td align="right">0.2686734</td>
+<td align="right">1.0183160</td>
+<td align="right">0.6748258</td>
+<td align="right">0.1774218</td>
+</tr>
+<tr class="even">
+<td align="left">Ube3a</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6124256</td>
+</tr>
+<tr class="odd">
+<td align="left">Snrpn</td>
+<td align="right">1.0360085</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3420704</td>
+</tr>
+<tr class="even">
+<td align="left">Ampd3</td>
+<td align="right">1.8174277</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Igf2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">6.4180736</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Th</td>
+<td align="right">8.8903412</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Kcnq1</td>
+<td align="right">0.5997434</td>
+<td align="right">0.0000000</td>
+<td align="right">1.0042483</td>
+<td align="right">0.5280638</td>
+</tr>
+<tr class="even">
+<td align="left">Kcnq1ot1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2829942</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Slc22a18</td>
+<td align="right">5.0891256</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Nap1l4</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.5109414</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Tnfrsf23</td>
+<td align="right">3.1860084</td>
+<td align="right">0.0000000</td>
+<td align="right">2.6674272</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Osbpl5</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.0214520</td>
+<td align="right">1.6113300</td>
+</tr>
+<tr class="odd">
+<td align="left">Atp10a</td>
+<td align="right">0.7467419</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6251960</td>
+<td align="right">0.2465601</td>
+</tr>
+<tr class="even">
+<td align="left">Inpp5f</td>
+<td align="right">0.0000000</td>
+<td align="right">3.0293836</td>
+<td align="right">0.6691787</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Gab1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.3837080</td>
+<td align="right">0.7275951</td>
+</tr>
+<tr class="even">
+<td align="left">Snx14</td>
+<td align="right">1.0668172</td>
+<td align="right">2.6956069</td>
+<td align="right">1.7863464</td>
+<td align="right">0.7044858</td>
+</tr>
+<tr class="odd">
+<td align="left">Ntm</td>
+<td align="right">0.2664019</td>
+<td align="right">0.2330092</td>
+<td align="right">0.4460802</td>
+<td align="right">0.4330381</td>
+</tr>
+<tr class="even">
+<td align="left">Rasgrf1</td>
+<td align="right">0.0000000</td>
+<td align="right">1.7277514</td>
+<td align="right">1.1449601</td>
+<td align="right">1.5051357</td>
+</tr>
+<tr class="odd">
+<td align="left">Lin28b</td>
+<td align="right">0.6743860</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2968927</td>
+</tr>
+<tr class="even">
+<td align="left">Ctnna3</td>
+<td align="right">0.2674703</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3110203</td>
+<td align="right">0.1275641</td>
+</tr>
+<tr class="odd">
+<td align="left">Ccdc40</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">3.1538361</td>
+</tr>
+<tr class="even">
+<td align="left">Ddc</td>
+<td align="right">1.1336994</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6327794</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Grb10</td>
+<td align="right">0.7740841</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9721316</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Rian</td>
+<td align="right">1.2148842</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Rtl1</td>
+<td align="right">7.8097293</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Begain</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.9706180</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Rb1</td>
+<td align="right">0.9813561</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2324337</td>
+<td align="right">0.6480505</td>
+</tr>
+<tr class="even">
+<td align="left">Htr2a</td>
+<td align="right">1.9366993</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Zfat</td>
+<td align="right">1.4602743</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9169410</td>
+<td align="right">0.4821550</td>
+</tr>
+<tr class="even">
+<td align="left">Kcnk9</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2358318</td>
+</tr>
+<tr class="odd">
+<td align="left">Slc38a4</td>
+<td align="right">1.7213946</td>
+<td align="right">3.2621825</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2841860</td>
+</tr>
+<tr class="even">
+<td align="left">Slc22a3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6100990</td>
+<td align="right">0.9624249</td>
+</tr>
+<tr class="odd">
+<td align="left">Slc22a2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9529853</td>
+</tr>
+<tr class="even">
+<td align="left">Glis3</td>
+<td align="right">0.5262973</td>
+<td align="right">0.7979010</td>
+<td align="right">0.6168860</td>
+<td align="right">0.1390188</td>
+</tr>
+</tbody>
+</table>
 <div class="figure">
 <img src="figure/lu1_jumpbarcode1/lu1_jumpbarcode1_tp78910_minus.png" alt="Whole genome reads distribution of minus strand-TP78910" />
 <p class="caption">Whole genome reads distribution of minus strand-TP78910</p>
 </div>
-<pre class="r"><code>imprinting.gene=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\MouseGenome\\imprinting_genes.txt&quot;, header=T)
-reads.gene.tp2.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
-reads.gene.tp3.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP03.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
-reads.gene.tp4.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP04.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
-reads.gene.tp5.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP05.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
-imprinting.gene.reads.tp2.minus=reads.gene.tp2.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp2.minus$Gene),]
-imprinting.gene.reads.tp3.minus=reads.gene.tp3.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp3.minus$Gene),]
-imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp4.minus$Gene),]
-imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
-combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
-colnames(combine)[4:7]=c(&quot;tp2.minus.RPKM&quot;, &quot;tp3.minus.RPKM&quot;, &quot;tp4.minus.RPKM&quot;, &quot;tp5.minus.RPKM&quot;)
-paternal.gene=combine[combine$tp2.minus.RPKM&gt;0,]$Gene</code></pre>
+<pre class="r"><code>kable(combine.fin, caption=&quot;RPKM of imprinting genes (at minus strand) from paternal samples at different stages&quot;)</code></pre>
+<table>
+<caption>RPKM of imprinting genes (at minus strand) from paternal samples at different stages</caption>
+<thead>
+<tr class="header">
+<th align="left">Gene</th>
+<th align="right">PN1</th>
+<th align="right">PN2</th>
+<th align="right">PN3</th>
+<th align="right">PN4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gpr1</td>
+<td align="right">0.0000000</td>
+<td align="right">7.3397906</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Zdbf2</td>
+<td align="right">0.0000000</td>
+<td align="right">5.6000398</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Sfmbt2</td>
+<td align="right">0.6678147</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3690139</td>
+<td align="right">0.2953052</td>
+</tr>
+<tr class="even">
+<td align="left">Wt1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.1825402</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">H13</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.7633011</td>
+<td align="right">1.6933085</td>
+</tr>
+<tr class="even">
+<td align="left">Gnas</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2664695</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Gnai3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.0946493</td>
+</tr>
+<tr class="even">
+<td align="left">Lin28a</td>
+<td align="right">0.0000000</td>
+<td align="right">14.9364526</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Trp73</td>
+<td align="right">2.2126694</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9606562</td>
+<td align="right">0.7687698</td>
+</tr>
+<tr class="even">
+<td align="left">Magi2</td>
+<td align="right">0.1924100</td>
+<td align="right">0.5293754</td>
+<td align="right">0.2126398</td>
+<td align="right">0.6685094</td>
+</tr>
+<tr class="odd">
+<td align="left">Ppp1r9a</td>
+<td align="right">0.7053484</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6124704</td>
+<td align="right">1.1436424</td>
+</tr>
+<tr class="even">
+<td align="left">Pon1</td>
+<td align="right">2.3648188</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Pon3</td>
+<td align="right">3.4563970</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Sgce</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6028819</td>
+</tr>
+<tr class="odd">
+<td align="left">Cpa4</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.2717553</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Copg2</td>
+<td align="right">0.5033182</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.5829095</td>
+</tr>
+<tr class="odd">
+<td align="left">Dhcr7</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.6831686</td>
+</tr>
+<tr class="even">
+<td align="left">Ano1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3542993</td>
+<td align="right">0.2835297</td>
+</tr>
+<tr class="odd">
+<td align="left">Peg3</td>
+<td align="right">2.4998823</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Usp29</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4742501</td>
+<td align="right">0.3795210</td>
+</tr>
+<tr class="odd">
+<td align="left">Magel2</td>
+<td align="right">9.1784929</td>
+<td align="right">0.0000000</td>
+<td align="right">7.9698988</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Gabrg3</td>
+<td align="right">0.7846475</td>
+<td align="right">0.0000000</td>
+<td align="right">0.1135546</td>
+<td align="right">0.4997995</td>
+</tr>
+<tr class="odd">
+<td align="left">Gabra5</td>
+<td align="right">0.0000000</td>
+<td align="right">2.2597429</td>
+<td align="right">1.0373653</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Gabrb3</td>
+<td align="right">0.5139526</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2231385</td>
+<td align="right">0.3571353</td>
+</tr>
+<tr class="odd">
+<td align="left">Ube3a</td>
+<td align="right">0.8870322</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3851153</td>
+<td align="right">1.2327618</td>
+</tr>
+<tr class="even">
+<td align="left">Snrpn</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6247685</td>
+<td align="right">0.3585104</td>
+<td align="right">0.1147599</td>
+</tr>
+<tr class="odd">
+<td align="left">Ampd3</td>
+<td align="right">1.7383028</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Kcnq1</td>
+<td align="right">0.3824217</td>
+<td align="right">0.7233546</td>
+<td align="right">0.1660328</td>
+<td align="right">0.2657371</td>
+</tr>
+<tr class="odd">
+<td align="left">Kcnq1ot1</td>
+<td align="right">0.7328538</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Ascl2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">21.7337150</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Nap1l4</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.1994441</td>
+</tr>
+<tr class="even">
+<td align="left">Tnfrsf23</td>
+<td align="right">3.0472999</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Tnfrsf26</td>
+<td align="right">3.0329408</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Osbpl5</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.8108684</td>
+</tr>
+<tr class="odd">
+<td align="left">Nctc1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">3.0371629</td>
+</tr>
+<tr class="even">
+<td align="left">Atp10a</td>
+<td align="right">0.7142312</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2481525</td>
+</tr>
+<tr class="odd">
+<td align="left">Inpp5f</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.3276273</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Trpm5</td>
+<td align="right">3.1519134</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Gab1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.4645885</td>
+</tr>
+<tr class="even">
+<td align="left">Snx14</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.8860123</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Ntm</td>
+<td align="right">0.2548036</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3063488</td>
+<td align="right">0.3949753</td>
+</tr>
+<tr class="even">
+<td align="left">Zc3h12c</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.8128695</td>
+</tr>
+<tr class="odd">
+<td align="left">Rasgrf1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.1357805</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Lin28b</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.5600906</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Plagl1</td>
+<td align="right">0.2289477</td>
+<td align="right">0.0000000</td>
+<td align="right">2.3856072</td>
+<td align="right">0.1590912</td>
+</tr>
+<tr class="even">
+<td align="left">Ctnna3</td>
+<td align="right">0.5258635</td>
+<td align="right">0.2688314</td>
+<td align="right">0.3949141</td>
+<td align="right">0.3456600</td>
+</tr>
+<tr class="odd">
+<td align="left">Ccdc40</td>
+<td align="right">1.7129964</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.7935513</td>
+</tr>
+<tr class="even">
+<td align="left">Ddc</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6277061</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Grb10</td>
+<td align="right">0.7403830</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6428918</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Commd1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6562044</td>
+<td align="right">1.0502616</td>
+</tr>
+<tr class="odd">
+<td align="left">Rian</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.5382967</td>
+</tr>
+<tr class="even">
+<td align="left">Mirg</td>
+<td align="right">0.0000000</td>
+<td align="right">12.7289949</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Begain</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.1790961</td>
+</tr>
+<tr class="even">
+<td align="left">Rb1</td>
+<td align="right">0.9386311</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3261180</td>
+</tr>
+<tr class="odd">
+<td align="left">Htr2a</td>
+<td align="right">0.9261909</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6435915</td>
+</tr>
+<tr class="even">
+<td align="left">Zfat</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3031965</td>
+<td align="right">0.2426345</td>
+</tr>
+<tr class="odd">
+<td align="left">Peg13</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">11.2371356</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Slc38a4</td>
+<td align="right">0.4116127</td>
+<td align="right">1.5571394</td>
+<td align="right">0.0000000</td>
+<td align="right">0.5720428</td>
+</tr>
+<tr class="odd">
+<td align="left">Slc22a3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2104151</td>
+<td align="right">0.9686407</td>
+</tr>
+<tr class="even">
+<td align="left">Slc22a2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.1985432</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Igf2r</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6081885</td>
+<td align="right">0.9734117</td>
+</tr>
+<tr class="even">
+<td align="left">Impact</td>
+<td align="right">2.9543953</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Glis3</td>
+<td align="right">0.5537225</td>
+<td align="right">1.1425875</td>
+<td align="right">0.5682301</td>
+<td align="right">0.4547290</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="lu2-jumpbarcode25mc" class="section level2">
 <h2>lu2-jumpbarcode2(5mC)</h2>
@@ -482,33 +2110,949 @@ paternal.gene=combine[combine$tp2.minus.RPKM&gt;0,]$Gene</code></pre>
 </tr>
 </tbody>
 </table>
+<div id="maternal-samples-1" class="section level3">
+<h3>Maternal samples</h3>
 <div class="figure">
 <img src="figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp2345_minus.png" alt="Whole genome reads distribution of minus strand-TP2345" />
 <p class="caption">Whole genome reads distribution of minus strand-TP2345</p>
 </div>
+<pre class="r"><code>kable(combine.fin, caption=&quot;RPKM of imprinting genes (at minus strand) from Maternal samples at different stages&quot;)</code></pre>
+<table>
+<caption>RPKM of imprinting genes (at minus strand) from Maternal samples at different stages</caption>
+<thead>
+<tr class="header">
+<th align="left">Gene</th>
+<th align="right">PN1</th>
+<th align="right">PN2</th>
+<th align="right">PN3</th>
+<th align="right">PN4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sfmbt2</td>
+<td align="right">1.2676945</td>
+<td align="right">0.4978873</td>
+<td align="right">0.6367538</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Wt1</td>
+<td align="right">0.0000000</td>
+<td align="right">1.5955271</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">L3mbtl</td>
+<td align="right">0.0000000</td>
+<td align="right">2.0884604</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Trp73</td>
+<td align="right">0.7700459</td>
+<td align="right">0.0000000</td>
+<td align="right">2.9009136</td>
+<td align="right">3.8082505</td>
+</tr>
+<tr class="odd">
+<td align="left">Magi2</td>
+<td align="right">0.6209194</td>
+<td align="right">0.5942959</td>
+<td align="right">0.1375956</td>
+<td align="right">0.7225289</td>
+</tr>
+<tr class="even">
+<td align="left">Ppp1r9a</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.6439908</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Asb4</td>
+<td align="right">0.0000000</td>
+<td align="right">1.5534553</td>
+<td align="right">0.0000000</td>
+<td align="right">4.5642355</td>
+</tr>
+<tr class="even">
+<td align="left">Sgce</td>
+<td align="right">0.0000000</td>
+<td align="right">1.0164643</td>
+<td align="right">0.0000000</td>
+<td align="right">2.9864923</td>
+</tr>
+<tr class="odd">
+<td align="left">Zim1</td>
+<td align="right">0.0000000</td>
+<td align="right">3.4129762</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Usp29</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4773677</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Gabrg3</td>
+<td align="right">0.2730704</td>
+<td align="right">0.3830302</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2250776</td>
+</tr>
+<tr class="even">
+<td align="left">Gabra5</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.0561710</td>
+</tr>
+<tr class="odd">
+<td align="left">Gabrb3</td>
+<td align="right">0.5365922</td>
+<td align="right">0.3010667</td>
+<td align="right">0.0000000</td>
+<td align="right">0.8845696</td>
+</tr>
+<tr class="even">
+<td align="left">Ube3a</td>
+<td align="right">1.8522120</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Snrpn</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3869724</td>
+<td align="right">0.8660812</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">H19</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">80.4902500</td>
+</tr>
+<tr class="odd">
+<td align="left">Igf2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">6.4084693</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Kcnq1</td>
+<td align="right">0.7985347</td>
+<td align="right">0.6720528</td>
+<td align="right">0.5013728</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Kcnq1ot1</td>
+<td align="right">1.5302720</td>
+<td align="right">1.7171847</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Tnfrsf26</td>
+<td align="right">6.3330840</td>
+<td align="right">0.0000000</td>
+<td align="right">7.9526558</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Atp10a</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4183873</td>
+<td align="right">0.9363907</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Inpp5f</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.3157510</td>
+</tr>
+<tr class="odd">
+<td align="left">Gab1</td>
+<td align="right">1.1002646</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.8137808</td>
+</tr>
+<tr class="even">
+<td align="left">Ntm</td>
+<td align="right">0.1227820</td>
+<td align="right">0.2755581</td>
+<td align="right">0.1541813</td>
+<td align="right">0.4048111</td>
+</tr>
+<tr class="odd">
+<td align="left">Zc3h12c</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">4.0267068</td>
+</tr>
+<tr class="even">
+<td align="left">Lin28b</td>
+<td align="right">0.0000000</td>
+<td align="right">0.7556949</td>
+<td align="right">0.0000000</td>
+<td align="right">2.9604282</td>
+</tr>
+<tr class="odd">
+<td align="left">Ctnna3</td>
+<td align="right">0.2967718</td>
+<td align="right">0.4162756</td>
+<td align="right">0.4844655</td>
+<td align="right">0.4403041</td>
+</tr>
+<tr class="even">
+<td align="left">Ccdc40</td>
+<td align="right">0.0000000</td>
+<td align="right">2.6758692</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Ddc</td>
+<td align="right">0.7547381</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Grb10</td>
+<td align="right">4.6379813</td>
+<td align="right">0.0000000</td>
+<td align="right">1.9413537</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Commd1</td>
+<td align="right">1.5780073</td>
+<td align="right">0.8853753</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Mirg</td>
+<td align="right">0.0000000</td>
+<td align="right">3.9420764</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Rb1</td>
+<td align="right">1.9599556</td>
+<td align="right">0.5498378</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Zfat</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4090839</td>
+<td align="right">0.9155688</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Slc38a4</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">4.3171484</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Slc22a3</td>
+<td align="right">2.9107455</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.3991748</td>
+</tr>
+<tr class="odd">
+<td align="left">Slc22a2</td>
+<td align="right">2.8821966</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Glis3</td>
+<td align="right">0.5255582</td>
+<td align="right">0.4718013</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3465520</td>
+</tr>
+</tbody>
+</table>
 <div class="figure">
 <img src="figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp2345_plus.png" alt="Whole genome reads distribution of plus strand-TP2345" />
 <p class="caption">Whole genome reads distribution of plus strand-TP2345</p>
 </div>
+<pre class="r"><code>kable(combine.fin, caption=&quot;RPKM of imprinting genes (at plus strand) from Maternal samples at different stages&quot;)</code></pre>
+<table>
+<caption>RPKM of imprinting genes (at plus strand) from Maternal samples at different stages</caption>
+<thead>
+<tr class="header">
+<th align="left">Gene</th>
+<th align="right">PN1</th>
+<th align="right">PN2</th>
+<th align="right">PN3</th>
+<th align="right">PN4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Zdbf2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">5.4231568</td>
+</tr>
+<tr class="even">
+<td align="left">Sfmbt2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2936799</td>
+<td align="right">0.7913744</td>
+<td align="right">0.6672435</td>
+</tr>
+<tr class="odd">
+<td align="left">H13</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">11.9032306</td>
+</tr>
+<tr class="even">
+<td align="left">Trp73</td>
+<td align="right">2.3841083</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Magi2</td>
+<td align="right">0.3015536</td>
+<td align="right">0.5923031</td>
+<td align="right">0.1824079</td>
+<td align="right">0.4485727</td>
+</tr>
+<tr class="even">
+<td align="left">Ppp1r9a</td>
+<td align="right">1.0133322</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Pon3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">12.6626158</td>
+</tr>
+<tr class="even">
+<td align="left">Sgce</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">3.1785002</td>
+</tr>
+<tr class="odd">
+<td align="left">Pon2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.0726991</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Copg2</td>
+<td align="right">1.0846311</td>
+<td align="right">0.0000000</td>
+<td align="right">0.8747825</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Dhcr7</td>
+<td align="right">5.2198410</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Ano1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.0637450</td>
+<td align="right">1.4948191</td>
+</tr>
+<tr class="odd">
+<td align="left">Gabrg3</td>
+<td align="right">0.4227212</td>
+<td align="right">0.3953796</td>
+<td align="right">0.3409354</td>
+<td align="right">0.2395483</td>
+</tr>
+<tr class="even">
+<td align="left">Gabrb3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9414404</td>
+</tr>
+<tr class="odd">
+<td align="left">Ube3a</td>
+<td align="right">0.0000000</td>
+<td align="right">1.0727297</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Kcnq1</td>
+<td align="right">0.8241038</td>
+<td align="right">0.9249610</td>
+<td align="right">0.9969909</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Nap1l4</td>
+<td align="right">0.0000000</td>
+<td align="right">4.1749490</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Atp10a</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.3083039</td>
+</tr>
+<tr class="odd">
+<td align="left">Gab1</td>
+<td align="right">1.1354951</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Ntm</td>
+<td align="right">0.6335675</td>
+<td align="right">0.4266637</td>
+<td align="right">0.4087906</td>
+<td align="right">0.3590311</td>
+</tr>
+<tr class="odd">
+<td align="left">Zc3h12c</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">4.2855923</td>
+</tr>
+<tr class="even">
+<td align="left">Rasgrf1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.5272817</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Lin28b</td>
+<td align="right">0.0000000</td>
+<td align="right">0.5200397</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Ctnna3</td>
+<td align="right">0.4900391</td>
+<td align="right">0.4296969</td>
+<td align="right">0.3334744</td>
+<td align="right">0.3124081</td>
+</tr>
+<tr class="odd">
+<td align="left">Ddc</td>
+<td align="right">3.1156193</td>
+<td align="right">0.8742304</td>
+<td align="right">0.0000000</td>
+<td align="right">3.9725193</td>
+</tr>
+<tr class="even">
+<td align="left">Commd1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9139210</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">AF357425</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">64.4460118</td>
+</tr>
+<tr class="even">
+<td align="left">Rian</td>
+<td align="right">0.0000000</td>
+<td align="right">1.4052516</td>
+<td align="right">0.0000000</td>
+<td align="right">4.2569933</td>
+</tr>
+<tr class="odd">
+<td align="left">Zfat</td>
+<td align="right">0.7524579</td>
+<td align="right">0.4222734</td>
+<td align="right">0.0000000</td>
+<td align="right">1.2792121</td>
+</tr>
+<tr class="even">
+<td align="left">Peg13</td>
+<td align="right">27.8877601</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Igf2r</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.5659997</td>
+</tr>
+<tr class="even">
+<td align="left">Glis3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.7913958</td>
+<td align="right">0.2624691</td>
+<td align="right">0.5532489</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="paternal-samples-1" class="section level3">
+<h3>Paternal samples</h3>
 <div class="figure">
 <img src="figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp78910_minus.png" alt="Whole genome reads distribution of minus strand-TP78910" />
 <p class="caption">Whole genome reads distribution of minus strand-TP78910</p>
 </div>
+<pre class="r"><code>kable(combine.fin, caption=&quot;RPKM of imprinting genes (at minus strand) from Maternal samples at different stages&quot;)</code></pre>
+<table>
+<caption>RPKM of imprinting genes (at minus strand) from Maternal samples at different stages</caption>
+<thead>
+<tr class="header">
+<th align="left">Gene</th>
+<th align="right">PN1</th>
+<th align="right">PN2</th>
+<th align="right">PN3</th>
+<th align="right">PN4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Zdbf2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">9.5423618</td>
+</tr>
+<tr class="even">
+<td align="left">Sfmbt2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">0.5218018</td>
+</tr>
+<tr class="odd">
+<td align="left">Gnas</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">3.1339753</td>
+</tr>
+<tr class="even">
+<td align="left">Trp73</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">17.464284</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Magi2</td>
+<td align="right">0.4568209</td>
+<td align="right">1.4388082</td>
+<td align="right">0.000000</td>
+<td align="right">0.0751705</td>
+</tr>
+<tr class="even">
+<td align="left">Ano1</td>
+<td align="right">0.0000000</td>
+<td align="right">6.1023068</td>
+<td align="right">6.440997</td>
+<td align="right">0.8767406</td>
+</tr>
+<tr class="odd">
+<td align="left">Peg3</td>
+<td align="right">13.0575134</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Gabrg3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4889546</td>
+<td align="right">0.000000</td>
+<td align="right">0.1404998</td>
+</tr>
+<tr class="odd">
+<td align="left">Gabrb3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">0.5521732</td>
+</tr>
+<tr class="even">
+<td align="left">Ube3a</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">1.9059945</td>
+</tr>
+<tr class="odd">
+<td align="left">Snrpn</td>
+<td align="right">3.0191822</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Ampd3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">2.4900981</td>
+</tr>
+<tr class="odd">
+<td align="left">Kcnq1</td>
+<td align="right">0.9987422</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">0.4108608</td>
+</tr>
+<tr class="even">
+<td align="left">Atp10a</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">5.637325</td>
+<td align="right">0.7673458</td>
+</tr>
+<tr class="odd">
+<td align="left">Snurf</td>
+<td align="right">14.0978494</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Ntm</td>
+<td align="right">0.4095087</td>
+<td align="right">3.0779156</td>
+<td align="right">1.856426</td>
+<td align="right">0.5053889</td>
+</tr>
+<tr class="odd">
+<td align="left">Lin28b</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">1.8479824</td>
+</tr>
+<tr class="even">
+<td align="left">Plagl1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">2.9516835</td>
+</tr>
+<tr class="odd">
+<td align="left">Dcn</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">1.7641761</td>
+</tr>
+<tr class="even">
+<td align="left">Ctnna3</td>
+<td align="right">0.2227068</td>
+<td align="right">0.4251150</td>
+<td align="right">0.000000</td>
+<td align="right">0.1832335</td>
+</tr>
+<tr class="odd">
+<td align="left">Rb1</td>
+<td align="right">4.9027059</td>
+<td align="right">3.5094587</td>
+<td align="right">0.000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Htr2a</td>
+<td align="right">0.0000000</td>
+<td align="right">6.9258917</td>
+<td align="right">0.000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Slc38a4</td>
+<td align="right">10.7497821</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Glis3</td>
+<td align="right">0.7887905</td>
+<td align="right">0.0000000</td>
+<td align="right">0.000000</td>
+<td align="right">1.5142925</td>
+</tr>
+</tbody>
+</table>
 <div class="figure">
-<img src="figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp2345_plus.png" alt="Whole genome reads distribution of plus strand-TP2345" />
+<img src="figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp78910_plus.png" alt="Whole genome reads distribution of plus strand-TP2345" />
 <p class="caption">Whole genome reads distribution of plus strand-TP2345</p>
 </div>
-<pre class="r"><code>imprinting.gene=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\MouseGenome\\imprinting_genes.txt&quot;, header=T)
-reads.gene.tp2.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
-reads.gene.tp3.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP03.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
-reads.gene.tp4.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP04.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
-reads.gene.tp5.minus=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PGC\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP05.bam.minus.cove.base.level.shiftonebase.txt&quot;, header=T)
-imprinting.gene.reads.tp2.minus=reads.gene.tp2.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp2.minus$Gene),]
-imprinting.gene.reads.tp3.minus=reads.gene.tp3.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp3.minus$Gene),]
-imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp4.minus$Gene),]
-imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
-combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
-colnames(combine)[4:7]=c(&quot;tp2.minus.RPKM&quot;, &quot;tp3.minus.RPKM&quot;, &quot;tp4.minus.RPKM&quot;, &quot;tp5.minus.RPKM&quot;)</code></pre>
+<pre class="r"><code>kable(combine.fin, caption=&quot;RPKM of imprinting genes (at plus strand) from Maternal samples at different stages&quot;)</code></pre>
+<table>
+<caption>RPKM of imprinting genes (at plus strand) from Maternal samples at different stages</caption>
+<thead>
+<tr class="header">
+<th align="left">Gene</th>
+<th align="right">PN1</th>
+<th align="right">PN2</th>
+<th align="right">PN3</th>
+<th align="right">PN4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sfmbt2</td>
+<td align="right">0.0000000</td>
+<td align="right">1.8167582</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Wt1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">3.1088725</td>
+</tr>
+<tr class="odd">
+<td align="left">Magi2</td>
+<td align="right">0.8217527</td>
+<td align="right">0.5234423</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4791646</td>
+</tr>
+<tr class="even">
+<td align="left">Ppp1r9a</td>
+<td align="right">1.2272866</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Pon1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">5.3984152</td>
+</tr>
+<tr class="even">
+<td align="left">Peg10</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">8.2259899</td>
+</tr>
+<tr class="odd">
+<td align="left">Asb4</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">3.0268960</td>
+</tr>
+<tr class="even">
+<td align="left">Usp29</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.8311955</td>
+</tr>
+<tr class="odd">
+<td align="left">Gabrg3</td>
+<td align="right">0.0000000</td>
+<td align="right">1.9567131</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2985326</td>
+</tr>
+<tr class="even">
+<td align="left">Gabrb3</td>
+<td align="right">4.0241845</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.1732524</td>
+</tr>
+<tr class="odd">
+<td align="left">Ube3a</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">32.2367207</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Snrpn</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.1885032</td>
+</tr>
+<tr class="odd">
+<td align="left">Kcnq1</td>
+<td align="right">0.0000000</td>
+<td align="right">1.4304949</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Ascl2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">57.1374634</td>
+</tr>
+<tr class="odd">
+<td align="left">Tnfrsf23</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">6.9563851</td>
+</tr>
+<tr class="even">
+<td align="left">Atp10a</td>
+<td align="right">0.0000000</td>
+<td align="right">5.3433382</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Gab1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">9.5747472</td>
+<td align="right">2.4057154</td>
+</tr>
+<tr class="even">
+<td align="left">Ntm</td>
+<td align="right">0.0000000</td>
+<td align="right">0.4399034</td>
+<td align="right">0.0000000</td>
+<td align="right">0.7158971</td>
+</tr>
+<tr class="odd">
+<td align="left">Zc3h12c</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.6704193</td>
+</tr>
+<tr class="even">
+<td align="left">Rasgrf1</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.9953140</td>
+</tr>
+<tr class="odd">
+<td align="left">Lin28b</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.9632879</td>
+</tr>
+<tr class="even">
+<td align="left">Ctnna3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.3189821</td>
+<td align="right">0.7747722</td>
+<td align="right">0.5191103</td>
+</tr>
+<tr class="odd">
+<td align="left">Rb1</td>
+<td align="right">2.4497881</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Htr2a</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">2.1143112</td>
+</tr>
+<tr class="odd">
+<td align="left">Zfat</td>
+<td align="right">1.8226628</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Slc22a3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">1.5910775</td>
+</tr>
+<tr class="odd">
+<td align="left">Slc22a2</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">3.1509441</td>
+</tr>
+<tr class="even">
+<td align="left">Glis3</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">5.4882287</td>
+<td align="right">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="lu1-jumpbarcode3" class="section level2">
+<h2>lu1-jumpbarcode3</h2>
+<div class="figure">
+<img src="figure/lu1_jumpbarcode3/lu1_jumpbarcode3tp4.png" alt="Whole genome reads distribution of TP4" />
+<p class="caption">Whole genome reads distribution of TP4</p>
+</div>
 <!-- Insert the session information into the document -->
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 3.2.2 (2015-08-14)
@@ -525,10 +3069,13 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+[1] knitr_1.15.1
+
 loaded via a namespace (and not attached):
  [1] backports_1.0.5 magrittr_1.5    rprojroot_1.2   tools_3.2.2    
  [5] htmltools_0.3.5 yaml_2.1.14     Rcpp_0.12.1     stringi_0.5-5  
- [9] rmarkdown_1.3   knitr_1.15.1    git2r_0.18.0    stringr_1.2.0  
+ [9] rmarkdown_1.3   highr_0.5.1     git2r_0.18.0    stringr_1.2.0  
 [13] digest_0.6.8    evaluate_0.10  </code></pre>
 </div>
 
