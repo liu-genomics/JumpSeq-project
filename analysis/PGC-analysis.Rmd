@@ -34,6 +34,7 @@ download from UCSC table brower. choose ucsc gene and use default setting.
 The output bed file is like 
 
 ```{r, echo=T, eval=F}
+        start    end     UCSC Transcript ID
 chr1    3195984 3205713 uc007aet.1      0       -       3195984 3195984 0       2       1414,2194,      0,7535,
 chr1    3204562 3661579 uc007aeu.1      0       -       3206102 3661429 0       3       2487,200,947,   0,207220,
 456070,
@@ -53,7 +54,7 @@ uc011wht.1      Tcea1
 uc011whu.1      Tcea1
 ...
 ```
-So each gene symbol may have multiple UC gene names, but only use one. 
+So each gene symbol may have multiple UCSC gene transcript, but only use one. 
 
 
 

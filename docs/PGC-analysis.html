@@ -312,15 +312,16 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-10-10</p>
+<p><strong>Last updated:</strong> 2017-10-11</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 98d3da9</p>
+<p><strong>Code version:</strong> fb35a4e</p>
 <!-- Add your analysis here -->
 <div id="mouse-genome-mm9" class="section level2">
 <h2>mouse genome (mm9)</h2>
 <p>download from UCSC table brower. choose ucsc gene and use default setting. The output bed file is like</p>
-<pre class="r"><code>chr1    3195984 3205713 uc007aet.1      0       -       3195984 3195984 0       2       1414,2194,      0,7535,
+<pre class="r"><code>        start    end     UCSC Transcript ID
+chr1    3195984 3205713 uc007aet.1      0       -       3195984 3195984 0       2       1414,2194,      0,7535,
 chr1    3204562 3661579 uc007aeu.1      0       -       3206102 3661429 0       3       2487,200,947,   0,207220,
 456070,
 chr1    3638391 3648985 uc007aev.1      0       -       3638391 3638391 0       2       2199,58,        0,10536,
@@ -332,7 +333,7 @@ uc007afi.2      Tcea1
 uc011wht.1      Tcea1
 uc011whu.1      Tcea1
 ...</code></pre>
-<p>So each gene symbol may have multiple UC gene names, but only use one.</p>
+<p>So each gene symbol may have multiple UCSC gene transcript, but only use one.</p>
 </div>
 <div id="lu1-jumpbarcode15hmc" class="section level2">
 <h2>lu1-jumpbarcode1(5hmC)</h2>
