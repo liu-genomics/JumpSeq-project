@@ -7,9 +7,10 @@ output: html_document
 
 <!-- The file analysis/chunks.R contains chunks that define default settings
 shared across the workflowr files. -->
-```{r read-chunk, include=FALSE, cache=FALSE}
+```{r read-chunk, include=FALSE}
 knitr::read_chunk("chunks.R")
 library(knitr)
+set.seed(123)
 ```
 
 <!-- Update knitr chunk options -->
@@ -26,6 +27,37 @@ library(knitr)
 ```
 
 <!-- Add your analysis here -->
+
+## mouse genome (mm9)
+
+download from UCSC table brower. choose ucsc gene and use default setting. 
+The output bed file is like 
+
+```{r, echo=T, eval=F}
+chr1    3195984 3205713 uc007aet.1      0       -       3195984 3195984 0       2       1414,2194,      0,7535,
+chr1    3204562 3661579 uc007aeu.1      0       -       3206102 3661429 0       3       2487,200,947,   0,207220,
+456070,
+chr1    3638391 3648985 uc007aev.1      0       -       3638391 3638391 0       2       2199,58,        0,10536,
+....
+```
+
+Use the first 3 columns as coordinate for the genes in the fourth column. Get the gene id conversion file following [here][here]
+
+[here]:http://genomewiki.ucsc.edu/index.php/Gene_id_conversion. 
+
+```{r, echo=T, eval=F}
+uc007afh.1      Lypla1
+uc007afg.1      Lypla1
+uc007afi.2      Tcea1
+uc011wht.1      Tcea1
+uc011whu.1      Tcea1
+...
+```
+So each gene symbol may have multiple UC gene names, but only use one. 
+
+
+
+
 
 ## lu1-jumpbarcode1(5hmC)
 
@@ -55,6 +87,14 @@ Table: reads in every transposase bacode sample
 * To use IGV, I created 21 bp window by extending 10 bp updtream and 10 bp downstream at every reads location. 
 
 
+####  mouse imprinting genes 
+
+150 imprinted genes are downloaded from this [site][printed].
+
+
+[printed]:http://www.geneimprint.com/site/genes-by-species.Mus+musculus
+
+
 ```{r,  echo=F}
 imprinting.gene=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\MouseGenome\\imprinting_genes.txt", header=T)
 reads.gene.tp2=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.plus.cove.base.level.shiftonebase.txt", header=T)
@@ -65,9 +105,9 @@ imprinting.gene.reads.tp2.minus=reads.gene.tp2[match(as.character(imprinting.gen
 imprinting.gene.reads.tp3.minus=reads.gene.tp3[match(as.character(imprinting.gene$Gene), reads.gene.tp3$Gene),]
 imprinting.gene.reads.tp4.minus=reads.gene.tp4[match(as.character(imprinting.gene$Gene), reads.gene.tp4$Gene),]
 imprinting.gene.reads.tp5.minus=reads.gene.tp5[match(as.character(imprinting.gene$Gene), reads.gene.tp5$Gene),]
-combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
-colnames(combine)[4:7]=c("PN1", "PN2", "PN3", "PN4")
-combine=combine[,-c(2,3)]
+combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
+combine=combine[,-c(3,4)]
+colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
 combine.nona=combine[complete.cases(combine), ]
 zero.index=intersect(intersect(intersect(which(combine.nona$PN1==0), which(combine.nona$PN2==0)), which(combine.nona$PN3==0)), which(combine.nona$PN4==0))
 combine.fin=combine.nona[-c(zero.index),]
@@ -75,8 +115,42 @@ rownames(combine.fin)=NULL
 ```
 
 ```{r, echo=T}
-kable(combine.fin, caption="RPKM of imprinting genes (at plus strand) from maternal samples at different stages")
+kable(combine.fin, caption="Number of reads of imprinting genes (at plus strand) from maternal samples at different stages")
 ```
+
+```{r, echo=F}
+clust=kmeans(combine.fin[,2:5],3)
+means=clust$centers
+max.vau=max(means)
+plot(means[1,], ylim=c(0,max.vau), type="o", col=1, xaxt='n', ylab="No.reads", xlab="")
+lines(means[2,], col=2, type="o")
+lines(means[3,], col=3, type="o")
+legend(1, (max.vau-1), c("clust 1", "clust 2", "clust 3"), col=c(1,2,3), lty=c(1,1,1))
+axis.labels <-c("PN1", "PN2", "PN3", "PN4")
+axis(1, at=seq(1,4), labels=axis.labels)
+```
+
+* use Kmeans to cluster genes with number of clusters fixed at 3. 
+
+* genes in cluster1 
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==1)])
+```
+
+* genes in cluster 2
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==2)])
+```
+
+* genes in cluster 3
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==3)])
+```
+
+
 
 
 ![Whole genome reads distribution of minus strand-TP2345 ](figure/lu1_jumpbarcode1/lu1_jumpbarcode1_tp2345_minus.png)
@@ -91,9 +165,11 @@ imprinting.gene.reads.tp2.minus=reads.gene.tp2.minus[match(as.character(imprinti
 imprinting.gene.reads.tp3.minus=reads.gene.tp3.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp3.minus$Gene),]
 imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp4.minus$Gene),]
 imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
-combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
-colnames(combine)[4:7]=c("PN1", "PN2", "PN3", "PN4")
-combine=combine[,-c(2,3)]
+
+combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
+combine=combine[,-c(3,4)]
+colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
+
 combine.nona=combine[complete.cases(combine), ]
 zero.index=intersect(intersect(intersect(which(combine.nona$PN1==0), which(combine.nona$PN2==0)), which(combine.nona$PN3==0)), which(combine.nona$PN4==0))
 combine.fin=combine.nona[-c(zero.index),]
@@ -101,8 +177,39 @@ rownames(combine.fin)=NULL
 ```
 
 ```{r, echo=T}
-kable(combine.fin, caption="RPKM of imprinting genes (at minus strand) from maternal samples at different stages")
+kable(combine.fin, caption="Number of reads of imprinting genes (at minus strand) from maternal samples at different stages")
 ```
+
+```{r, echo=F}
+clust=kmeans(combine.fin[,2:5],3)
+means=clust$centers
+max.vau=max(means)
+plot(means[1,], ylim=c(0,max.vau), type="o", col=1, xaxt='n', ylab="No.reads", xlab="")
+lines(means[2,], col=2, type="o")
+lines(means[3,], col=3, type="o")
+legend(1, (max.vau-1), c("clust 1", "clust 2", "clust 3"), col=c(1,2,3), lty=c(1,1,1))
+axis.labels <-c("PN1", "PN2", "PN3", "PN4")
+axis(1, at=seq(1,4), labels=axis.labels)
+```
+
+* genes in cluster1 
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==1)])
+```
+
+* genes in cluster 2
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==2)])
+```
+
+* genes in cluster 3
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==3)])
+```
+
 
 
 
@@ -120,9 +227,11 @@ imprinting.gene.reads.tp2.minus=reads.gene.tp2.minus[match(as.character(imprinti
 imprinting.gene.reads.tp3.minus=reads.gene.tp3.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp3.minus$Gene),]
 imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp4.minus$Gene),]
 imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
-combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
-colnames(combine)[4:7]=c("PN1", "PN2", "PN3", "PN4")
-combine=combine[,-c(2,3)]
+
+combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
+combine=combine[,-c(3,4)]
+colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
+
 combine.nona=combine[complete.cases(combine), ]
 zero.index=intersect(intersect(intersect(which(combine.nona$PN1==0), which(combine.nona$PN2==0)), which(combine.nona$PN3==0)), which(combine.nona$PN4==0))
 combine.fin=combine.nona[-c(zero.index),]
@@ -130,8 +239,40 @@ rownames(combine.fin)=NULL
 ```
 
 ```{r, echo=T}
-kable(combine.fin, caption="RPKM of imprinting genes (at plus strand) from paternal samples at different stages")
+kable(combine.fin, caption="Number of reads of imprinting genes (at plus strand) from paternal samples at different stages")
 ```
+
+```{r, echo=F}
+clust=kmeans(combine.fin[,2:5],3)
+means=clust$centers
+max.vau=max(means)
+plot(means[1,], ylim=c(0,max.vau), type="o", col=1, xaxt='n', ylab="No.reads", xlab="")
+lines(means[2,], col=2, type="o")
+lines(means[3,], col=3, type="o")
+legend(1, (max.vau-1), c("clust 1", "clust 2", "clust 3"), col=c(1,2,3), lty=c(1,1,1))
+axis.labels <-c("PN1", "PN2", "PN3", "PN4")
+axis(1, at=seq(1,4), labels=axis.labels)
+```
+
+* genes in cluster1 
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==1)])
+```
+
+* genes in cluster 2
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==2)])
+```
+
+* genes in cluster 3
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==3)])
+```
+
+
 
 
 
@@ -148,9 +289,12 @@ imprinting.gene.reads.tp2.minus=reads.gene.tp2.minus[match(as.character(imprinti
 imprinting.gene.reads.tp3.minus=reads.gene.tp3.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp3.minus$Gene),]
 imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp4.minus$Gene),]
 imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
-combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
-colnames(combine)[4:7]=c("PN1", "PN2", "PN3", "PN4")
-combine=combine[,-c(2,3)]
+
+
+combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
+combine=combine[,-c(3,4)]
+colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
+
 combine.nona=combine[complete.cases(combine), ]
 zero.index=intersect(intersect(intersect(which(combine.nona$PN1==0), which(combine.nona$PN2==0)), which(combine.nona$PN3==0)), which(combine.nona$PN4==0))
 combine.fin=combine.nona[-c(zero.index),]
@@ -158,7 +302,37 @@ rownames(combine.fin)=NULL
 ```
 
 ```{r, echo=T}
-kable(combine.fin, caption="RPKM of imprinting genes (at minus strand) from paternal samples at different stages")
+kable(combine.fin, caption="Number of reads of imprinting genes (at minus strand) from paternal samples at different stages")
+```
+
+```{r, echo=F}
+clust=kmeans(combine.fin[,2:5],3)
+means=clust$centers
+max.vau=max(means)
+plot(means[1,], ylim=c(0,max.vau), type="o", col=1, xaxt='n', ylab="No.reads", xlab="")
+lines(means[2,], col=2, type="o")
+lines(means[3,], col=3, type="o")
+legend(1, (max.vau-1), c("clust 1", "clust 2", "clust 3"), col=c(1,2,3), lty=c(1,1,1))
+axis.labels <-c("PN1", "PN2", "PN3", "PN4")
+axis(1, at=seq(1,4), labels=axis.labels)
+```
+
+* genes in cluster1 
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==1)])
+```
+
+* genes in cluster 2
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==2)])
+```
+
+* genes in cluster 3
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==3)])
 ```
 
 
@@ -196,6 +370,14 @@ Table: reads in every transposase bacode sample
 
 ![Whole genome reads distribution of minus strand-TP2345 ](figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp2345_minus.png)
 
+
+
+#### imprinting genes 
+
+
+
+
+
 ```{r,  echo=F}
 imprinting.gene=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\MouseGenome\\imprinting_genes.txt", header=T)
 reads.gene.tp2.minus=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.minus.cove.base.level.shiftonebase.txt", header=T)
@@ -206,9 +388,11 @@ imprinting.gene.reads.tp2.minus=reads.gene.tp2.minus[match(as.character(imprinti
 imprinting.gene.reads.tp3.minus=reads.gene.tp3.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp3.minus$Gene),]
 imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp4.minus$Gene),]
 imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
-combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
-colnames(combine)[4:7]=c("PN1", "PN2", "PN3", "PN4")
-combine=combine[,-c(2,3)]
+
+combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
+combine=combine[,-c(3,4)]
+colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
+
 combine.nona=combine[complete.cases(combine), ]
 zero.index=intersect(intersect(intersect(which(combine.nona$PN1==0), which(combine.nona$PN2==0)), which(combine.nona$PN3==0)), which(combine.nona$PN4==0))
 combine.fin=combine.nona[-c(zero.index),]
@@ -216,9 +400,38 @@ rownames(combine.fin)=NULL
 ```
 
 ```{r, echo=T}
-kable(combine.fin, caption="RPKM of imprinting genes (at minus strand) from Maternal samples at different stages")
+kable(combine.fin, caption="Number of reads of 38 imprinting genes (at minus strand) from Maternal samples at different stages")
 ```
 
+```{r, echo=F}
+clust=kmeans(combine.fin[,2:5],3)
+means=clust$centers
+max.vau=max(means)
+plot(means[1,], ylim=c(0,max.vau), type="o", col=1, xaxt='n', ylab="No.reads", xlab="")
+lines(means[2,], col=2, type="o")
+lines(means[3,], col=3, type="o")
+legend(3, 8, c("clust 1", "clust 2", "clust 3"), col=c(1,2,3), lty=c(1,1,1))
+axis.labels <-c("PN1", "PN2", "PN3", "PN4")
+axis(1, at=seq(1,4), labels=axis.labels)
+```
+
+* genes in cluster1 
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==1)])
+```
+
+* genes in cluster 2
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==2)])
+```
+
+* genes in cluster 3
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==3)])
+```
 
 
 
@@ -236,9 +449,12 @@ imprinting.gene.reads.tp2.minus=reads.gene.tp2.minus[match(as.character(imprinti
 imprinting.gene.reads.tp3.minus=reads.gene.tp3.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp3.minus$Gene),]
 imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp4.minus$Gene),]
 imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
-combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
-colnames(combine)[4:7]=c("PN1", "PN2", "PN3", "PN4")
-combine=combine[,-c(2,3)]
+
+
+combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
+combine=combine[,-c(3,4)]
+colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
+
 combine.nona=combine[complete.cases(combine), ]
 zero.index=intersect(intersect(intersect(which(combine.nona$PN1==0), which(combine.nona$PN2==0)), which(combine.nona$PN3==0)), which(combine.nona$PN4==0))
 combine.fin=combine.nona[-c(zero.index),]
@@ -246,8 +462,42 @@ rownames(combine.fin)=NULL
 ```
 
 ```{r, echo=T}
-kable(combine.fin, caption="RPKM of imprinting genes (at plus strand) from Maternal samples at different stages")
+kable(combine.fin, caption="Number of reads of imprinting genes (at plus strand) from Maternal samples at different stages")
 ```
+
+
+
+```{r, echo=F}
+clust=kmeans(combine.fin[,2:5],3)
+means=clust$centers
+max.vau=max(means)
+plot(means[1,], ylim=c(0,max.vau), type="o", col=1, xaxt='n', ylab="No.reads", xlab="")
+lines(means[2,], col=2, type="o")
+lines(means[3,], col=3, type="o")
+legend(3, 8, c("clust 1", "clust 2", "clust 3"), col=c(1,2,3), lty=c(1,1,1))
+axis.labels <-c("PN1", "PN2", "PN3", "PN4")
+axis(1, at=seq(1,4), labels=axis.labels)
+```
+
+* genes in cluster1 
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==1)])
+```
+
+* genes in cluster 2
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==2)])
+```
+
+* genes in cluster 3
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==3)])
+```
+
+
 
 ### Paternal samples 
 
@@ -263,9 +513,11 @@ imprinting.gene.reads.tp2.minus=reads.gene.tp2.minus[match(as.character(imprinti
 imprinting.gene.reads.tp3.minus=reads.gene.tp3.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp3.minus$Gene),]
 imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp4.minus$Gene),]
 imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
-combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
-colnames(combine)[4:7]=c("PN1", "PN2", "PN3", "PN4")
-combine=combine[,-c(2,3)]
+
+combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
+combine=combine[,-c(3,4)]
+colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
+
 combine.nona=combine[complete.cases(combine), ]
 zero.index=intersect(intersect(intersect(which(combine.nona$PN1==0), which(combine.nona$PN2==0)), which(combine.nona$PN3==0)), which(combine.nona$PN4==0))
 combine.fin=combine.nona[-c(zero.index),]
@@ -273,7 +525,39 @@ rownames(combine.fin)=NULL
 ```
 
 ```{r, echo=T}
-kable(combine.fin, caption="RPKM of imprinting genes (at minus strand) from Maternal samples at different stages")
+kable(combine.fin, caption="Number of reads of imprinting genes (at minus strand) from Maternal samples at different stages")
+```
+
+
+
+```{r, echo=F}
+clust=kmeans(combine.fin[,2:5],3)
+means=clust$centers
+max.vau=max(means)
+plot(means[1,], ylim=c(0,max.vau), type="o", col=1, xaxt='n', ylab="No.reads", xlab="")
+lines(means[2,], col=2, type="o")
+lines(means[3,], col=3, type="o")
+legend(1, 5, c("clust 1", "clust 2", "clust 3"), col=c(1,2,3), lty=c(1,1,1))
+axis.labels <-c("PN1", "PN2", "PN3", "PN4")
+axis(1, at=seq(1,4), labels=axis.labels)
+```
+
+* genes in cluster1 
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==1)])
+```
+
+* genes in cluster 2
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==2)])
+```
+
+* genes in cluster 3
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==3)])
 ```
 
 
@@ -289,9 +573,11 @@ imprinting.gene.reads.tp2.minus=reads.gene.tp2.minus[match(as.character(imprinti
 imprinting.gene.reads.tp3.minus=reads.gene.tp3.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp3.minus$Gene),]
 imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp4.minus$Gene),]
 imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
-combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$RPKM, imprinting.gene.reads.tp4.minus$RPKM, imprinting.gene.reads.tp5.minus$RPKM)
-colnames(combine)[4:7]=c("PN1", "PN2", "PN3", "PN4")
-combine=combine[,-c(2,3)]
+
+combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
+combine=combine[,-c(3,4)]
+colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
+
 combine.nona=combine[complete.cases(combine), ]
 zero.index=intersect(intersect(intersect(which(combine.nona$PN1==0), which(combine.nona$PN2==0)), which(combine.nona$PN3==0)), which(combine.nona$PN4==0))
 combine.fin=combine.nona[-c(zero.index),]
@@ -299,9 +585,40 @@ rownames(combine.fin)=NULL
 ```
 
 ```{r, echo=T}
-kable(combine.fin, caption="RPKM of imprinting genes (at plus strand) from Maternal samples at different stages")
+kable(combine.fin, caption="Number of reads  of imprinting genes (at plus strand) from Maternal samples at different stages")
 ```
 
+
+
+```{r, echo=F}
+clust=kmeans(combine.fin[,2:5],3)
+means=clust$centers
+max.vau=max(means)
+plot(means[1,], ylim=c(0,max.vau), type="o", col=1, xaxt='n', ylab="No.reads", xlab="")
+lines(means[2,], col=2, type="o")
+lines(means[3,], col=3, type="o")
+legend(1, (max.vau-1), c("clust 1", "clust 2", "clust 3"), col=c(1,2,3), lty=c(1,1,1))
+axis.labels <-c("PN1", "PN2", "PN3", "PN4")
+axis(1, at=seq(1,4), labels=axis.labels)
+```
+
+* genes in cluster1 
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==1)])
+```
+
+* genes in cluster 2
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==2)])
+```
+
+* genes in cluster 3
+
+```{r, echo=F}
+as.character(combine.fin$Gene[which(clust$cluster==3)])
+```
 
 
 ## lu1-jumpbarcode3
