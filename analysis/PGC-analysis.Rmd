@@ -10,6 +10,8 @@ shared across the workflowr files. -->
 ```{r read-chunk, include=FALSE}
 knitr::read_chunk("chunks.R")
 library(knitr)
+library(RColorBrewer)
+library(gplots)
 set.seed(123)
 ```
 
@@ -107,7 +109,7 @@ imprinting.gene.reads.tp3.minus=reads.gene.tp3[match(as.character(imprinting.gen
 imprinting.gene.reads.tp4.minus=reads.gene.tp4[match(as.character(imprinting.gene$Gene), reads.gene.tp4$Gene),]
 imprinting.gene.reads.tp5.minus=reads.gene.tp5[match(as.character(imprinting.gene$Gene), reads.gene.tp5$Gene),]
 combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
-combine=combine[,-c(3,4)]
+combine=combine[,-3]
 colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
 combine.nona=combine[complete.cases(combine), ]
 zero.index=intersect(intersect(intersect(which(combine.nona$PN1==0), which(combine.nona$PN2==0)), which(combine.nona$PN3==0)), which(combine.nona$PN4==0))
@@ -168,7 +170,7 @@ imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinti
 imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
 
 combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
-combine=combine[,-c(3,4)]
+combine=combine[,-3]
 colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
 
 combine.nona=combine[complete.cases(combine), ]
@@ -230,7 +232,7 @@ imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinti
 imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
 
 combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
-combine=combine[,-c(3,4)]
+combine=combine[,-3]
 colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
 
 combine.nona=combine[complete.cases(combine), ]
@@ -293,7 +295,7 @@ imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinti
 
 
 combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
-combine=combine[,-c(3,4)]
+combine=combine[,-3]
 colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
 
 combine.nona=combine[complete.cases(combine), ]
@@ -337,6 +339,49 @@ as.character(combine.fin$Gene[which(clust$cluster==3)])
 ```
 
 
+### important regions
+
+
+```{r, echo=F, warning=FALSE}
+hmc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\important.region.reads.summary.txt", header=T)
+pa.hmc=hmc[c(14,16,18,20),]; ma.hmc=hmc[c(4,6,8,10),]
+rownames(pa.hmc)=c("PN1", "PN2", "PN3", "PN4")
+colnames(pa.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+rownames(ma.hmc)=c("PN1", "PN2", "PN3", "PN4")
+colnames(ma.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+
+heatcol <- brewer.pal(9, "Reds")
+scale.pa.hmc=scale(as.matrix(pa.hmc))
+scale.ma.hmc=scale(as.matrix(ma.hmc))
+
+heatmap.2(scale.pa.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC (plus strand)", cexCol=0.8)
+
+
+heatmap.2(scale.ma.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC  (plus strand)", cexCol=0.8)
+
+```
+
+
+
+
+```{r, echo=F, warning=FALSE}
+hmc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\important.region.reads.summary.txt", header=T)
+pa.hmc=hmc[c(13,15,17,19),]; ma.hmc=hmc[c(3,5,7,9),]
+rownames(pa.hmc)=c("PN1", "PN2", "PN3", "PN4")
+colnames(pa.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+rownames(ma.hmc)=c("PN1", "PN2", "PN3", "PN4")
+colnames(ma.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+
+heatcol <- brewer.pal(9, "Reds")
+scale.pa.hmc=scale(as.matrix(pa.hmc))
+scale.ma.hmc=scale(as.matrix(ma.hmc))
+
+heatmap.2(scale.pa.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC (minus strand)", cexCol=0.8)
+
+
+heatmap.2(scale.ma.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC  (minus strand)", cexCol=0.8)
+
+```
 
 
 
@@ -345,9 +390,8 @@ as.character(combine.fin$Gene[which(clust$cluster==3)])
 
 
 
-
-
-
+#############################################################
+#############################################################
 
 
 ## lu2-jumpbarcode2(5mC)
@@ -366,10 +410,11 @@ Transposase barcode  | total unique reads | plus reads / minus reads
 10| 14,692 | 7,361/7,331
 Table: reads in every transposase bacode sample 
 
-
+#####################################################
 ### Maternal samples 
 
 ![Whole genome reads distribution of minus strand-TP2345 ](figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp2345_minus.png)
+
 
 
 
@@ -391,7 +436,7 @@ imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinti
 imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
 
 combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
-combine=combine[,-c(3,4)]
+combine=combine[,-3]
 colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
 
 combine.nona=combine[complete.cases(combine), ]
@@ -453,7 +498,7 @@ imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinti
 
 
 combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
-combine=combine[,-c(3,4)]
+combine=combine[,-3]
 colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
 
 combine.nona=combine[complete.cases(combine), ]
@@ -498,7 +543,7 @@ as.character(combine.fin$Gene[which(clust$cluster==2)])
 as.character(combine.fin$Gene[which(clust$cluster==3)])
 ```
 
-
+######################################################
 
 ### Paternal samples 
 
@@ -516,7 +561,7 @@ imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinti
 imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
 
 combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
-combine=combine[,-c(3,4)]
+combine=combine[,-3]
 colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
 
 combine.nona=combine[complete.cases(combine), ]
@@ -576,7 +621,7 @@ imprinting.gene.reads.tp4.minus=reads.gene.tp4.minus[match(as.character(imprinti
 imprinting.gene.reads.tp5.minus=reads.gene.tp5.minus[match(as.character(imprinting.gene$Gene), reads.gene.tp5.minus$Gene),]
 
 combine=cbind(imprinting.gene.reads.tp2.minus, imprinting.gene.reads.tp3.minus$No.reads, imprinting.gene.reads.tp4.minus$No.reads, imprinting.gene.reads.tp5.minus$No.reads)
-combine=combine[,-c(3,4)]
+combine=combine[,-3]
 colnames(combine)[2:5]=c("PN1", "PN2", "PN3", "PN4")
 
 combine.nona=combine[complete.cases(combine), ]
@@ -622,10 +667,80 @@ as.character(combine.fin$Gene[which(clust$cluster==3)])
 ```
 
 
+### important regions
+
+
+```{r, echo=F, warning=FALSE}
+mc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\important.region.reads.summary.txt", header=T)
+pa.mc=mc[c(14,16,18,20),]; ma.mc=mc[c(4,6,8,10),]
+rownames(pa.mc)=c("PN1", "PN2", "PN3", "PN4")
+colnames(pa.mc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+rownames(ma.mc)=c("PN1", "PN2", "PN3", "PN4")
+colnames(ma.mc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+
+heatcol <- brewer.pal(9, "Reds")
+scale.pa.mc=scale(as.matrix(pa.mc))
+scale.ma.mc=scale(as.matrix(ma.mc))
+
+heatmap.2(scale.pa.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5mC (plus strand)", cexCol=0.7)
+
+
+heatmap.2(scale.ma.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5mC  (plus strand)", cexCol=0.7)
+
+```
+
+
+
+
+```{r, echo=F, warning=FALSE}
+mc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\important.region.reads.summary.txt", header=T)
+pa.mc=mc[c(13,15,17,19),]; ma.mc=mc[c(3,5,7,9),]
+rownames(pa.mc)=c("PN1", "PN2", "PN3", "PN4")
+colnames(pa.mc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+rownames(ma.mc)=c("PN1", "PN2", "PN3", "PN4")
+colnames(ma.mc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+
+heatcol <- brewer.pal(9, "Reds")
+scale.pa.mc=scale(as.matrix(pa.mc))
+scale.ma.mc=scale(as.matrix(ma.mc))
+
+heatmap.2(scale.pa.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5mC (minus strand)", cexCol=0.7)
+
+
+heatmap.2(scale.ma.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5mC  (minus strand)", cexCol=0.7)
+
+```
+
+
+
 ## lu1-jumpbarcode3
 
 ![Whole genome reads distribution of TP4](figure/lu1_jumpbarcode3/lu1_jumpbarcode3tp4.png)
 
+
+
+## MII whole embryo (transposon-2)
+
+Jump barcode  | total unique reads | plus reads / minus reads
+----|-------|----------
+5| 801 | 397/404
+6|4,927|2,450/2,477
+
+
+## DBA 2 sperm (transposon-7)
+
+Jump barcode  | total unique reads | plus reads / minus reads
+----|-------|----------
+5| 286  | 145/141
+6|1,499|733/2,766
+
+
+## ICR sperm (transposon-8)
+
+Jump barcode  | total unique reads | plus reads / minus reads
+----|-------|----------
+5| 235 | 110/125
+6|1,436|720/716
 
 <!-- Insert the session information into the document -->
 ```{r session-info}
