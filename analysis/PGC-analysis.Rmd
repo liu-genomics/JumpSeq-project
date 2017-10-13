@@ -350,7 +350,7 @@ colnames(pa.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable"
 rownames(ma.hmc)=c("PN1", "PN2", "PN3", "PN4")
 colnames(ma.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
 
-heatcol <- brewer.pal(9, "Reds")
+heatcol <- brewer.pal(9, "Greens")
 scale.pa.hmc=scale(as.matrix(pa.hmc))
 scale.ma.hmc=scale(as.matrix(ma.hmc))
 
@@ -372,7 +372,7 @@ colnames(pa.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable"
 rownames(ma.hmc)=c("PN1", "PN2", "PN3", "PN4")
 colnames(ma.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
 
-heatcol <- brewer.pal(9, "Reds")
+heatcol <- brewer.pal(9, "Greens")
 scale.pa.hmc=scale(as.matrix(pa.hmc))
 scale.ma.hmc=scale(as.matrix(ma.hmc))
 
@@ -383,6 +383,32 @@ heatmap.2(scale.ma.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, s
 
 ```
 
+
+
+## lu1-jumpbarcode3/4
+
+### MII whole embryo (transposon-2)
+
+Jump barcode  | total unique reads | plus reads / minus reads
+----|-------|----------
+3| 20,851 | 10,218/10,633
+4|1,437|705/732
+
+
+### DBA 2 sperm (transposon-7)
+
+Jump barcode  | total unique reads | plus reads / minus reads
+----|-------|----------
+3| 62,366  | 30,614/31,752
+4|3,982|1,920/2,062
+
+
+### ICR sperm (transposon-8)
+
+Jump barcode  | total unique reads | plus reads / minus reads
+----|-------|----------
+3| 235 | 7,216/7,350
+4|1,013|482/531
 
 
 
@@ -678,7 +704,7 @@ colnames(pa.mc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable",
 rownames(ma.mc)=c("PN1", "PN2", "PN3", "PN4")
 colnames(ma.mc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
 
-heatcol <- brewer.pal(9, "Reds")
+heatcol <- brewer.pal(9, "Greens")
 scale.pa.mc=scale(as.matrix(pa.mc))
 scale.ma.mc=scale(as.matrix(ma.mc))
 
@@ -700,7 +726,7 @@ colnames(pa.mc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable",
 rownames(ma.mc)=c("PN1", "PN2", "PN3", "PN4")
 colnames(ma.mc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
 
-heatcol <- brewer.pal(9, "Reds")
+heatcol <- brewer.pal(9, "Greens")
 scale.pa.mc=scale(as.matrix(pa.mc))
 scale.ma.mc=scale(as.matrix(ma.mc))
 
@@ -712,14 +738,10 @@ heatmap.2(scale.ma.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, sy
 ```
 
 
-
-## lu1-jumpbarcode3
-
-![Whole genome reads distribution of TP4](figure/lu1_jumpbarcode3/lu1_jumpbarcode3tp4.png)
+## lu2-jumpbarcode5/6
 
 
-
-## MII whole embryo (transposon-2)
+### lu2-MII whole embryo (transposon-2)
 
 Jump barcode  | total unique reads | plus reads / minus reads
 ----|-------|----------
@@ -727,7 +749,7 @@ Jump barcode  | total unique reads | plus reads / minus reads
 6|4,927|2,450/2,477
 
 
-## DBA 2 sperm (transposon-7)
+### lu2-DBA 2 sperm (transposon-7)
 
 Jump barcode  | total unique reads | plus reads / minus reads
 ----|-------|----------
@@ -735,12 +757,22 @@ Jump barcode  | total unique reads | plus reads / minus reads
 6|1,499|733/2,766
 
 
-## ICR sperm (transposon-8)
+### lu2- ICR sperm (transposon-8)
 
 Jump barcode  | total unique reads | plus reads / minus reads
 ----|-------|----------
 5| 235 | 110/125
 6|1,436|720/716
+
+
+
+## lu1-jumpbarcode3
+
+![Whole genome reads distribution of TP4](figure/lu1_jumpbarcode3/lu1_jumpbarcode3tp4.png)
+
+
+
+
 
 <!-- Insert the session information into the document -->
 ```{r session-info}
