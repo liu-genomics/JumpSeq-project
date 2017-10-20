@@ -56,7 +56,7 @@ uc011wht.1      Tcea1
 uc011whu.1      Tcea1
 ...
 ```
-So each gene symbol may have multiple UCSC gene transcript, but only use one. 
+So each gene symbol may have multiple UCSC gene transcript and merge them together. 
 
 
 
@@ -72,10 +72,10 @@ Transposase barcode  | total unique reads | plus reads / minus reads
 4 (PN3)| 41,445 | 19,319/22,126
 5 (PN4)| 29,586| 14,089/15,497
 6| 648 | 280/368
-7| 30,982 | 15,316/15,666
-8| 7,782 | 3,877/3,905
-9| 32,754 | 16,329/16,425
-10| 42,382 | 21,133/21,249
+7 (PN1)| 30,982 | 15,316/15,666
+8 (PN2)| 7,782 | 3,877/3,905
+9 (PN3)| 32,754 | 16,329/16,425
+10 (PN4)| 42,382 | 21,133/21,249
 Table: reads in every transposase bacode sample 
 
 * Paternal: 6, 7, 8, 9, 10; maternal: 1, 2, 3, 4, 5
@@ -339,51 +339,9 @@ as.character(combine.fin$Gene[which(clust$cluster==3)])
 ```
 
 
-### important regions
 
-
-```{r, echo=F, warning=FALSE}
-hmc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\important.region.reads.summary.txt", header=T)
-pa.hmc=hmc[c(14,16,18,20),]; ma.hmc=hmc[c(4,6,8,10),]
-rownames(pa.hmc)=c("PN1", "PN2", "PN3", "PN4")
-colnames(pa.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
-rownames(ma.hmc)=c("PN1", "PN2", "PN3", "PN4")
-colnames(ma.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
-
-heatcol <- brewer.pal(9, "Greens")
-scale.pa.hmc=scale(as.matrix(pa.hmc))
-scale.ma.hmc=scale(as.matrix(ma.hmc))
-
-heatmap.2(scale.pa.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC (plus strand)", cexCol=0.8)
-
-
-heatmap.2(scale.ma.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC  (plus strand)", cexCol=0.8)
-
-```
-
-
-
-
-```{r, echo=F, warning=FALSE}
-hmc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\important.region.reads.summary.txt", header=T)
-pa.hmc=hmc[c(13,15,17,19),]; ma.hmc=hmc[c(3,5,7,9),]
-rownames(pa.hmc)=c("PN1", "PN2", "PN3", "PN4")
-colnames(pa.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
-rownames(ma.hmc)=c("PN1", "PN2", "PN3", "PN4")
-colnames(ma.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
-
-heatcol <- brewer.pal(9, "Greens")
-scale.pa.hmc=scale(as.matrix(pa.hmc))
-scale.ma.hmc=scale(as.matrix(ma.hmc))
-
-heatmap.2(scale.pa.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC (minus strand)", cexCol=0.8)
-
-
-heatmap.2(scale.ma.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC  (minus strand)", cexCol=0.8)
-
-```
-
-
+#################################################
+#################################################
 
 ## lu1-jumpbarcode3/4
 
@@ -393,6 +351,12 @@ Jump barcode  | total unique reads | plus reads / minus reads
 ----|-------|----------
 3| 20,851 | 10,218/10,633
 4|1,437|705/732
+
+
+
+
+![Whole genome reads distribution ](figure/lu1_jumpbarcode34/lu1.wholeembryo.png)
+
 
 
 ### DBA 2 sperm (transposon-7)
@@ -430,10 +394,10 @@ Transposase barcode  | total unique reads | plus reads / minus reads
 4 (PN3)| 12,157 | 6052/6105
 5 (PN4)| 9,003| 4,433/4,570
 6| 45,489 | 22,894/22,595
-7| 6,752 | 3,467/3,285
-8| 4,547 | 2,346/2,201
-9| 2,087 | 1,082/1,005
-10| 14,692 | 7,361/7,331
+7 (PN1)| 6,752 | 3,467/3,285
+8 (PN2)| 4,547 | 2,346/2,201
+9 (PN3)| 2,087 | 1,082/1,005
+10 (PN4)| 14,692 | 7,361/7,331
 Table: reads in every transposase bacode sample 
 
 #####################################################
@@ -693,7 +657,178 @@ as.character(combine.fin$Gene[which(clust$cluster==3)])
 ```
 
 
+
+
+########################################################
+########################################################
+
+## heatmap
+
+### whole genome 
+
+* every column is a normalized vector of reads counts of a gene, 
+
+```{r, echo=F, warning=F}
+reads.gene.tp2=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp3=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP03.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp4=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP04.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp5=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP05.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+
+
+combine=cbind(reads.gene.tp2$No.reads, reads.gene.tp3$No.reads, reads.gene.tp4$No.reads, reads.gene.tp5$No.reads)
+all.reads=as.matrix(t(combine))
+rownames(all.reads)=c("PN1", "PN2", "PN3", "PN4")
+colnames(all.reads)=reads.gene.tp2$Gene
+heatcol <- brewer.pal(9, "Greens")
+scale.reads=scale(all.reads)
+
+heatmap.2(scale.reads, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main=" 5hmC maternal (plus)", cexCol=0.7, labCol=F, na.rm=T)
+
+```
+
+
+
+```{r, echo=F, warning=F}
+reads.gene.tp2=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp3=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP03.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp4=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP04.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp5=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP05.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+
+
+combine=cbind(reads.gene.tp2$No.reads, reads.gene.tp3$No.reads, reads.gene.tp4$No.reads, reads.gene.tp5$No.reads)
+all.reads=as.matrix(t(combine))
+rownames(all.reads)=c("PN1", "PN2", "PN3", "PN4")
+colnames(all.reads)=reads.gene.tp2$Gene
+heatcol <- brewer.pal(9, "Greens")
+scale.reads=scale(all.reads)
+
+heatmap.2(scale.reads, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main=" 5hmC maternal (minus)", cexCol=0.7, labCol=F, na.rm=T)
+
+```
+
+
+
+```{r, echo=F, warning=F}
+reads.gene.tp2=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP07.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp3=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP08.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp4=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP09.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp5=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP10.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+
+
+combine=cbind(reads.gene.tp2$No.reads, reads.gene.tp3$No.reads, reads.gene.tp4$No.reads, reads.gene.tp5$No.reads)
+all.reads=as.matrix(t(combine))
+rownames(all.reads)=c("PN1", "PN2", "PN3", "PN4")
+colnames(all.reads)=reads.gene.tp2$Gene
+heatcol <- brewer.pal(9, "Greens")
+scale.reads=scale(all.reads)
+
+heatmap.2(scale.reads, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main=" 5hmC Paternal (plus)", cexCol=0.7, labCol=F, na.rm=T)
+
+```
+
+
+```{r, echo=F, warning=F}
+reads.gene.tp2=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP07.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp3=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP08.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp4=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP09.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp5=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP10.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+
+
+combine=cbind(reads.gene.tp2$No.reads, reads.gene.tp3$No.reads, reads.gene.tp4$No.reads, reads.gene.tp5$No.reads)
+all.reads=as.matrix(t(combine))
+rownames(all.reads)=c("PN1", "PN2", "PN3", "PN4")
+colnames(all.reads)=reads.gene.tp2$Gene
+heatcol <- brewer.pal(9, "Greens")
+scale.reads=scale(all.reads)
+
+heatmap.2(scale.reads, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main=" 5hmC Paternal (minus)", cexCol=0.7, labCol=F, na.rm=T)
+
+```
+
+
+
+```{r, echo=F, warning=F}
+reads.gene.tp2=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp3=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP03.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp4=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP04.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp5=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP05.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+
+
+combine=cbind(reads.gene.tp2$No.reads, reads.gene.tp3$No.reads, reads.gene.tp4$No.reads, reads.gene.tp5$No.reads)
+all.reads=as.matrix(t(combine))
+rownames(all.reads)=c("PN1", "PN2", "PN3", "PN4")
+colnames(all.reads)=reads.gene.tp2$Gene
+heatcol <- brewer.pal(9, "Greens")
+scale.reads=scale(all.reads)
+
+heatmap.2(scale.reads, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main=" 5mC maternal (plus)", cexCol=0.7, labCol=F, na.rm=T)
+
+```
+
+
+
+```{r, echo=F, warning=F}
+reads.gene.tp2=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp3=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP03.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp4=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP04.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp5=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP05.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+
+
+combine=cbind(reads.gene.tp2$No.reads, reads.gene.tp3$No.reads, reads.gene.tp4$No.reads, reads.gene.tp5$No.reads)
+all.reads=as.matrix(t(combine))
+rownames(all.reads)=c("PN1", "PN2", "PN3", "PN4")
+colnames(all.reads)=reads.gene.tp2$Gene
+heatcol <- brewer.pal(9, "Greens")
+scale.reads=scale(all.reads)
+
+heatmap.2(scale.reads, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main=" 5mC maternal (minus)", cexCol=0.7, labCol=F, na.rm=T)
+
+```
+
+
+```{r, echo=F, warning=F}
+reads.gene.tp2=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP07.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp3=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP08.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp4=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP09.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp5=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP10.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+
+
+combine=cbind(reads.gene.tp2$No.reads, reads.gene.tp3$No.reads, reads.gene.tp4$No.reads, reads.gene.tp5$No.reads)
+all.reads=as.matrix(t(combine))
+rownames(all.reads)=c("PN1", "PN2", "PN3", "PN4")
+colnames(all.reads)=reads.gene.tp2$Gene
+heatcol <- brewer.pal(9, "Greens")
+scale.reads=scale(all.reads)
+
+heatmap.2(scale.reads, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main=" 5mC Paternal (plus)", cexCol=0.7, labCol=F, na.rm=T)
+
+```
+
+
+
+```{r, echo=F, warning=F}
+reads.gene.tp2=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP07.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp3=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP08.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp4=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP09.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+reads.gene.tp5=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP10.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+
+
+combine=cbind(reads.gene.tp2$No.reads, reads.gene.tp3$No.reads, reads.gene.tp4$No.reads, reads.gene.tp5$No.reads)
+all.reads=as.matrix(t(combine))
+rownames(all.reads)=c("PN1", "PN2", "PN3", "PN4")
+colnames(all.reads)=reads.gene.tp2$Gene
+heatcol <- brewer.pal(9, "Greens")
+scale.reads=scale(all.reads)
+
+heatmap.2(scale.reads, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main=" 5mC Paternal (minus)", cexCol=0.7, labCol=F, na.rm=T)
+
+```
+
 ### important regions
+
+* each column is a normalized vector of reads count. 
+
+#### 5mC
 
 
 ```{r, echo=F, warning=FALSE}
@@ -736,6 +871,106 @@ heatmap.2(scale.pa.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, sy
 heatmap.2(scale.ma.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5mC  (minus strand)", cexCol=0.7)
 
 ```
+
+
+
+#### 5hmC
+
+
+```{r, echo=F, warning=FALSE}
+hmc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\important.region.reads.summary.txt", header=T)
+pa.hmc=hmc[c(14,16,18,20),]; ma.hmc=hmc[c(4,6,8,10),]
+rownames(pa.hmc)=c("PN1", "PN2", "PN3", "PN4")
+colnames(pa.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+rownames(ma.hmc)=c("PN1", "PN2", "PN3", "PN4")
+colnames(ma.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+
+heatcol <- brewer.pal(9, "Greens")
+scale.pa.hmc=scale(as.matrix(pa.hmc))
+scale.ma.hmc=scale(as.matrix(ma.hmc))
+
+heatmap.2(scale.pa.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC (plus strand)", cexCol=0.8)
+
+
+heatmap.2(scale.ma.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC  (plus strand)", cexCol=0.8)
+
+```
+
+
+
+
+```{r, echo=F, warning=FALSE}
+hmc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\important.region.reads.summary.txt", header=T)
+pa.hmc=hmc[c(13,15,17,19),]; ma.hmc=hmc[c(3,5,7,9),]
+rownames(pa.hmc)=c("PN1", "PN2", "PN3", "PN4")
+colnames(pa.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+rownames(ma.hmc)=c("PN1", "PN2", "PN3", "PN4")
+colnames(ma.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+
+heatcol <- brewer.pal(9, "Greens")
+scale.pa.hmc=scale(as.matrix(pa.hmc))
+scale.ma.hmc=scale(as.matrix(ma.hmc))
+
+heatmap.2(scale.pa.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC (minus strand)", cexCol=0.8)
+
+
+heatmap.2(scale.ma.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC  (minus strand)", cexCol=0.8)
+
+```
+
+
+## Paternal site changes at PN4 (5mC vs 5hmC)
+
+* 5hmC plus strand has 20,767 sites and 105 (0.5056%) are overlapping (20 bp windows) with 5mC plus strand; 5mC plus strand has 6575 sites and 73 (1.1103%) are overlapping with 5hmC plus strand.  
+
+
+window size | 5hmC (plus) | 5mC (plus) | 5hmC (minus) | 5mC (minus)
+------------|-------------|--------------|------------|------------
+20 bp |105 (0.5056%) | 73 (1.1103%)| 272 | 141
+100 bp| 367 | 202 | 446 | 183
+1000 bp| 497 | 309 | 593 | 283
+
+
+## PN2 vs PN3
+
+### Maternal 
+
+window size | PN2 (plus, 10,534) | PN3 (plus, 5,101) | PN2 (minus, 10,935) | PN3 (minus, 5,208)
+------------|-------------|--------------|------------|------------
+20 bp | 0 | 0| 2,128 | 1,256
+100 bp| 1,829 | 1,133 | 2,210| 1,268
+1000 bp| 1,808 | 1,133 |2,201 | 1,272
+Table: 5mC: Overlapping windows between PN2 and PN3. 
+
+
+window size | PN2 (plus, 13,733) | PN3 (plus, 18,114) | PN2 (minus, 14, 787) | PN3 (minus, 19,467)
+------------|-------------|--------------|------------|------------
+20 bp | 0 | 0|2,535 | 2,341
+100 bp|1,682 | 1,655| 2, 586 | 2,391
+1000 bp|1,788 | 1,777 | 2,712 | 2,543
+Table: 5hmC: Overlapping windows between PN2 and PN3.  
+
+
+
+### Paternal
+
+
+window size | PN2 (plus, 2,139) | PN3 (plus, 946) | PN2 (minus, 2,011) | PN3 (minus, 938)
+------------|-------------|--------------|------------|------------
+20 bp |52 | 89| 36| 37
+100 bp| 57 | 96 | 74 | 57
+1000 bp|90 |105| 131 | 69
+Table: 5mC: Overlapping windows between PN2 and PN3. 
+
+
+window size | PN2 (plus, 3,814) | PN3 (plus, 16,042) | PN2 (minus, 3,860) | PN3 (minus, 16,142)
+------------|------------------|------------|------------|-------------|---------
+20 bp |0 | 0| 157| 271
+100 bp| 136 | 315 | 211 | 463
+1000 bp| 181| 402| 273 | 542
+Table: 5hmC: Overlapping windows between PN2 and PN3.  
+
+
 
 
 ## lu2-jumpbarcode5/6

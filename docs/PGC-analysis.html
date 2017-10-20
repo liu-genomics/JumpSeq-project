@@ -312,10 +312,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-10-13</p>
+<p><strong>Last updated:</strong> 2017-10-20</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 359a08d</p>
+<p><strong>Code version:</strong> 4f4e69c</p>
 <!-- Add your analysis here -->
 <div id="mouse-genome-mm9" class="section level2">
 <h2>mouse genome (mm9)</h2>
@@ -333,7 +333,7 @@ uc007afi.2      Tcea1
 uc011wht.1      Tcea1
 uc011whu.1      Tcea1
 ...</code></pre>
-<p>So each gene symbol may have multiple UCSC gene transcript, but only use one.</p>
+<p>So each gene symbol may have multiple UCSC gene transcript and merge them together.</p>
 </div>
 <div id="lu1-jumpbarcode15hmc" class="section level2">
 <h2>lu1-jumpbarcode1(5hmC)</h2>
@@ -378,22 +378,22 @@ uc011whu.1      Tcea1
 <td>280/368</td>
 </tr>
 <tr class="odd">
-<td>7</td>
+<td>7 (PN1)</td>
 <td>30,982</td>
 <td>15,316/15,666</td>
 </tr>
 <tr class="even">
-<td>8</td>
+<td>8 (PN2)</td>
 <td>7,782</td>
 <td>3,877/3,905</td>
 </tr>
 <tr class="odd">
-<td>9</td>
+<td>9 (PN3)</td>
 <td>32,754</td>
 <td>16,329/16,425</td>
 </tr>
 <tr class="even">
-<td>10</td>
+<td>10 (PN4)</td>
 <td>42,382</td>
 <td>21,133/21,249</td>
 </tr>
@@ -2150,11 +2150,12 @@ uc011whu.1      Tcea1
 [43] &quot;Ddc&quot;      &quot;Grb10&quot;    &quot;Commd1&quot;   &quot;Rian&quot;     &quot;Mirg&quot;     &quot;Begain&quot;  
 [49] &quot;Rb1&quot;      &quot;Htr2a&quot;    &quot;Zfat&quot;     &quot;Peg13&quot;    &quot;Slc38a4&quot;  &quot;Slc22a3&quot; 
 [55] &quot;Slc22a2&quot;  &quot;Igf2r&quot;    &quot;Impact&quot;  </code></pre>
+<div id="section" class="section level49">
+<p></p>
 </div>
-<div id="important-regions" class="section level3">
-<h3>important regions</h3>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-27-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-28-2.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="section-1" class="section level49">
+<p></p>
+</div>
 </div>
 </div>
 <div id="lu1-jumpbarcode34" class="section level2">
@@ -2182,6 +2183,10 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
+<div class="figure">
+<img src="figure/lu1_jumpbarcode34/lu1.wholeembryo.png" alt="Whole genome reads distribution" />
+<p class="caption">Whole genome reads distribution</p>
+</div>
 </div>
 <div id="dba-2-sperm-transposon-7" class="section level3">
 <h3>DBA 2 sperm (transposon-7)</h3>
@@ -2230,10 +2235,10 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
-<div id="section" class="section level61">
+<div id="section-2" class="section level61">
 <p></p>
 </div>
-<div id="section-1" class="section level61">
+<div id="section-3" class="section level61">
 <p></p>
 </div>
 </div>
@@ -2281,28 +2286,28 @@ uc011whu.1      Tcea1
 <td>22,894/22,595</td>
 </tr>
 <tr class="odd">
-<td>7</td>
+<td>7 (PN1)</td>
 <td>6,752</td>
 <td>3,467/3,285</td>
 </tr>
 <tr class="even">
-<td>8</td>
+<td>8 (PN2)</td>
 <td>4,547</td>
 <td>2,346/2,201</td>
 </tr>
 <tr class="odd">
-<td>9</td>
+<td>9 (PN3)</td>
 <td>2,087</td>
 <td>1,082/1,005</td>
 </tr>
 <tr class="even">
-<td>10</td>
+<td>10 (PN4)</td>
 <td>14,692</td>
 <td>7,361/7,331</td>
 </tr>
 </tbody>
 </table>
-<div id="section-2" class="section level53">
+<div id="section-4" class="section level53">
 <p></p>
 </div>
 <div id="maternal-samples-1" class="section level3">
@@ -2594,7 +2599,7 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li>genes in cluster1</li>
 </ul>
@@ -2855,7 +2860,7 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li>genes in cluster1</li>
 </ul>
@@ -2872,7 +2877,7 @@ uc011whu.1      Tcea1
 <li>genes in cluster 3</li>
 </ul>
 <pre><code>[1] &quot;Gabrg3&quot; &quot;Kcnq1&quot;  &quot;Ntm&quot;    &quot;Glis3&quot; </code></pre>
-<div id="section-3" class="section level54">
+<div id="section-5" class="section level54">
 <p></p>
 </div>
 </div>
@@ -3066,7 +3071,7 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-41-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li>genes in cluster1</li>
 </ul>
@@ -3296,7 +3301,7 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li>genes in cluster1</li>
 </ul>
@@ -3312,11 +3317,263 @@ uc011whu.1      Tcea1
 <li>genes in cluster 3</li>
 </ul>
 <pre><code>[1] &quot;Magi2&quot;  &quot;Ntm&quot;    &quot;Ctnna3&quot;</code></pre>
+<div id="section-6" class="section level56">
+<p></p>
 </div>
-<div id="important-regions-1" class="section level3">
+<div id="section-7" class="section level56">
+<p></p>
+</div>
+</div>
+</div>
+<div id="heatmap" class="section level2">
+<h2>heatmap</h2>
+<div id="whole-genome" class="section level3">
+<h3>whole genome</h3>
+<ul>
+<li>every column is a normalized vector of reads counts of a gene,</li>
+</ul>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-51-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-55-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-56-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-57-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-58-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="important-regions" class="section level3">
 <h3>important regions</h3>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-53-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-54-2.png" width="672" style="display: block; margin: auto;" /></p>
+<ul>
+<li>each column is a normalized vector of reads count.</li>
+</ul>
+<div id="mc" class="section level4">
+<h4>5mC</h4>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-59-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-59-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-60-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-60-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="hmc" class="section level4">
+<h4>5hmC</h4>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-61-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-61-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-62-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-62-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="paternal-site-changes-at-pn4-5mc-vs-5hmc" class="section level2">
+<h2>Paternal site changes at PN4 (5mC vs 5hmC)</h2>
+<ul>
+<li>5hmC plus strand has 20,767 sites and 105 (0.5056%) are overlapping (20 bp windows) with 5mC plus strand; 5mC plus strand has 6575 sites and 73 (1.1103%) are overlapping with 5hmC plus strand.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>window size</th>
+<th>5hmC (plus)</th>
+<th>5mC (plus)</th>
+<th>5hmC (minus)</th>
+<th>5mC (minus)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>20 bp</td>
+<td>105 (0.5056%)</td>
+<td>73 (1.1103%)</td>
+<td>272</td>
+<td>141</td>
+</tr>
+<tr class="even">
+<td>100 bp</td>
+<td>367</td>
+<td>202</td>
+<td>446</td>
+<td>183</td>
+</tr>
+<tr class="odd">
+<td>1000 bp</td>
+<td>497</td>
+<td>309</td>
+<td>593</td>
+<td>283</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="pn2-vs-pn3" class="section level2">
+<h2>PN2 vs PN3</h2>
+<div id="maternal" class="section level3">
+<h3>Maternal</h3>
+<table style="width:94%;">
+<caption>5mC: Overlapping windows between PN2 and PN3.</caption>
+<colgroup>
+<col width="18%" />
+<col width="19%" />
+<col width="20%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>window size</th>
+<th>PN2 (plus, 10,534)</th>
+<th>PN3 (plus, 5,101)</th>
+<th>PN2 (minus, 10,935)</th>
+<th>PN3 (minus, 5,208)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>20 bp</td>
+<td>0</td>
+<td>0</td>
+<td>2,128</td>
+<td>1,256</td>
+</tr>
+<tr class="even">
+<td>100 bp</td>
+<td>1,829</td>
+<td>1,133</td>
+<td>2,210</td>
+<td>1,268</td>
+</tr>
+<tr class="odd">
+<td>1000 bp</td>
+<td>1,808</td>
+<td>1,133</td>
+<td>2,201</td>
+<td>1,272</td>
+</tr>
+</tbody>
+</table>
+<table style="width:94%;">
+<caption>5hmC: Overlapping windows between PN2 and PN3.</caption>
+<colgroup>
+<col width="18%" />
+<col width="19%" />
+<col width="20%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>window size</th>
+<th>PN2 (plus, 13,733)</th>
+<th>PN3 (plus, 18,114)</th>
+<th>PN2 (minus, 14, 787)</th>
+<th>PN3 (minus, 19,467)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>20 bp</td>
+<td>0</td>
+<td>0</td>
+<td>2,535</td>
+<td>2,341</td>
+</tr>
+<tr class="even">
+<td>100 bp</td>
+<td>1,682</td>
+<td>1,655</td>
+<td>2, 586</td>
+<td>2,391</td>
+</tr>
+<tr class="odd">
+<td>1000 bp</td>
+<td>1,788</td>
+<td>1,777</td>
+<td>2,712</td>
+<td>2,543</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="paternal" class="section level3">
+<h3>Paternal</h3>
+<table style="width:94%;">
+<caption>5mC: Overlapping windows between PN2 and PN3.</caption>
+<colgroup>
+<col width="18%" />
+<col width="19%" />
+<col width="20%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>window size</th>
+<th>PN2 (plus, 2,139)</th>
+<th>PN3 (plus, 946)</th>
+<th>PN2 (minus, 2,011)</th>
+<th>PN3 (minus, 938)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>20 bp</td>
+<td>52</td>
+<td>89</td>
+<td>36</td>
+<td>37</td>
+</tr>
+<tr class="even">
+<td>100 bp</td>
+<td>57</td>
+<td>96</td>
+<td>74</td>
+<td>57</td>
+</tr>
+<tr class="odd">
+<td>1000 bp</td>
+<td>90</td>
+<td>105</td>
+<td>131</td>
+<td>69</td>
+</tr>
+</tbody>
+</table>
+<table style="width:100%;">
+<caption>5hmC: Overlapping windows between PN2 and PN3.</caption>
+<colgroup>
+<col width="15%" />
+<col width="23%" />
+<col width="15%" />
+<col width="15%" />
+<col width="17%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>window size</th>
+<th>PN2 (plus, 3,814)</th>
+<th>PN3 (plus, 16,042)</th>
+<th>PN2 (minus, 3,860)</th>
+<th>PN3 (minus, 16,142)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>20 bp</td>
+<td>0</td>
+<td>0</td>
+<td>157</td>
+<td>271</td>
+</tr>
+<tr class="even">
+<td>100 bp</td>
+<td>136</td>
+<td>315</td>
+<td>211</td>
+<td>463</td>
+</tr>
+<tr class="odd">
+<td>1000 bp</td>
+<td>181</td>
+<td>402</td>
+<td>273</td>
+<td>542</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="lu2-jumpbarcode56" class="section level2">
