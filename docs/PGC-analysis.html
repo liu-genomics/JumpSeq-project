@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -312,10 +312,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-10-20</p>
+<p><strong>Last updated:</strong> 2017-10-26</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 4f4e69c</p>
+<p><strong>Code version:</strong> e5fe7e2</p>
 <!-- Add your analysis here -->
 <div id="mouse-genome-mm9" class="section level2">
 <h2>mouse genome (mm9)</h2>
@@ -3332,14 +3332,10 @@ uc011whu.1      Tcea1
 <ul>
 <li>every column is a normalized vector of reads counts of a gene,</li>
 </ul>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-51-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-55-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-56-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-57-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-58-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure">
+<img src="figure/" alt="qqter" />
+<p class="caption">qqter</p>
+</div>
 </div>
 <div id="important-regions" class="section level3">
 <h3>important regions</h3>
@@ -3348,14 +3344,17 @@ uc011whu.1      Tcea1
 </ul>
 <div id="mc" class="section level4">
 <h4>5mC</h4>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-59-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-59-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-60-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-60-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-59-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-59-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-59-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-60-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-60-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-60-3.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="hmc" class="section level4">
 <h4>5hmC</h4>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-61-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-61-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-62-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-62-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-61-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-61-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-61-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-62-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-62-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-62-3.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
+</div>
+<div id="reads-correlation" class="section level3">
+<h3>reads correlation</h3>
 </div>
 </div>
 <div id="paternal-site-changes-at-pn4-5mc-vs-5hmc" class="section level2">
@@ -3363,13 +3362,20 @@ uc011whu.1      Tcea1
 <ul>
 <li>5hmC plus strand has 20,767 sites and 105 (0.5056%) are overlapping (20 bp windows) with 5mC plus strand; 5mC plus strand has 6575 sites and 73 (1.1103%) are overlapping with 5hmC plus strand.</li>
 </ul>
-<table>
+<table style="width:94%;">
+<colgroup>
+<col width="18%" />
+<col width="19%" />
+<col width="20%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>window size</th>
-<th>5hmC (plus)</th>
-<th>5mC (plus)</th>
-<th>5hmC (minus)</th>
+<th>5hmC (plus, 20,767)</th>
+<th>5mC (plus, 6,575)</th>
+<th>5hmC (minus, 20, 933)</th>
 <th>5mC (minus)</th>
 </tr>
 </thead>
@@ -3397,6 +3403,54 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
+<table style="width:94%;">
+<caption>overlap between 5hmC (PN4) and 5mC (PN3)</caption>
+<colgroup>
+<col width="18%" />
+<col width="19%" />
+<col width="20%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>window size</th>
+<th>5hmC (plus, 20,767)</th>
+<th>5mC (PN3:plus, 939)</th>
+<th>5hmC (minus, 20,933)</th>
+<th>5mC ( PN3: minus, 939)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>20 bp</td>
+<td>0</td>
+<td>0</td>
+<td>53</td>
+<td>124</td>
+</tr>
+<tr class="even">
+<td>100 bp</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>1000 bp</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div id="pn1-5mc-vs-pn4-5hmc" class="section level3">
+<h3>PN1 (5mC) vs PN4 (5hmC)</h3>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-64-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pn2-5mc-vs-pn4-5hmc" class="section level3">
+<h3>PN2 (5mC) vs PN4 (5hmC)</h3>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-65-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pn3-5mc-vs-pn4-5hmc" class="section level3">
+<h3>PN3 (5mC) vs PN4 (5hmC)</h3>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-66-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
 </div>
 <div id="pn2-vs-pn3" class="section level2">
 <h2>PN2 vs PN3</h2>
@@ -3674,14 +3728,14 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] gplots_2.17.0      RColorBrewer_1.1-2 knitr_1.15.1      
+[1] gplots_3.0.1       RColorBrewer_1.1-2 knitr_1.17        
 
 loaded via a namespace (and not attached):
- [1] Rcpp_0.12.10       gtools_3.5.0       digest_0.6.8      
+ [1] Rcpp_0.12.10       gtools_3.5.0       digest_0.6.12     
  [4] rprojroot_1.2      bitops_1.0-6       backports_1.0.5   
  [7] git2r_0.18.0       magrittr_1.5       evaluate_0.10     
-[10] highr_0.5.1        KernSmooth_2.23-15 stringi_0.5-5     
-[13] gdata_2.17.0       rmarkdown_1.3      tools_3.2.2       
+[10] highr_0.6          KernSmooth_2.23-15 stringi_1.1.5     
+[13] gdata_2.18.0       rmarkdown_1.6      tools_3.2.2       
 [16] stringr_1.2.0      yaml_2.1.14        caTools_1.17.1    
 [19] htmltools_0.3.5   </code></pre>
 </div>
@@ -3735,7 +3789,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
