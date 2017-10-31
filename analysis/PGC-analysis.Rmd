@@ -3,6 +3,7 @@ title: "PN analysis"
 author: "Shengtong Han"
 date: YYYY-MM-DD
 output: html_document
+df_print: paged
 ---
 
 <!-- The file analysis/chunks.R contains chunks that define default settings
@@ -79,6 +80,18 @@ Transposase barcode  | total unique reads | plus reads / minus reads
 Table: reads in every transposase bacode sample 
 
 * Paternal: 6, 7, 8, 9, 10; maternal: 1, 2, 3, 4, 5
+
+```{r, echo=F}
+paternal.reads=c(8429, 32606, 41445, 29586)
+maternal.reads=c(30982, 7782, 32754, 42382)
+scale.paternal=paternal.reads/sum(paternal.reads)
+scale.maternal=maternal.reads/sum(maternal.reads)
+plot(scale.paternal,  ylim=c(0, 0.7), type="o", xaxt='n', xlab="", ylab="Proportion of reads", col=1, main="Proportion of reads at different stages of 5hmC", cex.main=0.8, cex.lab=0.8)
+lines(scale.maternal, type="o", col=2)
+legend(1, 0.5, c("paternal", "maternal"), col=c(1,2), lty=c(1,1))
+axis.labels <-c("PN1", "PN2", "PN3", "PN4")
+axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
+```
 
 
 ### Maternal samples 
@@ -179,8 +192,9 @@ combine.fin=combine.nona[-c(zero.index),]
 rownames(combine.fin)=NULL
 ```
 
-```{r, echo=T}
-kable(combine.fin, caption="Number of reads of imprinting genes (at minus strand) from maternal samples at different stages")
+```{r, rows.print=5}
+#kable(combine.fin, caption="Number of reads of imprinting genes (at minus strand) from maternal samples at different stages")
+combine.fin
 ```
 
 ```{r, echo=F}
@@ -366,6 +380,8 @@ Jump barcode  | total unique reads | plus reads / minus reads
 3| 62,366  | 30,614/31,752
 4|3,982|1,920/2,062
 
+
+there is a huge difference of reads count between these two replicates? 
 
 ### ICR sperm (transposon-8)
 
@@ -719,7 +735,6 @@ reads.gene.tp3=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\l
 reads.gene.tp4=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP09.bam.plus.cove.base.level.shiftonebase.txt", header=T)
 reads.gene.tp5=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP10.bam.plus.cove.base.level.shiftonebase.txt", header=T)
 
-
 combine=cbind(reads.gene.tp2$No.reads, reads.gene.tp3$No.reads, reads.gene.tp4$No.reads, reads.gene.tp5$No.reads)
 all.reads=as.matrix(t(combine))
 rownames(all.reads)=c("PN1", "PN2", "PN3", "PN4")
@@ -838,20 +853,26 @@ heatmap.2(scale.reads, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, sy
 
 ```{r, echo=F, warning=FALSE}
 mc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\important.region.reads.summary.txt", header=T)
-pa.mc=mc[c(14,16,18,20),]; ma.mc=mc[c(4,6,8,10),]
-rownames(pa.mc)=c("PN1", "PN2", "PN3", "PN4")
-colnames(pa.mc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
-rownames(ma.mc)=c("PN1", "PN2", "PN3", "PN4")
-colnames(ma.mc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+reads.dba2.sperm=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_dba2.sperm\\important.region.reads.summary.txt", header=T)
+stage=c("PN1", "PN2", "PN3", "PN4")
+regions=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
+pa.mc.plus=mc[c(14,16,18,20),]; ma.mc.plus=mc[c(4,6,8,10),]
+pa.mc.minus=mc[c(13,15,17,19),]; ma.mc.minus=mc[c(3,5,7,9),]
+pa.mc=pa.mc.plus+pa.mc.minus
+ma.mc=ma.mc.plus+ma.mc.minus
+rownames(pa.mc)=stage
+colnames(pa.mc)=regions
+rownames(ma.mc)=stage
+colnames(ma.mc)=regions
 
 heatcol <- brewer.pal(9, "Greens")
 scale.pa.mc=scale(as.matrix(pa.mc))
 scale.ma.mc=scale(as.matrix(ma.mc))
 
-heatmap.2(scale.pa.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5mC (plus strand)", cexCol=0.7)
+heatmap.2(scale.pa.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5mC", cexCol=0.7)
 
 
-heatmap.2(scale.ma.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5mC  (plus strand)", cexCol=0.7)
+heatmap.2(scale.ma.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5mc", cexCol=0.7)
 
 
 par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
@@ -869,52 +890,7 @@ for (i in 2:9)
 #legend(1, 3, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "imprinting", "promoter", "enhancer"), col=seq(1,9), lty=rep(1,9), ncol=3)
 axis.labels <-c("PN1", "PN2", "PN3", "PN4")
 axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
-mtext("plus strand", outer = TRUE, cex = 1)
-
-```
-
-
-
-
-```{r, echo=F, warning=FALSE}
-mc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu2_jumpbarcode2\\important.region.reads.summary.txt", header=T)
-pa.mc=mc[c(13,15,17,19),]; ma.mc=mc[c(3,5,7,9),]
-rownames(pa.mc)=c("PN1", "PN2", "PN3", "PN4")
-colnames(pa.mc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
-rownames(ma.mc)=c("PN1", "PN2", "PN3", "PN4")
-colnames(ma.mc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
-
-heatcol <- brewer.pal(9, "Greens")
-scale.pa.mc=scale(as.matrix(pa.mc))
-scale.ma.mc=scale(as.matrix(ma.mc))
-
-heatmap.2(scale.pa.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5mC (minus strand)", cexCol=0.7)
-
-
-heatmap.2(scale.ma.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5mC  (minus strand)", cexCol=0.7)
-
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-
-plot(scale.ma.mc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5mC-maternal", cex.main=0.8, cex.lab=0.6)
-for (i in 2:9)
-  lines(scale.ma.mc[,i], col=i, type="o")
-legend(1, 3, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "imprinting", "promoter", "enhancer"), col=seq(1,9), lty=rep(1,9), ncol=3, cex=0.45)
-axis.labels <-c("PN1", "PN2", "PN3", "PN4")
-axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
-
-plot(scale.pa.mc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5mC-paternal", cex.main=0.8, cex.lab=0.5)
-for (i in 2:9)
-  lines(scale.pa.mc[,i], col=i, type="o")
-#legend(1, 3, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "imprinting", "promoter", "enhancer"), col=seq(1,9), lty=rep(1,9), ncol=3)
-axis.labels <-c("PN1", "PN2", "PN3", "PN4")
-axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
-mtext("minus strand", outer = TRUE, cex = 1)
-
-
-
-
-
+#mtext("plus stran", outer = TRUE, cex = 1)
 
 ```
 
@@ -925,7 +901,11 @@ mtext("minus strand", outer = TRUE, cex = 1)
 
 ```{r, echo=F, warning=FALSE}
 hmc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\important.region.reads.summary.txt", header=T)
-pa.hmc=hmc[c(14,16,18,20),]; ma.hmc=hmc[c(4,6,8,10),]
+pa.hmc.plus=hmc[c(14,16,18,20),]; ma.hmc.plus=hmc[c(4,6,8,10),]
+pa.hmc.minus=hmc[c(13,15,17,19),]; ma.hmc.minus=hmc[c(3,5,7,9),]
+pa.hmc=pa.hmc.plus+pa.hmc.minus
+ma.hmc=ma.hmc.plus+ma.hmc.minus
+
 rownames(pa.hmc)=c("PN1", "PN2", "PN3", "PN4")
 colnames(pa.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
 rownames(ma.hmc)=c("PN1", "PN2", "PN3", "PN4")
@@ -935,10 +915,10 @@ heatcol <- brewer.pal(9, "Greens")
 scale.pa.hmc=scale(as.matrix(pa.hmc))
 scale.ma.hmc=scale(as.matrix(ma.hmc))
 
-heatmap.2(scale.pa.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC (plus strand)", cexCol=0.8)
+heatmap.2(scale.pa.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC", cexCol=0.8)
 
 
-heatmap.2(scale.ma.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC  (plus strand)", cexCol=0.8)
+heatmap.2(scale.ma.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC", cexCol=0.8)
 
 
 par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
@@ -956,7 +936,7 @@ for (i in 2:9)
 #legend(1, 3, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "imprinting", "promoter", "enhancer"), col=seq(1,9), lty=rep(1,9), ncol=3)
 axis.labels <-c("PN1", "PN2", "PN3", "PN4")
 axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
-mtext("plus strand", outer = TRUE, cex = 1)
+#mtext("plus strand", outer = TRUE, cex = 1)
 
 
 
@@ -966,47 +946,6 @@ mtext("plus strand", outer = TRUE, cex = 1)
 
 
 
-```{r, echo=F, warning=FALSE}
-hmc=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\important.region.reads.summary.txt", header=T)
-pa.hmc=hmc[c(13,15,17,19),]; ma.hmc=hmc[c(3,5,7,9),]
-rownames(pa.hmc)=c("PN1", "PN2", "PN3", "PN4")
-colnames(pa.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
-rownames(ma.hmc)=c("PN1", "PN2", "PN3", "PN4")
-colnames(ma.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "imprinting", "promoter", "enhancer")
-
-heatcol <- brewer.pal(9, "Greens")
-scale.pa.hmc=scale(as.matrix(pa.hmc))
-scale.ma.hmc=scale(as.matrix(ma.hmc))
-
-heatmap.2(scale.pa.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC (minus strand)", cexCol=0.8)
-
-
-heatmap.2(scale.ma.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC  (minus strand)", cexCol=0.8)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-
-plot(scale.ma.hmc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-maternal", cex.main=0.8, cex.lab=0.6)
-for (i in 2:9)
-  lines(scale.ma.hmc[,i], col=i, type="o")
-legend(1, 3, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "imprinting", "promoter", "enhancer"), col=seq(1,9), lty=rep(1,9), ncol=3, cex=0.45)
-axis.labels <-c("PN1", "PN2", "PN3", "PN4")
-axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
-
-plot(scale.pa.hmc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-paternal", cex.main=0.8, cex.lab=0.5)
-for (i in 2:9)
-  lines(scale.pa.hmc[,i], col=i, type="o")
-#legend(1, 3, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "imprinting", "promoter", "enhancer"), col=seq(1,9), lty=rep(1,9), ncol=3)
-axis.labels <-c("PN1", "PN2", "PN3", "PN4")
-axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
-mtext("minus strand", outer = TRUE, cex = 1)
-
-
-
-
-```
-
-
-### reads correlation
 
 ```{r, echo=F}
 #hmc=c(32606, 41445, 7782, 32754)
@@ -1036,83 +975,47 @@ window size | 5hmC (plus, 20,767) | 5mC (PN3:plus, 939) | 5hmC (minus, 20,933) |
 Table:  overlap between 5hmC (PN4) and 5mC (PN3)
 
 
-### PN1 (5mC) vs PN4 (5hmC)
+
+### 5mC (PN1, 2, 3) vs 5hmC (PN4)
 
 ```{r, echo=F}
 pn1.pn4.overlap=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\pn1.pn4.overlap", header=F)
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-
-hmc.plus=pn1.pn4.overlap[c(1,3,5,7),3]; hmc.minus=pn1.pn4.overlap[c(2,4,6,8),6]
-plot(hmc.minus, ylim=c(0,0.2), type="o", xaxt='n', xlab="", ylab="Proportion of 5hmC at PN4", col=3, main="", cex.main=0.8, cex.lab=0.8)
-lines(hmc.plus, col=4, type="o")
-legend(1, 0.15, c("minus", "plus"), col=c(3,4), lty=c(1,1))
-axis.labels <-c("20bp", "100bp", "1kb", "5kb")
-axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
-
-
-mc.plus=pn1.pn4.overlap[c(1,3,5,7),6]; mc.minus=pn1.pn4.overlap[c(2,4,6,8),6]
-plot(mc.minus, ylim=c(0,0.2), type="o", xaxt='n', xlab="", ylab="Proportion of 5mC at PN1", col=3, main="", cex.main=0.8, cex.lab=0.8)
-lines(mc.plus, col=4, type="o")
-legend(1, 0.15, c("minus", "plus"), col=c(3,4), lty=c(1,1))
-axis.labels <-c("20bp", "100bp", "1kb", "5kb")
-axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
-mtext("overlap between 5mC (PN1) & 5hmC (PN4)", outer = TRUE, cex = 1)
-
-```
-
-
-
-
-
-### PN2 (5mC) vs PN4 (5hmC)
-
-```{r, echo=F}
 pn2.pn4.overlap=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\pn2.pn4.overlap", header=F)
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-
-hmc.plus=pn2.pn4.overlap[c(1,3,5,7),3]; hmc.minus=pn2.pn4.overlap[c(2,4,6,8),6]
-plot(hmc.minus, ylim=c(0,0.2), type="o", xaxt='n', xlab="", ylab="Proportion of 5hmC at PN4", col=3, main="", cex.main=0.8, cex.lab=0.8)
-lines(hmc.plus, col=4, type="o")
-legend(1, 0.15, c("minus", "plus"), col=c(3,4), lty=c(1,1))
-axis.labels <-c("20bp", "100bp", "1kb", "5kb")
-axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
-
-
-mc.plus=pn2.pn4.overlap[c(1,3,5,7),6]; mc.minus=pn2.pn4.overlap[c(2,4,6,8),6]
-plot(mc.minus, ylim=c(0,0.2), type="o", xaxt='n', xlab="", ylab="Proportion of 5mC at PN2", col=3, main="", cex.main=0.8, cex.lab=0.8)
-lines(mc.plus, col=4, type="o")
-legend(1, 0.15, c("minus", "plus"), col=c(3,4), lty=c(1,1))
-axis.labels <-c("20bp", "100bp", "1kb", "5kb")
-axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
-mtext("overlap between 5mC (PN2) & 5hmC (PN4)", outer = TRUE, cex = 1)
-
-```
-
-
-
-### PN3 (5mC) vs PN4 (5hmC)
-
-```{r, echo=F}
 pn3.pn4.overlap=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\pn3.pn4.overlap", header=F)
 par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
 
-hmc.plus=pn3.pn4.overlap[c(1,3,5,7),3]; hmc.minus=pn3.pn4.overlap[c(2,4,6,8),6]
-plot(hmc.minus, ylim=c(0,0.4), type="o", xaxt='n', xlab="", ylab="Proportion of 5hmC at PN4", col=3, main="", cex.main=0.8, cex.lab=0.8)
-lines(hmc.plus, col=4, type="o")
-legend(1, 0.3, c("minus", "plus"), col=c(3,4), lty=c(1,1))
+pn1.pn4.hmc.plus=pn1.pn4.overlap[c(1,3,5,7),3]; pn1.pn4.hmc.minus=pn1.pn4.overlap[c(2,4,6,8),6]
+pn1.pn4.hmc.ave=(pn1.pn4.hmc.plus+pn1.pn4.hmc.minus)/2
+pn2.pn4.hmc.plus=pn2.pn4.overlap[c(1,3,5,7),3]; pn2.pn4.hmc.minus=pn2.pn4.overlap[c(2,4,6,8),6]
+pn2.pn4.hmc.ave=(pn2.pn4.hmc.plus+pn2.pn4.hmc.minus)/2
+pn3.pn4.hmc.plus=pn3.pn4.overlap[c(1,3,5,7),3]; pn3.pn4.hmc.minus=pn3.pn4.overlap[c(2,4,6,8),6]
+pn3.pn4.hmc.ave=(pn3.pn4.hmc.plus+pn3.pn4.hmc.minus)/2
+
+plot(pn1.pn4.hmc.ave, ylim=c(0,0.2), type="o", xaxt='n', xlab="", ylab="Proportion of 5hmC at PN4", col=3, main="", cex.main=0.8, cex.lab=0.8)
+lines(pn2.pn4.hmc.ave, col=4, type="o")
+lines(pn3.pn4.hmc.ave, col=5, type="o")
+legend(1, 0.15, c("pn1.pn4", "pn2.pn4", "pn3.pn4"), col=c(3,4, 5), lty=c(1,1, 1))
 axis.labels <-c("20bp", "100bp", "1kb", "5kb")
 axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
 
-
-mc.plus=pn3.pn4.overlap[c(1,3,5,7),6]; mc.minus=pn3.pn4.overlap[c(2,4,6,8),6]
-plot(mc.minus, ylim=c(0,0.4), type="o", xaxt='n', xlab="", ylab="Proportion of 5mC at PN3", col=3, main="", cex.main=0.8, cex.lab=0.8)
-lines(mc.plus, col=4, type="o")
-legend(1, 0.3, c("minus", "plus"), col=c(3,4), lty=c(1,1))
+pn1.pn4.mc.plus=pn1.pn4.overlap[c(1,3,5,7),6]; pn1.pn4.mc.minus=pn1.pn4.overlap[c(2,4,6,8),6]
+pn1.pn4.mc.ave=(pn1.pn4.mc.plus+pn1.pn4.mc.minus)/2
+pn2.pn4.mc.plus=pn2.pn4.overlap[c(1,3,5,7),6]; pn2.pn4.mc.minus=pn2.pn4.overlap[c(2,4,6,8),6]
+pn2.pn4.mc.ave=(pn2.pn4.mc.plus+pn2.pn4.mc.minus)/2
+pn3.pn4.mc.plus=pn3.pn4.overlap[c(1,3,5,7),6]; pn3.pn4.mc.minus=pn3.pn4.overlap[c(2,4,6,8),6]
+pn3.pn4.mc.ave=(pn3.pn4.mc.plus+pn3.pn4.mc.minus)/2
+plot(pn1.pn4.mc.ave, ylim=c(0,0.3), type="o", xaxt='n', xlab="", ylab="Proportion of 5mC at PN1, 2, 3", col=3, main="", cex.main=0.8, cex.lab=0.8)
+lines(pn2.pn4.mc.ave, col=4, type="o")
+lines(pn3.pn4.mc.ave, col=5, type="o")
+legend(1, 0.25, c("pn1.pn4", "pn2.pn4", "pn3.pn4"), col=c(3,4, 5), lty=c(1,1,1))
 axis.labels <-c("20bp", "100bp", "1kb", "5kb")
 axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
-mtext("overlap between 5mC (PN3) & 5hmC (PN4)", outer = TRUE, cex = 1)
+mtext("overlap between 5mC & 5hmC (PN4)", outer = TRUE, cex = 1)
 
 ```
+
+
+
 
 
 ## PN2 vs PN3

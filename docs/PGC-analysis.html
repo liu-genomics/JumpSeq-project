@@ -312,10 +312,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-10-26</p>
+<p><strong>Last updated:</strong> 2017-10-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> e5fe7e2</p>
+<p><strong>Code version:</strong> adfcb7f</p>
 <!-- Add your analysis here -->
 <div id="mouse-genome-mm9" class="section level2">
 <h2>mouse genome (mm9)</h2>
@@ -402,6 +402,7 @@ uc011whu.1      Tcea1
 <ul>
 <li>Paternal: 6, 7, 8, 9, 10; maternal: 1, 2, 3, 4, 5</li>
 </ul>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="maternal-samples" class="section level3">
 <h3>Maternal samples</h3>
 <div class="figure">
@@ -801,7 +802,7 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li><p>use Kmeans to cluster genes with number of clusters fixed at 3.</p></li>
 <li><p>genes in cluster1</p></li>
@@ -826,365 +827,59 @@ uc011whu.1      Tcea1
 <img src="figure/lu1_jumpbarcode1/lu1_jumpbarcode1_tp2345_minus.png" alt="Whole genome reads distribution of minus strand-TP2345" />
 <p class="caption">Whole genome reads distribution of minus strand-TP2345</p>
 </div>
-<pre class="r"><code>kable(combine.fin, caption=&quot;Number of reads of imprinting genes (at minus strand) from maternal samples at different stages&quot;)</code></pre>
-<table>
-<caption>Number of reads of imprinting genes (at minus strand) from maternal samples at different stages</caption>
-<thead>
-<tr class="header">
-<th align="left">Gene</th>
-<th align="right">PN1</th>
-<th align="right">PN2</th>
-<th align="right">PN3</th>
-<th align="right">PN4</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Gpr1</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Sfmbt2</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="left">Wt1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-</tr>
-<tr class="even">
-<td align="left">Gatm</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">Blcap</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Nnat</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">Gnas</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Lin28a</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">Trp73</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Magi2</td>
-<td align="right">2</td>
-<td align="right">11</td>
-<td align="right">13</td>
-<td align="right">5</td>
-</tr>
-<tr class="odd">
-<td align="left">Ppp1r9a</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">5</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="left">Pon3</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="left">Asb4</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Mest</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="left">Pon2</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Copg2</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="left">Dhcr7</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Ano1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="left">Peg3</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-</tr>
-<tr class="even">
-<td align="left">Usp29</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td align="left">Gabrg3</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">3</td>
-<td align="right">4</td>
-</tr>
-<tr class="even">
-<td align="left">Gabra5</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">0</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="left">Gabrb3</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="left">Snrpn</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td align="left">Kcnq1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">1</td>
-<td align="right">4</td>
-</tr>
-<tr class="even">
-<td align="left">Kcnq1ot1</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">Ascl2</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Tnfrsf23</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="left">Inpp5f</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Gab1</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">Snx14</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Ntm</td>
-<td align="right">2</td>
-<td align="right">4</td>
-<td align="right">6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">Rasgrf1</td>
-<td align="right">0</td>
-<td align="right">5</td>
-<td align="right">3</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Lin28b</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">Plagl1</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">1</td>
-</tr>
-<tr class="even">
-<td align="left">Ctnna3</td>
-<td align="right">1</td>
-<td align="right">7</td>
-<td align="right">12</td>
-<td align="right">14</td>
-</tr>
-<tr class="odd">
-<td align="left">Ddc</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">1</td>
-</tr>
-<tr class="even">
-<td align="left">Grb10</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">0</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">Commd1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="left">Rian</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">Rb1</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">0</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="left">Htr2a</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="left">Zfat</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
-</tr>
-<tr class="even">
-<td align="left">Peg13</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="left">Slc38a4</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Slc22a3</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">Slc22a2</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Igf2r</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">0</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">Glis3</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">6</td>
-</tr>
-</tbody>
-</table>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#kable(combine.fin, caption=&quot;Number of reads of imprinting genes (at minus strand) from maternal samples at different stages&quot;)
+combine.fin</code></pre>
+<pre><code>       Gene PN1 PN2 PN3 PN4
+1      Gpr1   1   0   0   0
+2    Sfmbt2   0   2   1   1
+3       Wt1   0   0   0   1
+4      Gatm   0   0   1   0
+5     Blcap   0   1   0   0
+6      Nnat   0   1   0   0
+7      Gnas   0   1   2   0
+8    Lin28a   0   0   1   0
+9     Trp73   0   0   1   0
+10    Magi2   2  11  13   5
+11  Ppp1r9a   0   1   5   2
+12     Pon3   0   0   1   1
+13     Asb4   0   0   1   0
+14     Mest   0   0   0   1
+15     Pon2   0   0   1   0
+16    Copg2   1   0   0   1
+17    Dhcr7   0   0   1   0
+18     Ano1   0   0   0   1
+19     Peg3   0   0   0   1
+20    Usp29   0   1   1   2
+21   Gabrg3   1   4   3   4
+22   Gabra5   1   2   0   1
+23   Gabrb3   0   1   2   2
+24    Snrpn   0   0   2   2
+25    Kcnq1   0   4   1   4
+26 Kcnq1ot1   0   2   1   0
+27    Ascl2   0   0   1   0
+28 Tnfrsf23   0   0   0   1
+29   Inpp5f   1   0   0   0
+30     Gab1   0   1   1   0
+31    Snx14   0   0   2   0
+32      Ntm   2   4   6   3
+33  Rasgrf1   0   5   3   0
+34   Lin28b   0   0   1   0
+35   Plagl1   0   1   2   1
+36   Ctnna3   1   7  12  14
+37      Ddc   0   1   0   1
+38    Grb10   0   2   0   0
+39   Commd1   0   0   0   2
+40     Rian   0   0   1   0
+41      Rb1   0   2   0   2
+42    Htr2a   1   0   0   1
+43     Zfat   0   0   3   1
+44    Peg13   0   0   0   1
+45  Slc38a4   1   0   1   0
+46  Slc22a3   0   0   2   0
+47  Slc22a2   0   1   1   0
+48    Igf2r   0   2   0   0
+49    Glis3   0   1   4   6</code></pre>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li>genes in cluster1</li>
 </ul>
@@ -1646,7 +1341,7 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li>genes in cluster1</li>
 </ul>
@@ -2128,7 +1823,7 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li>genes in cluster1</li>
 </ul>
@@ -2211,6 +1906,7 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
+<p>there is a huge difference of reads count between these two replicates?</p>
 </div>
 <div id="icr-sperm-transposon-8" class="section level3">
 <h3>ICR sperm (transposon-8)</h3>
@@ -2599,7 +2295,7 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-30-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li>genes in cluster1</li>
 </ul>
@@ -2860,7 +2556,7 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li>genes in cluster1</li>
 </ul>
@@ -3071,7 +2767,7 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-41-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-42-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li>genes in cluster1</li>
 </ul>
@@ -3301,7 +2997,7 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li>genes in cluster1</li>
 </ul>
@@ -3344,17 +3040,12 @@ uc011whu.1      Tcea1
 </ul>
 <div id="mc" class="section level4">
 <h4>5mC</h4>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-59-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-59-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-59-3.png" width="672" style="display: block; margin: auto;" /></p>
 <p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-60-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-60-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-60-3.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="hmc" class="section level4">
 <h4>5hmC</h4>
 <p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-61-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-61-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-61-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-62-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-62-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/PGC-analysis.Rmd/unnamed-chunk-62-3.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-</div>
-<div id="reads-correlation" class="section level3">
-<h3>reads correlation</h3>
 </div>
 </div>
 <div id="paternal-site-changes-at-pn4-5mc-vs-5hmc" class="section level2">
@@ -3439,17 +3130,9 @@ uc011whu.1      Tcea1
 </tr>
 </tbody>
 </table>
-<div id="pn1-5mc-vs-pn4-5hmc" class="section level3">
-<h3>PN1 (5mC) vs PN4 (5hmC)</h3>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-64-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="pn2-5mc-vs-pn4-5hmc" class="section level3">
-<h3>PN2 (5mC) vs PN4 (5hmC)</h3>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-65-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="pn3-5mc-vs-pn4-5hmc" class="section level3">
-<h3>PN3 (5mC) vs PN4 (5hmC)</h3>
-<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-66-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="mc-pn1-2-3-vs-5hmc-pn4" class="section level3">
+<h3>5mC (PN1, 2, 3) vs 5hmC (PN4)</h3>
+<p><img src="figure/PGC-analysis.Rmd/unnamed-chunk-63-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="pn2-vs-pn3" class="section level2">
