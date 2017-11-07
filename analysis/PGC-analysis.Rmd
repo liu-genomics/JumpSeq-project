@@ -11,6 +11,7 @@ shared across the workflowr files. -->
 ```{r read-chunk, include=FALSE}
 knitr::read_chunk("chunks.R")
 library(knitr)
+library(kableExtra)
 library(RColorBrewer)
 library(gplots)
 set.seed(123)
@@ -130,8 +131,10 @@ combine.fin=combine.nona[-c(zero.index),]
 rownames(combine.fin)=NULL
 ```
 
-```{r, echo=T}
-kable(combine.fin, caption="Number of reads of imprinting genes (at plus strand) from maternal samples at different stages")
+```{r, echo=F}
+kable(combine.fin, caption="Number of reads of imprinting genes (at plus strand) from maternal samples at different stages", "html") %>% 
+kable_styling() %>%
+scroll_box(height = "200px")
 ```
 
 ```{r, echo=F}
@@ -192,9 +195,10 @@ combine.fin=combine.nona[-c(zero.index),]
 rownames(combine.fin)=NULL
 ```
 
-```{r, rows.print=5}
-#kable(combine.fin, caption="Number of reads of imprinting genes (at minus strand) from maternal samples at different stages")
-combine.fin
+```{r, echo=F}
+kable(combine.fin, caption="Number of reads of imprinting genes (at minus strand) from maternal samples at different stages", "html") %>%
+kable_styling() %>%
+scroll_box(height = "200px")
 ```
 
 ```{r, echo=F}
@@ -255,8 +259,10 @@ combine.fin=combine.nona[-c(zero.index),]
 rownames(combine.fin)=NULL
 ```
 
-```{r, echo=T}
-kable(combine.fin, caption="Number of reads of imprinting genes (at plus strand) from paternal samples at different stages")
+```{r, echo=F}
+kable(combine.fin, caption="Number of reads of imprinting genes (at plus strand) from paternal samples at different stages", "html") %>% 
+kable_styling() %>%
+  scroll_box(height = "200px")
 ```
 
 ```{r, echo=F}
@@ -318,8 +324,10 @@ combine.fin=combine.nona[-c(zero.index),]
 rownames(combine.fin)=NULL
 ```
 
-```{r, echo=T}
-kable(combine.fin, caption="Number of reads of imprinting genes (at minus strand) from paternal samples at different stages")
+```{r, echo=F}
+kable(combine.fin, caption="Number of reads of imprinting genes (at minus strand) from paternal samples at different stages", "html") %>%
+kable_styling() %>%
+  scroll_box(height = "200px")
 ```
 
 ```{r, echo=F}
@@ -416,7 +424,22 @@ Transposase barcode  | total unique reads | plus reads / minus reads
 10 (PN4)| 14,692 | 7,361/7,331
 Table: reads in every transposase bacode sample 
 
+
+
+```{r, echo=F}
+paternal.reads=c(6752, 4547, 2087, 14692)
+maternal.reads=c(16647, 26834, 12157, 9003)
+scale.paternal=paternal.reads/sum(paternal.reads)
+scale.maternal=maternal.reads/sum(maternal.reads)
+plot(scale.paternal,  ylim=c(0, 0.7), type="o", xaxt='n', xlab="", ylab="Proportion of reads", col=1, main="Proportion of reads at different stages of 5mC", cex.main=0.8, cex.lab=0.8)
+lines(scale.maternal, type="o", col=2)
+legend(1, 0.6, c("paternal", "maternal"), col=c(1,2), lty=c(1,1))
+axis.labels <-c("PN1", "PN2", "PN3", "PN4")
+axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
+```
 #####################################################
+
+
 ### Maternal samples 
 
 ![Whole genome reads distribution of minus strand-TP2345 ](figure/lu2_jumpbarcode2/lu2_jumpbarcode2_tp2345_minus.png)
@@ -451,8 +474,10 @@ combine.fin=combine.nona[-c(zero.index),]
 rownames(combine.fin)=NULL
 ```
 
-```{r, echo=T}
-kable(combine.fin, caption="Number of reads of 38 imprinting genes (at minus strand) from Maternal samples at different stages")
+```{r, echo=F}
+kable(combine.fin, caption="Number of reads of 38 imprinting genes (at minus strand) from Maternal samples at different stages", "html") %>%
+kable_styling() %>%
+  scroll_box(height = "200px")
 ```
 
 ```{r, echo=F}
@@ -513,8 +538,11 @@ combine.fin=combine.nona[-c(zero.index),]
 rownames(combine.fin)=NULL
 ```
 
-```{r, echo=T}
-kable(combine.fin, caption="Number of reads of imprinting genes (at plus strand) from Maternal samples at different stages")
+```{r, echo=F}
+kable(combine.fin, caption="Number of reads of imprinting genes (at plus strand) from Maternal samples at different stages", "html") %>%
+  kable_styling() %>%
+  scroll_box(height = "200px")
+
 ```
 
 
@@ -576,8 +604,10 @@ combine.fin=combine.nona[-c(zero.index),]
 rownames(combine.fin)=NULL
 ```
 
-```{r, echo=T}
-kable(combine.fin, caption="Number of reads of imprinting genes (at minus strand) from Maternal samples at different stages")
+```{r, echo=F}
+kable(combine.fin, caption="Number of reads of imprinting genes (at minus strand) from Maternal samples at different stages", "html") %>%
+kable_styling() %>%
+scroll_box(height = "200px")  
 ```
 
 
@@ -636,8 +666,10 @@ combine.fin=combine.nona[-c(zero.index),]
 rownames(combine.fin)=NULL
 ```
 
-```{r, echo=T}
-kable(combine.fin, caption="Number of reads  of imprinting genes (at plus strand) from Maternal samples at different stages")
+```{r, echo=F}
+kable(combine.fin, caption="Number of reads  of imprinting genes (at plus strand) from Maternal samples at different stages", "html") %>%
+kable_styling() %>%
+  scroll_box(height = "200px")  
 ```
 
 
@@ -673,6 +705,34 @@ as.character(combine.fin$Gene[which(clust$cluster==3)])
 ```
 
 
+########################################################
+########################################################
+## Whole genome gene set analysis
+
+### 5hmC 
+
+```{r, echo=F}
+plus.reads.gene.tp2=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+plus.reads.gene.tp3=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP03.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+plus.reads.gene.tp4=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP04.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+plus.reads.gene.tp5=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP05.bam.plus.cove.base.level.shiftonebase.txt", header=T)
+plus.combine=cbind(plus.reads.gene.tp2$No.reads, plus.reads.gene.tp3$No.reads, plus.reads.gene.tp4$No.reads, plus.reads.gene.tp5$No.reads)
+
+minus.reads.gene.tp2=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP02.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+minus.reads.gene.tp3=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP03.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+minus.reads.gene.tp4=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP04.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+minus.reads.gene.tp5=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP05.bam.minus.cove.base.level.shiftonebase.txt", header=T)
+minus.combine=cbind(minus.reads.gene.tp2$No.reads, minus.reads.gene.tp3$No.reads, minus.reads.gene.tp4$No.reads, minus.reads.gene.tp5$No.reads)
+
+combine=plus.combine+minus.combine
+colnames(combine)=c("PN1", "PN2", "PN3", "PN4")
+rownames(combine)=plus.reads.gene.tp2$Gene
+nonzero.combine=combine[!(apply(combine, 1, function(y) any(y == 0))),]
+
+```
+5hmC maternal: there are 1032 genes with postive number of reads at all four stages. 
+
+
 
 
 ########################################################
@@ -681,6 +741,15 @@ as.character(combine.fin$Gene[which(clust$cluster==3)])
 ## heatmap
 
 ### whole genome 
+
+* genes with reads 
+
+
+
+
+
+
+
 
 * every column is a normalized vector of reads counts of a gene, 
 
@@ -955,25 +1024,7 @@ axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
 #cor(hmc, mc)
 ```
 
-## Paternal site changes at PN4 (5mC vs 5hmC)
-
-* 5hmC plus strand has 20,767 sites and 105 (0.5056%) are overlapping (20 bp windows) with 5mC plus strand; 5mC plus strand has 6575 sites and 73 (1.1103%) are overlapping with 5hmC plus strand.  
-
-
-window size | 5hmC (plus, 20,767) | 5mC (plus, 6,575) | 5hmC (minus, 20, 933) | 5mC (minus)
-------------|-------------|--------------|------------|------------
-20 bp |105 (0.5056%) | 73 (1.1103%)| 272 | 141
-100 bp| 367 | 202 | 446 | 183
-1000 bp| 497 | 309 | 593 | 283
-
-
-window size | 5hmC (plus, 20,767) | 5mC (PN3:plus, 939) | 5hmC (minus, 20,933) | 5mC ( PN3:  minus, 939)
-------------|-------------|--------------|------------|------------
-20 bp |0 |0 | 53 | 124 
-100 bp| 
-1000 bp| 
-Table:  overlap between 5hmC (PN4) and 5mC (PN3)
-
+## Paternal site changes (5mC vs 5hmC)
 
 
 ### 5mC (PN1, 2, 3) vs 5hmC (PN4)
@@ -1014,6 +1065,64 @@ mtext("overlap between 5mC & 5hmC (PN4)", outer = TRUE, cex = 1)
 
 ```
 
+
+### 5mC (PN1, 2) vs 5hmC (PN3)
+
+```{r, echo=F}
+pn1.pn3.overlap=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\pn1.pn3.overlap", header=F)
+pn2.pn3.overlap=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\pn2.pn3.overlap", header=F)
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+
+pn1.pn3.hmc.plus=pn1.pn3.overlap[c(1,3,5,7),3]; pn1.pn3.hmc.minus=pn1.pn3.overlap[c(2,4,6,8),6]
+pn1.pn3.hmc.ave=(pn1.pn3.hmc.plus+pn1.pn3.hmc.minus)/2
+pn2.pn3.hmc.plus=pn2.pn3.overlap[c(1,3,5,7),3]; pn2.pn3.hmc.minus=pn2.pn3.overlap[c(2,4,6,8),6]
+pn2.pn3.hmc.ave=(pn2.pn3.hmc.plus+pn2.pn3.hmc.minus)/2
+
+
+plot(pn1.pn3.hmc.ave, ylim=c(0,0.2), type="o", xaxt='n', xlab="", ylab="Proportion of 5hmC at PN3", col=3, main="", cex.main=0.8, cex.lab=0.8)
+lines(pn2.pn3.hmc.ave, col=4, type="o")
+legend(1, 0.15, c("pn1.pn3", "pn2.pn3"), col=c(3,4), lty=c(1,1))
+axis.labels <-c("20bp", "100bp", "1kb", "5kb")
+axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
+
+pn1.pn3.mc.plus=pn1.pn3.overlap[c(1,3,5,7),6]; pn1.pn3.mc.minus=pn1.pn3.overlap[c(2,4,6,8),6]
+pn1.pn3.mc.ave=(pn1.pn3.mc.plus+pn1.pn3.mc.minus)/2
+pn2.pn3.mc.plus=pn2.pn3.overlap[c(1,3,5,7),6]; pn2.pn3.mc.minus=pn2.pn3.overlap[c(2,4,6,8),6]
+pn2.pn3.mc.ave=(pn2.pn3.mc.plus+pn2.pn3.mc.minus)/2
+plot(pn1.pn3.mc.ave, ylim=c(0,0.3), type="o", xaxt='n', xlab="", ylab="Proportion of 5mC at PN1, 2", col=3, main="", cex.main=0.8, cex.lab=0.8)
+lines(pn2.pn3.mc.ave, col=4, type="o")
+legend(1, 0.25, c("pn1.pn3", "pn2.pn3"), col=c(3,4), lty=c(1,1))
+axis.labels <-c("20bp", "100bp", "1kb", "5kb")
+axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
+mtext("overlap between 5mC & 5hmC (PN3)", outer = TRUE, cex = 1)
+
+```
+
+
+
+
+### 5mC (PN1) vs 5hmC (PN2)
+
+```{r, echo=F}
+pn1.pn2.overlap=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PN\\lu1_jumpbarcode1\\pn1.pn2.overlap", header=F)
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+
+pn1.pn2.hmc.plus=pn1.pn2.overlap[c(1,3,5,7),3]; pn1.pn2.hmc.minus=pn1.pn2.overlap[c(2,4,6,8),6]
+pn1.pn2.hmc.ave=(pn1.pn2.hmc.plus+pn1.pn2.hmc.minus)/2
+
+
+plot(pn1.pn2.hmc.ave, ylim=c(0,0.2), type="o", xaxt='n', xlab="", ylab="Proportion of 5hmC at PN2", col=3, main="", cex.main=0.8, cex.lab=0.8)
+axis.labels <-c("20bp", "100bp", "1kb", "5kb")
+axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
+
+pn1.pn2.mc.plus=pn1.pn2.overlap[c(1,3,5,7),6]; pn1.pn2.mc.minus=pn1.pn2.overlap[c(2,4,6,8),6]
+pn1.pn2.mc.ave=(pn1.pn2.mc.plus+pn1.pn2.mc.minus)/2
+plot(pn1.pn2.mc.ave, ylim=c(0,0.3), type="o", xaxt='n', xlab="", ylab="Proportion of 5mC at PN1, 2", col=3, main="", cex.main=0.8, cex.lab=0.8)
+axis.labels <-c("20bp", "100bp", "1kb", "5kb")
+axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
+mtext("overlap between 5mC (PN1) & 5hmC (PN2)", outer = TRUE, cex = 1)
+
+```
 
 
 
