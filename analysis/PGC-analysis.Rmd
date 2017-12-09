@@ -83,8 +83,8 @@ Table: reads in every transposase bacode sample
 * Paternal: 6, 7, 8, 9, 10; maternal: 1, 2, 3, 4, 5
 
 ```{r, echo=F}
-paternal.reads=c(8429, 32606, 41445, 29586)
-maternal.reads=c(30982, 7782, 32754, 42382)
+maternal.reads=c(8429, 32606, 41445, 29586)
+paternal.reads=c(30982, 7782, 32754, 42382)
 scale.paternal=paternal.reads/sum(paternal.reads)
 scale.maternal=maternal.reads/sum(maternal.reads)
 plot(scale.paternal,  ylim=c(0, 0.7), type="o", xaxt='n', xlab="", ylab="Proportion of reads", col=1, main="Proportion of reads at different stages of 5hmC", cex.main=0.8, cex.lab=0.8)
