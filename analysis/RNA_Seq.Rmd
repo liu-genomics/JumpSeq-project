@@ -1,0 +1,135 @@
+---
+title: "RNA-Seq analysis"
+author: "Shengtong Han"
+date: YYYY-MM-DD
+output: html_document
+---
+
+<!-- The file analysis/chunks.R contains chunks that define default settings
+shared across the workflowr files. -->
+```{r read-chunk, include=FALSE, cache=FALSE}
+knitr::read_chunk("chunks.R")
+```
+
+<!-- Update knitr chunk options -->
+```{r knitr-opts-chunk, include=FALSE}
+```
+
+<!-- Insert the date the file was last updated -->
+```{r last-updated, echo=FALSE, results='asis'}
+```
+
+<!-- Insert the code version (Git commit SHA1) if Git repository exists and R
+ package git2r is installed -->
+```{r code-version, echo=FALSE, results='asis'}
+```
+
+
+```{r load packages, results='hide', include=FALSE}
+library(RSQLite)
+library(dplyr)
+library(knitr)
+library(git2r)
+```
+
+<!-- Add your analysis here -->
+
+## Quality Control (QC)
+
+Look at 300 bp downstream of TSS of all genes. 
+
+
+
+rep  | # reads 
+-------|------
+1 |445,029
+2 |322,718 
+3 |363,189 
+Table: Female PN1: total number of reads within 300 bp of TSS of all genes 
+
+
+
+rep  | # reads 
+-------|------
+1 |391,788
+2 |427,015 
+3 |415,578 
+Table: Female PN2: total number of reads within 300 bp of TSS of all genes 
+
+
+rep  | # reads 
+-------|------
+1 |142,434
+2 |143,869 
+Table: Female PN3: total number of reads within 300 bp of TSS of all genes 
+
+
+rep  | # reads 
+-------|------
+1 |466,115
+2 |374,645 
+3 |567,172 
+Table: Female PN4: total number of reads within 300 bp of TSS of all genes 
+
+```{r, echo=F}
+female.pn1=c(445029,322718,363189)
+female.pn2=c(391788, 427015, 415578)
+female.pn3=c(142434, 143869)
+female.pn4=c(466115, 374645, 567172)
+
+max.value=max(female.pn1, female.pn2, female.pn3, female.pn4)
+min.value=min(female.pn1, female.pn2, female.pn3, female.pn4)
+plot(female.pn1, ylim=c(min.value, max.value),col=1, type="o", pch=16, ylab="#.reads", xlab="Replicate", main="Female: numnber of reads with 300 bp downstream of TSS of all genes")
+lines(female.pn2, type="o", pch=16, col=2)
+lines(female.pn3, type="o", pch=16, col=3)
+lines(female.pn4, type="o", pch=16, col=4)
+legend(1, 3.5e+05, c("PN1", "PN2", "PN3", "PN4"), col=c(1,2,3,4), pch=c(16,16,16,16))
+```
+
+rep  | # reads 
+-------|------
+1 |465,964
+2 |385,472 
+Table: Male PN1: total number of reads within 300 bp of TSS of all genes 
+
+
+rep  | # reads 
+-------|------
+1 |436,084
+2 |388,608 
+Table: Male PN2: total number of reads within 300 bp of TSS of all genes
+
+rep  | # reads 
+-------|------
+1 |135,848
+2 |140,015 
+Table: Male PN3: total number of reads within 300 bp of TSS of all genes
+
+rep  | # reads 
+-------|------
+1 |488,898
+2 |582,308
+3 |479,979
+Table: Male PN4: total number of reads within 300 bp of TSS of all genes
+
+
+```{r, echo=F}
+male.pn1=c(465964,385472)
+male.pn2=c(436084, 388608)
+male.pn3=c(135848, 140015)
+male.pn4=c(488898, 582308, 479979)
+
+max.value=max(male.pn1, male.pn2, male.pn3, male.pn4)
+min.value=min(male.pn1, male.pn2, male.pn3, male.pn4)
+plot(male.pn4, ylim=c(min.value, max.value),col=4, type="o", pch=16, ylab="#.reads", xlab="Replicate", main="Male: numnber of reads with 300 bp downstream of TSS of all genes")
+lines(male.pn2, type="o", pch=16, col=2)
+lines(male.pn3, type="o", pch=16, col=3)
+lines(male.pn1, type="o", pch=16, col=1)
+legend(1, 3.5e+05, c("PN4", "PN2", "PN3", "PN1"), col=c(4,2,3,1), pch=c(16,16,16,16))
+```
+
+## Session information
+
+<!-- Insert the session information into the document -->
+```{r session-info}
+```

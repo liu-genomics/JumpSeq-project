@@ -10,8 +10,8 @@ This project aims to investigate genome-wide distribution of 5hmC.
 * [This](PeakCalling-procedure.html) is Peak window calling procedure. 
 * [This](JumpSeq-analysis.html) is analysis for 5hmC data.
 * [Here](5mCAnalysis.html) is analysis for 5mC data. 
-* [This](SingleCell.html) is single cell data. 
-* [This](PGC-analysis.html) is PN analysis. 
+* [This](RNA_Seq.html) is RNA-seq analysis. 
+* [This](PN-analysis.html) is PN analysis. 
 
 * Yuwen's analysis is [here][Yuwen]
 
