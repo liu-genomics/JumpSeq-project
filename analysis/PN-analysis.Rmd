@@ -975,6 +975,7 @@ axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
 ### correlation between 5mC vs 5hmC 
 
 
+#### at four PN stages 
 
 ```{r, echo=F, warning=FALSE}
 cor.matx=matrix(nrow=2, ncol=ncol(ma.hmc))
@@ -990,6 +991,29 @@ legend(1,0.3, c("maternal", "paternal"), col=c(1,2), pch=c(16,16))
 axis.labels <- colnames(cor.matx)[-7]
 axis(1, at=seq(1,8), labels=axis.labels, cex.axis=0.8, las=2)
 ```
+
+
+
+#### at PN3 and PN4
+
+
+
+```{r, echo=F, warning=FALSE}
+cor.matx=matrix(nrow=2, ncol=ncol(ma.hmc))
+for (i in 1:ncol(cor.matx))
+{
+  cor.matx[1,i]=cor(ma.mc[3:4,i], ma.hmc[3:4,i])
+  cor.matx[2,i]=cor(pa.mc[3:4,i], pa.hmc[3:4,i])
+}
+colnames(cor.matx)=colnames(ma.hmc)
+plot(cor.matx[1,-7], ylim=c(-1,1), col=1, type="o", pch=16, xaxt='n', xlab="", main="Correlation between 5mC and 5hmC  in different regions", ylab="correlation")
+lines(cor.matx[2,-7], ylim=c(-1,1), type="o", pch=16,col=2)
+legend(1,0.3, c("maternal", "paternal"), col=c(1,2), pch=c(16,16))
+axis.labels <- colnames(cor.matx)[-7]
+axis(1, at=seq(1,8), labels=axis.labels, cex.axis=0.8, las=2)
+```
+
+
 
 ## Paternal site changes (5mC vs 5hmC)
 
@@ -1088,7 +1112,7 @@ axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
 
 pn1.pn2.mc.plus=pn1.pn2.overlap[c(1,3,5,7),6]; pn1.pn2.mc.minus=pn1.pn2.overlap[c(2,4,6,8),6]
 pn1.pn2.mc.ave=(pn1.pn2.mc.plus+pn1.pn2.mc.minus)/2
-plot(pn1.pn2.mc.ave, ylim=c(0,0.3), type="o", xaxt='n', xlab="", ylab="Proportion of 5mC at PN1, 2", col=3, main="", cex.main=0.8, cex.lab=0.8)
+plot(pn1.pn2.mc.ave, ylim=c(0,0.3), type="o", xaxt='n', xlab="", ylab="Proportion of 5mC at PN1", col=3, main="", cex.main=0.8, cex.lab=0.8)
 axis.labels <-c("20bp", "100bp", "1kb", "5kb")
 axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
 mtext("overlap between 5mC (PN1) & 5hmC (PN2)", outer = TRUE, cex = 1)
