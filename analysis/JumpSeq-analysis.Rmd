@@ -728,6 +728,7 @@ pie(slices,labels = lbls, col=rainbow(length(lbls)),
   	main="Peak distribution in different regions(combine,plus, FDR0.05)")
 ```
 
+
 * The peaks are from combined data of 11 48ng replicates of plus strand at FDR0.05. 
 
 * Each peak window is counted once, start from CTCF, then enhancer, h3k27ac, h3k5me3, PoIII. For example, first count how many peak windows are overlaping with CTCF, then exclude these overlapped windows, use the rest to overlap with enhancer, and so on.   
@@ -1510,6 +1511,21 @@ plot(seq(1,200)+1, spike_in_zero, type="l", main="100% hmC model", xlab="Base po
 plot(seq(96, 102), spike_in_zero[97:103], type="o", main="100% hmC model", xlab="Base position", ylab="Num of reads")
 # there is one base shift 
 ```
+
+
+
+## 0.5ngmES-correlation
+```{r, echo=F}
+corr=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\0.5ngmES\\correlation.txt", header=T)
+ave=colMeans(corr, na.rm=T)
+plot(ave, type="o", xaxt='n', xlab="Window length",ylim=c(0,1), ylab="Correlation", pch=16)
+axis.labels <-c("20bp", "1kbp", "5kbp", "10kbp")
+axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8)
+```
+
+* With each window length, use the the windows with at least one reads, calculate the pairwise correlation between two replicates using reads number in the window, then average the correlation across all possible pairwise combinations (here only randomly pick 10 pairs). 
+
+
 
 ## Session information
 
