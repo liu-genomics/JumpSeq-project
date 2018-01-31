@@ -12,6 +12,7 @@ This project aims to investigate genome-wide distribution of 5hmC.
 * [Here](5mCAnalysis.html) is analysis for 5mC data. 
 * [This](RNA_Seq.html) is RNA-seq analysis. 
 * [This](PN-analysis.html) is PN analysis. 
+* [This](Sample-with-spikein.html) is analysis for samples with spike in
 
 * Yuwen's analysis is [here][Yuwen]
 

@@ -1,0 +1,128 @@
+---
+title: "Sample with spike in"
+author: "Shengtong  Han"
+date: YYYY-MM-DD
+output: html_document
+---
+
+<!-- The file analysis/chunks.R contains chunks that define default settings
+shared across the workflowr files. -->
+```{r read-chunk, include=FALSE, cache=FALSE}
+knitr::read_chunk("chunks.R")
+knitr::read_chunk("chunks.R")
+library(knitr)
+library(kableExtra)
+library(RColorBrewer)
+library(gplots)
+set.seed(123)
+```
+
+<!-- Update knitr chunk options -->
+```{r knitr-opts-chunk, include=FALSE}
+```
+
+<!-- Insert the date the file was last updated -->
+```{r last-updated, echo=FALSE, results='asis'}
+```
+
+<!-- Insert the code version (Git commit SHA1) if Git repository exists and R
+ package git2r is installed -->
+```{r code-version, echo=FALSE, results='asis'}
+```
+
+<!-- Add your analysis here -->
+
+## Important regions at different stages 
+
+```{r, echo=F, eval=F}
+region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\important.region.reads", header=F)
+region.reads.correct=matrix(nrow=19, ncol=8)
+for (i in 1:19)
+  region.reads.correct[i,]=as.numeric(region.reads[((i-1)*2+1),2:9]+region.reads[i*2,2:9])
+spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\spike.in.reads", header=F)
+reads.summary=cbind(region.reads.correct, as.numeric(spikein.reads[,2]))
+rownames(reads.summary)=c("hmc-PN5", "hmc-1cell", "hmc-2cellearly", "hmc-2celllate", "hmc-MII", "hmc-sperm", "hmc-ES", "mc-MII", "mc-sperm", "mc-ES", "mc-600pgmES", "hmc-PN1female", "hmc-PN1male", "hmc-PN2female", "hmc-PN2male", "hmc-PN3female", "hmc-PN3male", "hmc-PN4female", "hmc-PN4male")
+colnames(reads.summary)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer", "spikein")
+scale.factor=reads.summary[,9]/min(reads.summary[,9])
+scale.reads=matrix(nrow=19, ncol=8)
+for (i in 1:19)
+  scale.reads[i,]=reads.summary[i,1:8]*scale.factor[i]
+rownames(scale.reads)=rownames(reads.summary)
+colnames(scale.reads)=colnames(reads.summary)[1:8]
+```
+
+### Paternal 
+
+```{r, echo=F, warning=F}
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\scale.reads.csv")
+hmc_male=rbind(scale.reads[5,], scale.reads[13,], scale.reads[15,], scale.reads[17,], scale.reads[19,], scale.reads[1,], scale.reads[2:4,] )
+rownames(hmc_male)=hmc_male[,1]
+hmc_male=hmc_male[,-1]
+heatcol <- brewer.pal(9, "Greens")
+hmc_male2=hmc_male[2:5,]
+scale.male.hmc=scale(as.matrix(hmc_male))
+scale.male.hmc2=scale(as.matrix(hmc_male2))
+colnames(scale.male.hmc2)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
+colnames(scale.male.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
+rownames(scale.male.hmc)=c("MII", "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly", "2celllate")
+rownames(scale.male.hmc2)=c( "PN1","PN2","PN3","PN4")
+heatmap.2(scale.male.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC", cexCol=0.8)
+heatmap.2(scale.male.hmc2, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC", cexCol=0.8)
+
+par(mfrow=c(1,2))
+plot(scale.male.hmc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-Paternal", cex.main=0.8, cex.lab=0.6)
+for (i in 2:8)
+  lines(scale.male.hmc[,i], col=i, type="o")
+legend(1, 3, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "promoter", "enhancer"), col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+axis.labels <-c("MII", "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly", "2celllate")
+axis(1, at=seq(1,9), labels=axis.labels, cex.axis=0.8, las=2)
+
+plot(scale.male.hmc2[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-Paternal", cex.main=0.8, cex.lab=0.6)
+for (i in 2:8)
+  lines(scale.male.hmc2[,i], col=i, type="o")
+legend(1, 3, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "promoter", "enhancer"), col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+axis.labels <-c("PN1", "PN2", "PN3", "PN4")
+axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8, las=2)
+```
+
+### Maternal 
+
+
+```{r, echo=F, warning=F}
+hmc_female=rbind(scale.reads[5,], scale.reads[12,], scale.reads[14,], scale.reads[16,], scale.reads[18,], scale.reads[1,], scale.reads[2:4,] )
+rownames(hmc_female)=hmc_female[,1]
+hmc_female=hmc_female[,-1]
+heatcol <- brewer.pal(9, "Greens")
+scale.female.hmc=scale(as.matrix(hmc_female))
+hmc_female2=hmc_female[2:5,]
+scale.female.hmc=scale(as.matrix(hmc_female))
+scale.female.hmc2=scale(as.matrix(hmc_female2))
+colnames(scale.female.hmc2)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
+colnames(scale.female.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
+rownames(scale.female.hmc)=c("MII", "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly", "2celllate")
+rownames(scale.female.hmc2)=c( "PN1","PN2","PN3","PN4")
+heatmap.2(scale.female.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC", cexCol=0.8)
+heatmap.2(scale.female.hmc2, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC", cexCol=0.8)
+
+par(mfrow=c(1,2))
+plot(scale.female.hmc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-Maternal", cex.main=0.8, cex.lab=0.6)
+for (i in 2:8)
+  lines(scale.female.hmc[,i], col=i, type="o")
+legend(1, 3, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "promoter", "enhancer"), col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+axis.labels <-c("MII", "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly", "2celllate")
+axis(1, at=seq(1,9), labels=axis.labels, cex.axis=0.8, las=2)
+
+plot(scale.female.hmc2[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-Maternal", cex.main=0.8, cex.lab=0.6)
+for (i in 2:8)
+  lines(scale.female.hmc2[,i], col=i, type="o")
+legend(1, 3, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "promoter", "enhancer"), col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+axis.labels <-c("PN1", "PN2", "PN3", "PN4")
+axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8, las=2)
+
+```
+
+## Session information
+
+<!-- Insert the session information into the document -->
+```{r session-info}
+```
