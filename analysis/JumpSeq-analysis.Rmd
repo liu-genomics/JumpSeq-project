@@ -1528,6 +1528,58 @@ axis(1, at=seq(1,6), labels=axis.labels, cex.axis=0.8)
 
 
 
+```{r, echo=F}
+reads1=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\0.5ngmES\\1.reads.vector.txt", header=T)
+reads2=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\0.5ngmES\\2.reads.vector.txt", header=T)
+combine=cbind(reads1[,1], reads2[,1])
+combine=combine[-6919,]
+plot(combine[,1], combine[,2], xlab="No.reads", ylab="No.reads", main="Reads correlation of 1000 bp window between two samples")
+abline(lm(combine[,2]~0+combine[,1]), col="red")
+fit=lm(combine[,2]~0+combine[,1])
+r.square=summary(fit)$r.squared
+legend(1,150, expression(paste(R^2, "=0.09")))
+#fit=lm(combine[,1]~0+combine[,2])
+#lines(combine[,1], fit$coefficients[1]*combine[,2], col=2, type="l")
+```
+
+
+
+
+
+```{r, echo=F}
+reads1=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\0.5ngmES\\21.reads.vector.txt", header=T)
+reads2=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\0.5ngmES\\22.reads.vector.txt", header=T)
+combine=cbind(reads1[,1], reads2[,1])
+#combine=combine[-6919,]
+plot(combine[,1], combine[,2], xlab="Sample 1", ylab="Sample 2", main="Reads correlation of 1000 bp window between two samples")
+abline(lm(combine[,2]~0+combine[,1]), col="red")
+fit=lm(combine[,2]~0+combine[,1])
+summary(fit)$r.squared 
+#fit=lm(combine[,1]~0+combine[,2])
+#lines(combine[,1], fit$coefficients[1]*combine[,2], col=2, type="l")
+```
+
+```{r, echo=F}
+reads1=as.numeric(as.matrix(read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\0.5ngmES\\ATCAATG_TGACTCG.Merge_TP01_TP10.1000.bed.reads.1", header=F)))
+
+reads2=as.numeric(as.matrix(read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\0.5ngmES\\ATCAATG_TGACTCG.Merge_TP01_TP10.1000.bed.reads.2", header=F)))
+total.combine=cbind(reads1, reads2)
+total.combine[is.na(total.combine)]=0
+large.combine.index=union(which(total.combine[,1]>1000), which(total.combine[,2]>1000))
+combine=total.combine
+#combine=combine[-6919,]
+plot(combine[,1], combine[,2], xlab="No.reads", ylab="No.reads", main="Reads correlation of 1000 bp window between two samples")
+abline(lm(combine[,2]~0+combine[,1]), col="red")
+fit=lm(combine[,2]~0+combine[,1])
+summary(fit)$r.squared 
+r.square=summary(fit)$r.squared
+legend(1,3000, expression(paste(R^2, "=0.95")))
+#fit=lm(combine[,1]~0+combine[,2])
+#lines(combine[,1], fit$coefficients[1]*combine[,2], col=2, type="l")
+```
+
+
+
 ## Session information
 
 <!-- Insert the session information into the document -->
