@@ -191,7 +191,7 @@ axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8, las=2)
 
 ```{r, echo=F, warning=F}
 scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180228\\scale.reads.csv")
-hmc_male=rbind(scale.reads[6,],scale.reads[5,], scale.reads[9,], scale.reads[11,], scale.reads[13,], scale.reads[15,], scale.reads[1,], scale.reads[2:4,], scale.reads[8,] )
+hmc_male=rbind(scale.reads[5,], scale.reads[9,], scale.reads[11,], scale.reads[13,], scale.reads[15,], scale.reads[1,], scale.reads[2:4,], scale.reads[8,] )
 rownames(hmc_male)=hmc_male[,1]
 hmc_male=hmc_male[,-1]
 heatcol <- brewer.pal(9, "Greens")
@@ -200,7 +200,7 @@ scale.male.hmc=scale(as.matrix(hmc_male))
 scale.male.hmc2=scale(as.matrix(hmc_male2))
 colnames(scale.male.hmc2)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
 colnames(scale.male.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
-rownames(scale.male.hmc)=c("sperm", "MII", "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly", "2celllate", "ES")
+rownames(scale.male.hmc)=c( "MII", "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly", "2celllate", "ES")
 rownames(scale.male.hmc2)=c( "PN1","PN2","PN3","PN4")
 heatmap.2(scale.male.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC", cexCol=0.8)
 heatmap.2(scale.male.hmc2, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC", cexCol=0.8)
@@ -210,8 +210,8 @@ plot(scale.male.hmc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normal
 for (i in 2:8)
   lines(scale.male.hmc[,i], col=i, type="o")
 legend(1, 4, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "promoter", "enhancer"), col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
-axis.labels <-c("Sperm", "MII", "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly", "2celllate", "ES")
-axis(1, at=seq(1,11), labels=axis.labels, cex.axis=0.8, las=2)
+axis.labels <-c("MII", "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly", "2celllate", "ES")
+axis(1, at=seq(1,10), labels=axis.labels, cex.axis=0.8, las=2)
 
 plot(scale.male.hmc2[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-Maternal", cex.main=0.8, cex.lab=0.6)
 for (i in 2:8)
