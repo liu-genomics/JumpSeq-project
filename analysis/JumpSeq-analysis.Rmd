@@ -3,6 +3,7 @@ title: "5hmC data analysis"
 author: "Shengtong Han"
 date: YYYY-MM-DD
 output: html_document
+fig_caption: yes
 ---
 
 <!-- The file analysis/chunks.R contains chunks that define default settings
@@ -202,9 +203,21 @@ par(mfrow=c(1,2))
 barplot(ratio[,1], beside=F, ylim=c(0,1.2), col=c("red", "darkblue"), xlab=c("plus strand"), main="", ylab="Sensitivity")
 text(0.6, 1.0, ratio[1,1])
 text(2, 0.45, ratio[2,1])
-barplot(ratio[,1], beside=F, ylim=c(0,1.2), col=c("red", "darkblue"), xlab=c("minus strand"), main="", ylab="Sensitivity")
+barplot(ratio[,2], beside=F, ylim=c(0,1.2), col=c("red", "darkblue"), xlab=c("minus strand"), main="", ylab="Sensitivity")
 text(0.6, 1.0, ratio[1,2])
 text(2, 0.45, ratio[2,2])
+```
+
+
+```{r, echo=F, fig.cap="This figure shows the sensitivity of the method defined as the proportion of peak windows by other methods (Tab-seq and Nano seal ) that are recovered by our method"}
+ratio=matrix(nrow=2, ncol=2)
+ratio[,1]=c(0.9271, 0.3713)
+ratio[,2]=c(0.9273, 0.3713)
+ave=rowMeans(ratio)
+barplot(ave, beside=F, ylim=c(0,1.2), col=c("red", "darkblue"), xlab=c(""), main="", ylab="Sensitivity")
+text(0.6, 1.0, ave[1])
+text(2, 0.45, ave[2])
+
 ```
 
 
@@ -714,6 +727,42 @@ text(11, 0.005, "1.99(p<2.2e-16)")
 text(14, 0.0015, "0.49 (p=1)")
 
 ```
+
+
+
+
+```{r, echo=F, fig.cap="We combined eleven 48ng replicates, called peak windows of 20 bp, selecetd 20 bp windows with FDR 0.05. We randomly selected same amount of 20 bp windows as  the chosen windows in the whole genome. The proportion of chosen peak windows (red) and randon windows (blue) overlapping with different regions are calculated and the corresponding enrichments are shown above the red bar"}
+minus.percent=matrix(nrow=2, ncol=5)
+minus.percent[,1]=c(0.0070, 0.0032)
+minus.percent[,2]=c(0.0139, 0.0034)
+
+minus.percent[,3]=c(0.0069, 0.0026)
+minus.percent[,4]=c(0.0042, 0.0021)
+
+minus.percent[,5]=c(0.0005, 0.0011)
+colnames(minus.percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
+
+plus.percent=matrix(nrow=2, ncol=5)
+plus.percent[,1]=c(0.0068, 0.0032)
+plus.percent[,2]=c(0.0139, 0.0034)
+
+plus.percent[,3]=c(0.0070, 0.0026)
+plus.percent[,4]=c(0.0042, 0.0021)
+
+plus.percent[,5]=c(0.0006, 0.0011)
+colnames(plus.percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
+ave.percent=(minus.percent+plus.percent)/2
+
+barplot(ave.percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.02),
+ylab="Proportion of Jump-seq windows", main="combine 11 48ng replicates (FDR0.05)", xlab="", cex.names=1)
+text(1.5, 0.008, "2.16")
+text(4.5, 0.015, "4.09")
+text(7.5, 0.008, "2.67")
+text(10.5, 0.005, "2.00")
+text(14, 0.002, "0.50")
+```
+
+
 
 ### peak distribution
 
@@ -1474,21 +1523,29 @@ plot(seq(96, 102), spike_in_zero[97:103], type="o", main="100% hmC model", xlab=
 ### allow multiple reads 
 
 Only focus on reads from 96 base to 102 base. 
-```{r, echo=T}
-num.reads.plus1=c(34536, 103817, 282178,  1398644, 1374788, 2427158, 3002380, 3198060)
-num.reads.plus2=c(21389, 84709, 241444, 1184547, 1171380, 2109440, 2578213, 2757798)
-hmc.ratio=c(0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1)
+```{r, echo=T, warning=F}
+full.num.reads.plus1=c(34536, 103817, 282178,  1398644, 1374788, 2427158, 3002380, 3198060)
+full.num.reads.plus2=c(21389, 84709, 241444, 1184547, 1171380, 2109440, 2578213, 2757798)
+
+num.reads.plus1=c(34536, 103817, 282178, 1374788, 2427158, 3002380, 3198060)
+num.reads.plus2=c(21389, 84709, 241444,  1171380, 2109440, 2578213, 2757798)
+hmc.ratio=c(0, 0.01, 0.05,  0.25, 0.5, 0.75, 1)
 plot(hmc.ratio, num.reads.plus1, type="o", xlab="5hmC percentage", ylab="Number of reads in spike in", main="reads in base >=96 & <=102", col=1, ylim=c(21000, 3200000), xaxt="n")
 axis(1, at =hmc.ratio, las=0, cex.axis=0.5)
 lines(hmc.ratio, num.reads.plus2, col=2, type="o")
 legend(0.8, 1000000, c("plus1", "plus2"), col=c(1,2), lty=c(1,1))
+```
+
+```{r, echo=F, fig.cap="The fitted regression line (red) on the fold change of number of reads (point) at different hmC proportions in spike in"}
+hmc.ratio=c(0, 0.01, 0.05,  0.25, 0.5, 0.75, 1)
+num.reads.plus1=c(34536, 103817, 282178, 1374788, 2427158, 3002380, 3198060)
 
 fit=lm(num.reads.plus1/num.reads.plus1[1] ~ hmc.ratio)
-fit
-plot(hmc.ratio, num.reads.plus1/num.reads.plus1[1], xlim=c(0,1), ylim=c(0, 110), type="o", ylab="fold change", xaxt="n", main="plus1")
+
+plot(hmc.ratio, num.reads.plus1/num.reads.plus1[1], xlim=c(0,1), ylim=c(0, 110), type="p", ylab="fold change", xaxt="n", main="")
 axis(1, at =hmc.ratio, las=0, cex.axis=0.5)
-lines(hmc.ratio, fit$coefficients[1]+fit$coefficients[2]*hmc.ratio, col=2, type="o")
-legend(0.75, 40, c("observed", "fitted"), col=c(1,2), lty=c(1,1))
+lines(hmc.ratio, fit$coefficients[1]+fit$coefficients[2]*hmc.ratio, col=2, type="l")
+#legend(0.75, 40, c("observed", "fitted"), col=c(1,2), lty=c(1,1))
 ```
 
 Fold change can be >100. 
