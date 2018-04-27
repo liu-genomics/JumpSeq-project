@@ -3,6 +3,7 @@ title: "5mC data analysis"
 author: "Shengtong Han"
 date: YYYY-MM-DD
 output: html_document
+fig_caption: yes
 ---
 
 <!-- The file analysis/chunks.R contains chunks that define default settings
@@ -215,6 +216,8 @@ Table: Proportion of 5mC data (FDR0.05) overlapping with methylated cytosines an
 
 ## Summary 
 
+### Enrichment 
+
 ```{r, echo=T}
 percent=matrix(nrow=2, ncol=5)
 percent[,1]=c(0.7895, 0.1450)
@@ -230,7 +233,45 @@ barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", 
 ylab="Proportion of Jump-seq windows", main="Enrichment with methylated cytosine from Gary Hon (Data:rep 1 minus)", xlab="", cex.names=0.7)
 ```
 
+```{r, echo=F, fig.cap="Enrichment of methylated cytosine from Gary Hon  at different genomic concentrations. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng. "}
+minus.percent=matrix(nrow=2, ncol=5)
+minus.percent[,1]=c(0.7895, 0.1450)
+minus.percent[,2]=c(0.8069, 0.1450)
+minus.percent[,3]=c(0.8051, 0.1450)
+minus.percent[,4]=c(0.8511, 0.1450)
+minus.percent[,5]=c(0.8374, 0.1450)
+colnames(minus.percent)=c("2.4ng", "6ng", "12ng", "24ng", "48ng")
+
+plus.percent=matrix(nrow=2, ncol=5)
+plus.percent[,1]=c(0.7826, 0.1450)
+plus.percent[,2]=c(0.8473, 0.1450)
+plus.percent[,3]=c(0.8355, 0.1450)
+plus.percent[,4]=c(0.8482, 0.1450)
+plus.percent[,5]=c(0.8403, 0.1450)
+colnames(plus.percent)=c("2.4ng", "6ng", "12ng", "24ng", "48ng")
+percent=(plus.percent+minus.percent)/2
+#pdf("D:\\Dropbox\\JumpSeqProject\\Figure\\Enrichemnt_5mC.pdf")
+barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,1.2),
+ylab="Proportion of Jump-seq windows", main="", xlab="", cex.names=0.7)
+#dev.off()
+```
+
+
 * cutoff used for peak windows: 2.4ng (FDR0.05), others use p values less than $10^{-6}$. 
+
+### Sensitivity 
+```{r sensitivity, echo=F, fig.cap="Proportion of  methylated cytosine from Gary Hon  at different genomic concentrations recovered by Jump-seq. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng.}
+percent=matrix(nrow=2, ncol=5)
+percent[,1]=c(0.000026, 0.000029)
+percent[,2]=c(0.000195, 0.000334)
+percent[,3]=c(0.000313, 0.000553)
+percent[,4]=c(0.000503, 0.000704)
+percent[,5]=c(0.000776, 0.000786)
+colnames(percent)=c("2.4ng", "6ng", "12ng", "24ng", "48ng")
+col.mean=colMeans(percent)
+barplot(col.mean, col="darkblue", ylab="Proportion of Tab-seq methylated cytosine")
+```
+
 
 ## Session information
 

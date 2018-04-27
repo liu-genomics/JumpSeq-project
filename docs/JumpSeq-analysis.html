@@ -314,10 +314,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2018-03-19</p>
+<p><strong>Last updated:</strong> 2018-04-06</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 4ba08f4</p>
+<p><strong>Code version:</strong> b66d409</p>
 <!-- Add your analysis here -->
 <p>All samples are <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=400442004">here</a>: 48 ng (11); 24 ng (5); 12 ng (5); 6ng (5); 2.4 ng (5); 0.6ng (2).</p>
 <p>Mouse genome mm9 has 2,654,911,517 bases, 507,439,500 (19.11324%) cytosines and 507,585,491 (19.11873%) Gumines.</p>
@@ -603,173 +603,29 @@ mtext(&quot;***aC/Ga***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <ul>
 <li>aC/Ga means the center three nucleotides are aCa (plus strand) or aGa (minus strand).</li>
 </ul>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ac_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ac_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***aC/Gc***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ag_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ag_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***aC/Gg***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_at_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_at_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***aC/Gt***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ca_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ca_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***cC/Ga***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_cc_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_cc_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***cC/Gc***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_cg_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_cg_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***cC/Gg***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ct_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ct_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***cC/Gt***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ga_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ga_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***gC/Ga***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gc_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gc_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***gC/Gc***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gg_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gg_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***gC/Gg***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gt_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_gt_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***gC/Gt***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ta_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_ta_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***tC/Ga***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tc_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tc_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***tC/Gc***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-30-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tg_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tg_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***tC/Gg***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tt_plus_with_1_coverage.ave.perbase&quot;, header=F)
-
-minus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\center_three_jump\\48ng_11rep_merge.sorted_GSM882244_FDR_0.0484_tt_minus_with_1_coverage.ave.perbase&quot;, header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;plus&quot;)
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;minus&quot;)
-abline(v=0, col=2)
-mtext(&quot;***tC/Gt***-11rep&quot;, outer = TRUE, cex = 1)</code></pre>
-<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-32-1.png" alt="The  reads distribution around the center site C/G with 10 bp downstream and upstream. The sampls is the combined eleven 48ng replicates. The central three nucleotides are tCt (plus strand) or tGt (minus strand) " width="672" />
+<p class="caption">
+The reads distribution around the center site C/G with 10 bp downstream and upstream. The sampls is the combined eleven 48ng replicates. The central three nucleotides are tCt (plus strand) or tGt (minus strand)
+</p>
+</div>
 <p>Put all these 16 jump distributions together and plot them.</p>
-<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>png 
+  2 </code></pre>
 <p>Two sample Kolmogorov-Smirnov Tests: test if any two jump distributions are from the same distribution or not. First standardize the data.</p>
 <table style="width:50%;">
 <colgroup>
