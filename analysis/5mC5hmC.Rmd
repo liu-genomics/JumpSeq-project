@@ -33,6 +33,177 @@ set.seed(123)
 
 <!-- Add your analysis here -->
 
+```{r, echo=F}
+region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\important.region.reads", header=F)
+spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\spike.in.reads", header=F)[-c(11,15),]
+reads.summary=cbind(region.reads[,2:9], as.numeric(spikein.reads[,2]))
+rownames(reads.summary)=c("mc-PN2female", "mc-PN2male", "mc-PN3female", "mc-PN3male", "mc-2cellearly", "mc-2celllate",  "mc-MII", "mc-300pgSperm", "mc-300pgSpermRep", "mc-ES", "hmc-50ngSperm", "mc-PN1female", "mc-PN1male", "hmc-PN1female", "hmc-PN1male", "hmc-PN2female", "hmc-PN2male", "hmc-PN3female", "hmc-PN3male", "hmc-300pgSperm", "hmc-300pgSpermRep")
+colnames(reads.summary)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer", "spikein")
+scale.factor=reads.summary[,9]/min(reads.summary[,9])
+scale.reads=matrix(nrow=nrow(reads.summary), ncol=8)
+for (i in 1:nrow(reads.summary))
+  scale.reads[i,]=as.numeric(reads.summary[i,1:8]*scale.factor[i])
+rownames(scale.reads)=rownames(reads.summary)
+colnames(scale.reads)=colnames(reads.summary)[1:8]
+#write.csv(scale.reads, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
+```
+
 ## 5hmC 
 
+```{r, echo=F}
+regions=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
+all.stage=c("Sperm", "PN1","PN2","PN3")
+sub.stage=c( "PN1","PN2","PN3")
+```
+
+### Paternal 
+
+```{r, echo=F, warning=F}
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
+hmc_male=rbind(scale.reads[20,], scale.reads[15,], scale.reads[17,], scale.reads[19,])
+rownames(hmc_male)=hmc_male[,1]
+hmc_male=hmc_male[,-1]
+heatcol <- brewer.pal(9, "Greens")
+hmc_male2=hmc_male[2:4,]
+scale.male.hmc=scale(as.matrix(hmc_male))
+scale.male.hmc2=scale(as.matrix(hmc_male2))
+colnames(scale.male.hmc2)=regions
+colnames(scale.male.hmc)=regions
+rownames(scale.male.hmc)=all.stage
+rownames(scale.male.hmc2)=sub.stage
+heatmap.2(scale.male.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC", cexCol=0.8)
+heatmap.2(scale.male.hmc2, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC", cexCol=0.8)
+
+par(mfrow=c(1,2))
+plot(scale.male.hmc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-Paternal", cex.main=0.8, cex.lab=0.6)
+for (i in 2:8)
+  lines(scale.male.hmc[,i], col=i, type="o")
+legend(1, 4, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+axis.labels <-all.stage
+axis(1, at=seq(1,length(all.stage)), labels=axis.labels, cex.axis=0.8, las=2)
+
+plot(scale.male.hmc2[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-Paternal", cex.main=0.8, cex.lab=0.6)
+for (i in 2:8)
+  lines(scale.male.hmc2[,i], col=i, type="o")
+legend(1, 3, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+axis.labels <-sub.stage
+axis(1, at=seq(1,length(sub.stage)), labels=axis.labels, cex.axis=0.8, las=2)
+```
+
+
+
+### Maternal 
+
+```{r, echo=F, warning=F}
+regions=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
+all.stage=c("PN1","PN2","PN3")
+sub.stage=c( "PN1","PN2","PN3")
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
+hmc_female=rbind(scale.reads[14,], scale.reads[16,], scale.reads[18,])
+rownames(hmc_female)=hmc_female[,1]
+hmc_female=hmc_female[,-1]
+heatcol <- brewer.pal(9, "Greens")
+hmc_female2=hmc_female[1:3,]
+scale.female.hmc=scale(as.matrix(hmc_female))
+scale.female.hmc2=scale(as.matrix(hmc_female2))
+colnames(scale.female.hmc2)=regions
+colnames(scale.female.hmc)=regions
+rownames(scale.female.hmc)=all.stage
+rownames(scale.female.hmc2)=sub.stage
+heatmap.2(scale.female.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5hmC", cexCol=0.8)
+#heatmap.2(scale.female.hmc2, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC", cexCol=0.8)
+
+#par(mfrow=c(1,2))
+plot(scale.female.hmc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-Maternal", cex.main=0.8, cex.lab=0.6)
+for (i in 2:8)
+  lines(scale.female.hmc[,i], col=i, type="o")
+legend(1, 3, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+axis.labels <-all.stage
+axis(1, at=seq(1,length(all.stage)), labels=axis.labels, cex.axis=0.8, las=2)
+
+#plot(scale.male.hmc2[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-Paternal", cex.main=0.8, cex.lab=0.6)
+#for (i in 2:8)
+#  lines(scale.female.hmc2[,i], col=i, type="o")
+#legend(1, 3, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+#axis.labels <-sub.stage
+#axis(1, at=seq(1,length(sub.stage)), labels=axis.labels, cex.axis=0.8, las=2)
+```
+
+
 ## 5mC
+
+
+### Paternal 
+
+```{r, echo=F, warning=F}
+regions=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
+all.stage=c("Sperm", "PN1","PN2","PN3","2cellearly", "2celllate", "ES")
+sub.stage=c("PN1","PN2","PN3")
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
+mc_male=rbind(scale.reads[8,], scale.reads[15,], scale.reads[2,], scale.reads[4,], scale.reads[5,], scale.reads[6,], scale.reads[10,] )
+rownames(mc_male)=mc_male[,1]
+mc_male=mc_male[,-1]
+heatcol <- brewer.pal(9, "Greens")
+mc_male2=mc_male[2:4,]
+scale.male.mc=scale(as.matrix(mc_male))
+scale.male.mc2=scale(as.matrix(mc_male2))
+colnames(scale.male.mc2)=regions
+colnames(scale.male.mc)=regions
+rownames(scale.male.mc)=all.stage
+rownames(scale.male.mc2)=sub.stage
+heatmap.2(scale.male.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5mC", cexCol=0.8)
+heatmap.2(scale.male.mc2, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5mC", cexCol=0.8)
+
+par(mfrow=c(1,2))
+plot(scale.male.mc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5mC-Paternal", cex.main=0.8, cex.lab=0.6)
+for (i in 2:8)
+  lines(scale.male.mc[,i], col=i, type="o")
+legend(1, 4, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+axis.labels <-all.stage
+axis(1, at=seq(1,length(all.stage)), labels=axis.labels, cex.axis=0.8, las=2)
+
+plot(scale.male.mc2[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5mC-Paternal", cex.main=0.8, cex.lab=0.6)
+for (i in 2:8)
+  lines(scale.male.mc2[,i], col=i, type="o")
+legend(1, 3, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+axis.labels <-sub.stage
+axis(1, at=seq(1,length(sub.stage)), labels=axis.labels, cex.axis=0.8, las=2)
+```
+
+
+### Maternal 
+
+```{r, echo=F, warning=F}
+regions=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
+all.stage=c( "MII", "PN1","PN2","PN3","2cellearly", "2celllate",  "ES")
+sub.stage=c("PN1","PN2","PN3")
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
+mc_female=rbind(scale.reads[7,], scale.reads[12,], scale.reads[1,], scale.reads[3,], scale.reads[5,], scale.reads[6,], scale.reads[10,] )
+rownames(mc_female)=mc_female[,1]
+mc_female=mc_female[,-1]
+heatcol <- brewer.pal(9, "Greens")
+mc_female2=mc_female[2:4,]
+scale.female.mc=scale(as.matrix(mc_female))
+scale.female.mc2=scale(as.matrix(mc_female2))
+colnames(scale.female.mc2)=regions
+colnames(scale.female.mc)=regions
+rownames(scale.female.mc)=all.stage
+rownames(scale.female.mc2)=sub.stage
+heatmap.2(scale.female.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5mC", cexCol=0.8)
+heatmap.2(scale.female.mc2, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Maternal 5mC", cexCol=0.8)
+
+par(mfrow=c(1,2))
+plot(scale.female.mc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5mC-Maternal", cex.main=0.8, cex.lab=0.6)
+for (i in 2:8)
+  lines(scale.female.mc[,i], col=i, type="o")
+legend(1, 4, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+axis.labels <-all.stage
+axis(1, at=seq(1,length(all.stage)), labels=axis.labels, cex.axis=0.8, las=2)
+
+plot(scale.female.mc2[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5mC-Maternal", cex.main=0.8, cex.lab=0.6)
+for (i in 2:8)
+  lines(scale.female.mc2[,i], col=i, type="o")
+legend(1, 3, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+axis.labels <-sub.stage
+axis(1, at=seq(1,length(sub.stage)), labels=axis.labels, cex.axis=0.8, las=2)
+```
