@@ -58,18 +58,23 @@ colnames(scale.reads)=colnames(reads.summary)[1:8]
 ### Paternal 
 
 ```{r, echo=F, warning=F}
+all.stage=c("Sperm", "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly", "2celllate", "ES")
+sub.stage=c( "PN1","PN2","PN3","PN4")
+regions=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
 scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\scale.reads.csv")
-hmc_male=rbind(scale.reads[13,], scale.reads[15,], scale.reads[17,], scale.reads[19,], scale.reads[1,], scale.reads[2:4,], scale.reads[7,] )
+new.scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
+
+hmc_male=rbind(new.scale.reads[20,], scale.reads[13,], scale.reads[15,], scale.reads[17,], scale.reads[19,], scale.reads[1,], scale.reads[2:4,], scale.reads[7,] )
 row.names(hmc_male)=hmc_male[,1]
 hmc_male=hmc_male[,-1]
 heatcol <- brewer.pal(9, "Greens")
 hmc_male2=hmc_male[1:4,]
 scale.male.hmc=scale(as.matrix(hmc_male))
 scale.male.hmc2=scale(as.matrix(hmc_male2))
-colnames(scale.male.hmc2)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
-colnames(scale.male.hmc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
-rownames(scale.male.hmc)=c( "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly", "2celllate", "ES")
-rownames(scale.male.hmc2)=c( "PN1","PN2","PN3","PN4")
+colnames(scale.male.hmc2)=regions
+colnames(scale.male.hmc)=regions
+rownames(scale.male.hmc)=all.stage
+rownames(scale.male.hmc2)=sub.stage
 heatmap.2(scale.male.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC", cexCol=0.8)
 heatmap.2(scale.male.hmc2, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC", cexCol=0.8)
 
@@ -77,16 +82,16 @@ par(mfrow=c(1,2))
 plot(scale.male.hmc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-Paternal", cex.main=0.8, cex.lab=0.6)
 for (i in 2:8)
   lines(scale.male.hmc[,i], col=i, type="o")
-legend(1, 3, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "promoter", "enhancer"), col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
-axis.labels <-c( "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly", "2celllate", "ES")
-axis(1, at=seq(1,9), labels=axis.labels, cex.axis=0.8, las=2)
+legend(1, 3, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+axis.labels <-all.stage
+axis(1, at=seq(1,length(all.stage)), labels=axis.labels, cex.axis=0.8, las=2)
 
 plot(scale.male.hmc2[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-Paternal", cex.main=0.8, cex.lab=0.6)
 for (i in 2:8)
   lines(scale.male.hmc2[,i], col=i, type="o")
-legend(1, 3, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "promoter", "enhancer"), col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
-axis.labels <-c("PN1", "PN2", "PN3", "PN4")
-axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8, las=2)
+legend(1, 3, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+axis.labels <-sub.stage
+axis(1, at=seq(1,length(sub.stage)), labels=axis.labels, cex.axis=0.8, las=2)
 ```
 
 ### Maternal 
