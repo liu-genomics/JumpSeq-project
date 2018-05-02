@@ -68,7 +68,7 @@ hmc_male=rbind(new.scale.reads[20,], scale.reads[13,], scale.reads[15,], scale.r
 row.names(hmc_male)=hmc_male[,1]
 hmc_male=hmc_male[,-1]
 heatcol <- brewer.pal(9, "Greens")
-hmc_male2=hmc_male[1:4,]
+hmc_male2=hmc_male[2:5,]
 scale.male.hmc=scale(as.matrix(hmc_male))
 scale.male.hmc2=scale(as.matrix(hmc_male2))
 colnames(scale.male.hmc2)=regions
