@@ -75,6 +75,7 @@ colnames(scale.male.hmc2)=regions
 colnames(scale.male.hmc)=regions
 rownames(scale.male.hmc)=all.stage
 rownames(scale.male.hmc2)=sub.stage
+
 heatmap.2(scale.male.hmc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC", cexCol=0.8)
 heatmap.2(scale.male.hmc2, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC", cexCol=0.8)
 
@@ -93,6 +94,34 @@ legend(1, 3, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
 axis.labels <-sub.stage
 axis(1, at=seq(1,length(sub.stage)), labels=axis.labels, cex.axis=0.8, las=2)
 ```
+
+
+```{r, echo=F, eval=F}
+library(gridGraphics)
+library(grid)
+
+grab_grob <- function(){
+  grid.echo()
+  grid.grab()
+}
+
+arr <-list()
+arr[[1]]=scale.male.hmc
+arr[[2]]=scale.male.hmc2
+
+library(gplots)
+gl <- lapply(1:2, function(i){
+  heatmap.2(arr[[i]], Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5hmC", cexCol=0.8)
+  grab_grob()
+}
+)
+
+grid.newpage()
+library(gridExtra)
+grid.arrange(grobs=gl, ncol=2, clip=TRUE)
+
+```
+
 
 ### Maternal 
 
