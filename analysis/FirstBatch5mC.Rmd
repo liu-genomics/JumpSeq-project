@@ -1,5 +1,5 @@
 ---
-title: "20180221_first batch of 5mC"
+title: "20180221-first batch of 5mC"
 author: "Shengtong Han"
 date: YYYY-MM-DD
 output: html_document
