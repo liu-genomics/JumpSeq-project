@@ -36,7 +36,10 @@ All analysiz have been adjusted with spike in sample.
 
 ## Rep1-20180113 
 
-In this batch, sperm fails. 
+
+* In this batch, sperm fails. 
+
+* PN1 female, PN2 female and PN5 are replaced with deep sequencing data on 2018/06/06
 
 ```{r, echo=F, eval=F}
 region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\important.region.reads", header=F)
@@ -44,6 +47,19 @@ region.reads.correct=matrix(nrow=19, ncol=8)
 for (i in 1:19)
   region.reads.correct[i,]=as.numeric(region.reads[((i-1)*2+1),2:9]+region.reads[i*2,2:9])
 spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\spike.in.reads", header=F)
+
+supple.region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\important.region.reads", header=F, fill=T)[-3,]
+supple.spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\spike.in.reads", header=F, fill=T)[-3,]
+
+region.reads.correct[12,]=as.numeric(supple.region.reads[9,2:ncol(supple.region.reads)]) # for PN1-female, replace the old with the supplement
+region.reads.correct[14,]=as.numeric(supple.region.reads[10,2:ncol(supple.region.reads)]) # for PN2-female, replace the old with the supplement
+region.reads.correct[1,]=as.numeric(supple.region.reads[1,2:ncol(supple.region.reads)]) # for PN5, replace the old with the supplement
+
+spikein.reads[12,2]=supple.spikein.reads[9,2] # replace with new deep sequencing data
+spikein.reads[14,2]=supple.spikein.reads[10,2]
+spikein.reads[1,2]=supple.spikein.reads[1,2]
+
+
 reads.summary=cbind(region.reads.correct, as.numeric(spikein.reads[,2]))
 rownames(reads.summary)=c("hmc-PN5", "hmc-1cell", "hmc-2cellearly", "hmc-2celllate", "hmc-MII", "hmc-sperm", "hmc-ES", "mc-MII", "mc-sperm", "mc-ES", "mc-600pgmES", "hmc-PN1female", "hmc-PN1male", "hmc-PN2female", "hmc-PN2male", "hmc-PN3female", "hmc-PN3male", "hmc-PN4female", "hmc-PN4male")
 colnames(reads.summary)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer", "spikein")
@@ -172,10 +188,20 @@ spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\201801
 
 ## Rep 2-20180228
 
+
+* 1 cell is replaced with deep sequencing data on 2018/06/06
+
+
 ```{r, echo=F, eval=F}
 #region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180228\\important.region.reads", header=F)[,-1]
 region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180228_5hmC_2\\important.region.reads", header=F)[,-1]
 spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180228\\spike.in.reads", header=F)
+
+supple.region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\important.region.reads", header=F, fill=T)[-3,]
+supple.spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\spike.in.reads", header=F, fill=T)[-3,]
+region.reads[2,]=supple.region.reads[2,2:ncol(supple.region.reads)]
+spikein.reads[2,2]=supple.spikein.reads[2,2]
+
 reads.summary=as.matrix(cbind(region.reads, as.numeric(spikein.reads[,2])))
 rownames(reads.summary)=c("hmc-PN5", "hmc-1cell", "hmc-2cellearly", "hmc-2celllate", "hmc-MII", "hmc-sperm", "hmc-sperm-repeat", "hmc-ES",  "hmc-PN1female", "hmc-PN1male", "hmc-PN2female", "hmc-PN2male", "hmc-PN3female", "hmc-PN3male", "hmc-PN4female", "hmc-PN4male")
 colnames(reads.summary)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer", "spikein")
@@ -262,9 +288,17 @@ axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8, las=2)
 
 ## 5mC-20180227
 
+
+* MII is replaced with deep sequencing data on 2018/06/06
+
 ```{r, echo=F, eval=F}
 region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180227_5mC_2\\important.region.reads", header=F)[,-1]
+supple.region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\important.region.reads", header=F, fill=T)[-3,]
+region.reads[4,]=supple.region.reads[3,2:ncol(supple.region.reads)] # for mc-MII, replace the old with the supplement
 spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180227\\spike.in.reads", header=F)
+supple.spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\spike.in.reads", header=F, fill=T)[-3,]
+spikein.reads[4,2]=supple.spikein.reads[3,2]
+
 reads.summary=as.matrix(cbind(region.reads, as.numeric(spikein.reads[,2])))
 rownames(reads.summary)=c("mc-PN5","mc-1cell", "mc-2cellearly", "mc-MII", "mc-sperm", "mc-sperm-repeat", "mc-ES",  "mc-PN1female", "mc-PN1male", "mc-PN2female", "mc-PN2male", "mc-PN3female", "mc-PN3male", "mc-PN4female", "mc-PN4male")
 colnames(reads.summary)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer", "spikein")
@@ -349,6 +383,7 @@ axis.labels <-c("PN1", "PN2", "PN3", "PN4")
 axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8, las=2)
 ```
 
+* MII is replaced with the deep sequencing data on 20180606. 
 
 ## Session information
 

@@ -33,32 +33,46 @@ set.seed(123)
 
 <!-- Add your analysis here -->
 
+*lu-2: 5mC jump-seq MII
+lu-3: 5mC jump-seq, PN4, female
+lu-4: 5mC jump-seq, PN4, male
+lu-5: 5mC jump-seq, PN5
+lu-6: 5mC jump-seq, 1 cell
+lu-7: 5mC jump-seq, 2 cell  late on 2018/06/06 have been used as supplement
+
+
+
 ```{r, echo=F}
-region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\important.region.reads", header=F)
-spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\spike.in.reads", header=F)[-c(11,15),]
-reads.summary=cbind(region.reads[,2:9], as.numeric(spikein.reads[,2]))
-rownames(reads.summary)=c("mc-PN2female", "mc-PN2male", "mc-PN3female", "mc-PN3male", "mc-2cellearly", "mc-2celllate",  "mc-MII", "mc-300pgSperm", "mc-300pgSpermRep", "mc-ES", "hmc-50ngSperm", "mc-PN1female", "mc-PN1male", "hmc-PN1female", "hmc-PN1male", "hmc-PN2female", "hmc-PN2male", "hmc-PN3female", "hmc-PN3male", "hmc-300pgSperm", "hmc-300pgSpermRep")
+sample.label=c("mc-PN2female", "mc-PN2male", "mc-PN3female", "mc-PN3male", "mc-2cellearly", "mc-2celllate",  "mc-MII", "mc-300pgSperm", "mc-300pgSpermRep", "mc-ES", "hmc-50ngSperm", "mc-PN1female", "mc-PN1male", "hmc-PN1female", "hmc-PN1male", "hmc-PN2female", "hmc-PN2male", "hmc-PN3female", "hmc-PN3male", "hmc-300pgSperm", "hmc-300pgSpermRep", "mc-MII", "mc-PN4female", "mc-PN4male", "mc-PN5", "mc-1cell","mc-2celllate")
+orig.region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\important.region.reads", header=F)
+complement.region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\important.region.reads", header=F, fill=T)[-3,]
+
+orig.spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\spike.in.reads", header=F)[-c(11,15),]
+complement.spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\spike.in.reads", header=F)[-3,]
+region.reads=rbind(orig.region.reads, complement.region.reads[3:8,])
+spikein.reads=rbind(orig.spikein.reads, complement.spikein.reads[3:8,])
+
+reads.summary=as.matrix(cbind(region.reads[,2:9], as.numeric(spikein.reads[,2])))
+rownames(reads.summary)=sample.label
 colnames(reads.summary)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer", "spikein")
 scale.factor=reads.summary[,9]/min(reads.summary[,9])
 scale.reads=matrix(nrow=nrow(reads.summary), ncol=8)
 for (i in 1:nrow(reads.summary))
   scale.reads[i,]=as.numeric(reads.summary[i,1:8]*scale.factor[i])
-rownames(scale.reads)=rownames(reads.summary)
+rownames(scale.reads)=sample.label
 colnames(scale.reads)=colnames(reads.summary)[1:8]
 #write.csv(scale.reads, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
 ```
 
 ## 5hmC 
 
-```{r, echo=F}
-regions=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
-all.stage=c("Sperm", "PN1","PN2","PN3")
-sub.stage=c( "PN1","PN2","PN3")
-```
 
 ### Paternal 
 
 ```{r, echo=F, warning=F}
+regions=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
+all.stage=c("Sperm", "PN1","PN2","PN3")
+sub.stage=c( "PN1","PN2","PN3")
 scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
 hmc_male=rbind(scale.reads[20,], scale.reads[15,], scale.reads[17,], scale.reads[19,])
 rownames(hmc_male)=hmc_male[,1]
@@ -137,14 +151,14 @@ axis(1, at=seq(1,length(all.stage)), labels=axis.labels, cex.axis=0.8, las=2)
 
 ```{r, echo=F, warning=F}
 regions=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
-all.stage=c("Sperm", "PN1","PN2","PN3","2cellearly", "2celllate", "ES")
-sub.stage=c("PN1","PN2","PN3")
+all.stage=c("Sperm", "PN1","PN2","PN3","PN4", "PN5", "1cell", "2cellearly", "2celllate", "ES")
+sub.stage=c("PN1","PN2","PN3", "PN4")
 scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
-mc_male=rbind(scale.reads[8,], scale.reads[15,], scale.reads[2,], scale.reads[4,], scale.reads[5,], scale.reads[6,], scale.reads[10,] )
+mc_male=rbind(scale.reads[8,], scale.reads[15,], scale.reads[2,], scale.reads[4,],  scale.reads[24,], scale.reads[25,], scale.reads[26,],  scale.reads[5,], scale.reads[6,], scale.reads[10,] )
 rownames(mc_male)=mc_male[,1]
 mc_male=mc_male[,-1]
 heatcol <- brewer.pal(9, "Greens")
-mc_male2=mc_male[2:4,]
+mc_male2=mc_male[2:5,]
 scale.male.mc=scale(as.matrix(mc_male))
 scale.male.mc2=scale(as.matrix(mc_male2))
 colnames(scale.male.mc2)=regions
@@ -175,14 +189,14 @@ axis(1, at=seq(1,length(sub.stage)), labels=axis.labels, cex.axis=0.8, las=2)
 
 ```{r, echo=F, warning=F}
 regions=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
-all.stage=c( "MII", "PN1","PN2","PN3","2cellearly", "2celllate",  "ES")
-sub.stage=c("PN1","PN2","PN3")
+all.stage=c( "MII", "PN1","PN2","PN3","PN4", "PN5", "1cell", "2cellearly", "2celllate",  "ES")
+sub.stage=c("PN1","PN2","PN3", "PN4")
 scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
-mc_female=rbind(scale.reads[7,], scale.reads[12,], scale.reads[1,], scale.reads[3,], scale.reads[5,], scale.reads[6,], scale.reads[10,] )
+mc_female=rbind(scale.reads[7,], scale.reads[12,], scale.reads[1,], scale.reads[3,], scale.reads[23,], scale.reads[25,], scale.reads[26,], scale.reads[5,], scale.reads[6,], scale.reads[10,] )
 rownames(mc_female)=mc_female[,1]
 mc_female=mc_female[,-1]
 heatcol <- brewer.pal(9, "Greens")
-mc_female2=mc_female[2:4,]
+mc_female2=mc_female[2:5,]
 scale.female.mc=scale(as.matrix(mc_female))
 scale.female.mc2=scale(as.matrix(mc_female2))
 colnames(scale.female.mc2)=regions
