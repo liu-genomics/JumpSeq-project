@@ -284,6 +284,21 @@ axis.labels <-c("PN1", "PN2", "PN3", "PN4")
 axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8, las=2)
 ```
 
+### Comparison with deep sequencing data  YL-0413
+
+
+![Comparison with deep sequencing in IGV](figure/igv_comparison.png)
+
+
+```{r, echo=F}
+overlap.rate=matrix(nrow=3, ncol=2)
+overlap.rate[1,]=c(0.7893, 0.9501)
+overlap.rate[2,]=c(0.7776, 0.9727)
+overlap.rate[3,]=c(0.8174, 0.9130)
+rownames(overlap.rate)=c("YL-17 vs lu3-pn1male", "YL-20 vs lu16-sperm", "YL-21 vs lu17-ES" )
+barplot(t(overlap.rate),beside=T,  col=c("red", "blue"), ylim=c(0,1.2), legend=c("deep sequencing", "20180228-5hmC"), main="Proportion of overlapping 100 bp windows", args.legend = list(x ='topright', bty='n', inset=c(-0.005,0), cex=0.8), xpd = FALSE, las=1 )
+
+```
 
 
 ## 5mC-20180227
@@ -383,7 +398,7 @@ axis.labels <-c("PN1", "PN2", "PN3", "PN4")
 axis(1, at=seq(1,4), labels=axis.labels, cex.axis=0.8, las=2)
 ```
 
-* MII is replaced with the deep sequencing data on 20180606. 
+
 
 ## Session information
 
