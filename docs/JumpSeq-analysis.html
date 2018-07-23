@@ -314,10 +314,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2018-04-06</p>
+<p><strong>Last updated:</strong> 2018-07-23</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> b66d409</p>
+<p><strong>Code version:</strong> 616fd62</p>
 <!-- Add your analysis here -->
 <p>All samples are <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=400442004">here</a>: 48 ng (11); 24 ng (5); 12 ng (5); 6ng (5); 2.4 ng (5); 0.6ng (2).</p>
 <p>Mouse genome mm9 has 2,654,911,517 bases, 507,439,500 (19.11324%) cytosines and 507,585,491 (19.11873%) Gumines.</p>
@@ -1741,8 +1741,8 @@ plot(seq(96, 102), spike_in_zero[97:103], type=&quot;o&quot;, main=&quot;100% hm
 <pre class="r"><code># there is one base shift </code></pre>
 </div>
 </div>
-<div id="ngmes-correlation" class="section level2">
-<h2>0.5ngmES-correlation</h2>
+<div id="ng600pgmes-correlation" class="section level2">
+<h2>0.5ng(600pg)mES-correlation</h2>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-93-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li>With each window length, use the the windows with at least one reads, calculate the pairwise correlation between two replicates using reads number in the window, then average the correlation across all possible pairwise combinations (here only randomly pick 10 pairs).</li>
@@ -1755,12 +1755,35 @@ plot(seq(96, 102), spike_in_zero[97:103], type=&quot;o&quot;, main=&quot;100% hm
 Warning: NAs introduced by coercion</code></pre>
 <pre><code>[1] 0.9516026</code></pre>
 <p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-96-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="top-2-samples-with-most-reads" class="section level3">
+<h3>top 2 samples with most reads</h3>
+<pre class="r"><code>CHe-LHu-10S-PE75-lu-4_S4_R1_001_jump_TGACTCG.umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP01.bam 354531   CHe-LHu-10S-PE75-lu-6_S6_R1_001_jump_TGACTCG.umi_encoded_adaptor_removed_no_mismatch_sorted_dedup_TP15.bam 92623</code></pre>
+<pre class="r"><code>percent=matrix(nrow=2, ncol=4)
+percent[,1]=c(0.0854,0.0194)
+percent[,2]=c(0.1382,0.0257)
+
+percent[,3]=c(0.0771, 0.0194)
+percent[,4]=c(0.1151,0.0257)
+
+
+colnames(percent)=rep(c(&quot;Sample 1&quot;, &quot;Sample 2&quot;), each=2)
+
+#par(mfrow=c(1,2))
+par(mfrow=c(1,2),oma = c(0, 0, 2, 0))
+barplot(percent[,c(1,3)], beside=T, col=c(&quot;red&quot;, &quot;darkblue&quot;), legend=c(&quot;Jump-seq peaks&quot;, &quot;Random windows&quot;), ylim=c(0,0.3),
+xlab=&quot;Figure 1A&quot;, main=&quot;&quot;, ylab=&quot;Proportion of Nano-seal peaks&quot;, cex.names=0.5)
+
+barplot(percent[,c(2,4)], beside=T, col=c(&quot;red&quot;, &quot;darkblue&quot;), legend=c(&quot;Jump-seq peaks&quot;, &quot;Random windows&quot;), ylim=c(0,0.4),
+xlab=&quot;Figure 1B&quot;, main=&quot;&quot;, ylab=&quot;Proportion of Tab-seq peaks&quot;, cex.names=0.5)
+mtext(&quot;Two 0.5ng mES samples &quot;, outer = TRUE, cex = 1.5)</code></pre>
+<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-98-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
 <!-- Insert the session information into the document -->
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 3.4.3 (2017-11-30)
+<pre><code>R version 3.5.0 (2018-04-23)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows 7 x64 (build 7601) Service Pack 1
 
@@ -1777,10 +1800,10 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 loaded via a namespace (and not attached):
- [1] compiler_3.4.3  backports_1.0.5 magrittr_1.5    rprojroot_1.3-1
- [5] tools_3.4.3     htmltools_0.3.5 yaml_2.1.16     Rcpp_0.12.10   
- [9] stringi_1.1.5   rmarkdown_1.8   highr_0.6       knitr_1.17     
-[13] git2r_0.21.0    stringr_1.2.0   digest_0.6.12   evaluate_0.10  </code></pre>
+ [1] compiler_3.5.0  backports_1.1.2 magrittr_1.5    rprojroot_1.3-2
+ [5] tools_3.5.0     htmltools_0.3.6 yaml_2.1.19     Rcpp_0.12.16   
+ [9] stringi_1.1.7   rmarkdown_1.9   highr_0.6       knitr_1.20     
+[13] git2r_0.21.0    stringr_1.3.0   digest_0.6.15   evaluate_0.10.1</code></pre>
 </div>
 
 <hr>
