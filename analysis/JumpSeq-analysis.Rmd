@@ -1430,6 +1430,12 @@ barplot(percent[,c(2,4,6,8,10)], beside=T, col=c("red", "darkblue"), legend=c("J
 xlab="Figure 1B", main="", ylab="Proportion of Tab-seq peaks", cex.names=0.5)
 ```
 
+
+* FDR 0.05 is used for determine peak windows and sated clearly otherwise 
+* To make fair comparison, in each case, the same amount of random windows as peak windows  are picked in the whole genome and compute the its proportion windows overlpping with peaks from other methods. 
+* In some case, sinlge sample was used and in some cases, may be combined samples are used, but the enrichments are similar in both cases. 
+
+
 ## 0.6ng 5hmC replicate 
 
 ### reads information  and peak windows
@@ -1660,7 +1666,7 @@ CHe-LHu-10S-PE75-lu-4_S4_R1_001_jump_TGACTCG.umi_encoded_adaptor_removed_no_mism
 
 
 
-```{r, echo=T}
+```{r, echo=F}
 percent=matrix(nrow=2, ncol=4)
 percent[,1]=c(0.0854,0.0194)
 percent[,2]=c(0.1382,0.0257)
@@ -1678,8 +1684,11 @@ xlab="Figure 1A", main="", ylab="Proportion of Nano-seal peaks", cex.names=0.5)
 
 barplot(percent[,c(2,4)], beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.4),
 xlab="Figure 1B", main="", ylab="Proportion of Tab-seq peaks", cex.names=0.5)
-mtext("Two 0.5ng mES samples ", outer = TRUE, cex = 1.5)
+mtext("Enrichemnt of two 0.5ng mES samples", outer = TRUE, cex = 1.5)
 ```
+
+* Windows with reads are chosen and extended to 20 bp 
+
 
 
 
