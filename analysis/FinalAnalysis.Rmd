@@ -19,7 +19,7 @@ set.seed(123)
 
 ## 48ng 5hmC 
 
-###
+### Overlap by Venn diagram 
 
 If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows with FDR 0.05, of  which 686652 windows are overlapping with strong TAB-seq windows which are extended 10 bp downtream and 10 bp upstream. for strong TAB-seq, there are 2057636 20bp extended windows and 763937 are overlapping with Jump-seq windows.   
 
@@ -28,6 +28,117 @@ If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows 
 ![ Venn diagram of 5hmC and TAB-seq ](figure/VennDiagram.png)
 
 
+### Sensitivity 
+
+
+```{r, echo=F, fig.cap="This figure shows the sensitivity of the method defined as the proportion of peak windows by other methods (Tab-seq and Nano seal ) that are recovered by our method"}
+ratio=matrix(nrow=2, ncol=2)
+ratio[,1]=c(0.9271, 0.3713)
+ratio[,2]=c(0.9273, 0.3713)
+ave=matrix(nrow=2, ncol=1)
+ave[,1]=rowMeans(ratio)
+rownames(ave)=c("Nano_seal", "TAB-seq")
+#pdf("D:\\Dropbox\\JumpSeqProject\\Figure\\sensitivity_48ng_11sampleCombined.pdf")
+barplot(ave[,1], beside=F, ylim=c(0,1.2), col=c("red", "darkblue"), xlab=c(""), main="", ylab="Sensitivity")
+text(0.6, 1.0, ave[1])
+text(2, 0.45, ave[2])
+#dev.off()
+```
+
+* For Jump-seq, eleven 48ng samples are combined together, 20bp peak windows are called at FDR 0.05. 
+
+
+### Enrichment in genomic regions
+
+```{r, echo=F, fig.cap="We combined eleven 48ng replicates, called peak windows of 20 bp, selecetd 20 bp windows with FDR 0.05. We randomly selected same amount of 20 bp windows as  the chosen windows in the whole genome. The proportion of chosen peak windows (red) and randon windows (blue) overlapping with different regions are calculated and the corresponding enrichments are shown above the red bar"}
+minus.percent=matrix(nrow=2, ncol=5)
+minus.percent[,1]=c(0.0070, 0.0032)
+minus.percent[,2]=c(0.0139, 0.0034)
+
+minus.percent[,3]=c(0.0069, 0.0026)
+minus.percent[,4]=c(0.0042, 0.0021)
+
+minus.percent[,5]=c(0.0005, 0.0011)
+colnames(minus.percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
+
+plus.percent=matrix(nrow=2, ncol=5)
+plus.percent[,1]=c(0.0068, 0.0032)
+plus.percent[,2]=c(0.0139, 0.0034)
+
+plus.percent[,3]=c(0.0070, 0.0026)
+plus.percent[,4]=c(0.0042, 0.0021)
+
+plus.percent[,5]=c(0.0006, 0.0011)
+colnames(plus.percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
+ave.percent=(minus.percent+plus.percent)/2
+
+
+#pdf("D:\\Dropbox\\JumpSeqProject\\Figure\\Enrichment_different_region_48ng_11sampleCombined_FDR0.05.pdf")
+barplot(ave.percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.02),
+ylab="Proportion of Jump-seq windows", main="combine 11 48ng replicates (FDR0.05)", xlab="", cex.names=1)
+text(1.5, 0.008, "2.16")
+text(4.5, 0.015, "4.09")
+text(7.5, 0.008, "2.67")
+text(10.5, 0.005, "2.00")
+text(14, 0.002, "0.50")
+#dev.off()
+```
+
+
+## Enrichments across different genomic concentrations
+
+```{r, echo=F}
+percent=matrix(nrow=2, ncol=12)
+percent[,1]=c(0.0854,0.0194)
+percent[,2]=c(0.1382,0.0257)
+
+percent[,3]=c(43213, 10092)/521062
+percent[,4]=c(98049, 13382)/521062
+
+percent[,5]=c(61404, 12907)/665737
+percent[,6]=c(114794, 17049)/665737
+
+percent[,7]=c(111734, 23171)/1197291
+percent[,8]=c(149717, 31057)/1197291
+
+percent[,9]=c(122190, 28799)/1474825
+percent[,10]=c(246529, 37851)/1474825
+
+percent[,11]=c(529216, 73689)/3789453
+percent[,12]=c(921479, 98580)/3789453
+colnames(percent)=rep(c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng"), each=2)
+
+par(mfrow=c(1,2))
+barplot(percent[,c(1,3,5,7,9, 11)], beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.3),
+xlab="A", main="", ylab="Proportion of Nano-seal peaks", cex.names=0.5)
+
+barplot(percent[,c(2,4,6,8,10, 12)], beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.4),
+xlab="B", main="", ylab="Proportion of Tab-seq peaks", cex.names=0.5)
+```
+
+
+* FDR 0.05 is used for determine peak windows and sated clearly otherwise 
+* To make fair comparison, in each case, the same amount of random windows as peak windows  are picked in the whole genome and compute the its proportion windows overlpping with peaks from other methods. 
+* In some case, sinlge sample was used and in some cases, may be combined samples are used, but the enrichments are similar in both cases. 
 
 
 
+##  reads count and abundance 
+
+
+```{r, echo=F, fig.cap="The fitted regression line (red) on the fold change of number of reads (point) at different hmC proportions in spike in"}
+hmc.ratio=c(0, 0.01, 0.05,  0.25, 0.5, 0.75, 1)
+num.reads.plus1=c(34536, 103817, 282178, 1374788, 2427158, 3002380, 3198060)
+
+fit=lm(num.reads.plus1/num.reads.plus1[1] ~ hmc.ratio)
+
+#pdf("D:\\Dropbox\\JumpSeqProject\\Figure\\spike.in.regression.pdf")
+plot(hmc.ratio, num.reads.plus1/num.reads.plus1[1], xlim=c(0,1), ylim=c(0, 110), type="p", ylab="Fold change of reads", xlab="Ratio of hmC", xaxt="n", main="", pch=16)
+axis(1, at =hmc.ratio, las=0, cex.axis=0.5)
+lines(hmc.ratio, fit$coefficients[1]+fit$coefficients[2]*hmc.ratio, col=2, type="l")
+r.square=summary(fit)$r.squared
+legend(0.01,100, expression(paste(R^2, "=0.94")))
+#dev.off()
+
+#legend(0.75, 40, c("observed", "fitted"), col=c(1,2), lty=c(1,1))
+```

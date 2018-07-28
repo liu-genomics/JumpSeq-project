@@ -315,13 +315,52 @@ div.tocify {
 shared across the workflowr files. -->
 <div id="ng-5hmc" class="section level2">
 <h2>48ng 5hmC</h2>
-<div id="section" class="section level3">
-<h3></h3>
+<div id="overlap-by-venn-diagram" class="section level3">
+<h3>Overlap by Venn diagram</h3>
 <p>If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows with FDR 0.05, of which 686652 windows are overlapping with strong TAB-seq windows which are extended 10 bp downtream and 10 bp upstream. for strong TAB-seq, there are 2057636 20bp extended windows and 763937 are overlapping with Jump-seq windows.</p>
 <div class="figure">
 <img src="figure/VennDiagram.png" alt="Venn diagram of 5hmC and TAB-seq" />
 <p class="caption">Venn diagram of 5hmC and TAB-seq</p>
 </div>
+</div>
+<div id="sensitivity" class="section level3">
+<h3>Sensitivity</h3>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-1-1.png" alt="This figure shows the sensitivity of the method defined as the proportion of peak windows by other methods (Tab-seq and Nano seal ) that are recovered by our method" width="672" />
+<p class="caption">
+This figure shows the sensitivity of the method defined as the proportion of peak windows by other methods (Tab-seq and Nano seal ) that are recovered by our method
+</p>
+</div>
+<ul>
+<li>For Jump-seq, eleven 48ng samples are combined together, 20bp peak windows are called at FDR 0.05.</li>
+</ul>
+</div>
+<div id="enrichment-in-genomic-regions" class="section level3">
+<h3>Enrichment in genomic regions</h3>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-2-1.png" alt="We combined eleven 48ng replicates, called peak windows of 20 bp, selecetd 20 bp windows with FDR 0.05. We randomly selected same amount of 20 bp windows as  the chosen windows in the whole genome. The proportion of chosen peak windows (red) and randon windows (blue) overlapping with different regions are calculated and the corresponding enrichments are shown above the red bar" width="672" />
+<p class="caption">
+We combined eleven 48ng replicates, called peak windows of 20 bp, selecetd 20 bp windows with FDR 0.05. We randomly selected same amount of 20 bp windows as the chosen windows in the whole genome. The proportion of chosen peak windows (red) and randon windows (blue) overlapping with different regions are calculated and the corresponding enrichments are shown above the red bar
+</p>
+</div>
+</div>
+</div>
+<div id="enrichments-across-different-genomic-concentrations" class="section level2">
+<h2>Enrichments across different genomic concentrations</h2>
+<p><img src="FinalAnalysis_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<ul>
+<li>FDR 0.05 is used for determine peak windows and sated clearly otherwise</li>
+<li>To make fair comparison, in each case, the same amount of random windows as peak windows are picked in the whole genome and compute the its proportion windows overlpping with peaks from other methods.</li>
+<li>In some case, sinlge sample was used and in some cases, may be combined samples are used, but the enrichments are similar in both cases.</li>
+</ul>
+</div>
+<div id="reads-count-and-abundance" class="section level2">
+<h2>reads count and abundance</h2>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-4-1.png" alt="The fitted regression line (red) on the fold change of number of reads (point) at different hmC proportions in spike in" width="672" />
+<p class="caption">
+The fitted regression line (red) on the fold change of number of reads (point) at different hmC proportions in spike in
+</p>
 </div>
 </div>
 
