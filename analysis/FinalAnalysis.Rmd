@@ -1,0 +1,33 @@
+---
+title: "FinalAnalysis"
+author: "Shengtong"
+date: "July 25, 2018"
+output: html_document
+---
+
+<!-- The file analysis/chunks.R contains chunks that define default settings
+shared across the workflowr files. -->
+```{r read-chunk, include=FALSE}
+knitr::read_chunk("chunks.R")
+library(knitr)
+library(kableExtra)
+library(RColorBrewer)
+library(gplots)
+set.seed(123)
+```
+
+
+## 48ng 5hmC 
+
+###
+
+If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows with FDR 0.05, of  which 686652 windows are overlapping with strong TAB-seq windows which are extended 10 bp downtream and 10 bp upstream. for strong TAB-seq, there are 2057636 20bp extended windows and 763937 are overlapping with Jump-seq windows.   
+
+
+
+![ Venn diagram of 5hmC and TAB-seq ](figure/VennDiagram.png)
+
+
+
+
+

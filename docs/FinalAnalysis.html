@@ -9,9 +9,11 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Shengtong" />
 
+<meta name="date" content="2018-07-25" />
 
-<title>Home</title>
+<title>FinalAnalysis</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +21,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -164,6 +169,101 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -204,25 +304,26 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">FinalAnalysis</h1>
+<h4 class="author"><em>Shengtong</em></h4>
+<h4 class="date"><em>July 25, 2018</em></h4>
 
 </div>
 
 
-<p>This project aims to investigate genome-wide distribution of 5hmC.</p>
-<ul>
-<li><a href="PeakCalling-procedure.html">This</a> is Peak window calling procedure.</li>
-<li><a href="JumpSeq-analysis.html">This</a> is analysis for 5hmC data.</li>
-<li><a href="5mCAnalysis.html">Here</a> is analysis for 5mC data.</li>
-<li><a href="RNA_Seq.html">This</a> is RNA-seq analysis.</li>
-<li><a href="PN-analysis.html">This</a> is PN analysis.</li>
-<li><a href="Sample-with-spikein.html">This</a> is analysis for samples with spike in</li>
-<li><a href="5mC5hmC.html">This</a> is the data on 4/20/2018 with spike in</li>
-<li><a href="FirstBatch5mC.html">This</a> is the analysis for data on 2/21/2018 with spike in</li>
-<li><a href="20180606.html">This</a> is the analysis for data on 6/6/2018 with spike in</li>
-<li><p><a href="FinalAnalysis.html">Final alaysis</a></p></li>
-<li><p>Yuwen’s analysis is <a href="http://liu-genomics.github.io/Tiao_Seq/index.html">here</a></p></li>
-</ul>
+<!-- The file analysis/chunks.R contains chunks that define default settings
+shared across the workflowr files. -->
+<div id="ng-5hmc" class="section level2">
+<h2>48ng 5hmC</h2>
+<div id="section" class="section level3">
+<h3></h3>
+<p>If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows with FDR 0.05, of which 686652 windows are overlapping with strong TAB-seq windows which are extended 10 bp downtream and 10 bp upstream. for strong TAB-seq, there are 2057636 20bp extended windows and 763937 are overlapping with Jump-seq windows.</p>
+<div class="figure">
+<img src="figure/VennDiagram.png" alt="Venn diagram of 5hmC and TAB-seq" />
+<p class="caption">Venn diagram of 5hmC and TAB-seq</p>
+</div>
+</div>
+</div>
 
 <hr>
 <p>
@@ -250,6 +351,8 @@ $(document).ready(function () {
 -->
 
 
+</div>
+</div>
 
 </div>
 
