@@ -322,6 +322,11 @@ shared across the workflowr files. -->
 <img src="figure/VennDiagram.png" alt="Venn diagram of 5hmC and TAB-seq" />
 <p class="caption">Venn diagram of 5hmC and TAB-seq</p>
 </div>
+<p>If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows with FDR 0.05, of which 386331 (16.32%) windows are overlapping with hmC seal. For hmC seal, there are 64865 peaks and 58280 (89.85%) are overlapping with 5hmC peaks.</p>
+<div class="figure">
+<img src="figure/VennDiagram_hmc_hmcseal.png" alt="Venn diagram of 5hmC and hmC-seal" />
+<p class="caption">Venn diagram of 5hmC and hmC-seal</p>
+</div>
 </div>
 <div id="sensitivity" class="section level3">
 <h3>Sensitivity</h3>
@@ -362,6 +367,17 @@ We combined eleven 48ng replicates, called peak windows of 20 bp, selecetd 20 bp
 The fitted regression line (red) on the fold change of number of reads (point) at different hmC proportions in spike in
 </p>
 </div>
+</div>
+<div id="ng-5hmc-1" class="section level2">
+<h2>0.6ng 5hmC</h2>
+</div>
+<div id="enrichment-in-genomic-regions-1" class="section level2">
+<h2>enrichment in genomic regions</h2>
+<p><img src="FinalAnalysis_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ul>
+<li>cis-regulatory regions are extended 200bp windows.</li>
+<li>jump peaks are 20 bp windows with at least one reads.</li>
+</ul>
 </div>
 
 <hr>

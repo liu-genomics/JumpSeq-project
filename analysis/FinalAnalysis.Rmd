@@ -28,6 +28,12 @@ If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows 
 ![ Venn diagram of 5hmC and TAB-seq ](figure/VennDiagram.png)
 
 
+
+If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows with FDR 0.05, of  which 386331 (16.32%) windows are overlapping with hmC seal. For hmC seal,  there are 64865 peaks and 58280 (89.85%) are overlapping with 5hmC peaks. 
+
+![ Venn diagram of 5hmC and hmC-seal ](figure/VennDiagram_hmc_hmcseal.png)
+
+
 ### Sensitivity 
 
 
@@ -142,3 +148,27 @@ legend(0.01,100, expression(paste(R^2, "=0.94")))
 
 #legend(0.75, 40, c("observed", "fitted"), col=c(1,2), lty=c(1,1))
 ```
+
+
+## 0.6ng 5hmC 
+
+## enrichment in genomic regions 
+
+```{r, echo=F}
+percent=matrix(nrow=2, ncol=5)
+percent[,1]=c(0.0049, 0.0032)
+percent[,2]=c(0.0056, 0.0035)
+
+percent[,3]=c(0.0033, 0.0026)
+percent[,4]=c(0.0021, 0.0021)
+
+percent[,5]=c(0.0034, 0.0012)
+colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
+
+barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.01),
+ylab="Proportion of Jump-seq windows", main="", xlab="", cex.names=1)
+```
+
+* cis-regulatory regions are extended 200bp windows. 
+* jump peaks are 20 bp windows with at least one reads. 
+
