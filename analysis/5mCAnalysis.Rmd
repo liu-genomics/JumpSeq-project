@@ -260,7 +260,9 @@ ylab="Proportion of Jump-seq windows", main="", xlab="", cex.names=0.7)
 * cutoff used for peak windows: 2.4ng (FDR0.05), others use p values less than $10^{-6}$. 
 
 ### Sensitivity 
-```{r sensitivity, echo=F, fig.cap="Proportion of  methylated cytosine from Gary Hon  at different genomic concentrations recovered by Jump-seq. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng.}
+
+
+```{r, echo=F, fig.cap="Proportion of  methylated cytosine from Gary Hon  at different genomic concentrations recovered by Jump-seq. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng"}
 percent=matrix(nrow=2, ncol=5)
 percent[,1]=c(0.000026, 0.000029)
 percent[,2]=c(0.000195, 0.000334)

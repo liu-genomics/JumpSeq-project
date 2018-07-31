@@ -314,10 +314,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2018-03-22</p>
+<p><strong>Last updated:</strong> 2018-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> b66d409</p>
+<p><strong>Code version:</strong> 028a217</p>
 <!-- Add your analysis here -->
 <p>Samples are <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=271045416">here</a>: and original samples are <a href="https://docs.google.com/spreadsheets/d/1WesFCQTrFplnXRKCHmhqtm1529DHc5Sc2tX7GkRa_-U/edit#gid=1664366512">here</a></p>
 <div id="ng-5mc-replicates" class="section level2">
@@ -803,6 +803,8 @@ barplot(reads[,1]/sum(reads[,1]), ylim=c(0,1), ylab=&quot;Freq&quot;, main=&quot
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
+<div id="enrichment" class="section level3">
+<h3>Enrichment</h3>
 <pre class="r"><code>percent=matrix(nrow=2, ncol=5)
 percent[,1]=c(0.7895, 0.1450)
 percent[,2]=c(0.8069, 0.1450)
@@ -826,11 +828,21 @@ Enrichment of methylated cytosine from Gary Hon at different genomic concentrati
 <li>cutoff used for peak windows: 2.4ng (FDR0.05), others use p values less than <span class="math inline">\(10^{-6}\)</span>.</li>
 </ul>
 </div>
+<div id="sensitivity" class="section level3">
+<h3>Sensitivity</h3>
+<div class="figure" style="text-align: center">
+<img src="figure/5mCAnalysis.Rmd/unnamed-chunk-5-1.png" alt="Proportion of  methylated cytosine from Gary Hon  at different genomic concentrations recovered by Jump-seq. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng" width="672" />
+<p class="caption">
+Proportion of methylated cytosine from Gary Hon at different genomic concentrations recovered by Jump-seq. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng
+</p>
+</div>
+</div>
+</div>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
 <!-- Insert the session information into the document -->
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 3.4.3 (2017-11-30)
+<pre><code>R version 3.5.0 (2018-04-23)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows 7 x64 (build 7601) Service Pack 1
 
@@ -847,10 +859,10 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 loaded via a namespace (and not attached):
- [1] compiler_3.4.3  backports_1.0.5 magrittr_1.5    rprojroot_1.3-1
- [5] tools_3.4.3     htmltools_0.3.5 yaml_2.1.16     Rcpp_0.12.10   
- [9] stringi_1.1.5   rmarkdown_1.8   highr_0.6       knitr_1.17     
-[13] git2r_0.21.0    stringr_1.2.0   digest_0.6.12   evaluate_0.10  </code></pre>
+ [1] compiler_3.5.0  backports_1.1.2 magrittr_1.5    rprojroot_1.3-2
+ [5] tools_3.5.0     htmltools_0.3.6 yaml_2.1.19     Rcpp_0.12.16   
+ [9] stringi_1.1.7   rmarkdown_1.9   highr_0.6       knitr_1.20     
+[13] git2r_0.21.0    stringr_1.3.0   digest_0.6.15   evaluate_0.10.1</code></pre>
 </div>
 
 <hr>
