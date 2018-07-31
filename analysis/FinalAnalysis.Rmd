@@ -25,13 +25,13 @@ If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows 
 
 
 
-![ Venn diagram of 5hmC and TAB-seq ](figure/VennDiagram.png)
+![ Venn diagram of 5hmC and TAB-seq. 48ng samples are combined together and 20 bp windows are called at FDR 0.05. The proportion of peak windows of jump-seq overlapping with TAB-seq and the proportion of peaks of TAB-seq overlapping with jump-seq are presented inside the circle.  ](figure/VennDiagram.png)
 
 
 
 If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows with FDR 0.05, of  which 386331 (16.32%) windows are overlapping with hmC seal. For hmC seal,  there are 64865 peaks and 58280 (89.85%) are overlapping with 5hmC peaks. 
 
-![ Venn diagram of 5hmC and hmC-seal ](figure/VennDiagram_hmc_hmcseal.png)
+![ Venn diagram of 5hmC and hmC-seal. 48ng samples are combined together and 20 bp windows are called at FDR 0.05. The proportion of peak windows of jump-seq overlapping with hmC-seal  and the proportion of peaks of hmC-seal overlapping with jump-seq are presented inside the circle. ](figure/VennDiagram_hmc_hmcseal.png)
 
 
 ### Sensitivity 
@@ -39,11 +39,11 @@ If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows 
 
 ```{r, echo=F, fig.cap="This figure shows the sensitivity of the method defined as the proportion of peak windows by other methods (Tab-seq and Nano seal ) that are recovered by our method"}
 ratio=matrix(nrow=2, ncol=2)
-ratio[,1]=c(0.9271, 0.3713)
-ratio[,2]=c(0.9273, 0.3713)
+ratio[,1]=c(0.8985, 0.3713)
+ratio[,2]=c(0.8985, 0.3713)
 ave=matrix(nrow=2, ncol=1)
 ave[,1]=rowMeans(ratio)
-rownames(ave)=c("Nano_seal", "TAB-seq")
+rownames(ave)=c("hmC-seal", "TAB-seq")
 #pdf("D:\\Dropbox\\JumpSeqProject\\Figure\\sensitivity_48ng_11sampleCombined.pdf")
 barplot(ave[,1], beside=F, ylim=c(0,1.2), col=c("red", "darkblue"), xlab=c(""), main="", ylab="Sensitivity")
 text(0.6, 1.0, ave[1])

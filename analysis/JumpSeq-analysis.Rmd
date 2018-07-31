@@ -1485,6 +1485,30 @@ ylab="Proportion of Jump-seq windows", main="20160811_5hmC_Jump_Seq_0.6ng.minus"
 * cis-regulatory regions are extended 200bp windows. 
 * jump peaks are 20 bp windows with at least one reads. 
 
+
+### Overlap with 48ng samples 
+
+
+```{r, echo=F}
+overlap=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC_0.6ng\\overlap", header=F)
+reads.count=overlap[c(1,3,4,6)]
+par(mfrow=c(1,2))
+rep1=(reads.count[1:18,2]/reads.count[1:18,1]+reads.count[19:36,2]/reads.count[19:36,1])/2
+rep1.ave=numeric()
+rep2=(reads.count[37:54,2]/reads.count[37:54,1]+reads.count[55:72,2]/reads.count[55:72,1])/2
+rep2.ave=numeric()
+for (i in 1:9)
+{
+  rep1.ave[i]=mean(rep1[(i-1)*2+1], rep1[i*2])
+  rep2.ave[i]=mean(rep2[(i-1)*2+1], rep2[i*2])
+}
+barplot(rep1.ave, ylim=c(0,1), ylab="Proportation of 0.6ng 20 bp windows", main=paste("mean of", round(mean(rep1.ave), digits=4)))
+barplot(rep2.ave, ylim=c(0,1), ylab="Proportation of 0.6ng 20 bp windows", main=paste("mean of", round(mean(rep2.ave), digits=4)))
+```
+
+* overlap between 0.6ng single sample 20 bp windows with reads and 48ng single sample 20 bp windows with reads. 
+
+
 ## 5hmC spike in 
 
 
