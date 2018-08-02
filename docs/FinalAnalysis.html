@@ -331,28 +331,30 @@ shared across the workflowr files. -->
 <div id="sensitivity" class="section level3">
 <h3>Sensitivity</h3>
 <div class="figure">
-<img src="FinalAnalysis_files/figure-html/unnamed-chunk-1-1.png" alt="This figure shows the sensitivity of the method defined as the proportion of peak windows by other methods (Tab-seq and Nano seal ) that are recovered by our method" width="672" />
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-1-1.png" alt="This figure presents the proportion of peak windows of TAB-seq and hmC-seal that are recovered by 20 bp jump-seq peak windows from 48ng combined sample with FDR at 0.05" width="672" />
 <p class="caption">
-This figure shows the sensitivity of the method defined as the proportion of peak windows by other methods (Tab-seq and Nano seal ) that are recovered by our method
+This figure presents the proportion of peak windows of TAB-seq and hmC-seal that are recovered by 20 bp jump-seq peak windows from 48ng combined sample with FDR at 0.05
 </p>
 </div>
-<ul>
-<li>For Jump-seq, eleven 48ng samples are combined together, 20bp peak windows are called at FDR 0.05.</li>
-</ul>
 </div>
 <div id="enrichment-in-genomic-regions" class="section level3">
 <h3>Enrichment in genomic regions</h3>
 <div class="figure">
-<img src="FinalAnalysis_files/figure-html/unnamed-chunk-2-1.png" alt="We combined eleven 48ng replicates, called peak windows of 20 bp, selecetd 20 bp windows with FDR 0.05. We randomly selected same amount of 20 bp windows as  the chosen windows in the whole genome. The proportion of chosen peak windows (red) and randon windows (blue) overlapping with different regions are calculated and the corresponding enrichments are shown above the red bar" width="672" />
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-2-1.png" alt=" Eleven 48 ng samples are combined together and 20 bp peak windows are called at FDR 0.05. Random windows are randomly selected  in the whole genome with the same amount of peak windows. The proportion of chosen peak windows (red) and random windows (blue) overlapping in  different genomic regions are calculated and the corresponding odds ratio are shown above the red bar" width="672" />
 <p class="caption">
-We combined eleven 48ng replicates, called peak windows of 20 bp, selecetd 20 bp windows with FDR 0.05. We randomly selected same amount of 20 bp windows as the chosen windows in the whole genome. The proportion of chosen peak windows (red) and randon windows (blue) overlapping with different regions are calculated and the corresponding enrichments are shown above the red bar
+Eleven 48 ng samples are combined together and 20 bp peak windows are called at FDR 0.05. Random windows are randomly selected in the whole genome with the same amount of peak windows. The proportion of chosen peak windows (red) and random windows (blue) overlapping in different genomic regions are calculated and the corresponding odds ratio are shown above the red bar
 </p>
 </div>
 </div>
 </div>
 <div id="enrichments-across-different-genomic-concentrations" class="section level2">
 <h2>Enrichments across different genomic concentrations</h2>
-<p><img src="FinalAnalysis_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-3-1.png" alt=" From 0.6ng to  48ng 5hmC samples, 20bp peak windows are called at FDR 0.05 for jump-seq. Random windows are chosen in the whole genome in the same amount of peak windows. The overlap of peak windows by jump-seq and random windows with peaks from TAB-seq and hmC-seal are colored in red and blue respectively. " width="672" />
+<p class="caption">
+From 0.6ng to 48ng 5hmC samples, 20bp peak windows are called at FDR 0.05 for jump-seq. Random windows are chosen in the whole genome in the same amount of peak windows. The overlap of peak windows by jump-seq and random windows with peaks from TAB-seq and hmC-seal are colored in red and blue respectively.
+</p>
+</div>
 <ul>
 <li>FDR 0.05 is used for determine peak windows and sated clearly otherwise</li>
 <li>To make fair comparison, in each case, the same amount of random windows as peak windows are picked in the whole genome and compute the its proportion windows overlpping with peaks from other methods.</li>
@@ -373,7 +375,12 @@ The fitted regression line (red) on the fold change of number of reads (point) a
 </div>
 <div id="enrichment-in-genomic-regions-1" class="section level2">
 <h2>enrichment in genomic regions</h2>
-<p><img src="FinalAnalysis_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-5-1.png" alt="For 0.6ng 5hmC sample, 20 bp windows with at least one reads are called peak windows. Random windows are chosen in the whole genome in the same amount of peak windows. The proportion of peak windows and random windows in different genomic regions (200bp bins) are computeed. " width="672" />
+<p class="caption">
+For 0.6ng 5hmC sample, 20 bp windows with at least one reads are called peak windows. Random windows are chosen in the whole genome in the same amount of peak windows. The proportion of peak windows and random windows in different genomic regions (200bp bins) are computeed.
+</p>
+</div>
 <ul>
 <li>cis-regulatory regions are extended 200bp windows.</li>
 <li>jump peaks are 20 bp windows with at least one reads.</li>
@@ -400,9 +407,9 @@ Enrichment of methylated cytosine from Gary Hon at different genomic concentrati
 <div id="sensitivity-1" class="section level3">
 <h3>Sensitivity</h3>
 <div class="figure">
-<img src="FinalAnalysis_files/figure-html/unnamed-chunk-7-1.png" alt="Proportion of  methylated cytosine from Gary Hon  at different genomic concentrations recovered by Jump-seq. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng" width="672" />
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-7-1.png" alt="Normalized proportion of  methylated cytosine from Gary Hon  at different genomic concentrations recovered by Jump-seq. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng" width="672" />
 <p class="caption">
-Proportion of methylated cytosine from Gary Hon at different genomic concentrations recovered by Jump-seq. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng
+Normalized proportion of methylated cytosine from Gary Hon at different genomic concentrations recovered by Jump-seq. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng
 </p>
 </div>
 </div>
