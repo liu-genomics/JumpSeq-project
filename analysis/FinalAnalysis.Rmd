@@ -100,9 +100,9 @@ dat=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\mm9.genome
 dat.num=as.matrix(dat[,4:5])
 dat.num[dat.num=="."]=0
 dat.num[is.na(dat.num)]=0
-log.dat.num=cbind(log(as.numeric(dat.num[,1]), base=2), log(as.numeric(dat.num[,2]), base=2))
+log.dat.num=cbind(log(as.numeric(dat.num[,1]), base=10), log(as.numeric(dat.num[,2]), base=10))
 log.dat.num[log.dat.num=="-Inf"]=0
-corre=round(cor(as.numeric(dat.num[,1]), as.numeric(dat.num[,2])), digits=2)
+corre=round(cor(as.numeric(log.dat.num[,1]), as.numeric(log.dat.num[,2])), digits=2)
 plot(as.numeric(dat.num[,1]), as.numeric(dat.num[,2]), xlab="Rep 1", ylab="Rep 2")
 legend(0,10000, paste("R=", corre))
 
@@ -149,7 +149,7 @@ percent[,12]=c(921479, 98580)/3789453
 colnames(percent)=rep(c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng"), each=2)
 
 barplot(percent[,c(2,4,6,8,10, 12)], beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.4),
-xlab="", main="", ylab="Proportion of TAB-seq peaks", cex.names=0.5)
+xlab="", main="", ylab="Proportion of peaks overlapping with TAB-seq peaks", cex.names=0.5)
 ```
 
 
@@ -207,7 +207,7 @@ percent[,12]=c(921479, 98580)/3789453
 colnames(percent)=rep(c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng"), each=2)
 
 barplot(percent[,c(1,3,5,7,9, 11)], beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.3),
-xlab="", main="", ylab="Proportion of Nano-seal peaks", cex.names=0.5)
+xlab="", main="", ylab="Proportion of peaks overlapping with Nano-seal peaks", cex.names=0.5)
 ```
 
 
@@ -244,7 +244,7 @@ colnames(plus.percent)=c("2.4ng", "6ng", "12ng", "24ng", "48ng")
 percent=(plus.percent+minus.percent)/2
 #pdf("D:\\Dropbox\\JumpSeqProject\\Figure\\Enrichemnt_5mC.pdf")
 barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,1.2),
-ylab="Proportion of Jump-seq windows", main="", xlab="", cex.names=0.7)
+ylab="Proportion of methylated cytosine", main="", xlab="", cex.names=0.7)
 #dev.off()
 ```
 
