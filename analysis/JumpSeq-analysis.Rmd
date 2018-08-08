@@ -248,7 +248,7 @@ barplot(count[,1], beside=F, col=c("red", "darkblue"), legend=c("Observed", "Exp
 ### Jump distribution 
 The reference is GSM882244_FDR_0.0484. First got non-overlapping 5hmC regions and make sure each window has only one 5hmC site. For each window, count the reads depth at every site, then add up reads depth of these non-overlapping windows. Reads distribution is the accumulative reads depth at every base of all non-overlapping windows. Input Bam file is the replicate with largest number of reads.  
 
-```{r, echo=T, eval=T}
+```{r, echo=T, eval=F}
 minus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_GSM882244_FDR_0.0484_minus_with_1_coverage.ave.perbase", header=F)
 par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
 plot(seq(-100, 100, by=1)-1,minus.48ng[,1], type="l", ylab="coverage", xlab="Distance", main="")

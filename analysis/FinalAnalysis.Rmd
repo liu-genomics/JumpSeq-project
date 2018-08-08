@@ -21,6 +21,17 @@ set.seed(123)
 ## Accuracy of Jump-seq assessed with synthetic DNA: estimation of FP rates. 
 Figure: barplot, CPM (counts per million) of 5hmC vs. unmodified C. Show number of sites in the plot. 
 
+```{r, echo=F, fig.cap="Number of sites (5hmC or unmodified C ) are in brackets"}
+CPM=matrix(nrow=1, ncol=2)
+CPM[1,]=c(22, 0.78)
+colnames(CPM)=c("5hmC", "Unmodified C")
+barplot(CPM, col=c("red", "blue"), ylim=c(0, 24), ylab="Number of reads (million)", beside=T)
+text(1.5, 23, "22.00 (1)")
+text(3.5, 2, "0.78 (72)")
+```
+
+
+
 
 ## Quantification of 5hmC: linear correlation of read counts vs. 5hmC amount
 Figure: scatter plot. 
