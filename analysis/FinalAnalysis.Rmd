@@ -96,10 +96,12 @@ legend(0,4000, paste("R=", corre))
 
 
 
-dat=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\mm9.genome.500bp.window.bed.CHe-Lu-1_S12_L005_R1_001.plus.21.bp.bed.He-Lu-lu-1-48ng_S1_L006_R1_001.plus.21.bp.win.bed", header=F)
+dat=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\mm9.genome.100bp.window.bed.CHe-Lu-1_S12_L005_R1_001.plus.21.bp.bed.He-Lu-lu-1-48ng_S1_L006_R1_001.plus.21.bp.win.bed", header=F)
 dat.num=as.matrix(dat[,4:5])
 dat.num[dat.num=="."]=0
 dat.num[is.na(dat.num)]=0
+log.dat.num=cbind(log(as.numeric(dat.num[,1]), base=2), log(as.numeric(dat.num[,2]), base=2))
+log.dat.num[log.dat.num=="-Inf"]=0
 corre=round(cor(as.numeric(dat.num[,1]), as.numeric(dat.num[,2])), digits=2)
 plot(as.numeric(dat.num[,1]), as.numeric(dat.num[,2]), xlab="Rep 1", ylab="Rep 2")
 legend(0,10000, paste("R=", corre))
