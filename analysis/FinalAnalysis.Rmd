@@ -69,7 +69,7 @@ Estimate precision and sensitivity of 0.6 ng vs. 48 ng.
 Figure: barplots, show precision and sens. at different DNA levels (using sites at 48ng as true sites). 
 
 
-![Correlation among 48ng 5hmC with window size of 100bp ](figure/5hmC_replicate_correlation_1000bpwin_48ng.png)
+![Correlation among 48ng 5hmC with window size of 1kbp ](figure/5hmC_replicate_correlation_1000bpwin_48ng.png)
 
 
 
