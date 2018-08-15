@@ -110,7 +110,7 @@ plot(as.numeric(dat.num[,1]), as.numeric(dat.num[,2]), xlab="48ng Rep 1", ylab="
 
 ```
 
-## Comparison of Jump vs nano-seal with strong TAB-seq as gold stanard 
+## Comparison of Jump vs nano-seal with strong TAB-seq as gold standard 
 
 
 ```{r, echo=F}
