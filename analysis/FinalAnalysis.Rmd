@@ -110,6 +110,25 @@ plot(as.numeric(dat.num[,1]), as.numeric(dat.num[,2]), xlab="48ng Rep 1", ylab="
 
 ```
 
+## Comparison of Jump vs nano-seal with strong TAB-seq as gold stanard 
+
+
+```{r, echo=F}
+percent=matrix(nrow=2, ncol=6)
+percent[,1]=c(0.7172, 0.9186)
+percent[,2]=c(0.7942, 0.9186)
+
+percent[,3]=c(0.9439, 0.9186)
+percent[,4]=c(0.9664, 0.9186)
+
+percent[,5]=c(0.9646, 0.9186)
+percent[,6]=c(0.9607, 0.9186)
+colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
+bar.centers=barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Nano-seal peaks"), ylim=c(0,1.5),xlab="", main="", ylab="Proportion of peaks overlapping with TAB-seq peaks", cex.names=0.5)
+
+```
+
+* JumpSeq: 1kb windows are called at FDR 0.05 
 
 
 ## Comparison with Tab-seq
@@ -161,23 +180,37 @@ for (i in 1:6)
 
 
 ```{r, echo=F, fig.cap="Sensitivity"}
+#percent=matrix(nrow=2, ncol=6)
+#percent[,1]=c(0.0014, 0.0014)
+#percent[,2]=c(0.0245, 0.0249)
+#percent[,3]=c(0.0492, 0.0492)
+#percent[,4]=c(0.0765, 0.0767)
+#percent[,5]=c(0.0905, 0.0913)
+#percent[,6]=c(0.3713, 0.3713)
+#colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
+#col.mean=colMeans(percent)
+#normalized.mean=col.mean/max(col.mean)
+#barplot(col.mean, col="darkblue", ylab="Proportion of TAB-seq peaks recovered by Jump-seq")
+#* 0.6ng: windows with reads are called peaks 
+#* 2.4ng: use FDR 0.1 to call peaks 
+#* other samples use FDR 0.05 to call peaks
+
+##################################
 percent=matrix(nrow=2, ncol=6)
-percent[,1]=c(0.0014, 0.0014)
-percent[,2]=c(0.0245, 0.0249)
-percent[,3]=c(0.0492, 0.0492)
-percent[,4]=c(0.0765, 0.0767)
-percent[,5]=c(0.0905, 0.0913)
-percent[,6]=c(0.3713, 0.3713)
+percent[,1]=c(0.0002, 0.0002)
+percent[,2]=c(0.0004, 0.0004)
+percent[,3]=c(0.0050, 0.0058)
+percent[,4]=c(0.0652, 0.0665)
+percent[,5]=c(0.2284, 0.2303)
+percent[,6]=c(0.2558, 0.2575)
 colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
 col.mean=colMeans(percent)
 #normalized.mean=col.mean/max(col.mean)
-barplot(col.mean, col="darkblue", ylab="Proportion of TAB-seq peaks recovered by Jump-seq")
+barplot(col.mean, col="darkblue", ylab="Proportion of TAB-seq peaks recovered by Jump-seq", cex.lab=0.9)
+
 ```
 
-
-* 0.6ng: windows with reads are called peaks 
-* 2.4ng: use FDR 0.1 to call peaks 
-* other samples use FDR 0.05 to call peaks
+* 1kb windows are called at FDR 0.05 
 
 
 ### Spatial distribution 
@@ -246,23 +279,37 @@ for (i in 1:6)
 ### Sensitivity 
 
 ```{r, echo=F, fig.cap="Sensitivity"}
+#percent=matrix(nrow=2, ncol=6)
+#percent[,1]=c(0.0002, 0.0002)
+#percent[,2]=c(0.2711, 0.2692)
+#percent[,3]=c(0.4538, 0.4523)
+#percent[,4]=c(0.5559, 0.5711)
+#percent[,5]=c(0.6132, 0.6181)
+#percent[,6]=c(0.8982, 0.8988)
+#colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
+#col.mean=colMeans(percent)
+#normalized.mean=col.mean/max(col.mean)
+#barplot(col.mean, col="darkblue", ylab="Proportion of nano-seal  peaks recovered by Jump-seq")
+#* 0.6ng: windows with reads are called peaks 
+#* 2.4ng: use FDR 0.1 to call peaks 
+#* 6ng, 12ng, 24ng, 48ng: use FDR 0.05 to call peaks and 48ng are combined samples. 
+################################
+
 percent=matrix(nrow=2, ncol=6)
-percent[,1]=c(0.0752, 0.0760)
-percent[,2]=c(0.2711, 0.2692)
-percent[,3]=c(0.4538, 0.4523)
-percent[,4]=c(0.5559, 0.5711)
-percent[,5]=c(0.6132, 0.6181)
-percent[,6]=c(0.8982, 0.8988)
+percent[,1]=c(0.0002, 0.0002)
+percent[,2]=c(0.0004, 0.0003)
+percent[,3]=c(0.009, 0.0105)
+percent[,4]=c(0.1126, 0.1153)
+percent[,5]=c(0.3447, 0.3466)
+percent[,6]=c(0.3842, 0.3855)
 colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
 col.mean=colMeans(percent)
 #normalized.mean=col.mean/max(col.mean)
-barplot(col.mean, col="darkblue", ylab="Proportion of nano-seal  peaks recovered by Jump-seq")
+barplot(col.mean, col="darkblue", ylab="Proportion of nano-seal  peaks recovered by Jump-seq", cex.lab=0.9)
+
 ```
 
-
-* 0.6ng: windows with reads are called peaks 
-* 2.4ng: use FDR 0.1 to call peaks 
-* 6ng, 12ng, 24ng, 48ng: use FDR 0.05 to call peaks and 48ng are combined samples. 
+* 1kb windows are called at FDR 0.05  
 
 
 ## Comparison with BiS-seq (5mC) 
@@ -355,11 +402,11 @@ ave.percent=(minus.percent+plus.percent)/2
 #pdf("D:\\Dropbox\\JumpSeqProject\\Figure\\Enrichment_different_region_48ng_11sampleCombined_FDR0.05.pdf")
 barplot(ave.percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.02),
 ylab="Proportion of Jump-seq windows", main="", xlab="", cex.names=1)
-text(1.5, 0.008, "2.16")
-text(4.5, 0.015, "4.09")
-text(7.5, 0.008, "2.67")
-text(10.5, 0.005, "2.00")
-text(14, 0.002, "0.50")
+text(2.0, 0.008, "2.16(p<2.2e-16)")
+text(4.5, 0.015, "4.09(p<2.2e-16)")
+text(7.5, 0.008, "2.67(p<2.2e-16)")
+text(10.5, 0.005, "2.00(p<2.2e-16)")
+text(14, 0.002, "0.50(p=1)")
 #dev.off()
 ```
 
@@ -372,6 +419,8 @@ Figure: histogram of reads centered on Tab-seq sites, at a small scale 0-50bp.
 
 ```{r, echo=F}
 plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_GSM882244_FDR_0.0484_plus_with_1_coverage.ave.perbase", header=F)
+
+#plot(density(plus.48ng[76:126,1]))
 
 par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
 plot(seq(-25, 25, by=1)+1,plus.48ng[76:126,1], type="l", ylab="coverage", xlab="Distance", main="")
