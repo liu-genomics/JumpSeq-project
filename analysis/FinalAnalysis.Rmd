@@ -21,7 +21,7 @@ set.seed(123)
 ## Accuracy of Jump-seq assessed with synthetic DNA: estimation of FP rates. 
 Figure: barplot, CPM (counts per million) of 5hmC vs. unmodified C. Show number of sites in the plot. 
 
-```{r, echo=F, fig.cap="Number of sites (5hmC or unmodified C ) are in brackets"}
+```{r, echo=F, fig.cap="Number of reads (in million on y axis) at different sites, 5hmC (red) and unmodified C (blue), whose numbers are in brackets."}
 CPM=matrix(nrow=1, ncol=2)
 CPM[1,]=c(22, 0.78)
 colnames(CPM)=c("5hmC", "Unmodified C")
@@ -112,7 +112,7 @@ bar.centers=barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-
 
 * JumpSeq: 1kb windows are called at FDR 0.05 
 
-```{r, echo=F}
+```{r, echo=F, fig.cap="For jump-seq, we called 1kb windows at FDR0.05 as peaks and computed the proportion of peaks (in red) overlapping with Nano-seal peaks and Tab-seq peaks. Randomly pick same number of 1kb windows in the whole genome as jump-seq peaks at different DNA levels and calculate its proportion of windows (in blue) overlapping with Nano-seal peaks and Tab-seq peaks extended to 1kb. "}
 percent=matrix(nrow=2, ncol=12)
 
 percent[,1]=c(0.0808, 0.0365) # odd rows for nano-seal and even for TAB-seq
@@ -146,7 +146,7 @@ xlab="Figure B", main="", ylab="Proportion of paeks overlapping with Tab-seq pea
 
 ## Sensitvity 
 
-```{r, echo=F}
+```{r, echo=F, fig.cap="For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Tab-seq peaks overlapping with Jump-seq peaks are calculated. "}
 percent=matrix(nrow=2, ncol=6)
 percent[,1]=c(0.0002, 0.0002)
 percent[,2]=c(0.0004, 0.0004)
@@ -157,12 +157,12 @@ percent[,6]=c(0.2558, 0.2575)
 colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
 col.mean=colMeans(percent)
 #normalized.mean=col.mean/max(col.mean)
-barplot(col.mean, col="darkblue", ylab="Proportion of TAB-seq peaks recovered by Jump-seq", cex.lab=0.9)
+barplot(col.mean, col="darkblue", ylab="Proportion of Tab-seq peaks recovered by Jump-seq", cex.lab=0.9)
 
 ```
 
 
-```{r, echo=F}
+```{r, echo=F, fig.cap="For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Nano-seal peaks overlapping with Jump-seq peaks are calculated. "}
 percent=matrix(nrow=2, ncol=6)
 percent[,1]=c(0.0002, 0.0002)
 percent[,2]=c(0.0004, 0.0003)

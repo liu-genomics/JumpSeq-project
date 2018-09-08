@@ -317,9 +317,9 @@ shared across the workflowr files. -->
 <h2>Accuracy of Jump-seq assessed with synthetic DNA: estimation of FP rates.</h2>
 <p>Figure: barplot, CPM (counts per million) of 5hmC vs. unmodified C. Show number of sites in the plot.</p>
 <div class="figure">
-<img src="FinalAnalysis_files/figure-html/unnamed-chunk-1-1.png" alt="Number of sites (5hmC or unmodified C ) are in brackets" width="672" />
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-1-1.png" alt="Number of reads (in million on y axis) at different sites, 5hmC (red) and unmodified C (blue), whose numbers are in brackets." width="672" />
 <p class="caption">
-Number of sites (5hmC or unmodified C ) are in brackets
+Number of reads (in million on y axis) at different sites, 5hmC (red) and unmodified C (blue), whose numbers are in brackets.
 </p>
 </div>
 </div>
@@ -347,15 +347,30 @@ The fitted regression line (red) on the fold change of number of reads (point) a
 <ul>
 <li>JumpSeq: 1kb windows are called at FDR 0.05</li>
 </ul>
-<p><img src="FinalAnalysis_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-5-1.png" alt="For jump-seq, we called 1kb windows at FDR0.05 as peaks and computed the proportion of peaks (in red) overlapping with Nano-seal peaks and Tab-seq peaks. Randomly pick same number of 1kb windows in the whole genome as jump-seq peaks at different DNA levels and calculate its proportion of windows (in blue) overlapping with Nano-seal peaks and Tab-seq peaks extended to 1kb. " width="672" />
+<p class="caption">
+For jump-seq, we called 1kb windows at FDR0.05 as peaks and computed the proportion of peaks (in red) overlapping with Nano-seal peaks and Tab-seq peaks. Randomly pick same number of 1kb windows in the whole genome as jump-seq peaks at different DNA levels and calculate its proportion of windows (in blue) overlapping with Nano-seal peaks and Tab-seq peaks extended to 1kb.
+</p>
+</div>
 <ul>
 <li>Jump-seq; 1kb window are called at FDR 0.05</li>
 </ul>
 </div>
 <div id="sensitvity" class="section level2">
 <h2>Sensitvity</h2>
-<p><img src="FinalAnalysis_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p><img src="FinalAnalysis_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-6-1.png" alt="For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Tab-seq peaks overlapping with Jump-seq peaks are calculated. " width="672" />
+<p class="caption">
+For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Tab-seq peaks overlapping with Jump-seq peaks are calculated.
+</p>
+</div>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-7-1.png" alt="For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Nano-seal peaks overlapping with Jump-seq peaks are calculated. " width="672" />
+<p class="caption">
+For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Nano-seal peaks overlapping with Jump-seq peaks are calculated.
+</p>
+</div>
 </div>
 <div id="comparison-with-tab-seq" class="section level2">
 <h2>Comparison with Tab-seq</h2>
