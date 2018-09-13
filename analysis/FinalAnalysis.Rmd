@@ -386,7 +386,7 @@ text(14, 0.004, "2.95(p=9.15e-15)", cex=0.8)
 
 
 
-```{r, echo=F}
+```{r, echo=F, eval=F}
 count=matrix(nrow=2, ncol=2)
 count[1,]=c(73, 21118)
 count[2,]=c(1172, 1000000)
