@@ -357,6 +357,7 @@ text(14, 0.002, "0.50(p=1)")
 
 
 
+
 ```{r, echo=F, fig.cap="For 0.6ng 5hmC sample, 20 bp windows with at least one reads are called peak windows. Random windows are chosen in the whole genome in the same amount of peak windows. The proportion of peak windows and random windows in different genomic regions (200bp bins) are computeed. "}
 percent=matrix(nrow=2, ncol=5)
 percent[,1]=c(0.0049, 0.0032)
@@ -370,6 +371,11 @@ colnames(percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
 
 barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.01),
 ylab="Proportion of Jump-seq windows", main="", xlab="", cex.names=1)
+text(2.0, 0.0052, "1.56(p=3.42e-05)", cex=0.8)
+text(4.5, 0.006, "1.65(p=4.46e-07)")
+text(7.7, 0.0038, "1.24(p=0.09)")
+text(10.7, 0.0026, "0.99(p=1)")
+text(14, 0.004, "2.95(p=9.15e-15)", cex=0.8)
 ```
 
 * cis-regulatory regions are extended 200bp windows. 
@@ -380,7 +386,12 @@ ylab="Proportion of Jump-seq windows", main="", xlab="", cex.names=1)
 
 
 
-
+```{r, echo=F}
+count=matrix(nrow=2, ncol=2)
+count[1,]=c(73, 21118)
+count[2,]=c(1172, 1000000)
+fisher.test(count)
+```
 
 
 
