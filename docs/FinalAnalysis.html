@@ -313,123 +313,57 @@ div.tocify {
 
 <!-- The file analysis/chunks.R contains chunks that define default settings
 shared across the workflowr files. -->
-<div id="accuracy-of-jump-seq-assessed-with-synthetic-dna-estimation-of-fp-rates." class="section level2">
-<h2>Accuracy of Jump-seq assessed with synthetic DNA: estimation of FP rates.</h2>
-<p>Figure: barplot, CPM (counts per million) of 5hmC vs. unmodified C. Show number of sites in the plot.</p>
+<div id="profile-concept" class="section level2">
+<h2>Profile concept</h2>
+<div id="accuracy-of-jump-seq-assessed-with-synthetic-dna" class="section level3">
+<h3>Accuracy of Jump-seq assessed with synthetic DNA</h3>
 <div class="figure">
-<img src="FinalAnalysis_files/figure-html/unnamed-chunk-1-1.png" alt="Number of reads (in million on y axis) at different sites, 5hmC (red) and unmodified C (blue), whose numbers are in brackets." width="672" />
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-1-1.png" alt="Fig 1.1, Number of reads (in million on y axis) at different sites, 5hmC (red) and unmodified C (blue), whose numbers are in brackets." width="672" />
 <p class="caption">
-Number of reads (in million on y axis) at different sites, 5hmC (red) and unmodified C (blue), whose numbers are in brackets.
+Fig 1.1, Number of reads (in million on y axis) at different sites, 5hmC (red) and unmodified C (blue), whose numbers are in brackets.
 </p>
 </div>
 </div>
-<div id="quantification-of-5hmc-linear-correlation-of-read-counts-vs.5hmc-amount" class="section level2">
-<h2>Quantification of 5hmC: linear correlation of read counts vs. 5hmC amount</h2>
-<p>Figure: scatter plot.</p>
+<div id="quantification-of-5hmc-linear-correlation-of-read-counts-vs.5hmc-amount" class="section level3">
+<h3>Quantification of 5hmC: linear correlation of read counts vs. 5hmC amount</h3>
 <div class="figure">
-<img src="FinalAnalysis_files/figure-html/unnamed-chunk-2-1.png" alt="The fitted regression line (red) on the fold change of number of reads (point) at different hmC proportions in spike in" width="672" />
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-2-1.png" alt=" Fig 1.2: The fitted regression line (red) on the fold change of number of reads (point) at different hmC proportions in spike in" width="672" />
 <p class="caption">
-The fitted regression line (red) on the fold change of number of reads (point) at different hmC proportions in spike in
+Fig 1.2: The fitted regression line (red) on the fold change of number of reads (point) at different hmC proportions in spike in
 </p>
 </div>
 </div>
-<div id="visualization" class="section level2">
-<h2>Visualization</h2>
+<div id="visualization" class="section level3">
+<h3>Visualization</h3>
 <p>Figure: IGV view, show peaks at different DNA levels, also show peaks from Tab-seq or Nano-seal. See Figure 1B of Nano-seal paper.</p>
 </div>
-<div id="comparison-across-replicates-and-different-dna-levels" class="section level2">
-<h2>Comparison across replicates and different DNA levels</h2>
-<p>Correlation: 0.6 ng - 48 ng. Both 5mC and 5hmC. Figure: scatter plot, choose appropriate window size. Quantification of peak strength by CPM, divided by number of C’s in a peak. See Figure 1C. of Nano-seal. Figure: heat-map to summarize the results. See Figure S1C. Estimate precision and sensitivity of 0.6 ng vs. 48 ng. Figure: barplots, show precision and sens. at different DNA levels (using sites at 48ng as true sites).</p>
-</div>
-<div id="comparison-of-jump-vs-nano-seal-with-strong-tab-seq-as-gold-standard" class="section level2">
-<h2>Comparison of Jump vs nano-seal with strong TAB-seq as gold standard</h2>
-<p><img src="FinalAnalysis_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<ul>
-<li>JumpSeq: 1kb windows are called at FDR 0.05</li>
-</ul>
-<div class="figure">
-<img src="FinalAnalysis_files/figure-html/unnamed-chunk-5-1.png" alt="For jump-seq, we called 1kb windows at FDR0.05 as peaks and computed the proportion of peaks (in red) overlapping with Nano-seal peaks and Tab-seq peaks. Randomly pick same number of 1kb windows in the whole genome as jump-seq peaks at different DNA levels and calculate its proportion of windows (in blue) overlapping with Nano-seal peaks and Tab-seq peaks extended to 1kb. " width="672" />
-<p class="caption">
-For jump-seq, we called 1kb windows at FDR0.05 as peaks and computed the proportion of peaks (in red) overlapping with Nano-seal peaks and Tab-seq peaks. Randomly pick same number of 1kb windows in the whole genome as jump-seq peaks at different DNA levels and calculate its proportion of windows (in blue) overlapping with Nano-seal peaks and Tab-seq peaks extended to 1kb.
-</p>
-</div>
-<ul>
-<li>Jump-seq; 1kb window are called at FDR 0.05</li>
-</ul>
-</div>
-<div id="sensitvity" class="section level2">
-<h2>Sensitvity</h2>
-<div class="figure">
-<img src="FinalAnalysis_files/figure-html/unnamed-chunk-6-1.png" alt="For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Tab-seq peaks overlapping with Jump-seq peaks are calculated. " width="672" />
-<p class="caption">
-For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Tab-seq peaks overlapping with Jump-seq peaks are calculated.
-</p>
-</div>
-<div class="figure">
-<img src="FinalAnalysis_files/figure-html/unnamed-chunk-7-1.png" alt="For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Nano-seal peaks overlapping with Jump-seq peaks are calculated. " width="672" />
-<p class="caption">
-For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Nano-seal peaks overlapping with Jump-seq peaks are calculated.
-</p>
-</div>
-</div>
-<div id="comparison-with-tab-seq" class="section level2">
-<h2>Comparison with Tab-seq</h2>
-<p>48ng hmC: combine the replicates. Assess FP rates, sensitivity. Figure: barplot, precision (percent of Tab-seq peaks) as function of DNA level, and number of sites/peaks found. Comparison at window level (e.g. 100bp). See Figure S1F of Nano-seal paper. Figure: spatial distribution of reads, centered on Tab-seq peaks. See Figure S1G and S1H of Nano-seal paper.</p>
-</div>
-<div id="spatial-distribution" class="section level2">
-<h2>Spatial distribution</h2>
+<div id="spatial-distribution" class="section level3">
+<h3>Spatial distribution</h3>
 <p>The reference is GSM882244_FDR_0.0484. First got non-overlapping 5hmC regions and make sure each window has only one 5hmC site. For each window, count the reads depth at every site, then add up reads depth of these non-overlapping windows. Reads distribution is the accumulative reads depth at every base of all non-overlapping windows. Input Bam file is the replicate with largest number of reads.</p>
-<p><img src="FinalAnalysis_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="FinalAnalysis_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
-<div id="comparison-with-nano-seal" class="section level2">
-<h2>Comparison with Nano-seal</h2>
-<p>0.6 - 48 ng hmC. Assess FP rates, sensitivity. Figure: similar to Tab-seq.</p>
-<ul>
-<li>1kb windows are called at FDR 0.05</li>
-</ul>
 </div>
-<div id="comparison-with-bis-seq-5mc" class="section level2">
-<h2>Comparison with BiS-seq (5mC)</h2>
-<p>2.4 - 48 ng. Assess FP rates, sensitivity. Figure: similar to Tab-seq.</p>
-<div id="enrichment" class="section level3">
-<h3>Enrichment</h3>
+<div id="self-quantification" class="section level2">
+<h2>Self-quantification</h2>
+<pre class="r"><code>#Correlation: 0.6 ng - 48 ng. Both 5mC and 5hmC. 
+#Comparison across replicates and different DNA levels
+#Figure: heat-map to summarize the results. See Figure S1C. 
+#Estimate precision and sensitivity of 0.6 ng vs. 48 ng. 
+#Figure: barplots, show precision and sens. at different DNA levels (using sites at 48ng as true sites). </code></pre>
+<div id="corrleation-among-replicates" class="section level3">
+<h3>corrleation among replicates</h3>
 <div class="figure">
-<img src="FinalAnalysis_files/figure-html/unnamed-chunk-13-1.png" alt="Enrichment of methylated cytosine from Gary Hon  at different genomic concentrations. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng. Number of peak windows are shown over the bar." width="672" />
-<p class="caption">
-Enrichment of methylated cytosine from Gary Hon at different genomic concentrations. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng. Number of peak windows are shown over the bar.
-</p>
+<img src="figure/VennDiagram_5hmC_0.6ng_tworeplicate.png" alt="Venn diagram of two 0.6ng 5hmC replicates. For each replicate, 1kb windows are called at FDR 0.05. The proportion of peak windows between two replicates are presented inside the circle." />
+<p class="caption">Venn diagram of two 0.6ng 5hmC replicates. For each replicate, 1kb windows are called at FDR 0.05. The proportion of peak windows between two replicates are presented inside the circle.</p>
 </div>
-<ul>
-<li>cutoff used for peak windows: 2.4ng (FDR0.05), others use p values less than <span class="math inline">\(10^{-6}\)</span>.</li>
-</ul>
 </div>
-<div id="sensitivity" class="section level3">
-<h3>Sensitivity</h3>
+<div id="correlation-between-different-dna-levels" class="section level3">
+<h3>correlation between different DNA levels</h3>
 <div class="figure">
-<img src="FinalAnalysis_files/figure-html/unnamed-chunk-14-1.png" alt="Normalized proportion of  methylated cytosine from Gary Hon  at different genomic concentrations recovered by Jump-seq. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng" width="672" />
-<p class="caption">
-Normalized proportion of methylated cytosine from Gary Hon at different genomic concentrations recovered by Jump-seq. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng
-</p>
+<img src="figure/VennDiagram_5hmC_0.6ng_48ng.png" alt="Venn diagram of 0.6ng 5hmC and 48ng 5hmC. For each sample, 1kb windows are called at FDR 0.05. The proportion of peak windows between two replicates are presented inside the circle." />
+<p class="caption">Venn diagram of 0.6ng 5hmC and 48ng 5hmC. For each sample, 1kb windows are called at FDR 0.05. The proportion of peak windows between two replicates are presented inside the circle.</p>
 </div>
 </div>
-</div>
-<div id="enrichment-of-genomic-features-enhancer-ctcf-etc." class="section level2">
-<h2>Enrichment of genomic features: enhancer, CTCF, etc.</h2>
-<p>Figure: barplot, for each feature, two bars, observed enrichment (fold or proportion) vs. random. See Figure 3B. of Tab-seq paper. Remark: alt. figure, correlation of read density vs. strength of features. Box-plot: range of read density vs. strong, weak enhancers.</p>
-<div class="figure">
-<img src="FinalAnalysis_files/figure-html/unnamed-chunk-15-1.png" alt=" Eleven 48 ng samples are combined together and 20 bp peak windows are called at FDR 0.05. Random windows are randomly selected  in the whole genome with the same amount of peak windows. The proportion of chosen peak windows (red) and random windows (blue) overlapping in  different genomic regions are calculated and the corresponding odds ratio are shown above the red bar" width="672" />
-<p class="caption">
-Eleven 48 ng samples are combined together and 20 bp peak windows are called at FDR 0.05. Random windows are randomly selected in the whole genome with the same amount of peak windows. The proportion of chosen peak windows (red) and random windows (blue) overlapping in different genomic regions are calculated and the corresponding odds ratio are shown above the red bar
-</p>
-</div>
-</div>
-<div id="high-resolution-distribution-of-jump-seq-reads" class="section level2">
-<h2>High resolution distribution of Jump-seq reads</h2>
-<p>Figure: histogram of reads centered on Tab-seq sites, at a small scale 0-50bp.</p>
-<p><img src="FinalAnalysis_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-</div>
-<div id="ng-5hmc" class="section level2">
-<h2>48ng 5hmC</h2>
 <div id="overlap-by-venn-diagram" class="section level3">
 <h3>Overlap by Venn diagram</h3>
 <p>If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows with FDR 0.05, of which 686652 windows are overlapping with strong TAB-seq windows which are extended 10 bp downtream and 10 bp upstream. for strong TAB-seq, there are 2057636 20bp extended windows and 763937 are overlapping with Jump-seq windows.</p>
@@ -444,12 +378,111 @@ Eleven 48 ng samples are combined together and 20 bp peak windows are called at 
 </div>
 </div>
 </div>
-<div id="ng-5hmc-1" class="section level2">
-<h2>0.6ng 5hmC</h2>
-<div id="enrichment-in-genomic-regions" class="section level3">
-<h3>enrichment in genomic regions</h3>
+<div id="comparison-with-other-methods" class="section level2">
+<h2>Comparison with other methods</h2>
+<div id="comparison-of-jump-vs-nano-seal-with-strong-tab-seq-as-gold-standard" class="section level3">
+<h3>Comparison of Jump vs nano-seal with strong TAB-seq as gold standard</h3>
+<p><img src="FinalAnalysis_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ul>
+<li>JumpSeq: 1kb windows are called at FDR 0.05</li>
+</ul>
+</div>
+<div id="enrichments" class="section level3">
+<h3>Enrichments</h3>
 <div class="figure">
-<img src="FinalAnalysis_files/figure-html/unnamed-chunk-17-1.png" alt="For 0.6ng 5hmC sample, 20 bp windows with at least one reads are called peak windows. Random windows are chosen in the whole genome in the same amount of peak windows. The proportion of peak windows and random windows in different genomic regions (200bp bins) are computeed. " width="672" />
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-8-1.png" alt="For jump-seq, we called 1kb windows at FDR0.05 as peaks and computed the proportion of peaks (in red) overlapping with Nano-seal peaks and Tab-seq peaks. Randomly pick same number of 1kb windows in the whole genome as jump-seq peaks at different DNA levels and calculate its proportion of windows (in blue) overlapping with Nano-seal peaks and Tab-seq peaks extended to 1kb. " width="672" />
+<p class="caption">
+For jump-seq, we called 1kb windows at FDR0.05 as peaks and computed the proportion of peaks (in red) overlapping with Nano-seal peaks and Tab-seq peaks. Randomly pick same number of 1kb windows in the whole genome as jump-seq peaks at different DNA levels and calculate its proportion of windows (in blue) overlapping with Nano-seal peaks and Tab-seq peaks extended to 1kb.
+</p>
+</div>
+<ul>
+<li>Jump-seq; 1kb window are called at FDR 0.05</li>
+</ul>
+</div>
+<div id="sensitvity" class="section level3">
+<h3>Sensitvity</h3>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-9-1.png" alt="For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Tab-seq peaks overlapping with Jump-seq peaks are calculated. " width="672" />
+<p class="caption">
+For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Tab-seq peaks overlapping with Jump-seq peaks are calculated.
+</p>
+</div>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-10-1.png" alt="For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Nano-seal peaks overlapping with Jump-seq peaks are calculated. " width="672" />
+<p class="caption">
+For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Nano-seal peaks overlapping with Jump-seq peaks are calculated.
+</p>
+</div>
+<table>
+<caption>Number of peaks recovered by Jump_seq</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">0.6ng</th>
+<th align="right">2.4ng</th>
+<th align="right">6ng</th>
+<th align="right">12ng</th>
+<th align="right">24ng</th>
+<th align="right">48ng</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tab_seq</td>
+<td align="right">412</td>
+<td align="right">823</td>
+<td align="right">11111</td>
+<td align="right">135495</td>
+<td align="right">471919</td>
+<td align="right">528092</td>
+</tr>
+<tr class="even">
+<td>Nano_seal</td>
+<td align="right">13</td>
+<td align="right">23</td>
+<td align="right">632</td>
+<td align="right">7391</td>
+<td align="right">22421</td>
+<td align="right">24963</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="bis-seq-5mc" class="section level2">
+<h2>BiS-seq (5mC)</h2>
+<div id="enrichment" class="section level3">
+<h3>Enrichment</h3>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-12-1.png" alt="Enrichment of methylated cytosine from Gary Hon  at different genomic concentrations. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng. Number of peak windows are shown over the bar." width="672" />
+<p class="caption">
+Enrichment of methylated cytosine from Gary Hon at different genomic concentrations. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng. Number of peak windows are shown over the bar.
+</p>
+</div>
+<ul>
+<li>cutoff used for peak windows: 2.4ng (FDR0.05), others use p values less than <span class="math inline">\(10^{-6}\)</span>.</li>
+</ul>
+</div>
+<div id="sensitivity" class="section level3">
+<h3>Sensitivity</h3>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-13-1.png" alt="Normalized proportion of  methylated cytosine from Gary Hon  at different genomic concentrations recovered by Jump-seq. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng" width="672" />
+<p class="caption">
+Normalized proportion of methylated cytosine from Gary Hon at different genomic concentrations recovered by Jump-seq. Peak windows with p value less than 10^{-6} is used for 48ng, 24ng, 12ng, 6ng and FDR0.05 is used for 2.4ng
+</p>
+</div>
+</div>
+</div>
+<div id="enrichment-of-genomic-features" class="section level2">
+<h2>Enrichment of genomic features</h2>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-14-1.png" alt=" Eleven 48 ng samples are combined together and 20 bp peak windows are called at FDR 0.05. Random windows are randomly selected  in the whole genome with the same amount of peak windows. The proportion of chosen peak windows (red) and random windows (blue) overlapping in  different genomic regions are calculated and the corresponding odds ratio are shown above the red bar" width="672" />
+<p class="caption">
+Eleven 48 ng samples are combined together and 20 bp peak windows are called at FDR 0.05. Random windows are randomly selected in the whole genome with the same amount of peak windows. The proportion of chosen peak windows (red) and random windows (blue) overlapping in different genomic regions are calculated and the corresponding odds ratio are shown above the red bar
+</p>
+</div>
+<div class="figure">
+<img src="FinalAnalysis_files/figure-html/unnamed-chunk-15-1.png" alt="For 0.6ng 5hmC sample, 20 bp windows with at least one reads are called peak windows. Random windows are chosen in the whole genome in the same amount of peak windows. The proportion of peak windows and random windows in different genomic regions (200bp bins) are computeed. " width="672" />
 <p class="caption">
 For 0.6ng 5hmC sample, 20 bp windows with at least one reads are called peak windows. Random windows are chosen in the whole genome in the same amount of peak windows. The proportion of peak windows and random windows in different genomic regions (200bp bins) are computeed.
 </p>
@@ -458,11 +491,6 @@ For 0.6ng 5hmC sample, 20 bp windows with at least one reads are called peak win
 <li>cis-regulatory regions are extended 200bp windows.</li>
 <li>jump peaks are 20 bp windows with at least one reads.</li>
 </ul>
-</div>
-<div id="reads-overlap-with-single-48ng-sample" class="section level3">
-<h3>Reads overlap with single 48ng sample</h3>
-<p>0.6ng: 1085 20 bp windows of 21188</p>
-</div>
 </div>
 
 <hr>

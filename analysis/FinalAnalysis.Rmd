@@ -18,10 +18,11 @@ set.seed(123)
 
 
 
-## Accuracy of Jump-seq assessed with synthetic DNA: estimation of FP rates. 
-Figure: barplot, CPM (counts per million) of 5hmC vs. unmodified C. Show number of sites in the plot. 
+## Profile concept 
 
-```{r, echo=F, fig.cap="Number of reads (in million on y axis) at different sites, 5hmC (red) and unmodified C (blue), whose numbers are in brackets."}
+### Accuracy of Jump-seq assessed with synthetic DNA
+
+```{r, echo=F, fig.cap="Fig 1.1, Number of reads (in million on y axis) at different sites, 5hmC (red) and unmodified C (blue), whose numbers are in brackets."}
 CPM=matrix(nrow=1, ncol=2)
 CPM[1,]=c(22, 0.78)
 colnames(CPM)=c("5hmC", "Unmodified C")
@@ -33,11 +34,10 @@ text(3.5, 2, "0.78 (72)")
 
 
 
-## Quantification of 5hmC: linear correlation of read counts vs. 5hmC amount
-Figure: scatter plot. 
+###  Quantification of 5hmC: linear correlation of read counts vs. 5hmC amount
 
 
-```{r, echo=F, fig.cap="The fitted regression line (red) on the fold change of number of reads (point) at different hmC proportions in spike in"}
+```{r, echo=F, fig.cap=" Fig 1.2: The fitted regression line (red) on the fold change of number of reads (point) at different hmC proportions in spike in"}
 hmc.ratio=c(0, 0.01, 0.05,  0.25, 0.5, 0.75, 1)
 num.reads.plus1=c(34536, 103817, 282178, 1374788, 2427158, 3002380, 3198060)
 
@@ -56,43 +56,92 @@ legend(0.01,100, expression(paste(R^2, "=0.94")))
 
 
 
-## Visualization 
+### Visualization 
 Figure: IGV view, show peaks at different DNA levels, also show peaks from Tab-seq or Nano-seal. See Figure 1B of Nano-seal paper. 
 
 
+### Spatial distribution 
 
-## Comparison across replicates and different DNA levels 
-Correlation: 0.6 ng - 48 ng. Both 5mC and 5hmC. 
-Figure: scatter plot, choose appropriate window size. Quantification of peak strength by CPM, divided by number of C's in a peak. See Figure 1C. of Nano-seal. 
-Figure: heat-map to summarize the results. See Figure S1C. 
-Estimate precision and sensitivity of 0.6 ng vs. 48 ng. 
-Figure: barplots, show precision and sens. at different DNA levels (using sites at 48ng as true sites). 
+
+The reference is GSM882244_FDR_0.0484. First got non-overlapping 5hmC regions and make sure each window has only one 5hmC site. For each window, count the reads depth at every site, then add up reads depth of these non-overlapping windows. Reads distribution is the accumulative reads depth at every base of all non-overlapping windows. Input Bam file is the replicate with largest number of reads.  
 
 
 
+```{r, echo=F}
+plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_GSM882244_FDR_0.0484_plus_with_1_coverage.ave.perbase", header=F)
 
-```{r, echo=F, cache=T, eval=F}
-dat=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\mm9.genome.1kb.window.bed.CHe-Lu-1_S12_L005_R1_001.plus.21.bp.bed.He-Lu-lu-1-48ng_S1_L006_R1_001.plus.21.bp.win.bed", header=F)
-dat.num=as.matrix(dat[,4:5])
-dat.num[dat.num=="."]=0
-dat.num[is.na(dat.num)]=0
-
-par(mfrow=c(1,2))
-log.dat.num=cbind(log(as.numeric(dat.num[,1]), base=2), log(as.numeric(dat.num[,2]), base=2))
-log.dat.num[log.dat.num=="-Inf"]=0
-log.corre=round(cor(as.numeric(log.dat.num[,1]), as.numeric(log.dat.num[,2])), digits=2)
-plot(as.numeric(log.dat.num[,1]), as.numeric(log.dat.num[,2]), xlab="48ng Rep 1", ylab="48ng Rep 2", main="log transformed sample")
-
-
-corre=round(cor(as.numeric(dat.num[,1]), as.numeric(dat.num[,2])), digits=2)
-plot(as.numeric(dat.num[,1]), as.numeric(dat.num[,2]), xlab="48ng Rep 1", ylab="48ng Rep 2", main="raw sample")
-
-
-
+par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
+plot(seq(-100, 100, by=1)+1,plus.48ng[,1], type="l", ylab="coverage", xlab="Distance", main="")
+abline(v=0, col=2)
+plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="")
+abline(v=0, col=2)
+mtext("20161115_5hmC_Jump_Seq_2hmC_spike_in.plus", outer = TRUE, cex = 1)
 
 ```
 
-## Comparison of Jump vs nano-seal with strong TAB-seq as gold standard 
+
+
+
+## Self-quantification
+```{r, eval=F}
+#Correlation: 0.6 ng - 48 ng. Both 5mC and 5hmC. 
+#Comparison across replicates and different DNA levels
+#Figure: heat-map to summarize the results. See Figure S1C. 
+#Estimate precision and sensitivity of 0.6 ng vs. 48 ng. 
+#Figure: barplots, show precision and sens. at different DNA levels (using sites at 48ng as true sites). 
+```
+
+### corrleation among replicates 
+
+```{r, echo=F, eval=F}
+0.6ng: rep 1: 49/334;  rep 2: 57/297
+```
+
+![ Venn diagram of two 0.6ng 5hmC replicates. For each replicate, 1kb windows  are called at FDR 0.05. The proportion of peak windows between two replicates are presented inside the circle.  ](figure/VennDiagram_5hmC_0.6ng_tworeplicate.png)
+
+
+
+### correlation between different DNA levels 
+
+```{r, echo=F, cache=T, eval=F}
+0.6ng vs 48ng : 0.6ng: 94/334; 48ng: 79/195809 
+```
+
+![ Venn diagram of  0.6ng 5hmC  and 48ng 5hmC. For each sample, 1kb windows  are called at FDR 0.05. The proportion of peak windows between two replicates are presented inside the circle.  ](figure/VennDiagram_5hmC_0.6ng_48ng.png)
+
+
+
+### Overlap by Venn diagram 
+
+If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows with FDR 0.05, of  which 686652 windows are overlapping with strong TAB-seq windows which are extended 10 bp downtream and 10 bp upstream. for strong TAB-seq, there are 2057636 20bp extended windows and 763937 are overlapping with Jump-seq windows.   
+
+
+
+![ Venn diagram of 5hmC and TAB-seq. 48ng samples are combined together and 20 bp windows are called at FDR 0.05. The proportion of peak windows of jump-seq overlapping with TAB-seq and the proportion of peaks of TAB-seq overlapping with jump-seq are presented inside the circle.  ](figure/VennDiagram.png)
+
+
+
+If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows with FDR 0.05, of  which 386331 (16.32%) windows are overlapping with hmC seal. For hmC seal,  there are 64865 peaks and 58280 (89.85%) are overlapping with 5hmC peaks. 
+
+![ Venn diagram of 5hmC and hmC-seal. 48ng samples are combined together and 20 bp windows are called at FDR 0.05. The proportion of peak windows of jump-seq overlapping with hmC-seal  and the proportion of peaks of hmC-seal overlapping with jump-seq are presented inside the circle. ](figure/VennDiagram_hmc_hmcseal.png)
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+## Comparison with other methods 
+
+### Comparison of Jump vs nano-seal with strong TAB-seq as gold standard 
 
 
 ```{r, echo=F}
@@ -111,6 +160,9 @@ bar.centers=barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-
 ```
 
 * JumpSeq: 1kb windows are called at FDR 0.05 
+
+
+### Enrichments 
 
 ```{r, echo=F, fig.cap="For jump-seq, we called 1kb windows at FDR0.05 as peaks and computed the proportion of peaks (in red) overlapping with Nano-seal peaks and Tab-seq peaks. Randomly pick same number of 1kb windows in the whole genome as jump-seq peaks at different DNA levels and calculate its proportion of windows (in blue) overlapping with Nano-seal peaks and Tab-seq peaks extended to 1kb. "}
 percent=matrix(nrow=2, ncol=12)
@@ -144,7 +196,7 @@ xlab="Figure B", main="", ylab="Proportion of paeks overlapping with Tab-seq pea
 
 * Jump-seq; 1kb window are called at FDR 0.05 
 
-## Sensitvity 
+### Sensitvity 
 
 ```{r, echo=F, fig.cap="For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Tab-seq peaks overlapping with Jump-seq peaks are calculated. "}
 percent=matrix(nrow=2, ncol=6)
@@ -156,8 +208,10 @@ percent[,5]=c(0.2284, 0.2303)
 percent[,6]=c(0.2558, 0.2575)
 colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
 col.mean=colMeans(percent)
+
 #normalized.mean=col.mean/max(col.mean)
-barplot(col.mean, col="darkblue", ylab="Proportion of Tab-seq peaks recovered by Jump-seq", cex.lab=0.9)
+barplot(col.mean , col="darkblue", ylab="Proportion of Tab-seq peaks recovered by Jump-seq", cex.lab=0.9)
+tab_seq_overlap=round(col.mean*2057636)
 
 ```
 
@@ -174,53 +228,19 @@ colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
 col.mean=colMeans(percent)
 #normalized.mean=col.mean/max(col.mean)
 barplot(col.mean, col="darkblue", ylab="Proportion of nano-seal  peaks recovered by Jump-seq", cex.lab=0.9)
+nano_seal_overlap=round(col.mean*64865)
 ```
 
 
-
-
-## Comparison with Tab-seq
-48ng hmC: combine the replicates. Assess FP rates, sensitivity. 
-Figure: barplot, precision (percent of Tab-seq peaks) as function of DNA level, and number of sites/peaks found. Comparison at window level (e.g. 100bp). See Figure S1F of Nano-seal paper. 
-Figure: spatial distribution of reads, centered on Tab-seq peaks. See Figure S1G and S1H of Nano-seal paper.   
-
-
-```{r, echo=F, fig.cap=" From 0.6ng to  48ng 5hmC samples, 20bp peak windows are called at FDR 0.05 for jump-seq. Random windows are chosen in the whole genome in the same amount of peak windows. The overlap of peak windows by jump-seq and random windows with TAB-seq peaks are colored in red and blue respectively. Number of peak windows are shown over the bar. ", eval=F}
-percent=matrix(nrow=2, ncol=12)
-percent[,1]=c(1752,398)/20511
-percent[,2]=c(2835,528)/20511
-
-percent[,3]=c(43213, 10092)/521062
-percent[,4]=c(98049, 13382)/521062
-
-percent[,5]=c(61404, 12907)/665737
-percent[,6]=c(114794, 17049)/665737
-
-percent[,7]=c(111734, 23171)/1197291
-percent[,8]=c(149717, 31057)/1197291
-#percent[,8]=c(0.1252, 31057/1197291)
-
-percent[,9]=c(122190, 28799)/1474825
-percent[,10]=c(246529, 37851)/1474825
-#percent[,10]=c(0.2610, 37851/1474825)
-
-percent[,11]=c(529216, 73689)/3789453
-percent[,12]=c(921479, 98580)/3789453
-#percent[,12]=c(0.2899, 98580/3789453)
-colnames(percent)=rep(c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng"), each=2)
-
-#par(mar = c(5, 4, 4, 4) + 0.3)
-bar.centers=barplot(percent[,c(2,4,6,8,10, 12)], beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.4),xlab="", main="", ylab="Proportion of peaks overlapping with TAB-seq peaks", cex.names=0.5)
-num.peak=c(2835, 98049, 114794, 149717, 246529, 921479)
-above.dist=percent[1, c(2,4,6,8,10,12)]+0.02
-for (i in 1:6)
-  text(bar.centers[1,i], above.dist[i], num.peak[i])
-
-* FDR 0.05 is used for determine peak windows and sated clearly otherwise 
-* To make fair comparison, in each case, the same amount of random windows as peak windows  are picked in the whole genome and compute the its proportion windows overlpping with peaks from other methods. 
-* In some case, sinlge sample was used and in some cases, may be combined samples are used, but the enrichments are similar in both cases.
-
+```{r, echo=F}
+overlap=matrix(nrow=2, ncol=6)
+overlap[1,]=tab_seq_overlap
+overlap[2,]=nano_seal_overlap
+colnames(overlap)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
+rownames(overlap)=c("Tab_seq", "Nano_seal")
+kable(overlap, caption="Number of peaks recovered by Jump_seq")
 ```
+
 
 
  
@@ -228,142 +248,19 @@ for (i in 1:6)
 
 
 
-```{r, echo=F, fig.cap="Sensitivity", eval=F}
-#percent=matrix(nrow=2, ncol=6)
-#percent[,1]=c(0.0014, 0.0014)
-#percent[,2]=c(0.0245, 0.0249)
-#percent[,3]=c(0.0492, 0.0492)
-#percent[,4]=c(0.0765, 0.0767)
-#percent[,5]=c(0.0905, 0.0913)
-#percent[,6]=c(0.3713, 0.3713)
-#colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
-#col.mean=colMeans(percent)
-#normalized.mean=col.mean/max(col.mean)
-#barplot(col.mean, col="darkblue", ylab="Proportion of TAB-seq peaks recovered by Jump-seq")
-#* 0.6ng: windows with reads are called peaks 
-#* 2.4ng: use FDR 0.1 to call peaks 
-#* other samples use FDR 0.05 to call peaks
-
-##################################
-percent=matrix(nrow=2, ncol=6)
-percent[,1]=c(0.0002, 0.0002)
-percent[,2]=c(0.0004, 0.0004)
-percent[,3]=c(0.0050, 0.0058)
-percent[,4]=c(0.0652, 0.0665)
-percent[,5]=c(0.2284, 0.2303)
-percent[,6]=c(0.2558, 0.2575)
-colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
-col.mean=colMeans(percent)
-#normalized.mean=col.mean/max(col.mean)
-barplot(col.mean, col="darkblue", ylab="Proportion of TAB-seq peaks recovered by Jump-seq", cex.lab=0.9)
-
-* 1kb windows are called at FDR 0.05 
-
-```
-
-
-
-## Spatial distribution 
-
-
-The reference is GSM882244_FDR_0.0484. First got non-overlapping 5hmC regions and make sure each window has only one 5hmC site. For each window, count the reads depth at every site, then add up reads depth of these non-overlapping windows. Reads distribution is the accumulative reads depth at every base of all non-overlapping windows. Input Bam file is the replicate with largest number of reads.  
-
-
-
-```{r, echo=F}
-plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_GSM882244_FDR_0.0484_plus_with_1_coverage.ave.perbase", header=F)
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-100, 100, by=1)+1,plus.48ng[,1], type="l", ylab="coverage", xlab="Distance", main="")
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="")
-abline(v=0, col=2)
-mtext("20161115_5hmC_Jump_Seq_2hmC_spike_in.plus", outer = TRUE, cex = 1)
-
-```
 
 
 
 
-## Comparison with Nano-seal
-0.6 - 48 ng hmC. Assess FP rates, sensitivity. 
-Figure: similar to Tab-seq. 
-
-
-```{r, echo=F, fig.cap=" From 0.6ng to  48ng 5hmC samples, 20bp peak windows are called at FDR 0.05 for jump-seq. Random windows are chosen in the whole genome in the same amount of peak windows. The overlap of peak windows by jump-seq and random windows with Nano-seal peaks are colored in red and blue respectively.  Number of peak windows are shown over the bar", eval=F}
-#percent=matrix(nrow=2, ncol=12)
-#percent[,1]=c(1752,398)/20511
-#percent[,2]=c(2835,528)/20511
-
-#percent[,3]=c(43213, 10092)/521062
-#percent[,4]=c(98049, 13382)/521062
-
-percent[,5]=c(61404, 12907)/665737
-percent[,6]=c(114794, 17049)/665737
-
-percent[,7]=c(111734, 23171)/1197291
-percent[,8]=c(149717, 31057)/1197291
-
-percent[,9]=c(122190, 28799)/1474825
-percent[,10]=c(246529, 37851)/1474825
-
-percent[,11]=c(529216, 73689)/3789453
-percent[,12]=c(921479, 98580)/3789453
-colnames(percent)=rep(c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng"), each=2)
-
-bar.centers=barplot(percent[,c(1,3,5,7,9, 11)], beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.3),xlab="", main="", ylab="Proportion of peaks overlapping with Nano-seal peaks", cex.names=0.5)
-num.peak=c(1752, 43213, 61404, 111734, 122190, 529216)
-above.dist=percent[1, c(1,3,5,7,9,11)]+0.02
-for (i in 1:6)
-  text(bar.centers[1,i], above.dist[i], num.peak[i])
-
-* FDR 0.05 is used for determine peak windows and sated clearly otherwise 
-* To make fair comparison, in each case, the same amount of random windows as peak windows  are picked in the whole genome and compute the its proportion windows overlpping with peaks from other methods. 
-* In some case, sinlge sample was used and in some cases, may be combined samples are used, but the enrichments are similar in both cases.
-#######################################
-
-```
 
 
 
 
-```{r, echo=F, fig.cap="Sensitivity", eval=F}
-#percent=matrix(nrow=2, ncol=6)
-#percent[,1]=c(0.0002, 0.0002)
-#percent[,2]=c(0.2711, 0.2692)
-#percent[,3]=c(0.4538, 0.4523)
-#percent[,4]=c(0.5559, 0.5711)
-#percent[,5]=c(0.6132, 0.6181)
-#percent[,6]=c(0.8982, 0.8988)
-#colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
-#col.mean=colMeans(percent)
-#normalized.mean=col.mean/max(col.mean)
-#barplot(col.mean, col="darkblue", ylab="Proportion of nano-seal  peaks recovered by Jump-seq")
-#* 0.6ng: windows with reads are called peaks 
-#* 2.4ng: use FDR 0.1 to call peaks 
-#* 6ng, 12ng, 24ng, 48ng: use FDR 0.05 to call peaks and 48ng are combined samples. 
-################################
-
-percent=matrix(nrow=2, ncol=6)
-percent[,1]=c(0.0002, 0.0002)
-percent[,2]=c(0.0004, 0.0003)
-percent[,3]=c(0.009, 0.0105)
-percent[,4]=c(0.1126, 0.1153)
-percent[,5]=c(0.3447, 0.3466)
-percent[,6]=c(0.3842, 0.3855)
-colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
-col.mean=colMeans(percent)
-#normalized.mean=col.mean/max(col.mean)
-barplot(col.mean, col="darkblue", ylab="Proportion of nano-seal  peaks recovered by Jump-seq", cex.lab=0.9)
-
-```
-
-* 1kb windows are called at FDR 0.05  
 
 
-## Comparison with BiS-seq (5mC) 
-2.4 - 48 ng. Assess FP rates, sensitivity. 
-Figure: similar to Tab-seq. 
+
+## BiS-seq (5mC) 
+
  
  
 ### Enrichment
@@ -420,9 +317,8 @@ barplot(normalized.mean, col="darkblue", ylab="Normalized proportion of methylat
 
  
 
-## Enrichment of genomic features: enhancer, CTCF, etc. 
-Figure: barplot, for each feature, two bars, observed enrichment (fold or proportion) vs. random. See Figure 3B. of Tab-seq paper. 
-Remark: alt. figure, correlation of read density vs. strength of features. Box-plot: range of read density vs. strong, weak enhancers. 
+## Enrichment of genomic features
+ 
 
 
 ```{r, echo=F, fig.cap=" Eleven 48 ng samples are combined together and 20 bp peak windows are called at FDR 0.05. Random windows are randomly selected  in the whole genome with the same amount of peak windows. The proportion of chosen peak windows (red) and random windows (blue) overlapping in  different genomic regions are calculated and the corresponding odds ratio are shown above the red bar"}
@@ -461,57 +357,6 @@ text(14, 0.002, "0.50(p=1)")
 
 
 
-
-
-## High resolution distribution of Jump-seq reads
-Figure: histogram of reads centered on Tab-seq sites, at a small scale 0-50bp. 
-
-```{r, echo=F}
-plus.48ng=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_GSM882244_FDR_0.0484_plus_with_1_coverage.ave.perbase", header=F)
-
-#plot(density(plus.48ng[76:126,1]))
-
-par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
-plot(seq(-25, 25, by=1)+1,plus.48ng[76:126,1], type="l", ylab="coverage", xlab="Distance", main="")
-abline(v=0, col=2)
-plot(seq(-10, 10, by=1)+1,plus.48ng[91:111,1], type="l", ylab="coverage", xlab="Distance", main="")
-abline(v=0, col=2)
-mtext("20161115_5hmC_Jump_Seq_2hmC_spike_in.plus", outer = TRUE, cex = 1)
-```
-
-
-
-
-## 48ng 5hmC 
-
-### Overlap by Venn diagram 
-
-If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows with FDR 0.05, of  which 686652 windows are overlapping with strong TAB-seq windows which are extended 10 bp downtream and 10 bp upstream. for strong TAB-seq, there are 2057636 20bp extended windows and 763937 are overlapping with Jump-seq windows.   
-
-
-
-![ Venn diagram of 5hmC and TAB-seq. 48ng samples are combined together and 20 bp windows are called at FDR 0.05. The proportion of peak windows of jump-seq overlapping with TAB-seq and the proportion of peaks of TAB-seq overlapping with jump-seq are presented inside the circle.  ](figure/VennDiagram.png)
-
-
-
-If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows with FDR 0.05, of  which 386331 (16.32%) windows are overlapping with hmC seal. For hmC seal,  there are 64865 peaks and 58280 (89.85%) are overlapping with 5hmC peaks. 
-
-![ Venn diagram of 5hmC and hmC-seal. 48ng samples are combined together and 20 bp windows are called at FDR 0.05. The proportion of peak windows of jump-seq overlapping with hmC-seal  and the proportion of peaks of hmC-seal overlapping with jump-seq are presented inside the circle. ](figure/VennDiagram_hmc_hmcseal.png)
-
-
-
- 
-
-
-
-
-
-
-
-## 0.6ng 5hmC 
-
-###  enrichment in genomic regions 
-
 ```{r, echo=F, fig.cap="For 0.6ng 5hmC sample, 20 bp windows with at least one reads are called peak windows. Random windows are chosen in the whole genome in the same amount of peak windows. The proportion of peak windows and random windows in different genomic regions (200bp bins) are computeed. "}
 percent=matrix(nrow=2, ncol=5)
 percent[,1]=c(0.0049, 0.0032)
@@ -531,8 +376,22 @@ ylab="Proportion of Jump-seq windows", main="", xlab="", cex.names=1)
 * jump peaks are 20 bp windows with at least one reads. 
 
 
-### Reads overlap with single 48ng sample 
 
-0.6ng: 1085 20 bp windows of 21188 
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
 
 
