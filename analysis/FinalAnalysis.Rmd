@@ -146,20 +146,20 @@ If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows 
 
 ```{r, echo=F}
 percent=matrix(nrow=2, ncol=6)
-percent[,1]=c(0.7172, 0.9186)
-percent[,2]=c(0.7942, 0.9186)
+percent[,1]=c(0.7186, 0.9186)
+percent[,2]=c(0.7786, 0.9186)
 
-percent[,3]=c(0.9439, 0.9186)
-percent[,4]=c(0.9664, 0.9186)
+percent[,3]=c(0.9356, 0.9186)
+percent[,4]=c(0.9598, 0.9186)
 
-percent[,5]=c(0.9646, 0.9186)
-percent[,6]=c(0.9607, 0.9186)
+percent[,5]=c(0.9560, 0.9186)
+percent[,6]=c(0.9504, 0.9186)
 colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
 bar.centers=barplot(percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Nano-seal peaks"), ylim=c(0,1.5),xlab="", main="", ylab="Proportion of peaks overlapping with TAB-seq peaks", cex.names=0.5)
 
 ```
 
-* JumpSeq: 1kb windows are called at FDR 0.05 
+* JumpSeq: 1kb windows are called at FDR 0.05. To make a fair comparison, we trim the jump-seq peak windows to be of the same length as nano_seq peaks.   
 
 
 ### Enrichments 
@@ -198,7 +198,7 @@ xlab="Figure B", main="", ylab="Proportion of paeks overlapping with Tab-seq pea
 
 ### Sensitvity 
 
-```{r, echo=F, fig.cap="For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Tab-seq peaks overlapping with Jump-seq peaks are calculated. "}
+```{r, echo=F, fig.cap="For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Tab-seq peaks overlapping with Jump-seq peaks are calculated. ", eval=F}
 percent=matrix(nrow=2, ncol=6)
 percent[,1]=c(0.0002, 0.0002)
 percent[,2]=c(0.0004, 0.0004)
@@ -211,12 +211,7 @@ col.mean=colMeans(percent)
 
 #normalized.mean=col.mean/max(col.mean)
 barplot(col.mean , col="darkblue", ylab="Proportion of Tab-seq peaks recovered by Jump-seq", cex.lab=0.9)
-tab_seq_overlap=round(col.mean*2057636)
-
-```
-
-
-```{r, echo=F, fig.cap="For jump-seq, 1kb windows are called at FDR0.05 as peaks. At different DNA levels, the proporttion of Nano-seal peaks overlapping with Jump-seq peaks are calculated. "}
+#tab_seq_overlap=round(col.mean*2057636)
 percent=matrix(nrow=2, ncol=6)
 percent[,1]=c(0.0002, 0.0002)
 percent[,2]=c(0.0004, 0.0003)
@@ -228,21 +223,27 @@ colnames(percent)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
 col.mean=colMeans(percent)
 #normalized.mean=col.mean/max(col.mean)
 barplot(col.mean, col="darkblue", ylab="Proportion of nano-seal  peaks recovered by Jump-seq", cex.lab=0.9)
-nano_seal_overlap=round(col.mean*64865)
+#nano_seal_overlap=round(col.mean*64865)
 ```
 
 
 ```{r, echo=F}
 overlap=matrix(nrow=2, ncol=6)
-overlap[1,]=tab_seq_overlap
-overlap[2,]=nano_seal_overlap
+tab_by_jump=c(832, 1116, 19686, 219644, 649783, 715179)
+tab_by_nano=rep(465501, 6)
+overlap[1,]=tab_by_jump
+overlap[2,]=tab_by_nano
 colnames(overlap)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
 rownames(overlap)=c("Tab_seq", "Nano_seal")
 kable(overlap, caption="Number of peaks recovered by Jump_seq")
+
+barplot(overlap, beside=T,  ylim=c(0, max(overlap)), col=c("red", "darkblue"), xlim=c(1, 25), 
+ylab="# Tab-seq peaks overlaping with other peaks", main="", xlab="", cex.names=0.7, legend=c("Jump-seq peaks", "nano-seal peaks"))
+
 ```
 
 
-
+To be  fair, 1kb Jump-sea peaks are trimed to be of the same length as nano-seal peaks. 
  
 
 
