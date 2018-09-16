@@ -208,8 +208,8 @@ tab_by_nano=rep(465501, 6)
 overlap[1,]=tab_by_jump
 overlap[2,]=tab_by_nano
 colnames(overlap)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
-rownames(overlap)=c("Tab_seq", "Nano_seal")
-kable(overlap, caption="Number of peaks recovered by Jump_seq")
+rownames(overlap)=c("Jump_seq", "Nano_seal")
+kable(overlap, caption="Number of Tab-seq peaks recovered by Jump_seq and nano-seal")
 
 barplot(overlap, beside=T,  ylim=c(0, max(overlap)), col=c("red", "darkblue"), xlim=c(1, 25), 
 ylab="# Tab-seq peaks overlaping with other peaks", main="", xlab="", cex.names=0.7, legend=c("Jump-seq peaks", "nano-seal peaks"))
