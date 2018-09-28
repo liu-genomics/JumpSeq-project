@@ -325,37 +325,52 @@ barplot(normalized.mean, col="darkblue", ylab="Normalized proportion of methylat
 
 
 ```{r, echo=F, fig.cap=" Eleven 48 ng samples are combined together and 20 bp peak windows are called at FDR 0.05. Random windows are randomly selected  in the whole genome with the same amount of peak windows. The proportion of chosen peak windows (red) and random windows (blue) overlapping in  different genomic regions are calculated and the corresponding odds ratio are shown above the red bar"}
-minus.percent=matrix(nrow=2, ncol=5)
+par(mfrow=c(2,1))
+
+minus.percent=matrix(nrow=2, ncol=9)
 minus.percent[,1]=c(0.0070, 0.0032)
 minus.percent[,2]=c(0.0139, 0.0034)
-
 minus.percent[,3]=c(0.0069, 0.0026)
 minus.percent[,4]=c(0.0042, 0.0021)
+minus.percent[,5]=c(75887/2368196, 140/10000)
+minus.percent[,6]=c(30340/2368196, 53/10000)
+minus.percent[,7]=c(153280/2368196, 130/10000)
+minus.percent[,8]=c(121485/2368196, 265/10000)
+minus.percent[,9]=c( 1213246/2368196, 3860/10000)
+colnames(minus.percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "3UTR", "5UTR", "exon", "promoter", "intron")
 
-minus.percent[,5]=c(0.0005, 0.0011)
-colnames(minus.percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
-
-plus.percent=matrix(nrow=2, ncol=5)
+plus.percent=matrix(nrow=2, ncol=9)
 plus.percent[,1]=c(0.0068, 0.0032)
 plus.percent[,2]=c(0.0139, 0.0034)
-
 plus.percent[,3]=c(0.0070, 0.0026)
 plus.percent[,4]=c(0.0042, 0.0021)
-
-plus.percent[,5]=c(0.0006, 0.0011)
-colnames(plus.percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3", "polII")
+plus.percent[,5]=c(75919/2366463, 140/10000)
+plus.percent[,6]=c(29801/2366463, 53/10000)
+plus.percent[,7]=c(152850/2366463, 130/10000)
+plus.percent[,8]=c(119941/2366463, 265/10000)
+plus.percent[,9]=c(1212097/2366463, 3860/10000)
+colnames(plus.percent)=c("ctcf", "enhancer", "h3k27ac", "h3k4me3","3UTR", "5UTR", "exon", "promoter", "intron")
 ave.percent=(minus.percent+plus.percent)/2
 
 
 #pdf("D:\\Dropbox\\JumpSeqProject\\Figure\\Enrichment_different_region_48ng_11sampleCombined_FDR0.05.pdf")
-barplot(ave.percent, beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0,0.02),
-ylab="Proportion of Jump-seq windows", main="", xlab="", cex.names=1)
-text(2.0, 0.008, "2.16(p<2.2e-16)")
-text(4.5, 0.015, "4.09(p<2.2e-16)")
-text(7.5, 0.008, "2.67(p<2.2e-16)")
-text(10.5, 0.005, "2.00(p<2.2e-16)")
+barplot(ave.percent[,1:4], beside=T, col=c("red", "darkblue"), legend=c("Jump-seq peaks", "Random windows"), ylim=c(0, 0.03), 
+ylab=" % Jump-seq peaks", main="", xlab="", cex.names=1, args.legend = list(x ='topright', bty='n', inset=c(-0.005,0), cex=0.8), xpd = FALSE, las=1)
+text(2.2, 0.01, "2.16(p<2.2e-16)")
+text(4.8, 0.017, "4.09(p<2.2e-16)")
+text(8.2, 0.01, "2.67(p<2.2e-16)")
+text(10.8, 0.007, "2.00(p<2.2e-16)")
 text(14, 0.002, "0.50(p=1)")
 #dev.off()
+
+barplot(ave.percent[,5:8], beside=T, col=c("red", "darkblue"), ylim=c(0, 0.085),
+ylab="", main="", xlab="", cex.names=1, xpd = FALSE, las=1)
+
+text(2.2, 0.04, "2.28(p<2.2e-16)")
+text(5.2, 0.022, "2.42(p=1.426e-13)")
+text(8.2, 0.074, "4.98(p<2.2e-16)")
+text(11, 0.06, "1.94(p<2.2e-16)")
+text(14, 0.002, "0.50(p=1)")
 ```
 
 
@@ -386,13 +401,19 @@ text(14, 0.004, "2.95(p=9.15e-15)", cex=0.8)
 
 
 
+minus.percent[,5]=c(75887/2368196, 140/10000)
+minus.percent[,6]=c(30340/2368196, 53/10000)
+minus.percent[,7]=c(153280/2368196, 130/10000)
+minus.percent[,8]=c(121485/2368196, 265/10000)
+minus.percent[,9]=c( 1213246/2368196, 3860/10000)
+
 
 
 
 ```{r, echo=F, eval=F}
 count=matrix(nrow=2, ncol=2)
-count[1,]=c(73, 21118)
-count[2,]=c(1172, 1000000)
+count[1,]=c(121485, 2368196)
+count[2,]=c(265, 10000)
 fisher.test(count)
 ```
 
