@@ -93,6 +93,19 @@ mtext("20161115_5hmC_Jump_Seq_2hmC_spike_in.plus", outer = TRUE, cex = 1)
 
 ### corrleation among replicates 
 
+```{r, echo=F}
+reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\mm9.genome.1kb.window.bed.CHe-Lu-1_S12_L005_R1_001.plus.21.bp.bed.He-Lu-lu-1-48ng_S1_L006_R1_001.plus.21.bp.win.bed", header=F)
+reads1=as.numeric(as.character(reads[,4]))
+reads2=as.numeric(as.character(reads[,5]))
+reads1[is.na(reads1)]=0
+reads2[is.na(reads2)]=0
+reads.combine=cbind(reads1, reads2)
+reads.effect=reads.combine[which(rowSums(reads.combine) > 0),] 
+plot(log2(reads.effect[,1]), log2(reads.effect[,2]), pch=16, xlab="Rep 1", ylab="Rep 2", main="48ng 5hmC")
+```
+
+
+
 ```{r, echo=F, eval=F}
 0.6ng: rep 1: 49/334;  rep 2: 57/297
 ```
@@ -315,6 +328,17 @@ colnames(percent)=c("2.4ng", "6ng", "12ng", "24ng", "48ng")
 col.mean=colMeans(percent)
 normalized.mean=col.mean/max(col.mean)
 barplot(normalized.mean, col="darkblue", ylab="Normalized proportion of methylated cytosine")
+```
+
+
+### Correlation between replicates 
+
+```{r, echo=F}
+reads1=as.numeric(as.character(read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5mC\\20160811_5mC_Jump_Seq_2.4ng.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.He-Lu-10_5mc-jump-2.4ng-S10_L004_R1_001.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.bed.reads.1", header=F)[,1]))
+reads1[is.na(reads1)]=0
+reads2=as.numeric(as.character(read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5mC\\20160811_5mC_Jump_Seq_2.4ng.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.He-Lu-10_5mc-jump-2.4ng-S10_L004_R1_001.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.bed.reads.2", header=F)[,1]))
+reads2[is.na(reads2)]=0
+plot(log2(reads1), log2(reads2), pch=16, xlab="Rep 1", ylab="Rep 2", main="2.4ng 5mC")
 ```
 
 
