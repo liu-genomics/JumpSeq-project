@@ -105,6 +105,15 @@ plot(log2(reads.effect[,1]), log2(reads.effect[,2]), pch=16, xlab="Rep 1", ylab=
 ```
 
 
+```{r, echo=F}
+reads1=as.numeric(as.character(read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\first.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.second.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.bed.reads.1", header=F)[,1]))
+reads1[is.na(reads1)]=0
+reads2=as.numeric(as.character(read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\first.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.second.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.bed.reads.2", header=F)[,1]))
+reads2[is.na(reads2)]=0
+plot(log2(reads1), log2(reads2), pch=16, xlab="Six samples combined", ylab="The rest six samples", main="48ng combine 5hmC")
+```
+
+
 
 ```{r, echo=F, eval=F}
 0.6ng: rep 1: 49/334;  rep 2: 57/297
