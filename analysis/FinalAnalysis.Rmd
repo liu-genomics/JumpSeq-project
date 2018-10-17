@@ -93,7 +93,7 @@ mtext("20161115_5hmC_Jump_Seq_2hmC_spike_in.plus", outer = TRUE, cex = 1)
 
 ### corrleation among replicates 
 
-```{r, echo=F}
+```{r, echo=F }
 reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\mm9.genome.1kb.window.bed.CHe-Lu-1_S12_L005_R1_001.plus.21.bp.bed.He-Lu-lu-1-48ng_S1_L006_R1_001.plus.21.bp.win.bed", header=F)
 reads1=as.numeric(as.character(reads[,4]))
 reads2=as.numeric(as.character(reads[,5]))
@@ -105,7 +105,7 @@ plot(log2(reads.effect[,1]), log2(reads.effect[,2]), pch=16, xlab="Rep 1", ylab=
 ```
 
 
-```{r, echo=F}
+```{r, echo=F, warning=F, eval=F}
 reads1=as.numeric(as.character(read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\first.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.second.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.bed.reads.1", header=F)[,1]))
 reads1[is.na(reads1)]=0
 reads2=as.numeric(as.character(read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\first.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.second.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.bed.reads.2", header=F)[,1]))
@@ -136,6 +136,13 @@ plot(log2(reads1), log2(reads2), pch=16, xlab="Six samples combined", ylab="The 
 
 
 ## Comparison with other methods 
+
+### correlation between Jump-seq and nano-seal
+
+```{r, echo=F, eval=F}
+reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\Dali Han\\GSM2166069_mESC_50ng_1.ucsc.bedGraph.noheader.48ng_11rep_merge.mm9.last2.col", header=F)
+
+```
 
 ### Comparison of Jump vs nano-seal with strong TAB-seq as gold standard 
 
@@ -435,13 +442,6 @@ text(14, 0.004, "2.95(p=9.15e-15)", cex=0.8)
 
 
 
-minus.percent[,5]=c(75887/2368196, 140/10000)
-minus.percent[,6]=c(30340/2368196, 53/10000)
-minus.percent[,7]=c(153280/2368196, 130/10000)
-minus.percent[,8]=c(121485/2368196, 265/10000)
-minus.percent[,9]=c( 1213246/2368196, 3860/10000)
-
-
 
 
 ```{r, echo=F, eval=F}
@@ -451,9 +451,83 @@ count[2,]=c(265, 10000)
 fisher.test(count)
 ```
 
+## PN analysis 
 
 
+### 5hmC 
 
+```{r, echo=F, fig.cap="Normalized reads count of 5hmC in different regions at different stages. Solid lineas are paternal  and and dotted liner are maternal and they both merge together after PN 5"}
+regions=c("3UTR", "5UTR", "CDS", "TTS", "Intron", "Intergenic","Promoter")
+num.regions=length(regions)
+male.first.stage=c("Sperm", "PN1","PN2","PN3","PN4")
+female.first.stage=c("MII", "PN1","PN2","PN3","PN4")
+common.second.stage=c("PN5","1cell","2cellearly", "2celllate", "ES")
+################# replicate 1 ##############
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\scale.reads.xiaolong.annotation.csv")
+new.scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
+hmc_female=rbind(scale.reads[5,], scale.reads[12,], scale.reads[14,], scale.reads[16,], scale.reads[18,], scale.reads[1,], scale.reads[2:4,], scale.reads[7,] )
+rownames(hmc_female)=hmc_female[,1]
+hmc_female=hmc_female[,-1]
+
+hmc_male=rbind(new.scale.reads[20,], scale.reads[13,], scale.reads[15,], scale.reads[17,], scale.reads[19,], scale.reads[1,], scale.reads[2:4,], scale.reads[7,] )
+rownames(hmc_male)=hmc_male[,1]
+hmc_male=hmc_male[,-1]
+first_hmc_combine=rbind(hmc_female[1:5,], hmc_male)
+
+scale_first_hmc_combine=scale(as.matrix(first_hmc_combine)) 
+scale_hmc_combine=scale_first_hmc_combine
+min.limit=min(scale_hmc_combine)-0.5; max.limit=max(scale_hmc_combine)+0.5
+
+male.index=c(seq(1,5), seq(11,15))
+female.index=c(seq(6,10), seq(11,15))
+plot(scale_hmc_combine[male.index,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main="5hmC at different stages", cex.main=0.8, cex.lab=1, lty=1, pch=16, lwd=2)
+for (i in 2:num.regions)
+  lines(scale_hmc_combine[male.index,i], col=i, type="o", lty=1, pch=16, lwd=2)
+legend(1, max.limit, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=2, cex=0.65)
+for (i in 1:num.regions)
+  lines(scale_hmc_combine[female.index,i], col=i, type="o", lty=3, pch=16, lwd=2)
+#legend(1, max.limit, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=2, cex=0.65)
+
+axis.labels <-c("MII/Sperm", "PN1","PN2","PN3","PN4", common.second.stage)
+axis(1, at=seq(1,length(male.index)), labels=axis.labels, cex.axis=0.8, las=2)
+```
+
+### 5mC 
+
+```{r, echo=F, fig.cap="Normalized reads count of 5mC in different regions at different stages. Solid lineas are paternal  and and dotted liner are maternal and they both merge together after PN 5"}
+############# maternal 
+all.stage=c( "MII", "PN1","PN2","PN3","PN4", "PN5", "1cell", "2cellearly", "2celllate",  "ES")
+common.second.stage=c("PN5", "1cell", "2cellearly", "2celllate",  "ES")
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
+mc_female=rbind(scale.reads[7,], scale.reads[12,], scale.reads[1,], scale.reads[3,], scale.reads[23,], scale.reads[25,], scale.reads[26,], scale.reads[5,], scale.reads[6,], scale.reads[10,] )
+rownames(mc_female)=mc_female[,1]
+mc_female=mc_female[,-1]
+
+############### paternal 
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
+mc_male=rbind(scale.reads[8,], scale.reads[15,], scale.reads[2,], scale.reads[4,],  scale.reads[24,], scale.reads[25,], scale.reads[26,],  scale.reads[5,], scale.reads[6,], scale.reads[10,] )
+rownames(mc_male)=mc_male[,1]
+mc_male=mc_male[,-1]
+
+mc_combine=rbind(mc_female[1:5,], mc_male)
+scale_mc_combine=scale(as.matrix(mc_combine)) 
+
+male.index=c(seq(1,5), seq(11,15))
+female.index=c(seq(6,10), seq(11,15))
+min.limit=min(scale_mc_combine); max.limit=max(scale_mc_combine)
+
+plot(scale_mc_combine[male.index,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main="5mC at diferent stages", cex.main=0.8, cex.lab=1, lty=1, pch=16, lwd=2)
+for (i in 2:num.regions)
+  lines(scale_mc_combine[male.index,i], col=i, type="o", lty=1, pch=16, lwd=2)
+legend(2, max.limit, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=2, cex=0.65)
+for (i in 1:num.regions)
+  lines(scale_mc_combine[female.index,i], col=i, type="o", lty=3, pch=16, lwd=2)
+#legend(2, max.limit, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=2, cex=0.65)
+
+axis.labels <-c("MII/Sperm", "PN1","PN2","PN3","PN4", common.second.stage)
+axis(1, at=seq(1,length(male.index)), labels=axis.labels, cex.axis=0.8, las=2)
+
+```
 
 
  

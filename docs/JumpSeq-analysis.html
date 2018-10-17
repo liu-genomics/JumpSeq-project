@@ -314,10 +314,10 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2018-07-31</p>
+<p><strong>Last updated:</strong> 2018-10-12</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 4909dd7</p>
+<p><strong>Code version:</strong> 6160e9e</p>
 <!-- Add your analysis here -->
 <p>All samples are <a href="https://docs.google.com/spreadsheets/d/1FHkVSgTCJDY19VcFg2goat4rXJfxofCn3CFRV-gCbfo/edit#gid=400442004">here</a>: 48 ng (11); 24 ng (5); 12 ng (5); 6ng (5); 2.4 ng (5); 0.6ng (2).</p>
 <p>Mouse genome mm9 has 2,654,911,517 bases, 507,439,500 (19.11324%) cytosines and 507,585,491 (19.11873%) Gumines.</p>
@@ -578,7 +578,6 @@ abline(v=0, col=2)
 plot(seq(-10, 10, by=1)-1,minus.48ng[91:111,1], type=&quot;l&quot;, ylab=&quot;coverage&quot;, xlab=&quot;Distance&quot;, main=&quot;&quot;)
 abline(v=0, col=2)
 mtext(&quot;20161115_5hmC_Jump_Seq_2hmC_spike_in.minus&quot;, outer = TRUE, cex = 1)</code></pre>
-<p><img src="figure/JumpSeq-analysis.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>plus.48ng=read.table(&quot;D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\JumpSeq-project\\data\\20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_GSM882244_FDR_0.0484_plus_with_1_coverage.ave.perbase&quot;, header=F)
 
 par(mfrow=c(1,2), oma = c(0, 0, 2, 0))

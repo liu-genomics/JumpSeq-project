@@ -44,24 +44,31 @@ lu-7: 5mC jump-seq, 2 cell  late on 2018/06/06 have been used as supplement
 
 ```{r, echo=F}
 sample.label=c("mc-PN2female", "mc-PN2male", "mc-PN3female", "mc-PN3male", "mc-2cellearly", "mc-2celllate",  "mc-MII", "mc-300pgSperm", "mc-300pgSpermRep", "mc-ES", "hmc-50ngSperm", "mc-PN1female", "mc-PN1male", "hmc-PN1female", "hmc-PN1male", "hmc-PN2female", "hmc-PN2male", "hmc-PN3female", "hmc-PN3male", "hmc-300pgSperm", "hmc-300pgSpermRep", "mc-MII", "mc-PN4female", "mc-PN4male", "mc-PN5", "mc-1cell","mc-2celllate")
-orig.region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\important.region.reads", header=F)
-complement.region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\important.region.reads", header=F, fill=T)[-3,]
+#orig.region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\important.region.reads", header=F)
+#complement.region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\important.region.reads", header=F, fill=T)[-3,]
+orig.region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\important.region.by.xiaolong.reads", header=F)
+complement.region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\important.region.by.xiaolong.reads", header=F, fill=T)[-3,]
+
 
 orig.spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\spike.in.reads", header=F)[-c(11,15),]
 complement.spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\spike.in.reads", header=F)[-3,]
 region.reads=rbind(orig.region.reads, complement.region.reads[3:8,])
 spikein.reads=rbind(orig.spikein.reads, complement.spikein.reads[3:8,])
 
-reads.summary=as.matrix(cbind(region.reads[,2:9], as.numeric(spikein.reads[,2])))
+#regions=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer", "spikein")
+regions=c("3UTR", "5UTR", "CDS", "TTS", "Intron", "Intergenic","Promoter")
+num.regions=length(regions)
+reads.summary=as.matrix(cbind(region.reads[,2:num.regions], as.numeric(spikein.reads[,2])))
 rownames(reads.summary)=sample.label
-colnames(reads.summary)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer", "spikein")
-scale.factor=reads.summary[,9]/min(reads.summary[,9])
-scale.reads=matrix(nrow=nrow(reads.summary), ncol=8)
+colnames(reads.summary)=regions
+
+scale.factor=reads.summary[,ncol(reads.summary)]/min(reads.summary[,ncol(reads.summary)])
+scale.reads=matrix(nrow=nrow(reads.summary), ncol=num.regions)
 for (i in 1:nrow(reads.summary))
-  scale.reads[i,]=as.numeric(reads.summary[i,1:8]*scale.factor[i])
+  scale.reads[i,]=as.numeric(reads.summary[i,1:num.regions]*scale.factor[i])
 rownames(scale.reads)=sample.label
-colnames(scale.reads)=colnames(reads.summary)[1:8]
-#write.csv(scale.reads, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
+colnames(scale.reads)=colnames(reads.summary)[1:num.regions]
+#write.csv(scale.reads, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
 ```
 
 ## 5hmC 
