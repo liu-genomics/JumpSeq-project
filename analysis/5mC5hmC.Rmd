@@ -157,10 +157,11 @@ axis(1, at=seq(1,length(all.stage)), labels=axis.labels, cex.axis=0.8, las=2)
 ### Paternal 
 
 ```{r, echo=F, warning=F}
-regions=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
+regions=c("3UTR", "5UTR", "CDS", "TTS", "Intron", "Intergenic","Promoter")
+num.regions=length(regions)
 all.stage=c("Sperm", "PN1","PN2","PN3","PN4", "PN5", "1cell", "2cellearly", "2celllate", "ES")
 sub.stage=c("PN1","PN2","PN3", "PN4")
-scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
 mc_male=rbind(scale.reads[8,], scale.reads[15,], scale.reads[2,], scale.reads[4,],  scale.reads[24,], scale.reads[25,], scale.reads[26,],  scale.reads[5,], scale.reads[6,], scale.reads[10,] )
 rownames(mc_male)=mc_male[,1]
 mc_male=mc_male[,-1]
@@ -177,16 +178,16 @@ heatmap.2(scale.male.mc2, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol,
 
 par(mfrow=c(1,2))
 plot(scale.male.mc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5mC-Paternal", cex.main=0.8, cex.lab=0.6)
-for (i in 2:8)
+for (i in 2:num.regions)
   lines(scale.male.mc[,i], col=i, type="o")
-legend(1, 4, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+legend(1, 4, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=3, cex=0.45)
 axis.labels <-all.stage
 axis(1, at=seq(1,length(all.stage)), labels=axis.labels, cex.axis=0.8, las=2)
 
 plot(scale.male.mc2[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5mC-Paternal", cex.main=0.8, cex.lab=0.6)
-for (i in 2:8)
+for (i in 2:num.regions)
   lines(scale.male.mc2[,i], col=i, type="o")
-legend(1, 3, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+legend(1, 3, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=3, cex=0.45)
 axis.labels <-sub.stage
 axis(1, at=seq(1,length(sub.stage)), labels=axis.labels, cex.axis=0.8, las=2)
 ```
@@ -195,7 +196,6 @@ axis(1, at=seq(1,length(sub.stage)), labels=axis.labels, cex.axis=0.8, las=2)
 ### Maternal 
 
 ```{r, echo=F, warning=F}
-regions=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
 all.stage=c( "MII", "PN1","PN2","PN3","PN4", "PN5", "1cell", "2cellearly", "2celllate",  "ES")
 sub.stage=c("PN1","PN2","PN3", "PN4")
 scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
@@ -215,16 +215,57 @@ heatmap.2(scale.female.mc2, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatco
 
 par(mfrow=c(1,2))
 plot(scale.female.mc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5mC-Maternal", cex.main=0.8, cex.lab=0.6)
-for (i in 2:8)
+for (i in 2:num.regions)
   lines(scale.female.mc[,i], col=i, type="o")
-legend(1, 4, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+legend(1, 4, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=3, cex=0.45)
 axis.labels <-all.stage
 axis(1, at=seq(1,length(all.stage)), labels=axis.labels, cex.axis=0.8, las=2)
 
 plot(scale.female.mc2[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5mC-Maternal", cex.main=0.8, cex.lab=0.6)
-for (i in 2:8)
+for (i in 2:num.regions)
   lines(scale.female.mc2[,i], col=i, type="o")
-legend(1, 3, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+legend(1, 3, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=3, cex=0.45)
 axis.labels <-sub.stage
 axis(1, at=seq(1,length(sub.stage)), labels=axis.labels, cex.axis=0.8, las=2)
 ```
+
+
+### combine paternal and maternal 
+
+```{r, echo=F}
+############# maternal 
+regions=c("3UTR", "5UTR", "CDS", "TTS", "Intron", "Intergenic","Promoter")
+num.regions=length(regions)
+all.stage=c( "MII", "PN1","PN2","PN3","PN4", "PN5", "1cell", "2cellearly", "2celllate",  "ES")
+common.second.stage=c("PN5", "1cell", "2cellearly", "2celllate",  "ES")
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
+mc_female=rbind(scale.reads[7,], scale.reads[12,], scale.reads[1,], scale.reads[3,], scale.reads[23,], scale.reads[25,], scale.reads[26,], scale.reads[5,], scale.reads[6,], scale.reads[10,] )
+rownames(mc_female)=mc_female[,1]
+mc_female=mc_female[,-1]
+
+############### paternal 
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
+mc_male=rbind(scale.reads[8,], scale.reads[15,], scale.reads[2,], scale.reads[4,],  scale.reads[24,], scale.reads[25,], scale.reads[26,],  scale.reads[5,], scale.reads[6,], scale.reads[10,] )
+rownames(mc_male)=mc_male[,1]
+mc_male=mc_male[,-1]
+
+mc_combine=rbind(mc_female[1:5,], mc_male)
+scale_mc_combine=scale(as.matrix(mc_combine)) 
+
+male.index=c(seq(1,5), seq(11,15))
+female.index=c(seq(6,10), seq(11,15))
+min.limit=min(scale_mc_combine); max.limit=max(scale_mc_combine)
+
+plot(scale_mc_combine[male.index,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main="5mC at diferent stages", cex.main=0.8, cex.lab=1, lty=1, pch=16, lwd=2)
+for (i in 2:num.regions)
+  lines(scale_mc_combine[male.index,i], col=i, type="o", lty=1, pch=16, lwd=2)
+legend(2, max.limit, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=2, cex=0.65)
+for (i in 1:num.regions)
+  lines(scale_mc_combine[female.index,i], col=i, type="o", lty=3, pch=16, lwd=2)
+#legend(2, max.limit, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=2, cex=0.65)
+
+axis.labels <-c("MII/Sperm", "PN1","PN2","PN3","PN4", common.second.stage)
+axis(1, at=seq(1,length(male.index)), labels=axis.labels, cex.axis=0.8, las=2)
+
+```
+

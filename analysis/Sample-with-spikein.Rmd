@@ -403,13 +403,13 @@ min.limit=min(scale_hmc_combine)-0.5; max.limit=max(scale_hmc_combine)+0.5
 #######
 male.index=c(seq(1,5), seq(11,15))
 female.index=c(seq(6,10), seq(11,15))
-plot(scale_hmc_combine[male.index,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main="", cex.main=0.8, cex.lab=1, lty=1, pch=16)
+plot(scale_hmc_combine[male.index,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main="5hmC at different stages", cex.main=0.8, cex.lab=1, lty=1, pch=16, lwd=2)
 for (i in 2:num.regions)
-  lines(scale_hmc_combine[male.index,i], col=i, type="o", lty=1, pch=16)
+  lines(scale_hmc_combine[male.index,i], col=i, type="o", lty=1, pch=16, lwd=2)
 legend(1, max.limit, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=2, cex=0.65)
 for (i in 1:num.regions)
-  lines(scale_hmc_combine[female.index,i], col=i, type="o", lty=3, pch=16)
-legend(1, max.limit, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=2, cex=0.65)
+  lines(scale_hmc_combine[female.index,i], col=i, type="o", lty=3, pch=16, lwd=2)
+#legend(1, max.limit, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=2, cex=0.65)
 
 axis.labels <-c("MII/Sperm", "PN1","PN2","PN3","PN4", common.second.stage)
 axis(1, at=seq(1,length(male.index)), labels=axis.labels, cex.axis=0.8, las=2)
@@ -440,7 +440,10 @@ barplot(t(overlap.rate),beside=T,  col=c("red", "blue"), ylim=c(0,1.2), legend=c
 * MII is replaced with deep sequencing data on 2018/06/06
 
 ```{r, echo=F, eval=F}
-region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180227_5mC_2\\important.region.reads", header=F)[,-1]
+samples=c("mc-PN5","mc-1cell", "mc-2cellearly", "mc-MII", "mc-sperm", "mc-sperm-repeat", "mc-ES",  "mc-PN1female", "mc-PN1male", "mc-PN2female", "mc-PN2male", "mc-PN3female", "mc-PN3male", "mc-PN4female", "mc-PN4male")
+regions=c("3UTR", "5UTR", "CDS", "TTS", "Intron", "Intergenic","Promoter")
+num.regions=length(regions)
+region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180227\\important.region.by.xiaolong.reads", header=F)[,-1]
 supple.region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\important.region.reads", header=F, fill=T)[-3,]
 region.reads[4,]=supple.region.reads[3,2:ncol(supple.region.reads)] # for mc-MII, replace the old with the supplement
 spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180227\\spike.in.reads", header=F)
@@ -448,22 +451,23 @@ supple.spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\
 spikein.reads[4,2]=supple.spikein.reads[3,2]
 
 reads.summary=as.matrix(cbind(region.reads, as.numeric(spikein.reads[,2])))
-rownames(reads.summary)=c("mc-PN5","mc-1cell", "mc-2cellearly", "mc-MII", "mc-sperm", "mc-sperm-repeat", "mc-ES",  "mc-PN1female", "mc-PN1male", "mc-PN2female", "mc-PN2male", "mc-PN3female", "mc-PN3male", "mc-PN4female", "mc-PN4male")
-colnames(reads.summary)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer", "spikein")
-scale.factor=reads.summary[,9]/min(reads.summary[,9])
-scale.reads=matrix(nrow=nrow(region.reads), ncol=8)
+rownames(reads.summary)=samples
+colnames(reads.summary)=c(regions, "spikein")
+scale.factor=reads.summary[,ncol(reads.summary)]/min(reads.summary[,ncol(reads.summary)])
+scale.reads=matrix(nrow=nrow(region.reads), ncol=num.regions)
 for (i in 1:nrow(region.reads))
-  scale.reads[i,]=reads.summary[i,1:8]*scale.factor[i]
+  scale.reads[i,]=reads.summary[i,1:num.regions]*scale.factor[i]
 rownames(scale.reads)=rownames(reads.summary)
-colnames(scale.reads)=colnames(reads.summary)[1:8]
-write.csv(scale.reads, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180227_5mC_2\\scale.reads.csv")
+colnames(scale.reads)=colnames(reads.summary)[1:num.regions]
+#write.csv(scale.reads, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180227\\scale.reads.xiaolong.annotation.csv")
 ```
 
 ### Paternal 
 
 ```{r, echo=F, warning=F}
-scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180227_5mC_2\\scale.reads.csv")
-new.scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.csv")
+all.stages=c("Sperm", "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly",  "ES")
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180227_5mC_2\\scale.reads.xiaolong.annotation.csv")
+new.scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
 
 #mc_male=rbind(scale.reads[5,], scale.reads[9,], scale.reads[11,], scale.reads[13,], scale.reads[15,], scale.reads[1:3,], scale.reads[7,] )
 mc_male=rbind(new.scale.reads[8,], scale.reads[9,], scale.reads[11,], scale.reads[13,], scale.reads[15,], scale.reads[1:3,], scale.reads[7,] )
@@ -473,9 +477,9 @@ heatcol <- brewer.pal(9, "Greens")
 mc_male2=mc_male[2:5,]
 scale.male.mc=scale(as.matrix(mc_male))
 scale.male.mc2=scale(as.matrix(mc_male2))
-colnames(scale.male.mc2)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
-colnames(scale.male.mc)=c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "transposable", "promoter", "enhancer")
-rownames(scale.male.mc)=c("Sperm", "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly",  "ES")
+colnames(scale.male.mc2)=regions
+colnames(scale.male.mc)=regions
+rownames(scale.male.mc)=all.stages
 rownames(scale.male.mc2)=c( "PN1","PN2","PN3","PN4")
 heatmap.2(scale.male.mc, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5mC", cexCol=0.8)
 heatmap.2(scale.male.mc2, Rowv =F, Colv = F, scale="none", key=TRUE,col=heatcol, symbreaks=T,trace="none", density.info="none",keysize=2, key.xlab=NA, main="Paternal 5mC", cexCol=0.8)
@@ -484,7 +488,7 @@ par(mfrow=c(1,2))
 plot(scale.male.mc[,1], ylim=c(-2,3), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5mC-Paternal", cex.main=0.8, cex.lab=0.6)
 for (i in 2:8)
   lines(scale.male.mc[,i], col=i, type="o")
-legend(1, 4, c("exon", "intron", "3UTR", "5UTR", "CpGIsland", "trans", "promoter", "enhancer"), col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
+legend(1, 4, regions, col=seq(1,8), lty=rep(1,8), ncol=3, cex=0.45)
 axis.labels <-c("Sperm", "PN1","PN2","PN3","PN4","PN5","1cell","2cellearly",  "ES")
 axis(1, at=seq(1,9), labels=axis.labels, cex.axis=0.8, las=2)
 
