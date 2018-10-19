@@ -465,7 +465,7 @@ fisher.test(count)
 
 ## PN analysis 
 
-For both male and female, at every stage, the nnumber of reads are counted in each region. Within every region, the reads are normalized about zero. To see the overall pattern, in the second figure, reads from all regions are put together. 
+For both male and female, at every stage, the nnumber of reads are counted in each region. Within every region, the reads are normalized around zero. To see the overall pattern, in the second figure, reads from all regions are put together. 
 
 
 ### 5hmC 
