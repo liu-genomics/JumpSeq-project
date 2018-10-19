@@ -465,18 +465,66 @@ fisher.test(count)
 
 ## PN analysis 
 
+For both male and female, at every stage, the nnumber of reads are counted in each region. Within every region, the reads are normalized about zero. To see the overall pattern, in the second figure, reads from all regions are put together. 
+
 
 ### 5hmC 
+
+
+```{r, echo=F}
+regions=c("3UTR", "5UTR", "CDS", "TTS", "Intron", "Intergenic","Promoter")
+num.regions=length(regions)
+common.second.stage=c("PN5","1cell","2cellearly", "2celllate", "ES")
+plot_function=function(hmc_combine, sample.label)
+{
+scale_hmc_combine=scale(as.matrix(hmc_combine)) 
+min.limit=min(scale_hmc_combine)-1; max.limit=max(scale_hmc_combine)+1
+
+male.index=c(seq(1,5), seq(11,15))
+female.index=c(seq(6,10), seq(11,15))
+######### plot 1*3 figure 
+par(mfrow=c(1,3))
+plot(scale_hmc_combine[1:5,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=paste(sample.label,  "Maternal", sep="-"), cex.main=0.8, cex.lab=1, lwd=2)
+for (i in 2:num.regions)
+  lines(scale_hmc_combine[1:5,i], col=i, type="o", lwd=2)
+legend(1, max.limit, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=2, cex=0.65)
+axis.labels <-c("MII", "PN1","PN2","PN3","PN4")
+axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8, las=2)
+
+plot(scale_hmc_combine[6:10,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="", col=1, main=paste(sample.label, "Paternal", sep="-"), cex.main=0.8, cex.lab=0.6, lwd=2)
+for (i in 2:num.regions)
+  lines(scale_hmc_combine[6:10,i], col=i, type="o", lwd=2)
+#legend(1, 3, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=3, cex=0.45)
+axis.labels <-c("Sperm", "PN1","PN2","PN3","PN4")
+axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8, las=2)
+
+plot(scale_hmc_combine[11:15,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="", col=1, main="", cex.main=0.8, cex.lab=0.6, lwd=2)
+for (i in 2:num.regions)
+  lines(scale_hmc_combine[11:15,i], col=i, type="o", lwd=2)
+#legend(1, 3, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=3, cex=0.45)
+axis.labels <-c("PN5","1cell","2cellearly", "2celllate", "ES")
+axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8, las=2)
+################ plot with regions combined 
+par(mfrow=c(1,1))
+hmc_combine_region=rowSums(hmc_combine)
+scale_hmc_combine_region=scale(hmc_combine_region)
+min.limit=min(scale_hmc_combine_region); max.limit=max(scale_hmc_combine_region)
+plot(scale_hmc_combine_region[male.index], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main= paste(sample.label, " at different stages", sep=""), cex.main=0.8, cex.lab=1, lty=1, pch=16, lwd=2)
+lines(scale_hmc_combine_region[female.index], col=2, type="o", lty=1, pch=16, lwd=2)
+legend(2, max.limit, c("Paternal", "Maternal"), col=seq(1,2), lty=rep(1,2), ncol=2, cex=0.65)
+
+axis.labels <-c("MII/Sperm", "PN1","PN2","PN3","PN4", common.second.stage)
+axis(1, at=seq(1,length(male.index)), labels=axis.labels, cex.axis=0.8, las=2)
+}
+```
+
+
+
 
 
 #### Replicate 1 
 
 ```{r, echo=F}
-regions=c("3UTR", "5UTR", "CDS", "TTS", "Intron", "Intergenic","Promoter")
-num.regions=length(regions)
-male.first.stage=c("Sperm", "PN1","PN2","PN3","PN4")
-female.first.stage=c("MII", "PN1","PN2","PN3","PN4")
-common.second.stage=c("PN5","1cell","2cellearly", "2celllate", "ES")
 ################# replicate 1 ##############
 scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\scale.reads.xiaolong.annotation.csv")
 new.scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
@@ -488,48 +536,11 @@ hmc_male=rbind(new.scale.reads[20,], scale.reads[13,], scale.reads[15,], scale.r
 rownames(hmc_male)=hmc_male[,1]
 hmc_male=hmc_male[,-1]
 first_hmc_combine=rbind(hmc_female[1:5,], hmc_male)
+plot_function(first_hmc_combine, "5hmC")
 
-scale_hmc_combine=scale(as.matrix(first_hmc_combine)) 
-min.limit=min(scale_hmc_combine)-0.5; max.limit=max(scale_hmc_combine)+0.5
-
-male.index=c(seq(1,5), seq(11,15))
-female.index=c(seq(6,10), seq(11,15))
-######### plot 1*3 figure 
-par(mfrow=c(1,3))
-plot(scale_hmc_combine[1:5,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-Maternal", cex.main=0.8, cex.lab=1, lwd=2)
-for (i in 2:num.regions)
-  lines(scale_hmc_combine[1:5,i], col=i, type="o", lwd=2)
-legend(1, max.limit, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=2, cex=0.65)
-axis.labels <-c("MII", "PN1","PN2","PN3","PN4")
-axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8, las=2)
-
-plot(scale_hmc_combine[6:10,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="", col=1, main=" 5hmC-Paternal", cex.main=0.8, cex.lab=0.6, lwd=2)
-for (i in 2:num.regions)
-  lines(scale_hmc_combine[6:10,i], col=i, type="o", lwd=2)
-legend(1, 3, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=3, cex=0.45)
-axis.labels <-c("Sperm", "PN1","PN2","PN3","PN4")
-axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8, las=2)
-
-plot(scale_hmc_combine[11:15,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="", col=1, main="", cex.main=0.8, cex.lab=0.6)
-for (i in 2:num.regions)
-  lines(scale_hmc_combine[11:15,i], col=i, type="o")
-legend(1, 3, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=3, cex=0.45)
-axis.labels <-c("PN5","1cell","2cellearly", "2celllate", "ES")
-axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8, las=2)
-################ plot with regions combined 
-par(mfrow=c(1,1))
-hmc_combine_region=rowSums(first_hmc_combine)
-scale_hmc_combine_region=scale(hmc_combine_region)
-min.limit=min(scale_hmc_combine_region); max.limit=max(scale_hmc_combine_region)
-plot(scale_hmc_combine_region[male.index], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main="5hmC at different stages", cex.main=0.8, cex.lab=1, lty=1, pch=16, lwd=2)
-lines(scale_hmc_combine_region[female.index], col=2, type="o", lty=1, pch=16, lwd=2)
-legend(1, max.limit, c("Paternal", "Maternal"), col=seq(1,2), lty=rep(1,2), ncol=2, cex=0.65)
-
-axis.labels <-c("MII/Sperm", "PN1","PN2","PN3","PN4", common.second.stage)
-axis(1, at=seq(1,length(male.index)), labels=axis.labels, cex.axis=0.8, las=2)
 ```
 
-#### replicate 2 
+#### Replicate 2 
 
 ```{r, echo=F}
 ############## replicate 2 ####################
@@ -541,47 +552,8 @@ hmc_male=hmc_male[,-1]
 hmc_female=rbind(second.rep.scale.reads[5,], second.rep.scale.reads[9,], second.rep.scale.reads[11,], second.rep.scale.reads[13,], second.rep.scale.reads[15,], second.rep.scale.reads[1,], second.rep.scale.reads[2:4,], second.rep.scale.reads[8,] )
 rownames(hmc_female)=hmc_female[,1]
 hmc_female=hmc_female[,-1]
-
 second_hmc_combine=rbind(hmc_female[1:5,], hmc_male)
-scale_hmc_combine=scale(as.matrix(second_hmc_combine))
-
-min.limit=min(scale_hmc_combine)-0.5; max.limit=max(scale_hmc_combine)+0.5
-
-male.index=c(seq(1,5), seq(11,15))
-female.index=c(seq(6,10), seq(11,15))
-######### plot 1*3 figure 
-par(mfrow=c(1,3))
-plot(scale_hmc_combine[1:5,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5hmC-Maternal", cex.main=0.8, cex.lab=1, lwd=2)
-for (i in 2:num.regions)
-  lines(scale_hmc_combine[1:5,i], col=i, type="o", lwd=2)
-legend(1, max.limit, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=2, cex=0.65)
-axis.labels <-c("Sperm", "PN1","PN2","PN3","PN4")
-axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8, las=2)
-
-plot(scale_hmc_combine[6:10,1], ylim=c(-2, 2), type="o", xaxt='n', xlab="", ylab="", col=1, main=" 5hmC-Paternal", cex.main=0.8, cex.lab=0.6, lwd=2)
-for (i in 2:num.regions)
-  lines(scale_hmc_combine[6:10,i], col=i, type="o", lwd=2)
-legend(1, 3, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=3, cex=0.45)
-axis.labels <-c("MII", "PN1","PN2","PN3","PN4")
-axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8, las=2)
-
-plot(scale_hmc_combine[11:15,1], ylim=c(-2, 2),  type="o", xaxt='n', xlab="", ylab="", col=1, main="", cex.main=0.8, cex.lab=0.6)
-for (i in 2:num.regions)
-  lines(scale_hmc_combine[11:15,i], col=i, type="o")
-legend(1, 3, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=3, cex=0.45)
-axis.labels <-c("PN5","1cell","2cellearly", "2celllate", "ES")
-axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8, las=2)
-################ plot with regions combined 
-par(mfrow=c(1,1))
-hmc_combine_region=rowSums(second_hmc_combine)
-scale_hmc_combine_region=scale(hmc_combine_region)
-min.limit=min(scale_hmc_combine_region); max.limit=max(scale_hmc_combine_region)
-plot(scale_hmc_combine_region[male.index], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main="5hmC at different stages", cex.main=0.8, cex.lab=1, lty=1, pch=16, lwd=2)
-lines(scale_hmc_combine_region[female.index], col=2, type="o", lty=1, pch=16, lwd=2)
-legend(1, max.limit, c("Paternal", "Maternal"), col=seq(1,2), lty=rep(1,2), ncol=2, cex=0.65)
-
-axis.labels <-c("MII/Sperm", "PN1","PN2","PN3","PN4", common.second.stage)
-axis(1, at=seq(1,length(male.index)), labels=axis.labels, cex.axis=0.8, las=2)
+plot_function(second_hmc_combine, "5hmC")
 
 
 ```
@@ -594,8 +566,6 @@ axis(1, at=seq(1,length(male.index)), labels=axis.labels, cex.axis=0.8, las=2)
 
 ```{r, echo=F}
 ############# maternal 
-all.stage=c( "MII", "PN1","PN2","PN3","PN4", "PN5", "1cell", "2cellearly", "2celllate",  "ES")
-common.second.stage=c("PN5", "1cell", "2cellearly", "2celllate",  "ES")
 scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
 mc_female=rbind(scale.reads[7,], scale.reads[12,], scale.reads[1,], scale.reads[3,], scale.reads[23,], scale.reads[25,], scale.reads[26,], scale.reads[5,], scale.reads[6,], scale.reads[10,] )
 rownames(mc_female)=mc_female[,1]
@@ -606,52 +576,38 @@ scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\
 mc_male=rbind(scale.reads[8,], scale.reads[15,], scale.reads[2,], scale.reads[4,],  scale.reads[24,], scale.reads[25,], scale.reads[26,],  scale.reads[5,], scale.reads[6,], scale.reads[10,] )
 rownames(mc_male)=mc_male[,1]
 mc_male=mc_male[,-1]
-
 first_mc_combine=rbind(mc_female[1:5,], mc_male)
-scale_mc_combine=scale(as.matrix(first_mc_combine)) 
-min.limit=min(scale_mc_combine); max.limit=max(scale_mc_combine)
+plot_function(first_mc_combine, "5mC")
 
-######### plot 1*3 figure 
-par(mfrow=c(1,3))
-plot(scale_mc_combine[1:5,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=" 5mC-Maternal", cex.main=0.8, cex.lab=1, lwd=2)
-for (i in 2:num.regions)
-  lines(scale_mc_combine[1:5,i], col=i, type="o", lwd=2)
-legend(1, max.limit, regions, col=seq(1,num.regions), lty=rep(1,num.regions), ncol=2, cex=0.65)
-axis.labels <-c("MII", "PN1","PN2","PN3","PN4")
-axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8, las=2)
 
-plot(scale_mc_combine[6:10,1], ylim=c(-2, 3), type="o", xaxt='n', xlab="", ylab="", col=1, main=" 5mC-Paternal", cex.main=0.8, cex.lab=0.6, lwd=2)
-for (i in 2:num.regions)
-  lines(scale_mc_combine[6:10,i], col=i, type="o", lwd=2)
-axis.labels <-c("MII", "PN1","PN2","PN3","PN4")
-axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8, las=2)
-
-plot(scale_mc_combine[11:15,1], ylim=c(-2, 3),  type="o", xaxt='n', xlab="", ylab="", col=1, main="", cex.main=0.8, cex.lab=0.6)
-for (i in 2:num.regions)
-  lines(scale_mc_combine[11:15,i], col=i, type="o")
-axis.labels <-c("PN5","1cell","2cellearly", "2celllate", "ES")
-axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8, las=2)
-
-################# plot with regions combined 
-par(mfrow=c(1,1))
-mc_combine_region=rowSums(first_mc_combine)
-scale_mc_combine_region=scale(mc_combine_region)
-min.limit=min(scale_mc_combine_region); max.limit=max(scale_mc_combine_region)
-plot(scale_mc_combine_region[male.index], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main="5mC at different stages", cex.main=0.8, cex.lab=1, lty=1, pch=16, lwd=2)
-lines(scale_mc_combine_region[female.index], col=2, type="o", lty=1, pch=16, lwd=2)
-legend(2, max.limit, c("Paternal", "Maternal"), col=seq(1,2), lty=rep(1,2), ncol=2, cex=0.65)
-
-axis.labels <-c("MII/Sperm", "PN1","PN2","PN3","PN4", common.second.stage)
-axis(1, at=seq(1,length(male.index)), labels=axis.labels, cex.axis=0.8, las=2)
 
 
 ```
 
 
 
-#### replicate 2 
+#### Replicate 2 
+
+```{r, echo=F}
+############ paternal 
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180227\\scale.reads.xiaolong.annotation.csv")
+new.scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
+#mc_male=rbind(scale.reads[5,], scale.reads[9,], scale.reads[11,], scale.reads[13,], scale.reads[15,], scale.reads[1:3,], scale.reads[7,] )
+mc_male=rbind(new.scale.reads[8,], scale.reads[9,], scale.reads[11,], scale.reads[13,], scale.reads[15,], scale.reads[1:3,], scale.reads[16,], scale.reads[7,] )
+rownames(mc_male)=mc_male[,1]
+mc_male=mc_male[,-1]
+
+############### Maternal 
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180227\\scale.reads.xiaolong.annotation.csv")
+mc_female=rbind(scale.reads[4,], scale.reads[8,], scale.reads[10,], scale.reads[12,], scale.reads[14,], scale.reads[1:3,], scale.reads[16,], scale.reads[7,] )
+rownames(mc_female)=mc_female[,1]
+mc_female=mc_female[,-1]
+second_mc_combine=rbind(mc_female[1:5,], mc_male)
+plot_function(second_mc_combine, "5mC")
 
 
+
+```
 
 
 
