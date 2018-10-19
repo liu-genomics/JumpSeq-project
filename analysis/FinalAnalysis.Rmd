@@ -480,8 +480,8 @@ plot_function=function(hmc_combine, sample.label)
 scale_hmc_combine=scale(as.matrix(hmc_combine)) 
 min.limit=min(scale_hmc_combine)-1; max.limit=max(scale_hmc_combine)+1
 
-male.index=c(seq(1,5), seq(11,15))
-female.index=c(seq(6,10), seq(11,15))
+female.index=c(seq(1,5), seq(11,15))
+male.index=c(seq(6,10), seq(11,15))
 ######### plot 1*3 figure 
 par(mfrow=c(1,3))
 plot(scale_hmc_combine[1:5,1], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main=paste(sample.label,  "Maternal", sep="-"), cex.main=0.8, cex.lab=1, lwd=2)
@@ -537,7 +537,7 @@ rownames(hmc_male)=hmc_male[,1]
 hmc_male=hmc_male[,-1]
 first_hmc_combine=rbind(hmc_female[1:5,], hmc_male)
 plot_function(first_hmc_combine, "5hmC")
-
+#write.csv(first_hmc_combine, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PNData4Xiaolong\\normalized-with-spikein-5hmC-replicate1.csv")
 ```
 
 #### Replicate 2 
@@ -553,8 +553,8 @@ hmc_female=rbind(second.rep.scale.reads[5,], second.rep.scale.reads[9,], second.
 rownames(hmc_female)=hmc_female[,1]
 hmc_female=hmc_female[,-1]
 second_hmc_combine=rbind(hmc_female[1:5,], hmc_male)
+#write.csv(second_hmc_combine, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PNData4Xiaolong\\normalized-with-spikein-5hmC-replicate2.csv")
 plot_function(second_hmc_combine, "5hmC")
-
 
 ```
 
@@ -577,6 +577,8 @@ mc_male=rbind(scale.reads[8,], scale.reads[15,], scale.reads[2,], scale.reads[4,
 rownames(mc_male)=mc_male[,1]
 mc_male=mc_male[,-1]
 first_mc_combine=rbind(mc_female[1:5,], mc_male)
+#write.csv(first_mc_combine, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PNData4Xiaolong\\normalized-with-spikein-5mC-replicate1.csv")
+
 plot_function(first_mc_combine, "5mC")
 
 
@@ -603,6 +605,8 @@ mc_female=rbind(scale.reads[4,], scale.reads[8,], scale.reads[10,], scale.reads[
 rownames(mc_female)=mc_female[,1]
 mc_female=mc_female[,-1]
 second_mc_combine=rbind(mc_female[1:5,], mc_male)
+#write.csv(second_mc_combine, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\PNData4Xiaolong\\normalized-with-spikein-5mC-replicate2.csv")
+
 plot_function(second_mc_combine, "5mC")
 
 
