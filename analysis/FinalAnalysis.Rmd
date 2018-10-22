@@ -471,6 +471,8 @@ For both male and female, at every stage, the nnumber of reads are counted in ea
 ### 5hmC 
 
 
+**Use largest number of reads as baseline**
+
 ```{r, echo=F}
 regions=c("3UTR", "5UTR", "CDS", "TTS", "Intron", "Intergenic","Promoter")
 num.regions=length(regions)
@@ -508,7 +510,7 @@ axis(1, at=seq(1,5), labels=axis.labels, cex.axis=0.8, las=2)
 par(mfrow=c(1,1))
 hmc_combine_region=rowSums(hmc_combine)
 scale_hmc_combine_region=scale(hmc_combine_region)
-min.limit=min(scale_hmc_combine_region); max.limit=max(scale_hmc_combine_region)
+min.limit=min(scale_hmc_combine_region)-1; max.limit=max(scale_hmc_combine_region)+1
 plot(scale_hmc_combine_region[male.index], ylim=c(min.limit,max.limit), type="o", xaxt='n', xlab="", ylab="normalized reads count", col=1, main= paste(sample.label, " at different stages", sep=""), cex.main=0.8, cex.lab=1, lty=1, pch=16, lwd=2)
 lines(scale_hmc_combine_region[female.index], col=2, type="o", lty=1, pch=16, lwd=2)
 legend(2, max.limit, c("Paternal", "Maternal"), col=seq(1,2), lty=rep(1,2), ncol=2, cex=0.65)
@@ -526,8 +528,9 @@ axis(1, at=seq(1,length(male.index)), labels=axis.labels, cex.axis=0.8, las=2)
 
 ```{r, echo=F}
 ################# replicate 1 ##############
-scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\scale.reads.xiaolong.annotation.csv")
-new.scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
+#scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\scale.reads.xiaolong.annotation.csv")
+scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
+new.scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
 hmc_female=rbind(scale.reads[5,], scale.reads[12,], scale.reads[14,], scale.reads[16,], scale.reads[18,], scale.reads[1,], scale.reads[2:4,], scale.reads[7,] )
 rownames(hmc_female)=hmc_female[,1]
 hmc_female=hmc_female[,-1]
@@ -544,8 +547,8 @@ plot_function(first_hmc_combine, "5hmC")
 
 ```{r, echo=F}
 ############## replicate 2 ####################
-second.rep.scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180228\\scale.reads.xiaolong.annotation.csv")
-new.scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
+second.rep.scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180228\\scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
+new.scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
 hmc_male=rbind(new.scale.reads[20,], second.rep.scale.reads[10,], second.rep.scale.reads[12,], second.rep.scale.reads[14,], second.rep.scale.reads[16,], second.rep.scale.reads[1,], second.rep.scale.reads[2:4,], second.rep.scale.reads[8,] )
 rownames(hmc_male)=hmc_male[,1]
 hmc_male=hmc_male[,-1]
