@@ -62,13 +62,14 @@ reads.summary=as.matrix(cbind(region.reads[,2:num.regions], as.numeric(spikein.r
 rownames(reads.summary)=sample.label
 colnames(reads.summary)=regions
 
-scale.factor=reads.summary[,ncol(reads.summary)]/min(reads.summary[,ncol(reads.summary)])
+#scale.factor=reads.summary[,ncol(reads.summary)]/min(reads.summary[,ncol(reads.summary)])
+scale.factor=max(reads.summary[,ncol(reads.summary)])/reads.summary[,ncol(reads.summary)]
 scale.reads=matrix(nrow=nrow(reads.summary), ncol=num.regions)
 for (i in 1:nrow(reads.summary))
   scale.reads[i,]=as.numeric(reads.summary[i,1:num.regions]*scale.factor[i])
 rownames(scale.reads)=sample.label
 colnames(scale.reads)=colnames(reads.summary)[1:num.regions]
-#write.csv(scale.reads, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.csv")
+write.csv(scale.reads, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180420\\scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
 ```
 
 ## 5hmC 

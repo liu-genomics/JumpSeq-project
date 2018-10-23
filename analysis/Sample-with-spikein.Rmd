@@ -73,13 +73,14 @@ reads.summary=cbind(region.reads.correct, as.numeric(spikein.reads[,2]))
 rownames(reads.summary)=samples
 colnames(reads.summary)=c(regions, "spikein")
 last.col.index=num.regions+1
-scale.factor=reads.summary[,last.col.index]/min(reads.summary[,last.col.index])
+#scale.factor=reads.summary[,last.col.index]/min(reads.summary[,last.col.index]) # use the smallest number of reads as baseline 
+scale.factor=max(reads.summary[,last.col.index])/reads.summary[,last.col.index] # use the largest number of reads as baseline
 scale.reads=matrix(nrow=num.sample, ncol=num.regions)
 for (i in 1:num.sample)
   scale.reads[i,]=as.numeric(reads.summary[i,1:num.regions]*scale.factor[i])
 rownames(scale.reads)=rownames(reads.summary)
 colnames(scale.reads)=colnames(reads.summary)[1:num.regions]
-#write.csv(scale.reads, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\scale.reads.xiaolong.annotation.csv")
+#write.csv(scale.reads, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
 ```
 
 ### Paternal 
@@ -248,7 +249,7 @@ spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\201802
 
 supple.region.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\important.region.by.xiaolong.reads", header=F, fill=T)[-3,]
 supple.spikein.reads=read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180606\\spike.in.reads", header=F, fill=T)[-3,]
-region.reads[2,]=supple.region.reads[2,2:ncol(supple.region.reads)]
+region.reads[2,]=supple.region.reads[2,2:ncol(supple.region.reads)] # replacement for one cell 
 spikein.reads[2,2]=supple.spikein.reads[2,2]
 
 reads.summary=as.matrix(cbind(region.reads, as.numeric(spikein.reads[,2])))
@@ -256,13 +257,15 @@ rownames(reads.summary)=c("hmc-PN5", "hmc-1cell", "hmc-2cellearly", "hmc-2cellla
 regions=c("3UTR", "5UTR", "CDS", "TTS", "Intron", "Intergenic","Promoter")
 num.regions=length(regions)
 colnames(reads.summary)=c(regions, "spikein")
-scale.factor=reads.summary[,ncol(reads.summary)]/min(reads.summary[,ncol(reads.summary)])
+#scale.factor=reads.summary[,ncol(reads.summary)]/min(reads.summary[,ncol(reads.summary)])
+scale.factor=max(reads.summary[,ncol(reads.summary)])/reads.summary[,ncol(reads.summary)]
 scale.reads=matrix(nrow=nrow(region.reads), ncol=num.regions)
 for (i in 1:nrow(region.reads))
   scale.reads[i,]=reads.summary[i,1:num.regions]*scale.factor[i]
 rownames(scale.reads)=rownames(reads.summary)
 colnames(scale.reads)=colnames(reads.summary)[1:num.regions]
 #write.csv(scale.reads, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180228\\scale.reads.xiaolong.annotation.csv")
+write.csv(scale.reads, file="D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180228\\scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
 ```
 
 ### Paternal 
