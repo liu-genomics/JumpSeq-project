@@ -18,11 +18,9 @@ set.seed(123)
 
 
 
-## Proof of  concept 
+## Proof of  concept
+`
 
-```{r, echo=F}
-path="/Users/han24/Documents/Research/Jump-Seq/"
-```
 
 ### Accuracy of Jump-seq assessed with synthetic DNA
 
@@ -72,7 +70,7 @@ The reference is GSM882244_FDR_0.0484. First got non-overlapping 5hmC regions an
 
 
 ```{r, echo=F}
-plus.48ng=read.table(paste(path,"JumpSeq-project/data/20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_GSM882244_FDR_0.0484_plus_with_1_coverage.ave.perbase", sep="/"), header=F)
+plus.48ng=read.table("../data/20161115_5hmC_Jump_Seq_2hmC_spike_in.mm9.umi_encoded_adaptor_removed_no_mismatch.sorted.dedup_GSM882244_FDR_0.0484_plus_with_1_coverage.ave.perbase", header=F)
 
 par(mfrow=c(1,2), oma = c(0, 0, 2, 0))
 plot(seq(-100, 100, by=1)+1,plus.48ng[,1], type="l", ylab="coverage", xlab="Distance", main="")
@@ -98,7 +96,7 @@ mtext("20161115_5hmC_Jump_Seq_2hmC_spike_in.plus", outer = TRUE, cex = 1)
 ### corrleation among replicates 
 
 ```{r, echo=F, fig.cap="Reads correlations in 1kb windows between two 5hmC replicates. log2 transformation in calculation of correlations  of number of reads", warning=F, cache=T}
-reads=read.table(paste(path, "5hmC/mm9.genome.1kb.window.bed.CHe-Lu-1_S12_L005_R1_001.plus.21.bp.bed.He-Lu-lu-1-48ng_S1_L006_R1_001.plus.21.bp.win.bed", sep="/"), header=F)
+reads=read.table("../../5hmC/mm9.genome.1kb.window.bed.CHe-Lu-1_S12_L005_R1_001.plus.21.bp.bed.He-Lu-lu-1-48ng_S1_L006_R1_001.plus.21.bp.win.bed", header=F)
 reads1=as.numeric(as.character(reads[,4]))
 reads2=as.numeric(as.character(reads[,5]))
 reads1[is.na(reads1)]=0
@@ -111,9 +109,9 @@ legend(0, 12, c("r=0.94"))
 
 
 ```{r, echo=F, warning=F, eval=F}
-reads1=as.numeric(as.character(read.table(paste(path,"5hmC/first.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.second.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.bed.reads.1", sep="/"), header=F)[,1]))
+reads1=as.numeric(as.character(read.table("../../5hmC/first.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.second.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.bed.reads.1", header=F)[,1]))
 reads1[is.na(reads1)]=0
-reads2=as.numeric(as.character(read.table("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\5hmC\\first.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.second.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.bed.reads.2", header=F)[,1]))
+reads2=as.numeric(as.character(read.table("..\\5hmC\\first.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.second.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.bed.reads.2", header=F)[,1]))
 reads2[is.na(reads2)]=0
 plot(log2(reads1), log2(reads2), pch=16, xlab="Combined sample 1", ylab="Combined sample 2", main="48ng combine 5hmC")
 legend(0, 15, c("r=0.98"))
@@ -365,9 +363,9 @@ barplot(normalized.mean, col="darkblue", ylab="Normalized proportion of methylat
 ### Correlation between replicates 
 
 ```{r, echo=F, warning=F, fig.cap="Correlation of reads in 20 bp windows between two replicates of 2.4ng 5mC. log2 transformation is used for computing correlations"}
-reads1=as.numeric(as.character(read.table(paste(path,"5mC/20160811_5mC_Jump_Seq_2.4ng.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.He-Lu-10_5mc-jump-2.4ng-S10_L004_R1_001.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.bed.reads.1", sep="/"), header=F)[,1]))
+reads1=as.numeric(as.character(read.table("C:\\Shengtong\\Research\\Jump-Seq\\5mC\\20160811_5mC_Jump_Seq_2.4ng.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.He-Lu-10_5mc-jump-2.4ng-S10_L004_R1_001.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.bed.reads.1", header=F)[,1]))
 reads1[is.na(reads1)]=0
-reads2=as.numeric(as.character(read.table(paste(path,"5mC/20160811_5mC_Jump_Seq_2.4ng.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.He-Lu-10_5mc-jump-2.4ng-S10_L004_R1_001.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.bed.reads.2", sep="/"), header=F)[,1]))
+reads2=as.numeric(as.character(read.table("C:\\Shengtong\\Research\\Jump-Seq\\5mC\\20160811_5mC_Jump_Seq_2.4ng.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.He-Lu-10_5mc-jump-2.4ng-S10_L004_R1_001.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.bed.reads.2", header=F)[,1]))
 reads2[is.na(reads2)]=0
 plot(log2(reads1), log2(reads2), pch=16, xlab="Rep 1", ylab="Rep 2", main="2.4ng 5mC")
 legend(0, 12, c("r=0.98"))
@@ -533,8 +531,8 @@ axis(1, at=seq(1,length(male.index)), labels=axis.labels, cex.axis=0.8, las=2)
 ```{r, echo=F}
 ################# replicate 1 ##############
 #scale.reads=read.csv("D:\\ResearchWork\\StatisticalGenetics\\JumpSeq\\20180113\\scale.reads.xiaolong.annotation.csv")
-scale.reads=read.csv(paste(path, "20180113/scale.reads.xiaolong.annotation.use.large.as.baseline.csv", sep="/"))
-new.scale.reads=read.csv(paste(path,"20180420/scale.reads.xiaolong.annotation.use.large.as.baseline.csv", sep="/"))
+scale.reads=read.csv("../../20180113/scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
+new.scale.reads=read.csv("../../20180420/scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
 hmc_female=rbind(scale.reads[5,], scale.reads[12,], scale.reads[14,], scale.reads[16,], scale.reads[18,], scale.reads[1,], scale.reads[2:4,], scale.reads[7,] )
 rownames(hmc_female)=hmc_female[,1]
 hmc_female=hmc_female[,-1]
@@ -551,8 +549,8 @@ plot_function(first_hmc_combine, "5hmC")
 
 ```{r, echo=F}
 ############## replicate 2 ####################
-second.rep.scale.reads=read.csv(paste(path,"20180228/scale.reads.xiaolong.annotation.use.large.as.baseline.csv", sep="/"))
-new.scale.reads=read.csv(paste(path, "20180420/scale.reads.xiaolong.annotation.use.large.as.baseline.csv", sep="/"))
+second.rep.scale.reads=read.csv("../../20180228/scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
+new.scale.reads=read.csv( "../../20180420/scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
 hmc_male=rbind(new.scale.reads[20,], second.rep.scale.reads[10,], second.rep.scale.reads[12,], second.rep.scale.reads[14,], second.rep.scale.reads[16,], second.rep.scale.reads[1,], second.rep.scale.reads[2:4,], second.rep.scale.reads[8,] )
 rownames(hmc_male)=hmc_male[,1]
 hmc_male=hmc_male[,-1]
@@ -574,13 +572,13 @@ plot_function(second_hmc_combine, "5hmC")
 
 ```{r, echo=F}
 ############# maternal 
-scale.reads=read.csv(paste(path, "20180420/scale.reads.xiaolong.annotation.use.large.as.baseline.csv", sep="/"))
+scale.reads=read.csv("../../20180420/scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
 mc_female=rbind(scale.reads[7,], scale.reads[12,], scale.reads[1,], scale.reads[3,], scale.reads[23,], scale.reads[25,], scale.reads[26,], scale.reads[5,], scale.reads[6,], scale.reads[10,] )
 rownames(mc_female)=mc_female[,1]
 mc_female=mc_female[,-1]
 
 ############### paternal 
-scale.reads=read.csv(paste(path,"20180420/scale.reads.xiaolong.annotation.use.large.as.baseline.csv", sep="/"))
+scale.reads=read.csv("../../20180420/scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
 mc_male=rbind(scale.reads[8,], scale.reads[15,], scale.reads[2,], scale.reads[4,],  scale.reads[24,], scale.reads[25,], scale.reads[26,],  scale.reads[5,], scale.reads[6,], scale.reads[10,] )
 rownames(mc_male)=mc_male[,1]
 mc_male=mc_male[,-1]
@@ -600,15 +598,15 @@ plot_function(first_mc_combine, "5mC")
 
 ```{r, echo=F}
 ############ paternal 
-scale.reads=read.csv(paste(path, "20180227/scale.reads.xiaolong.annotation.use.large.as.baseline.csv", sep="/"))
-new.scale.reads=read.csv(paste(path,"20180420/scale.reads.xiaolong.annotation.use.large.as.baseline.csv", sep="/"))
+scale.reads=read.csv("../../20180227/scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
+new.scale.reads=read.csv("../../20180420/scale.reads.xiaolong.annotation.use.large.as.baseline.csv")
 #mc_male=rbind(scale.reads[5,], scale.reads[9,], scale.reads[11,], scale.reads[13,], scale.reads[15,], scale.reads[1:3,], scale.reads[7,] )
 mc_male=rbind(new.scale.reads[8,], scale.reads[9,], scale.reads[11,], scale.reads[13,], scale.reads[15,], scale.reads[1:3,], scale.reads[16,], scale.reads[7,] )
 rownames(mc_male)=mc_male[,1]
 mc_male=mc_male[,-1]
 
 ############### Maternal 
-scale.reads=read.csv(paste(path, "20180227/scale.reads.xiaolong.annotation.csv", sep="/"))
+scale.reads=read.csv("../../20180227/scale.reads.xiaolong.annotation.csv")
 mc_female=rbind(scale.reads[4,], scale.reads[8,], scale.reads[10,], scale.reads[12,], scale.reads[14,], scale.reads[1:3,], scale.reads[16,], scale.reads[7,] )
 rownames(mc_female)=mc_female[,1]
 mc_female=mc_female[,-1]
