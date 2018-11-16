@@ -253,9 +253,10 @@ colnames(overlap)=c("0.6ng", "2.4ng", "6ng", "12ng", "24ng", "48ng")
 rownames(overlap)=c("Jump_seq", "Nano_seal (50ng)")
 kable(overlap, caption="Number of Tab-seq peaks recovered by Jump_seq and nano-seal")
 
-barplot(overlap[,6], beside=T,  ylim=c(0, max(overlap)), col=c("red", "darkblue"), 
-ylab="# Tab-seq peaks overlaping with other peaks", main="48ng Jump-seq vs 50ng nano-seal", xlab="", cex.names=0.7, legend=c("Jump-seq peaks", "nano-seal peaks"))
-
+bar.centers=barplot(overlap[,6], beside=T,   col=c("red", "darkblue"), 
+ylab="# Tab-seq peaks overlaping with other peaks", main="48ng Jump-seq vs 50ng nano-seal", xlab="", cex.names=0.7, legend=c("Jump-seq peaks", "nano-seal peaks"), ylim=c(0, 760000))
+text(bar.centers[1,1], 740000, "715179")
+text(bar.centers[2,1], 490000, "465501")
 ```
 
 
