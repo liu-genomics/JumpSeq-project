@@ -291,7 +291,7 @@ If we combine eleven 48ng 5hmC samples together, there are 2367316 20bp windows 
 
 
 
- If we use single 48gn 5hmC sample, then 28095/97548=28.80% 1kb windows are overllaping with nano-seal peaks and 24920/64865=38.42% nnao-seal peaks overlapping with jump-seq.  
+ If we use single 48gn 5hmC sample, then 28095/97548=28.80% 1kb windows are overllaping with nano-seal peaks and 24920/64865=38.42% nano-seal peaks overlapping with jump-seq.  
 
 
 
@@ -371,8 +371,10 @@ reads1=as.numeric(as.character(read.table("C:\\Shengtong\\Research\\Jump-Seq\\5m
 reads1[is.na(reads1)]=0
 reads2=as.numeric(as.character(read.table("C:\\Shengtong\\Research\\Jump-Seq\\5mC\\20160811_5mC_Jump_Seq_2.4ng.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.He-Lu-10_5mc-jump-2.4ng-S10_L004_R1_001.minus.21.bp.win.5prime.pstv.cove.bed.numberC.combine.pvalue.bed.reads.2", header=F)[,1]))
 reads2[is.na(reads2)]=0
+#pdf("../../Figure/correlation_two_5mc_2.4ng.pdf")
 plot(log2(reads1), log2(reads2), pch=16, xlab="Rep 1", ylab="Rep 2", main="2.4ng 5mC")
 legend(0, 12, c("r=0.98"))
+#dev.off()
 ```
 
 
