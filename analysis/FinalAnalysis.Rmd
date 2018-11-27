@@ -110,6 +110,7 @@ legend(0, 12, c("r=0.94"))
 ```
 
 
+
 ```{r, echo=F, warning=F, eval=F}
 reads1=as.numeric(as.character(read.table("../../5hmC/first.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.second.six.sample.sorted.bam.cove.base.level.extend.bed.with.reads.bed.reads.1", header=F)[,1]))
 reads1[is.na(reads1)]=0
@@ -119,6 +120,55 @@ plot(log2(reads1), log2(reads2), pch=16, xlab="Combined sample 1", ylab="Combine
 legend(0, 15, c("r=0.98"))
 
 ```
+
+
+
+```{r, echo=F, warning=F}
+reads1=as.numeric(as.character(read.table("../../5hmC/correlation/20160601_5hmC_Jump_Seq_24ng.minus.FDR0.05.corrected.txt.bed.He-lu-7_S9_L006_R1_001.minus.FDR0.05.corrected.txt.bed.bed.reads.1", header=F)[,1]))
+reads1[is.na(reads1)]=0
+reads2=as.numeric(as.character(read.table("../../5hmC/correlation/20160601_5hmC_Jump_Seq_24ng.minus.FDR0.05.corrected.txt.bed.He-lu-7_S9_L006_R1_001.minus.FDR0.05.corrected.txt.bed.bed.reads.2", header=F)[,1]))
+reads2[is.na(reads2)]=0
+plot(log2(reads1), log2(reads2), pch=16, xlab="Rep 1", ylab="Rep 2", main="24ng 5hmC")
+legend(2, 12, c("r=0.99"))
+
+```
+
+
+```{r, echo=F, warning=F}
+reads1=as.numeric(as.character(read.table("../../5hmC/correlation/20160428_5hmC_Jump_Seq_NPM_12ng.minus.FDR0.05.txt.bed.CHe-Lu-3_S14_L005_R1_001.minus.FDR0.05.txt.bed.bed.reads.1", header=F)[,1]))
+reads1[is.na(reads1)]=0
+reads2=as.numeric(as.character(read.table("../../5hmC/correlation/20160428_5hmC_Jump_Seq_NPM_12ng.minus.FDR0.05.txt.bed.CHe-Lu-3_S14_L005_R1_001.minus.FDR0.05.txt.bed.bed.reads.2", header=F)[,1]))
+reads2[is.na(reads2)]=0
+plot(log2(reads1), log2(reads2), pch=16, xlab="Rep 1", ylab="Rep 2", main="12ng 5hmC")
+legend(2, 12, c("r=-0.09"))
+
+```
+
+
+
+
+```{r, echo=F, warning=F}
+reads1=as.numeric(as.character(read.table("../../5hmC/correlation/20160428_5hmC_Jump_Seq_NPM_6ng.minus.FDR0.05.txt.bed.CHe-Lu-6ng_L008_R1_001.minus.FDR0.05.txt.bed.bed.reads.1", header=F)[,1]))
+reads1[is.na(reads1)]=0
+reads2=as.numeric(as.character(read.table("../../5hmC/correlation/20160428_5hmC_Jump_Seq_NPM_6ng.minus.FDR0.05.txt.bed.CHe-Lu-6ng_L008_R1_001.minus.FDR0.05.txt.bed.bed.reads.2", header=F)[,1]))
+reads2[is.na(reads2)]=0
+plot(log2(reads1), log2(reads2), pch=16, xlab="Rep 1", ylab="Rep 2", main="6ng 5hmC")
+legend(2, 12, c("r=0.95"))
+
+```
+
+
+
+```{r, echo=F, warning=F}
+reads1=as.numeric(as.character(read.table("../../5hmC/correlation/CHe-lu-2.4ng_mixed_with_other_library.minus.FDR0.05.corrected.txt.bed.He-Lu-10_2.4ng-S5_L001_R1_001.minus.FDR0.05.corrected.txt.bed.bed.reads.1", header=F)[,1]))
+reads1[is.na(reads1)]=0
+reads2=as.numeric(as.character(read.table("../../5hmC/correlation/CHe-lu-2.4ng_mixed_with_other_library.minus.FDR0.05.corrected.txt.bed.He-Lu-10_2.4ng-S5_L001_R1_001.minus.FDR0.05.corrected.txt.bed.bed.reads.2", header=F)[,1]))
+reads2[is.na(reads2)]=0
+plot(log2(reads1), log2(reads2), pch=16, xlab="Rep 1", ylab="Rep 2", main="2.4ng 5hmC")
+legend(2, 10, c("r=0.99"))
+
+```
+
 
 
 ![Six samples of 12 samplers are combined as combined sample 1 and the rest six are combined sample 2. Reads in 20 bp windows are used to calculate correlations between these two combined samples. log2 transformation is used for reads on both x and y axis.](figure/correltion-combined-5hmc.png)
@@ -377,8 +427,59 @@ legend(0, 12, c("r=0.98"))
 #dev.off()
 ```
 
+```{r, echo=F, warning=F, fig.cap="Correlation of reads in 20 bp windows between two replicates of 6ng 5mC. log2 transformation is used for computing correlations"}
+reads1=as.numeric(as.character(read.table("C:\\Shengtong\\Research\\Jump-Seq\\5mC\\20160811_5mC_Jump_Seq_6ng.minus.pvalue10-6.bed.He-Lu-9_5mc-jump-6ng-S9_L004_R1_001.minus.pvalue10-6.bed.bed.reads.1", header=F)[,1]))
+reads1[is.na(reads1)]=0
+reads2=as.numeric(as.character(read.table("C:\\Shengtong\\Research\\Jump-Seq\\5mC\\20160811_5mC_Jump_Seq_6ng.minus.pvalue10-6.bed.He-Lu-9_5mc-jump-6ng-S9_L004_R1_001.minus.pvalue10-6.bed.bed.reads.2", header=F)[,1]))
+reads2[is.na(reads2)]=0
+#pdf("../../Figure/correlation_two_5mc_2.4ng.pdf")
+plot(log2(reads1), log2(reads2), pch=16, xlab="Rep 1", ylab="Rep 2", main="6ng 5mC")
+legend(2, 12, c("r=0.91"))
+#dev.off()
+```
 
+
+
+```{r, echo=F, warning=F, fig.cap="Correlation of reads in 20 bp windows between two replicates of 12ng 5mC. log2 transformation is used for computing correlations"}
+reads1=as.numeric(as.character(read.table("C:\\Shengtong\\Research\\Jump-Seq\\5mC\\20160811_5mC_Jump_Seq_12ng.minus.pvalue10-6.bed.He-Lu-8_5mc-jump-12ng-S8_L004_R1_001.minus.pvalue10-6.bed.bed.reads.1", header=F)[,1]))
+reads1[is.na(reads1)]=0
+reads2=as.numeric(as.character(read.table("C:\\Shengtong\\Research\\Jump-Seq\\5mC\\20160811_5mC_Jump_Seq_12ng.minus.pvalue10-6.bed.He-Lu-8_5mc-jump-12ng-S8_L004_R1_001.minus.pvalue10-6.bed.bed.reads.2", header=F)[,1]))
+reads2[is.na(reads2)]=0
+#pdf("../../Figure/correlation_two_5mc_2.4ng.pdf")
+plot(log2(reads1), log2(reads2), pch=16, xlab="Rep 1", ylab="Rep 2", main="12ng 5mC")
+legend(2, 12, c("r=0.97"))
+#dev.off()
+```
  
+
+
+
+```{r, echo=F, warning=F, fig.cap="Correlation of reads in 20 bp windows between two replicates of 24ng 5mC. log2 transformation is used for computing correlations"}
+reads1=as.numeric(as.character(read.table("C:\\Shengtong\\Research\\Jump-Seq\\5mC\\20160811_5mC_Jump_Seq_24ng.minus.pvalue10-6.bed.He-Lu-7_5mC-jump-24ng-S7_L004_R1_001.minus.pvalue10-6.bed.bed.reads.1", header=F)[,1]))
+reads1[is.na(reads1)]=0
+reads2=as.numeric(as.character(read.table("C:\\Shengtong\\Research\\Jump-Seq\\5mC\\20160811_5mC_Jump_Seq_24ng.minus.pvalue10-6.bed.He-Lu-7_5mC-jump-24ng-S7_L004_R1_001.minus.pvalue10-6.bed.bed.reads.2", header=F)[,1]))
+reads2[is.na(reads2)]=0
+#pdf("../../Figure/correlation_two_5mc_2.4ng.pdf")
+plot(log2(reads1), log2(reads2), pch=16, xlab="Rep 1", ylab="Rep 2", main="24ng 5mC")
+legend(2, 12, c("r=0.98"))
+#dev.off()
+```
+
+
+
+
+```{r, echo=F, warning=F, fig.cap="Correlation of reads in 20 bp windows between two replicates of 48ng 5mC. log2 transformation is used for computing correlations"}
+reads1=as.numeric(as.character(read.table("C:\\Shengtong\\Research\\Jump-Seq\\5mC\\20160811_5mC_Jump_Seq_48ng.minus.pvalue10-6.bed.He-Lu-6_5mC-jump-48ng-S6_L004_R1_001.minus.pvalue10-6.bed.bed.reads.1", header=F)[,1]))
+reads1[is.na(reads1)]=0
+reads2=as.numeric(as.character(read.table("C:\\Shengtong\\Research\\Jump-Seq\\5mC\\20160811_5mC_Jump_Seq_48ng.minus.pvalue10-6.bed.He-Lu-6_5mC-jump-48ng-S6_L004_R1_001.minus.pvalue10-6.bed.bed.reads.2", header=F)[,1]))
+reads2[is.na(reads2)]=0
+#pdf("../../Figure/correlation_two_5mc_2.4ng.pdf")
+plot(log2(reads1), log2(reads2), pch=16, xlab="Rep 1", ylab="Rep 2", main="48ng 5mC")
+legend(2, 12, c("r=0.93"))
+#dev.off()
+```
+
+
 
 ## Enrichment of genomic features
  
