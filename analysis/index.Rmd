@@ -17,6 +17,7 @@ This project aims to investigate genome-wide distribution of 5hmC.
 * [This](FirstBatch5mC.html) is the analysis for data on 2/21/2018 with spike in
 * [This](20180606.html) is the analysis for data on 6/6/2018 with spike in 
 * [Final analysis](FinalAnalysis.html)  
+* [Updated Final analysis by Yuwen](181223_FinalAnalysis_updated.html)
 
 
 
