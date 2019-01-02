@@ -305,8 +305,8 @@ div.tocify {
 </div>
 
 
-<!-- The file analysis/chunks.R contains chunks that define default settings
-shared across the workflowr files. -->
+<p><!-- The file analysis/chunks.R contains chunks that define default settings
+shared across the workflowr files. --></p>
 <pre class="r"><code>#knitr::read_chunk(&quot;chunks.R&quot;)
 library(knitr)
 library(RColorBrewer)
@@ -322,7 +322,6 @@ library(gplots)</code></pre>
 set.seed(123)</code></pre>
 <div id="proof-of-concept" class="section level2">
 <h2>Proof of concept</h2>
-<p>`</p>
 <div id="quantification-of-5hmc-linear-correlation-of-read-counts-vs.5hmc-amount" class="section level3">
 <h3>Quantification of 5hmC: linear correlation of read counts vs. 5hmC amount</h3>
 <div class="figure">
@@ -420,9 +419,172 @@ For jump-seq, we called 1kb windows at FDR0.05 as peaks and computed the proport
 </tr>
 </tbody>
 </table>
+</div>
+<div id="enrichment-in-genomic-features" class="section level3">
+<h3>Enrichment in genomic features</h3>
+<div class="figure">
+<img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-14-1.png" alt=" Eleven 48 ng samples are combined together and 20 bp peak windows are called at FDR 0.05. Random windows are randomly selected  in the whole genome with the same amount of peak windows. The enrichments (compare Jump-Seq peaks with random peaks) in  different genomic regions are calculated" width="672" />
+<p class="caption">
+Eleven 48 ng samples are combined together and 20 bp peak windows are called at FDR 0.05. Random windows are randomly selected in the whole genome with the same amount of peak windows. The enrichments (compare Jump-Seq peaks with random peaks) in different genomic regions are calculated
+</p>
+</div>
+<div class="figure">
+<img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-15-1.png" alt="For 0.6ng 5hmC sample, 20 bp windows with at least one reads are called peak windows. Random windows are chosen in the whole genome in the same amount of peak windows. The enrichments (Jump-seq peaks compared with random windows) different genomic regions (200bp bins) are computed. " width="672" />
+<p class="caption">
+For 0.6ng 5hmC sample, 20 bp windows with at least one reads are called peak windows. Random windows are chosen in the whole genome in the same amount of peak windows. The enrichments (Jump-seq peaks compared with random windows) different genomic regions (200bp bins) are computed.
+</p>
+</div>
+<ul>
+<li>cis-regulatory regions are extended 200bp windows.</li>
+<li>jump peaks are 20 bp windows with at least one reads, enrichment is compared with random windows with the same size.</li>
+</ul>
 <pre class="r"><code>getwd()</code></pre>
 <pre><code>## [1] &quot;/media/yuwen/G/Jump-Seq_manuscript/JumpSeq-project/analysis&quot;</code></pre>
 <p>To be fair, 1kb Jump-sea peaks are trimed to be of the same length as nano-seal peaks.</p>
+</div>
+</div>
+<div id="pn-analysis" class="section level2">
+<h2>PN analysis</h2>
+<div id="pn-enrichment-in-different-genomic-features" class="section level3">
+<h3>PN enrichment in different genomic features</h3>
+<pre class="r"><code>library(tidyr)</code></pre>
+</div>
+<div id="hmc-maternal-rep1-fold-of-enrichment" class="section level3">
+<h3>5hmc Maternal Rep1, fold of enrichment</h3>
+<pre class="r"><code>ggplot(data_rep1_maternal, aes(x = Sample_Note, y = Enrichment, group = annotation, col = annotation)) + geom_line() + theme(axis.text.x = element_text(size =8, color = &quot;black&quot;, vjust = 1), axis.text.y = element_text(size =8, color = &quot;black&quot;))</code></pre>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+<div id="hmc-maternal-rep2" class="section level3">
+<h3>5hmc Maternal Rep2</h3>
+<pre class="r"><code>#data_rep2_maternal$reads.norm1 &lt;- data_rep2_maternal$reads/data_rep2_maternal$remove_PCR_duplicates
+ggplot(data_rep2_maternal, aes(x = Sample_Note, y = Enrichment, group = annotation, col = annotation)) + geom_line() + theme(axis.text.x = element_text(size =8, color = &quot;black&quot;, vjust = 1), axis.text.y = element_text(size =8, color = &quot;black&quot;))</code></pre>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+</div>
+<div id="hmc-paternal-rep1" class="section level3">
+<h3>5hmc Paternal Rep1</h3>
+<pre class="r"><code># data_rep1_paternal$reads.norm1 &lt;- data_rep1_paternal$reads/data_rep1_paternal$remove_PCR_duplicates
+ggplot(data_rep1_paternal, aes(x = Sample_Note, y = Enrichment, group = annotation, col = annotation)) + geom_line() + theme(axis.text.x = element_text(size =8, color = &quot;black&quot;, vjust = 1), axis.text.y = element_text(size =8, color = &quot;black&quot;))</code></pre>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+</div>
+<div id="hmc-paternal-rep2" class="section level3">
+<h3>5hmc Paternal Rep2</h3>
+</div>
+<div id="mc-maternal-rep1-fold-of-enrichment" class="section level3">
+<h3>5mc Maternal Rep1, fold of enrichment</h3>
+<pre class="r"><code>ggplot(data_rep1_maternal, aes(x = Sample_Note, y = Enrichment, group = annotation, col = annotation)) + geom_line() </code></pre>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+</div>
+<div id="mc-maternal-rep2" class="section level3">
+<h3>5mc Maternal Rep2</h3>
+<pre class="r"><code>#data_rep2_maternal$reads.norm1 &lt;- data_rep2_maternal$reads/data_rep2_maternal$remove_PCR_duplicates
+ggplot(data_rep2_maternal, aes(x = Sample_Note, y = Enrichment, group = annotation, col = annotation)) + geom_line() </code></pre>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+</div>
+<div id="mc-paternal-rep1" class="section level3">
+<h3>5mc Paternal Rep1</h3>
+<pre class="r"><code># data_rep1_paternal$reads.norm1 &lt;- data_rep1_paternal$reads/data_rep1_paternal$remove_PCR_duplicates
+ggplot(data_rep1_paternal, aes(x = Sample_Note, y = Enrichment, group = annotation, col = annotation)) + geom_line() + theme(axis.text.x = element_text(size =8, color = &quot;black&quot;, vjust = 1), axis.text.y = element_text(size =8, color = &quot;black&quot;))</code></pre>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+</div>
+<div id="mc-paternal-rep2" class="section level3">
+<h3>5mc Paternal Rep2</h3>
+<pre class="r"><code># data_rep2_paternal$reads.norm1 &lt;- data_rep2_paternal$reads/data_rep2_paternal$remove_PCR_duplicates
+ggplot(data_rep2_paternal, aes(x = Sample_Note, y = Enrichment, group = annotation, col = annotation)) + geom_line() + theme(axis.text.x = element_text(size =8, color = &quot;black&quot;, vjust = 1), axis.text.y = element_text(size =8, color = &quot;black&quot;))</code></pre>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+</div>
+</div>
+<div id="enrichment-in-different-annotations-of-up-regulateddown-regulated-genes-comparing-2-cell-stage-and-mo." class="section level2">
+<h2>Enrichment in different annotations of up-regulated/down-regulated genes comparing 2-cell stage and MO.</h2>
+</div>
+<div id="combine-a-few-conditions-across-replicatesion." class="section level2">
+<h2>combine a few conditions across replicatesion.</h2>
+<pre><code>## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated</code></pre>
+<div id="enrichment-in-genes-up-regulated-in-2-cell-stage-compared-to-mo" class="section level3">
+<h3>Enrichment in genes up-regulated in 2-cell stage compared to MO</h3>
+<div class="figure">
+<img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-37-1.png" alt="Enrichment in genes up-regulated in 2-cell stage compared to MO" width="672" />
+<p class="caption">
+Enrichment in genes up-regulated in 2-cell stage compared to MO
+</p>
+</div>
+</div>
+<div id="enrichment-in-genes-down-regulated-in-2-cell-stage-compared-to-mo" class="section level3">
+<h3>Enrichment in genes down-regulated in 2-cell stage compared to MO</h3>
+<div class="figure">
+<img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-38-1.png" alt="Enrichment in genes down-regulated in 2-cell stage compared to MO" width="672" />
+<p class="caption">
+Enrichment in genes down-regulated in 2-cell stage compared to MO
+</p>
+</div>
+</div>
+</div>
+<div id="enrichment-in-different-annotations-of-top-5000-expressedbottom-5000-expressed-genes-at-the-2-cell-stage" class="section level2">
+<h2>Enrichment in different annotations of top 5000 expressed/bottom 5000 expressed genes at the 2-cell stage</h2>
+</div>
+<div id="combine-a-few-conditions-across-replicatesion.-1" class="section level2">
+<h2>combine a few conditions across replicatesion.</h2>
+<pre><code>## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated
+
+## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
+## level, NA generated</code></pre>
+<div id="enrichment-in-top-5000-expressed-genes-at-the-2-cell-stage" class="section level3">
+<h3>Enrichment in top 5000 expressed genes at the 2-cell stage</h3>
+<div class="figure">
+<img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-41-1.png" alt="Enrichment in top 5000 expressed genes at the 2-cell stage" width="672" />
+<p class="caption">
+Enrichment in top 5000 expressed genes at the 2-cell stage
+</p>
+</div>
+</div>
+<div id="enrichment-in-bottom-5000-expressed-genes-at-the-2-cell-stage" class="section level3">
+<h3>Enrichment in bottom 5000 expressed genes at the 2-cell stage</h3>
+<div class="figure">
+<img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-42-1.png" alt="Enrichment in bottom 5000 expressed genes at the 2-cell stage" width="672" />
+<p class="caption">
+Enrichment in bottom 5000 expressed genes at the 2-cell stage
+</p>
+</div>
 </div>
 </div>
 
