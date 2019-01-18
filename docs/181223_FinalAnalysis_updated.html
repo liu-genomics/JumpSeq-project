@@ -305,8 +305,8 @@ div.tocify {
 </div>
 
 
-<p><!-- The file analysis/chunks.R contains chunks that define default settings
-shared across the workflowr files. --></p>
+<!-- The file analysis/chunks.R contains chunks that define default settings
+shared across the workflowr files. -->
 <pre class="r"><code>#knitr::read_chunk(&quot;chunks.R&quot;)
 library(knitr)
 library(RColorBrewer)
@@ -439,7 +439,7 @@ For 0.6ng 5hmC sample, 20 bp windows with at least one reads are called peak win
 <li>jump peaks are 20 bp windows with at least one reads, enrichment is compared with random windows with the same size.</li>
 </ul>
 <pre class="r"><code>getwd()</code></pre>
-<pre><code>## [1] &quot;/media/yuwen/G/Jump-Seq_manuscript/JumpSeq-project/analysis&quot;</code></pre>
+<pre><code>## [1] &quot;/project/G/Jump-Seq_manuscript/JumpSeq-project/analysis&quot;</code></pre>
 <p>To be fair, 1kb Jump-sea peaks are trimed to be of the same length as nano-seal peaks.</p>
 </div>
 </div>
@@ -585,6 +585,69 @@ Enrichment in top 5000 expressed genes at the 2-cell stage
 Enrichment in bottom 5000 expressed genes at the 2-cell stage
 </p>
 </div>
+</div>
+</div>
+<div id="compare-jump-seq-with-nano-hmc-seal" class="section level2">
+<h2>Compare Jump-Seq with Nano-hmc-Seal</h2>
+<div id="rep-6ng-vs-1000-cell-nano-sealdedup-merged-from-two-biological-replicates-10kb-window" class="section level3">
+<h3>160402 rep, 6ng vs 1000-cell nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<pre><code>##           [,1]
+## [1,] 0.8685951</code></pre>
+</div>
+<div id="rep-6ng-vs-1000-cell-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-1" class="section level3">
+<h3>160511 rep, 6ng vs 1000-cell nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<pre><code>##          [,1]
+## [1,] 0.862631</code></pre>
+</div>
+<div id="rep-6ng-vs-1000-cell-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-2" class="section level3">
+<h3>160521 rep, 6ng vs 1000-cell nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<pre><code>##          [,1]
+## [1,] 0.867717</code></pre>
+</div>
+<div id="rep-6ng-vs-1000-cell-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-3" class="section level3">
+<h3>160604 rep, 6ng vs 1000-cell nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<pre><code>##          [,1]
+## [1,] 0.862498</code></pre>
+</div>
+<div id="rep-6ng-vs-1000-cell-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-4" class="section level3">
+<h3>160620 rep, 6ng vs 1000-cell nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<pre><code>##           [,1]
+## [1,] 0.8707161</code></pre>
+</div>
+<div id="rep-48ng-vs-50ng-nano-sealdedup-merged-from-two-biological-replicates-10kb-window" class="section level3">
+<h3>160402 rep, 48ng vs 50ng nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<pre><code>##           [,1]
+## [1,] 0.9160376</code></pre>
+</div>
+<div id="rep-48ng-vs-50ng-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-1" class="section level3">
+<h3>160511 rep, 48ng vs 50ng nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<pre><code>##           [,1]
+## [1,] 0.9160376</code></pre>
+</div>
+<div id="rep-48ng-vs-50ng-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-2" class="section level3">
+<h3>160521 rep, 48ng vs 50ng nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<pre><code>##           [,1]
+## [1,] 0.9234346</code></pre>
+</div>
+<div id="rep-48ng-vs-50ng-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-3" class="section level3">
+<h3>160604 rep, 48ng vs 50ng nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<pre><code>##           [,1]
+## [1,] 0.9111268</code></pre>
+</div>
+<div id="rep-48ng-vs-50ng-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-4" class="section level3">
+<h3>160620 rep, 48ng vs 50ng nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<pre><code>##           [,1]
+## [1,] 0.9190462</code></pre>
 </div>
 </div>
 
