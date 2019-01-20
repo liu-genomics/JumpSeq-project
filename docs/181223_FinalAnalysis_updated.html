@@ -443,8 +443,8 @@ For 0.6ng 5hmC sample, 20 bp windows with at least one reads are called peak win
 <p>To be fair, 1kb Jump-sea peaks are trimed to be of the same length as nano-seal peaks.</p>
 </div>
 </div>
-<div id="pn-analysis" class="section level2">
-<h2>PN analysis</h2>
+<div id="hmc-pn-analysis" class="section level2">
+<h2>5hmc PN analysis</h2>
 <div id="pn-enrichment-in-different-genomic-features" class="section level3">
 <h3>PN enrichment in different genomic features</h3>
 <pre class="r"><code>library(tidyr)</code></pre>
@@ -493,34 +493,11 @@ ggplot(data_rep2_paternal, aes(x = Sample_Note, y = Enrichment, group = annotati
 <p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 </div>
 </div>
-<div id="enrichment-in-different-annotations-of-up-regulateddown-regulated-genes-comparing-2-cell-stage-and-mo." class="section level2">
-<h2>Enrichment in different annotations of up-regulated/down-regulated genes comparing 2-cell stage and MO.</h2>
+<div id="enrichment-of-5hmc-signal-in-different-annotations-of-up-regulateddown-regulated-genes-comparing-2-cell-stage-and-mo." class="section level2">
+<h2>Enrichment of 5hmc signal in different annotations of up-regulated/down-regulated genes comparing 2-cell stage and MO.</h2>
 </div>
 <div id="combine-a-few-conditions-across-replicatesion." class="section level2">
 <h2>combine a few conditions across replicatesion.</h2>
-<pre><code>## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated</code></pre>
 <div id="enrichment-in-genes-up-regulated-in-2-cell-stage-compared-to-mo" class="section level3">
 <h3>Enrichment in genes up-regulated in 2-cell stage compared to MO</h3>
 <div class="figure">
@@ -540,34 +517,11 @@ Enrichment in genes down-regulated in 2-cell stage compared to MO
 </div>
 </div>
 </div>
-<div id="enrichment-in-different-annotations-of-top-5000-expressedbottom-5000-expressed-genes-at-the-2-cell-stage" class="section level2">
-<h2>Enrichment in different annotations of top 5000 expressed/bottom 5000 expressed genes at the 2-cell stage</h2>
+<div id="enrichment-of-5hmc-signal-in-different-annotations-of-top-5000-expressedbottom-5000-expressed-genes-at-the-2-cell-stage" class="section level2">
+<h2>Enrichment of 5hmc signal in different annotations of top 5000 expressed/bottom 5000 expressed genes at the 2-cell stage</h2>
 </div>
 <div id="combine-a-few-conditions-across-replicatesion.-1" class="section level2">
 <h2>combine a few conditions across replicatesion.</h2>
-<pre><code>## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated
-
-## Warning in `[&lt;-.factor`(`*tmp*`, iseq, value = &quot;combine&quot;): invalid factor
-## level, NA generated</code></pre>
 <div id="enrichment-in-top-5000-expressed-genes-at-the-2-cell-stage" class="section level3">
 <h3>Enrichment in top 5000 expressed genes at the 2-cell stage</h3>
 <div class="figure">
@@ -587,65 +541,164 @@ Enrichment in bottom 5000 expressed genes at the 2-cell stage
 </div>
 </div>
 </div>
+<div id="enrichment-of-5mc-signal-in-different-annotations-of-top-5000-expressedbottom-5000-expressed-genes-at-the-2-cell-stage" class="section level2">
+<h2>Enrichment of 5mc signal in different annotations of top 5000 expressed/bottom 5000 expressed genes at the 2-cell stage</h2>
+</div>
+<div id="combine-a-few-conditions-across-replicatesion.-2" class="section level2">
+<h2>combine a few conditions across replicatesion.</h2>
+<div id="enrichment-in-top-5000-expressed-genes-at-the-2-cell-stage-1" class="section level3">
+<h3>Enrichment in top 5000 expressed genes at the 2-cell stage</h3>
+<div class="figure">
+<img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-45-1.png" alt="Enrichment in top 5000 expressed genes at the 2-cell stage" width="672" />
+<p class="caption">
+Enrichment in top 5000 expressed genes at the 2-cell stage
+</p>
+</div>
+<pre><code>##     annotation Sample_name remove_PCR_duplicates retain_PCR_duplicates
+## 3          CDS        &lt;NA&gt;                    NA                    NA
+## 6     down3000        &lt;NA&gt;                    NA                    NA
+## 9       intron        &lt;NA&gt;                    NA                    NA
+## 12      up3000        &lt;NA&gt;                    NA                    NA
+## 15        UTR3        &lt;NA&gt;                    NA                    NA
+## 18        UTR5        &lt;NA&gt;                    NA                    NA
+## 4          CDS        &lt;NA&gt;                    NA                    NA
+## 8     down3000        &lt;NA&gt;                    NA                    NA
+## 121     intron        &lt;NA&gt;                    NA                    NA
+## 16      up3000        &lt;NA&gt;                    NA                    NA
+## 20        UTR3        &lt;NA&gt;                    NA                    NA
+## 24        UTR5        &lt;NA&gt;                    NA                    NA
+## 31         CDS        &lt;NA&gt;                    NA                    NA
+## 61    down3000        &lt;NA&gt;                    NA                    NA
+## 91      intron        &lt;NA&gt;                    NA                    NA
+## 122     up3000        &lt;NA&gt;                    NA                    NA
+## 151       UTR3        &lt;NA&gt;                    NA                    NA
+## 181       UTR5        &lt;NA&gt;                    NA                    NA
+## 41         CDS        &lt;NA&gt;                    NA                    NA
+## 81    down3000        &lt;NA&gt;                    NA                    NA
+## 123     intron        &lt;NA&gt;                    NA                    NA
+## 161     up3000        &lt;NA&gt;                    NA                    NA
+## 201       UTR3        &lt;NA&gt;                    NA                    NA
+## 241       UTR5        &lt;NA&gt;                    NA                    NA
+##     Sample_Note      Exp_Type Batch_Number Batch_date    sum Enrichment
+## 3      PN3 male 5mC -jump-seq            0          0 168300       1656
+## 6      PN3 male 5mC -jump-seq            0          0 168300       1127
+## 9      PN3 male 5mC -jump-seq            0          0 168300      16345
+## 12     PN3 male 5mC -jump-seq            0          0 168300        791
+## 15     PN3 male 5mC -jump-seq            0          0 168300        689
+## 18     PN3 male 5mC -jump-seq            0          0 168300        101
+## 4      PN4 male 5mC -jump-seq            0          0 226508       1981
+## 8      PN4 male 5mC -jump-seq            0          0 226508       1549
+## 121    PN4 male 5mC -jump-seq            0          0 226508      20979
+## 16     PN4 male 5mC -jump-seq            0          0 226508       1011
+## 20     PN4 male 5mC -jump-seq            0          0 226508        851
+## 24     PN4 male 5mC -jump-seq            0          0 226508        103
+## 31   PN3 female 5mC -jump-seq            0          0 130655       1734
+## 61   PN3 female 5mC -jump-seq            0          0 130655       1260
+## 91   PN3 female 5mC -jump-seq            0          0 130655      20290
+## 122  PN3 female 5mC -jump-seq            0          0 130655        638
+## 151  PN3 female 5mC -jump-seq            0          0 130655        793
+## 181  PN3 female 5mC -jump-seq            0          0 130655         98
+## 41   PN4 female 5mC -jump-seq            0          0 262160       3581
+## 81   PN4 female 5mC -jump-seq            0          0 262160       2551
+## 123  PN4 female 5mC -jump-seq            0          0 262160      40372
+## 161  PN4 female 5mC -jump-seq            0          0 262160       1156
+## 201  PN4 female 5mC -jump-seq            0          0 262160       1642
+## 241  PN4 female 5mC -jump-seq            0          0 262160        202
+##     feature_length fold_enrichment pvalue.enrich pvalue.deplete
+## 3          8207661       3.3567178  0.000000e+00   1.000000e+00
+## 6         13936412       1.3453858  9.829413e-22   1.000000e+00
+## 9        192365576       1.4136161  0.000000e+00   1.000000e+00
+## 12        14660088       0.8976640  9.990697e-01   1.046767e-03
+## 15         6709089       1.7085574  1.852694e-38   1.000000e+00
+## 18         1448854       1.1597668  7.773551e-02   9.360493e-01
+## 4          8207661       2.9835928  0.000000e+00   1.000000e+00
+## 8         13936412       1.3739626  5.934815e-33   1.000000e+00
+## 121      192365576       1.3481304  0.000000e+00   1.000000e+00
+## 16        14660088       0.8524896  9.999999e-01   9.654079e-08
+## 20         6709089       1.5679799  1.334302e-34   1.000000e+00
+## 24         1448854       0.8787940  9.151218e-01   1.008757e-01
+## 31         8207661       4.5275336  0.000000e+00   1.000000e+00
+## 61        13936412       1.9375440 3.910701e-100   1.000000e+00
+## 91       192365576       2.2604072  0.000000e+00   1.000000e+00
+## 122       14660088       0.9326444  9.640558e-01   3.915333e-02
+## 151        6709089       2.5330376 2.143065e-114   1.000000e+00
+## 181        1448854       1.4495508  3.045169e-04   9.997960e-01
+## 41         8207661       4.6598991  0.000000e+00   1.000000e+00
+## 81        13936412       1.9550195 2.425210e-205   1.000000e+00
+## 123      192365576       2.2415298  0.000000e+00   1.000000e+00
+## 161       14660088       0.8421954  1.000000e+00   9.429526e-10
+## 201        6709089       2.6139736 2.777319e-248   1.000000e+00
+## 241        1448854       1.4890811  6.305356e-08   1.000000e+00</code></pre>
+</div>
+<div id="enrichment-in-bottom-5000-expressed-genes-at-the-2-cell-stage-1" class="section level3">
+<h3>Enrichment in bottom 5000 expressed genes at the 2-cell stage</h3>
+<div class="figure">
+<img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-46-1.png" alt="Enrichment in bottom 5000 expressed genes at the 2-cell stage" width="672" />
+<p class="caption">
+Enrichment in bottom 5000 expressed genes at the 2-cell stage
+</p>
+</div>
+</div>
+</div>
 <div id="compare-jump-seq-with-nano-hmc-seal" class="section level2">
 <h2>Compare Jump-Seq with Nano-hmc-Seal</h2>
 <div id="rep-6ng-vs-1000-cell-nano-sealdedup-merged-from-two-biological-replicates-10kb-window" class="section level3">
 <h3>160402 rep, 6ng vs 1000-cell nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
-<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 <pre><code>##           [,1]
 ## [1,] 0.8685951</code></pre>
 </div>
 <div id="rep-6ng-vs-1000-cell-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-1" class="section level3">
 <h3>160511 rep, 6ng vs 1000-cell nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
-<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <pre><code>##          [,1]
 ## [1,] 0.862631</code></pre>
 </div>
 <div id="rep-6ng-vs-1000-cell-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-2" class="section level3">
 <h3>160521 rep, 6ng vs 1000-cell nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
-<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <pre><code>##          [,1]
 ## [1,] 0.867717</code></pre>
 </div>
 <div id="rep-6ng-vs-1000-cell-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-3" class="section level3">
 <h3>160604 rep, 6ng vs 1000-cell nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
-<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <pre><code>##          [,1]
 ## [1,] 0.862498</code></pre>
 </div>
 <div id="rep-6ng-vs-1000-cell-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-4" class="section level3">
 <h3>160620 rep, 6ng vs 1000-cell nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
-<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <pre><code>##           [,1]
 ## [1,] 0.8707161</code></pre>
 </div>
 <div id="rep-48ng-vs-50ng-nano-sealdedup-merged-from-two-biological-replicates-10kb-window" class="section level3">
 <h3>160402 rep, 48ng vs 50ng nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
-<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <pre><code>##           [,1]
 ## [1,] 0.9160376</code></pre>
 </div>
 <div id="rep-48ng-vs-50ng-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-1" class="section level3">
 <h3>160511 rep, 48ng vs 50ng nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
-<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <pre><code>##           [,1]
 ## [1,] 0.9160376</code></pre>
 </div>
 <div id="rep-48ng-vs-50ng-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-2" class="section level3">
 <h3>160521 rep, 48ng vs 50ng nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
-<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <pre><code>##           [,1]
 ## [1,] 0.9234346</code></pre>
 </div>
 <div id="rep-48ng-vs-50ng-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-3" class="section level3">
 <h3>160604 rep, 48ng vs 50ng nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
-<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <pre><code>##           [,1]
 ## [1,] 0.9111268</code></pre>
 </div>
 <div id="rep-48ng-vs-50ng-nano-sealdedup-merged-from-two-biological-replicates-10kb-window-4" class="section level3">
 <h3>160620 rep, 48ng vs 50ng nano-seal(dedup, merged from two biological replicates), 10kb window</h3>
-<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p><img src="181223_FinalAnalysis_updated_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 <pre><code>##           [,1]
 ## [1,] 0.9190462</code></pre>
 </div>
